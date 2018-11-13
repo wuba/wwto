@@ -1,5 +1,4 @@
 var wx = swan;
-
 if (!wx['has_hook_flag']) {
   wx['has_hook_flag'] = true;
   let getStorageSyncBak = swan['getStorageSync'];

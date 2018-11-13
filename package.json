@@ -1,6 +1,6 @@
 {
   "name": "gulp-wx-to-swan",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "weChat mini-program to baidu mini-program",
   "main": "index.js",
   "scripts": {
@@ -11,6 +11,7 @@
     "url": "git+https://github.com/fulme/gulp-wx-to-swan.git"
   },
   "devDependencies": {
+    "fs-extra": "^7.0.1",
     "gulp": "~3.9.1",
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^1.0.0"
