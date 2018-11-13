@@ -1,6 +1,6 @@
 {
   "name": "gulp-wx-to-swan",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "weChat mini-program to baidu mini-program",
   "main": "index.js",
   "scripts": {
