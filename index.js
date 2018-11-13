@@ -50,7 +50,7 @@ function wxToSwan(opt = {}) {
     }))
     .pipe(gulp.dest(dest));
 
-  const patch = fs.readFileSync('./swan-patch.js', 'utf8');
+  const patch = fs.readFileSync(__dirname + '/swan-patch.js', 'utf8');
   gulp.src(src + "/**/*.js")
     .pipe(replace(/([\s\S]*)/, patch + '$1'))
     .pipe(gulp.dest(dest));
