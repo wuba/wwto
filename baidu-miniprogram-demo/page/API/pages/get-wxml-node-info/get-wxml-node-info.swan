@@ -1,0 +1,27 @@
+<import src="../../../common/head.swan" />
+<import src="../../../common/foot.swan" />
+
+<view class="container">
+  <template is="head" data="{{{title: 'createSelectorQuery'}}}"/>
+
+  <view class="page-body">
+    <view class="page-section">
+      <movable-area>
+        <movable-view class="target" x="{{x}}" y="{{y}}" direction="all" bindchange="getNodeInfo">
+          Drag
+        </movable-view>
+      </movable-area>
+    </view>
+
+    <view class="page-section">
+      <view class="metric">
+        <view s-for="{{ metrics }}" s-key="{{item.key}}">
+          <text class="b">{{ item.key }}</text>
+          <text class="span">{{ item.val }}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <template is="foot" />
+</view>

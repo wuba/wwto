@@ -1,0 +1,5 @@
+@import "../../../common/lib/weui";
+
+.weui-label{
+  width: 5em;
+}

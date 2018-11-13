@@ -1,0 +1,35 @@
+{
+  "name": "gulp-wx-to-swan",
+  "version": "1.0.0",
+  "description": "weChat mini-program to baidu mini-program",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fulme/gulp-wx-to-swan.git"
+  },
+  "devDependencies": {
+    "gulp": "~3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^1.0.0"
+  },
+  "keywords": [
+    "gulp",
+    "wechat",
+    "mini-program",
+    "baidu mini-program",
+    "微信小城",
+    "百度小程序",
+    "小程序转换",
+    "微信小程序转百度小程序"
+  ],
+  "author": "fulme",
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/fulme/gulp-wx-to-swan/issues"
+  },
+  "homepage": "https://github.com/fulme/gulp-wx-to-swan#readme"
+}
