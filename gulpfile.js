@@ -25,7 +25,7 @@ gulp.task('toutiao', function() {
   });
 });
 
-gulp.task('convert', function(cb) {
+gulp.task('test', function(cb) {
   sequence(
     'baidu',
     'alibaba',
