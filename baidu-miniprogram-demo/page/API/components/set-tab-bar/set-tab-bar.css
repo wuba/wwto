@@ -1,6 +1,0 @@
-@import "../../../common/lib/weui";
-@import "../../../../app";
-
-.weui-label {
-  width: 5em;
-}

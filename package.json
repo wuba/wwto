@@ -1,8 +1,8 @@
 {
-  "name": "gulp-wx-to-swan",
+  "name": "gulp-wx-to-all",
   "version": "1.0.2",
   "description": "weChat mini-program to baidu mini-program",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "gulp test"
   },
@@ -14,14 +14,16 @@
     "fs-extra": "^7.0.1",
     "gulp": "~3.9.1",
     "gulp-rename": "^1.2.2",
-    "gulp-replace": "^1.0.0"
+    "gulp-replace": "^1.0.0",
+    "gulp-sequence": "^1.0.0"
   },
   "keywords": [
     "gulp",
     "wechat",
     "mini-program",
+    "wechat mini-program",
     "baidu mini-program",
-    "微信小城",
+    "微信小程序",
     "百度小程序",
     "小程序转换",
     "微信小程序转百度小程序"

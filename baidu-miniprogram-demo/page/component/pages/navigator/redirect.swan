@@ -1,6 +1,0 @@
-<import src="../../../common/head.swan" />
-<import src="../../../common/foot.swan" />
-
-<view class="container">
-  <template is="head" data="{{{title: '当前页'}}}"/>
-</view>
