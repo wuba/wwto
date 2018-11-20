@@ -1,14 +1,14 @@
 {
   "name": "gulp-wx-to-all",
   "version": "1.0.2",
-  "description": "weChat mini-program to baidu mini-program",
+  "description": "weChat mini-program to other mini-program",
   "main": "src/index.js",
   "scripts": {
     "test": "gulp test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fulme/gulp-wx-to-swan.git"
+    "url": "git+https://github.com/fulme/gulp-wx-to-all.git"
   },
   "devDependencies": {
     "fs-extra": "^7.0.1",
@@ -32,7 +32,7 @@
   "license": "MIT",
   "readmeFilename": "README.md",
   "bugs": {
-    "url": "https://github.com/fulme/gulp-wx-to-swan/issues"
+    "url": "https://github.com/fulme/gulp-wx-to-all.git/issues"
   },
-  "homepage": "https://github.com/fulme/gulp-wx-to-swan#readme"
+  "homepage": "https://github.com/fulme/gulp-wx-to-all.git#readme"
 }
