@@ -2,24 +2,24 @@
 
 const gulp = require('gulp');
 const sequence = require('gulp-sequence');
-const converter = require('./src/index');
+const wto = require('./src/index');
 
 gulp.task('baidu', function() {
-  return converter.toBaidu({
+  return wto.toBaidu({
     src: './demo/miniprogram-demo',
     dest: './demo/dist/baidu-miniprogram-demo'
   });
 });
 
 gulp.task('alibaba', function() {
-  return converter.toAlibaba({
+  return wto.toAlibaba({
     src: './demo/miniprogram-demo',
     dest: './demo/dist/alibaba-miniprogram-demo'
   });
 });
 
 gulp.task('toutiao', function() {
-  return converter.toToutiao({
+  return wto.toToutiao({
     src: './demo/miniprogram-demo',
     dest: './demo/dist/toutiao-miniprogram-demo'
   });

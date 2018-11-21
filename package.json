@@ -1,14 +1,17 @@
 {
-  "name": "gulp-wx-to-all",
-  "version": "1.0.2",
+  "name": "wto-cli",
+  "version": "1.0.0",
   "description": "weChat mini-program to other mini-program",
   "main": "src/index.js",
+  "bin": {
+    "wto": "bin/index.js"
+  },
   "scripts": {
     "test": "gulp test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fulme/gulp-wx-to-all.git"
+    "url": "git+https://github.com/fulme/wto-cli.git"
   },
   "devDependencies": {
     "fs-extra": "^7.0.1",
@@ -23,16 +26,21 @@
     "mini-program",
     "wechat mini-program",
     "baidu mini-program",
+    "alibaba mini-program",
+    "toutiao mini-program",
     "微信小程序",
     "百度小程序",
-    "小程序转换",
-    "微信小程序转百度小程序"
+    "阿里小程序",
+    "头条小程序",
+    "微信小程序转百度小程序",
+    "微信小程序转阿里小程序",
+    "微信小程序转头条小程序"
   ],
   "author": "fulme",
   "license": "MIT",
   "readmeFilename": "README.md",
   "bugs": {
-    "url": "https://github.com/fulme/gulp-wx-to-all.git/issues"
+    "url": "https://github.com/fulme/wto-cli.git/issues"
   },
-  "homepage": "https://github.com/fulme/gulp-wx-to-all.git#readme"
+  "homepage": "https://github.com/fulme/wto-cli.git#readme"
 }

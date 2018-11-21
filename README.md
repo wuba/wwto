@@ -1,25 +1,38 @@
-# wx-to-all
+# wto-cli
 > 将微信小程序自动转换成百度/微信/头条小程序
 
 ## 简介
-**wx-to-all**是一款支持将原生微信小程序转换成其他小程序的工具集合。  
-使用**wx-to-all**，我们几乎不需要对已有的微信小程序做任何改动，就可以接近零成本获得`百度小城`、`阿里小程序`、`头条小程序`。
+**wto-cli**是一款支持将原生微信小程序转换成其他小程序的工具集合。  
+使用**wto-cli**，我们几乎不需要对已有的微信小程序做任何改动，就可以接近零成本获得`百度小城`、`阿里小程序`、`头条小程序`。
 
 ## 安装
 ```
- npm i gulp-wx-to-all
+ npm i wto-cli -g
  // or
- yarn add gulp-wx-to-all
+ yarn global add wto-cli
 ```
 
 ## 使用
+### 命令行
+```shell
+  # 转换成百度小程序
+  wto baidu --src ./src --dest ./dist/baidu
+  
+  # 转换成阿里小程序
+  wto alibaba --src ./src --dest ./dist/alibaba
+  
+  # 转换成头条小程序
+  wto alibaba --src ./src --dest ./dist/alibaba
+```
+
+### 打包工具
 ```
 const gulp = require('gulp');
-const converter = require('gulp-wx-to-all');
+const wto = require('wto-cli');
 
 // 转换成百度小程序
 gulp.task('baidu', function(cb) {
-    converter.toBaidu({
+    wto.toBaidu({
       src: './miniprogram-demo',
       dest: './baidu-miniprogram-demo'
     });
@@ -27,7 +40,7 @@ gulp.task('baidu', function(cb) {
 
 // 转换成阿里小程序
 gulp.task('alibaba', function(cb) {
-    converter.toBaidu({
+    wto.toBaidu({
       src: './miniprogram-demo',
       dest: './alibaba-miniprogram-demo'
     });
@@ -35,7 +48,7 @@ gulp.task('alibaba', function(cb) {
 
 // 转换成头条小程序
 gulp.task('alibaba', function(cb) {
-    converter.toBaidu({
+    wto.toBaidu({
       src: './miniprogram-demo',
       dest: './toutiao-miniprogram-demo'
     });
@@ -53,7 +66,7 @@ gulp.task('all', function(cb) {
 ```
 
 ## 使用案例
-`wx-to-all`已经投入了我们的生产环境中使用，包括`58微聊`和`神奇江湖`
+`wto-cli`已经投入了我们的生产环境中使用，包括`58微聊`和`神奇江湖`
 
 
 ## 注意事项
@@ -74,3 +87,4 @@ gulp.task('all', function(cb) {
 - 不支持实时音视频通话
 
 ### 阿里小程序
+- TODO
