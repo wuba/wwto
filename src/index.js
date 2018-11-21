@@ -8,8 +8,8 @@ module.exports = {
   toToutiao: toutiaoConverter,
 
   toAll: (opt) => {
-    baiduConverter(Object.assign({}, opt, { dest: opt.baiduDest }));
-    alibabaConverter(Object.assign({}, opt, { dest: opt.alibabaDest }));
-    toutiaoConverter(Object.assign({}, opt, { dest: opt.toutiaoDest }));
+    baiduConverter(Object.assign({}, opt, { target: opt.baiduTarget }));
+    alibabaConverter(Object.assign({}, opt, { target: opt.alibabaTarget }));
+    toutiaoConverter(Object.assign({}, opt, { target: opt.toutiaoTarget }));
   }
 };

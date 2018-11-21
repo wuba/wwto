@@ -16,13 +16,16 @@
 ### 命令行
 ```shell
   # 转换成百度小程序
-  wto baidu --src src --dest dist/baidu
+  wto build -p baidu -s src -t dist/baidu
   
   # 转换成阿里小程序
-  wto alibaba --src src --dest dist/alibaba
+  wto build -p alibaba -s src -t dist/alibaba
   
   # 转换成头条小程序
-  wto alibaba --src src --dest dist/alibaba
+  wto build -p alibaba -s src -t dist/alibaba
+  
+  # 转换成百度&&阿里&&头条小程序
+  wto build -s src -t dist
 ```
 
 ### 打包工具
@@ -33,34 +36,34 @@ const wto = require('wto-cli');
 // 转换成百度小程序
 gulp.task('baidu', function(cb) {
     wto.toBaidu({
-      src: './miniprogram-demo',
-      dest: './baidu-miniprogram-demo'
+      source: './miniprogram-demo',
+      target: './baidu-miniprogram-demo'
     });
 });
 
 // 转换成阿里小程序
 gulp.task('alibaba', function(cb) {
     wto.toBaidu({
-      src: './miniprogram-demo',
-      dest: './alibaba-miniprogram-demo'
+      source: './miniprogram-demo',
+      target: './alibaba-miniprogram-demo'
     });
 });
 
 // 转换成头条小程序
 gulp.task('alibaba', function(cb) {
     wto.toBaidu({
-      src: './miniprogram-demo',
-      dest: './toutiao-miniprogram-demo'
+      source: './miniprogram-demo',
+      target: './toutiao-miniprogram-demo'
     });
 });
 
 // 转换成百度/阿里/头条小程序
 gulp.task('all', function(cb) {
     converter.toAll({
-      src: './miniprogram-demo',
-      baiduDest: './baidu-miniprogram-demo',
-      alibabaDest: './alibaba-miniprogram-demo',
-      toutiaoDest: './toutiao-miniprogram-demo',
+      source: './miniprogram-demo',
+      baiduTarget: './baidu-miniprogram-demo',
+      alibaTarget: './alibaba-miniprogram-demo',
+      toutiaoTarget: './toutiao-miniprogram-demo',
     });
 });
 ```
@@ -89,6 +92,7 @@ gulp.task('all', function(cb) {
 - 图片的`src`属性不能用数组赋值（如：`<image src="{{arr}}"></image>`）
 - `wx:for`不支持对象
 - 不支持`selectComponent`
+- 所有页面必须在`pages`目录下
 
 ### 阿里小程序
 - TODO

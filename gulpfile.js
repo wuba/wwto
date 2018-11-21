@@ -6,22 +6,22 @@ const wto = require('./src/index');
 
 gulp.task('baidu', function() {
   return wto.toBaidu({
-    src: './demo/miniprogram-demo',
-    dest: './demo/dist/baidu-miniprogram-demo'
+    source: './demo/miniprogram-demo',
+    target: './demo/dist/baidu-miniprogram-demo'
   });
 });
 
 gulp.task('alibaba', function() {
   return wto.toAlibaba({
-    src: './demo/miniprogram-demo',
-    dest: './demo/dist/alibaba-miniprogram-demo'
+    source: './demo/miniprogram-demo',
+    target: './demo/dist/alibaba-miniprogram-demo'
   });
 });
 
 gulp.task('toutiao', function() {
   return wto.toToutiao({
-    src: './demo/miniprogram-demo',
-    dest: './demo/dist/toutiao-miniprogram-demo'
+    source: './demo/miniprogram-demo',
+    target: './demo/dist/toutiao-miniprogram-demo'
   });
 });
 

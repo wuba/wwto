@@ -1,6 +1,6 @@
 {
   "name": "wto-cli",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "weChat mini-program to other mini-program",
   "main": "src/index.js",
   "bin": {
@@ -14,6 +14,7 @@
     "url": "git+https://github.com/fulme/wto-cli.git"
   },
   "devDependencies": {
+    "commander": "^2.9.0",
     "fs-extra": "^7.0.1",
     "gulp": "~3.9.1",
     "gulp-rename": "^1.2.2",

@@ -5,8 +5,8 @@ const rename = require('gulp-rename');
 const replace = require('gulp-replace');
 
 function convert(opt = {}) {
-  const src = opt.src || './src';
-  const dest = opt.dest || './baidu';
+  const src = opt.source || './src';
+  const dest = opt.target || './baidu';
   const assets = opt.assets || [
     src + "/**/*.json",
     src + "/**/*.png",
