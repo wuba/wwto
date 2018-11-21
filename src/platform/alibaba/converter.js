@@ -27,9 +27,23 @@ function convert(opt = {}) {
 
     gulp.src(src + "/**/*.wxml")
       .pipe(replace('wx:', 'a:'))
+      .pipe(replace('a:for-items', 'a:for'))
       .pipe(replace('.wxml', '.axml'))
       .pipe(rename(function(path) {
         path.extname = ".axml";
+      }))
+      .pipe(replace(/\s+bind[\w]+=['"]/ig, function(match, p1) {
+        // 事件绑定名称对齐
+        return match.replace(/bind(\w)/g, (m, p1) => {return ['on', p1.toUpperCase()].join('')})
+      }))
+      .pipe(gulp.dest(dest));
+
+    gulp.src(src + "/**/*.json")
+      .pipe(replace(/usingComponents([^}]+)/g, function(match, p1) {
+        return match.replace(/":\s*"([\w])/ig, (m, p1) => {
+          // 相对路径必须加./
+          return m.replace(p1, ['./', p1].join(''));
+        });
       }))
       .pipe(gulp.dest(dest));
 

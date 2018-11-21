@@ -19,6 +19,8 @@ if (!wx['has_baidu_hook_flag']) {
       return bak[api](params).data;
     };
   });
+
+  wx.request = wx.httpRequest;
   wx.setNavigationBarTitle = wx.setNavigationBar;
 
   wx.login = (o) => {

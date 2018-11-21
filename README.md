@@ -1,15 +1,14 @@
 # wto
 > **wto**: wechat mini-program to other mini-program
-> 近乎零成本将将微信小程序转换成百度/微信/头条小程序
 
 ## 简介
 **wto**是一款支持将原生微信小程序转换成其他小程序的工具集合。  
-使用**wto**，我们几乎不需要对已有的微信小程序做任何改动，就可以接近零成本获得`百度小城`、`阿里小程序`、`头条小程序`。
+使用**wto**，几乎不需要对已有的微信小程序做任何改动，可以接近零成本获得`百度小城`、`阿里小程序`、`头条小程序`。
 
 ## 安装
-```
+```shell
  npm i wto-cli -g
- // or
+ # or
  yarn global add wto-cli
 ```
 
@@ -17,17 +16,17 @@
 ### 命令行
 ```shell
   # 转换成百度小程序
-  wto baidu --src ./src --dest ./dist/baidu
+  wto baidu --src src --dest dist/baidu
   
   # 转换成阿里小程序
-  wto alibaba --src ./src --dest ./dist/alibaba
+  wto alibaba --src src --dest dist/alibaba
   
   # 转换成头条小程序
-  wto alibaba --src ./src --dest ./dist/alibaba
+  wto alibaba --src src --dest dist/alibaba
 ```
 
 ### 打包工具
-```
+```javascript
 const gulp = require('gulp');
 const wto = require('wto-cli');
 
@@ -86,6 +85,10 @@ gulp.task('all', function(cb) {
 - 录音功能没有全局方法（`wx.startRecord`, `wx.stopRecord`）
 - 不支持背景音频
 - 不支持实时音视频通话
+- 条件/循环渲染，不能进行函数调用运算（如：`wx:if="{{['aa', 'bb'].indexOf('aa')===-1}}"`）
+- 图片的`src`属性不能用数组赋值（如：`<image src="{{arr}}"></image>`）
+- `wx:for`不支持对象
+- 不支持`selectComponent`
 
 ### 阿里小程序
 - TODO
