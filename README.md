@@ -43,15 +43,15 @@ gulp.task('baidu', function(cb) {
 
 // 转换成阿里小程序
 gulp.task('alibaba', function(cb) {
-    wto.toBaidu({
+    wto.toAlibaba({
       source: './miniprogram-demo',
       target: './alibaba-miniprogram-demo'
     });
 });
 
 // 转换成头条小程序
-gulp.task('alibaba', function(cb) {
-    wto.toBaidu({
+gulp.task('toutiao', function(cb) {
+    wto.toToutiao({
       source: './miniprogram-demo',
       target: './toutiao-miniprogram-demo'
     });
@@ -62,7 +62,7 @@ gulp.task('all', function(cb) {
     converter.toAll({
       source: './miniprogram-demo',
       baiduTarget: './baidu-miniprogram-demo',
-      alibaTarget: './alibaba-miniprogram-demo',
+      alibabaTarget: './alibaba-miniprogram-demo',
       toutiaoTarget: './toutiao-miniprogram-demo',
     });
 });
