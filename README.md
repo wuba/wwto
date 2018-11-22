@@ -3,7 +3,7 @@
 
 ## 简介
 **wto**是一款支持将原生微信小程序转换成其他小程序的工具集合。  
-使用**wto**，几乎不需要对已有的微信小程序做任何改动，可以接近零成本获得`百度小城`、`阿里小程序`、`头条小程序`。
+使用**wto**，几乎不需要对已有的微信小程序做任何改动，可以接近零成本获得`百度小程序`、`阿里小程序`、`头条小程序`。
 
 ## 安装
 ```shell
@@ -22,7 +22,7 @@
   wto build -p alibaba -s src -t dist/alibaba
   
   # 转换成头条小程序
-  wto build -p alibaba -s src -t dist/alibaba
+  wto build -p toutiao -s src -t dist/toutiao
   
   # 转换成百度&&阿里&&头条小程序
   wto build -s src -t dist
