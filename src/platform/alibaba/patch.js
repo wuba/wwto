@@ -1,6 +1,6 @@
 var wx = my;
-if (!wx['has_baidu_hook_flag']) {
-  wx['has_baidu_hook_flag'] = true;
+if (!wx['has_ali_hook_flag']) {
+  wx['has_ali_hook_flag'] = true;
 
   const STORAGE_API = ['getStorageSync', 'setStorageSync', 'removeStorageSync'];
   let bak = {};

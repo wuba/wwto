@@ -7,9 +7,14 @@
 
 ## 安装
 ```shell
- npm i wto-cli -g
- # or
- yarn global add wto-cli
+  # 安装之前先设置私服58npm  
+  npm config set registry http://ires.58corp.com/repository/58npm
+  # or
+  yarn config set registry  -g http://ires.58corp.com/repository/58npm
+  
+  npm i wto-cli -g --registry http://ires.58corp.com/repository/npm/
+  # or
+  yarn global add wto-cli --registry http://ires.58corp.com/repository/npm/
 ```
 
 ## 使用
@@ -33,33 +38,9 @@
 const gulp = require('gulp');
 const wto = require('wto-cli');
 
-// 转换成百度小程序
-gulp.task('baidu', function(cb) {
-    wto.toBaidu({
-      source: './miniprogram-demo',
-      target: './baidu-miniprogram-demo'
-    });
-});
-
-// 转换成阿里小程序
-gulp.task('alibaba', function(cb) {
-    wto.toAlibaba({
-      source: './miniprogram-demo',
-      target: './alibaba-miniprogram-demo'
-    });
-});
-
-// 转换成头条小程序
-gulp.task('toutiao', function(cb) {
-    wto.toToutiao({
-      source: './miniprogram-demo',
-      target: './toutiao-miniprogram-demo'
-    });
-});
-
 // 转换成百度/阿里/头条小程序
 gulp.task('all', function(cb) {
-    converter.toAll({
+    wto.toAll({
       source: './miniprogram-demo',
       baiduTarget: './baidu-miniprogram-demo',
       alibabaTarget: './alibaba-miniprogram-demo',
@@ -95,4 +76,6 @@ gulp.task('all', function(cb) {
 - 所有页面必须在`pages`目录下
 
 ### 阿里小程序
-- TODO
+- `json`文件或模板绝对路径必须以`/`开头，相对路径必须以./开头
+- 自定义组件命名只能使用短横线（custom-com）
+- `fetch`是全局只读对象，不能对其赋值
