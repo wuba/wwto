@@ -7,11 +7,6 @@
 
 ## 安装
 ```shell
-  # 安装之前先设置私服58npm  
-  npm config set registry http://ires.58corp.com/repository/58npm
-  # or
-  yarn config set registry  -g http://ires.58corp.com/repository/58npm
-  
   npm i wto-cli -g --registry http://ires.58corp.com/repository/npm/
   # or
   yarn global add wto-cli --registry http://ires.58corp.com/repository/npm/
