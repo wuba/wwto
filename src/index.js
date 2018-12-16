@@ -2,7 +2,6 @@ const baiduConverter = require('./platform/baidu/converter');
 const alibabaConverter = require('./platform/alibaba/converter');
 const toutiaoConverter = require('./platform/toutiao/converter');
 
-console.log(webrtc);
 module.exports = {
   toBaidu: baiduConverter,
   toAlibaba: alibabaConverter,

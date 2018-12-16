@@ -3,16 +3,12 @@ const gulp = require('gulp');
 const fse = require('fs-extra');
 const rename = require('gulp-rename');
 const replace = require('gulp-replace');
+const config = require('../../config');
 
 function convert(opt = {}) {
   const src = opt.source || './src';
   const dest = opt.target || './baidu';
-  const assets = opt.assets || [
-    src + "/**/*.json",
-    src + "/**/*.png",
-    src + "/**/*.jpg",
-    src + "/**/*.gif"
-  ];
+  const assets = opt.assets || config.getAssets(src);
 
   fse.remove(dest).then(() => {
     gulp.src(assets)
