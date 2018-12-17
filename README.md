@@ -7,9 +7,12 @@
 
 ## 安装
 ```shell
-  npm i wto-cli -g --registry http://ires.58corp.com/repository/npm/
-  # or
-  yarn global add wto-cli --registry http://ires.58corp.com/repository/npm/
+  npm config set registry http://ires.58corp.com/repository/58npm
+  npm i wto-cli -g
+
+  #or
+  yarn config set registry http://ires.58corp.com/repository/58npm
+  yarn global add wto-cli
 ```
 
 ## 使用
@@ -52,9 +55,8 @@ gulp.task('all', function(cb) {
 注意事项是各平台不支持且无法通过本工具转换完成的一些点，如果要开发跨平台的应用需要规避或者降级处理。
 
 ### 百度小程序
-- bind*={{str}}   `str`只能是字面量，不能包含运算（如：`bindtap="flag ? 'fn1' : 'fn2'"`）
-- wx:for={{arr}}  `arr`只能是字面量，不不能包含运算（如：`wx:for="{{flag ? arr1 : arr2}}"`）
-- 文件名必须与组件目录一致（`custom-com/custom-com.(js|json|wxml|wxss)`）
+- bind*={{str}}   `str`不能包含函数调用（如：`bindtap="flag ? 'fn1' : 'fn2'"`）
+- wx:for={{arr}}  `arr`不能包含函数调用（如：`wx:for="{{flag ? arr1 : arr2}}"`）
 - 不要使用`setData`保存视图不需要的变量（如原生变量：`Animation`），继承字段会被丢弃
 - 图片的`src`属性不能用数组赋值（如：`<image src="{{arr}}"></image>`）
 
