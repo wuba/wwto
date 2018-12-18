@@ -68,9 +68,8 @@ gulp.task('all', function(cb) {
 - 不支持实时音视频通话
 - 条件/循环渲染，不能进行函数调用运算（如：`wx:if="{{['aa', 'bb'].indexOf('aa')===-1}}"`）
 - 图片的`src`属性不能用数组赋值（如：`<image src="{{arr}}"></image>`）
-- `wx:for`不支持对象
-- 不支持`selectComponent`
-- 所有页面必须在`pages`目录下
+- `wx:for`不支持对象，从源码规避（转换一下）
+- 不支持`selectComponent`，可以通过监听属性的`observer`来实现外部的调用
 
 ### 阿里小程序
 - `json`文件或模板绝对路径必须以`/`开头，相对路径必须以./开头
