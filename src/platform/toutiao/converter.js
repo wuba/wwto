@@ -33,11 +33,14 @@ function convert(opt = {}) {
     const patch = fs.readFileSync(__dirname + '/patch.js', 'utf8');
     gulp.src(src + "/**/*.js")
       .pipe(replace(/([\s\S]*)/, patch + '$1'))
+      .pipe(replace(/\.option\.transition\.delay/g, '.delay'))
+      .pipe(replace(/\.option\.transition\.duration/g, '.duration'))
+      .pipe(replace(/\.option\.transition\.timingFunction/g, '.duration'))
       .pipe(replace(/([\w]+)\.setData\([^)]+}\)/g, function(match, p1) {
         // 解决嵌套字段更新后无法刷新视图的问题
         const nest = /['"][\w]+\.[\w]+['"]/.test(match);
         if (nest) {
-          return match.replace(match, [match, ';', p1, '.setData('+p1+'.data);'].join(''))
+          return match.replace(match, [match, ';', p1, '.setData(' + p1 + '.data);'].join(''))
         }
         return match;
       }))
