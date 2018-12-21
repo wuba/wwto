@@ -50,7 +50,7 @@ function convert(opt = {}) {
         // 三目运算 "<" 后面不能直接跟非空白字符
         return match.replace(p1, [p1, ' '].join(''));
       }))
-      .pipe(replace(/{{[^}\d]*(\.)[\d][^}]+}}/g, function(match, p1) {
+      .pipe(replace(/{{[^}\d\w]*(\.)[\d][^}]+}}/g, function(match, p1) {
         // 浮点数不能忽略小数点前面的0
         return match.replace(p1, ['0', p1].join(''));
       }))
