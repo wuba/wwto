@@ -16,12 +16,26 @@ if (!wx['has_ali_hook_flag']) {
       } else {
         params = key;
       }
-      return bak[api](params).data;
+      let result = bak[api](params).data;
+
+      if (api === 'getStorageSync') {
+        result = result || '';
+      }
+
+      return result;
     };
   });
 
-  wx.request = wx.httpRequest;
+  wx.request = function(opt) {
+    opt.headers = opt.header || opt.headers || {};
+    opt.headers['referer'] = '';
+    opt.headers['content-type'] = opt.headers['content-type'] || 'application/json';
+
+    return wx.httpRequest(opt);
+  };
+
   wx.setNavigationBarTitle = wx.setNavigationBar;
+  wx.setNavigationBarColor = wx.setNavigationBar;
 
   wx.login = (o) => {
     let bak = {
@@ -33,7 +47,7 @@ if (!wx['has_ali_hook_flag']) {
       res.code = res.authCode;
       delete res.authCode;
       bak.success && bak.success(res);
-    }
+    };
     return wx.getAuthCode(o);
   };
 
@@ -51,10 +65,19 @@ if (!wx['has_ali_hook_flag']) {
         rst[k === 'avatar' ? 'avatarUrl' : k] = res[k];
       }
       bak.success && bak.success({userInfo: rst});
-    }
+    };
 
     return getAuthUserInfo(o);
   };
 
   wx.showShareMenu = wx.showShareMenu || ((opt) => {});
+
+  const createSelectorQuery = wx.createSelectorQuery;
+  wx.createSelectorQuery = function() {
+    let query = createSelectorQuery.apply(this, arguments);
+    query.in = function() {
+      return query;
+    };
+    return query;
+  }
 }
