@@ -16,6 +16,14 @@ function convert(opt = {}) {
 
     gulp.src(src + "/**/*.wxss")
       .pipe(replace('.wxss"', '"'))
+      .pipe(replace(/url\(['"](\/\/[^'"]+)['"]\)/ig, function(match, p1) {
+        // 背景url属性值必须带协议
+        return match.replace(/\/\//g, m => 'https:' + m);
+      }))
+      .pipe(replace(/url\((\/\/[^'"]+)\)/ig, function(match, p1) {
+        // 背景url属性值必须带协议
+        return match.replace(/\/\//g, m => 'https:' + m);
+      }))
       .pipe(rename(function(path) {
         path.extname = ".ttss";
       }))
@@ -25,10 +33,28 @@ function convert(opt = {}) {
       .pipe(replace('wx:', 'tt:'))
       .pipe(replace('tt:for-items', 'tt:for'))
       .pipe(replace('.wxml', '.ttml'))
+      .pipe(replace(/url\(['"](\/\/[^'"]+)['"]\)/ig, function(match, p1) {
+        // 背景url属性值必须带协议
+        return match.replace(/\/\//g, m => 'https:' + m);
+      }))
+      .pipe(replace(/url\((\/\/[^'"]+)\)/ig, function(match, p1) {
+        // 背景url属性值必须带协议
+        return match.replace(/\/\//g, m => 'https:' + m);
+      }))
+      .pipe(replace(/url=["']{{([^{}\s\?=]+)}}/ig, function(match, p1) {
+        // url属性值必须带协议
+        return match.replace(p1, '(' + p1 +'[0]==\'/\' && ' + p1 + '[1]==\'/\') ? \'https:\' + ' + p1 + ':' + p1);
+      }))
+      .pipe(replace(/url\({{([^{}\s\?=]+)}}/ig, function(match, p1) {
+        // 背景url属性值必须带协议
+        return match.replace(p1, '(' + p1 +'[0]==\'/\' && ' + p1 + '[1]==\'/\') ? \'https:\' + ' + p1 + ':' + p1);
+      }))
       .pipe(rename(function(path) {
         path.extname = ".ttml";
       }))
       .pipe(gulp.dest(dest));
+
+    gulp.src(src + "/**/*.json").pipe(gulp.dest(dest));
 
     const patch = fs.readFileSync(__dirname + '/patch.js', 'utf8');
     gulp.src(src + "/**/*.js")
