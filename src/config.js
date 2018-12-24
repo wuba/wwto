@@ -4,7 +4,8 @@ module.exports =  {
       src + "/**/*.*",
       "!" + src + "/**/*.wxml",
       "!" + src + "/**/*.wxss",
-      "!" + src + "/**/*.js"
+      "!" + src + "/**/*.js",
+      "!" + src + "/**/*.json"
     ];
   }
 };
