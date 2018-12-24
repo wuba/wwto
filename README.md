@@ -75,3 +75,6 @@ gulp.task('all', function(cb) {
 - `json`文件或模板绝对路径必须以`/`开头，相对路径必须以./开头
 - 自定义组件命名只能使用短横线（custom-com）
 - `fetch`是全局只读对象，不能对其赋值
+- `require`，参数只能是字符串直接量，不能是变量（如：`var path = '/a/b/c'; require(path);`）
+- `triggerEvent(name, data)`，`name`目前只支持字符串直接量，不支持变量
+- `swiper`组件手动设置`current`后，不会自动触发`bindChange`事件，如果需要主动触发
