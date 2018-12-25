@@ -4,9 +4,16 @@ const fse = require('fs-extra');
 const rename = require('gulp-rename');
 const replace = require('gulp-replace');
 const uneval = require('uneval');
+const md5Hex = require('md5-hex');
 const config = require('../../config');
 const balancingGroup = require('../../utils/balancing-group');
 const transpiler = require('./transpiler');
+const scopedHandler = require('../../scope/scope-hander');
+const ab2str = require('arraybuffer-to-string');
+const str2ab = require('to-buffer');
+const through2 = require('through2');
+const DOMParser = require('xmldom').DOMParser;
+const scopeView = require('../../scope/scope-view');
 
 function convert(opt = {}) {
   const src = opt.source || './src';
@@ -19,10 +26,35 @@ function convert(opt = {}) {
 
     gulp.src(src + "/**/*.wxss")
       .pipe(replace('.wxss"', '"'))
-      .pipe(rename(function(path) {
-        path.extname = ".acss";
+      .pipe(through2.obj(function(file, enc, cb) {
+        let path = file.history[0].replace(file.base, '').replace('.wxss', '');
+        let jsonPath = file.history[0].replace('.wxss', '.json');
 
-        console.log(path);
+        fs.exists(jsonPath, (exist) => {
+          if (exist) {
+            let json = fs.readFileSync(jsonPath);
+            let isCom = /"component":\s*true/.test(json);
+
+            if (isCom) {
+              let md5 = '_' + md5Hex(path);
+              let str = ab2str(file.contents);
+              scopedHandler(md5, str).then((css) => {
+                file.contents = str2ab(css);
+                this.push(file);
+                cb();
+              });
+            } else {
+              this.push(file);
+              cb();
+            }
+          } else {
+            this.push(file);
+            cb();
+          }
+        });
+      }))
+      .pipe(rename(function(file) {
+        file.extname = ".acss";
       }))
       .pipe(gulp.dest(dest));
 
@@ -30,6 +62,36 @@ function convert(opt = {}) {
       .pipe(replace('wx:', 'a:'))
       .pipe(replace('a:for-items', 'a:for'))
       .pipe(replace('.wxml', '.axml'))
+      .pipe(through2.obj(function(file, enc, cb) {
+        let path = file.history[0].replace(file.base, '').replace('.wxml', '');
+        let jsonPath = file.history[0].replace('.wxml', '.json');
+
+        fs.exists(jsonPath, (exist) => {
+          if (exist) {
+            let json = fs.readFileSync(jsonPath);
+            let isCom = /"component":\s*true/.test(json);
+
+            if (isCom) {
+              let md5 = '_' + md5Hex(path);
+              let str = ab2str(file.contents);
+              let node = new DOMParser().parseFromString(str);
+              scopeView(node, md5);
+              let nodeStr = node.toString()
+                .replace(/xmlns:a=""/, '').replace(/&amp;/g, '&').replace(/&quot;/g, "'");
+
+              file.contents = str2ab(nodeStr);
+              this.push(file);
+              cb();
+            } else {
+              this.push(file);
+              cb();
+            }
+          } else {
+            this.push(file);
+            cb();
+          }
+        });
+      }))
       .pipe(replace(/\s+formType=['"]\w+['"]/g, function(match) {
         return match.replace('formType', 'form-type');
       }))

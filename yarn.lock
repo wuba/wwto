@@ -173,9 +173,27 @@ array-unique@^0.3.2:
   version "0.3.2"
   resolved "http://ires.58corp.com/repository/58npm/array-unique/-/array-unique-0.3.2.tgz#a894b75d4bc4f6cd679ef3244a9fd8f46ae2d428"
 
+arraybuffer-to-string@^1.0.2:
+  version "1.0.2"
+  resolved "http://ires.58corp.com/repository/58npm/arraybuffer-to-string/-/arraybuffer-to-string-1.0.2.tgz#c373aa7bb0e6844d9a2bc9654c8889a9570a26e2"
+
 assign-symbols@^1.0.0:
   version "1.0.0"
   resolved "http://ires.58corp.com/repository/58npm/assign-symbols/-/assign-symbols-1.0.0.tgz#59667f41fadd4f20ccbc2bb96b8d4f7f78ec0367"
+
+async-replace@^1.0.0:
+  version "1.0.1"
+  resolved "http://ires.58corp.com/repository/58npm/async-replace/-/async-replace-1.0.1.tgz#d3f0857ccd02f1e94eb149cb5f89d58ac4f021d6"
+  dependencies:
+    async "^1.4.2"
+
+async@^1.4.2:
+  version "1.5.2"
+  resolved "http://ires.58corp.com/repository/58npm/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
+
+atob-lite@^2.0.0:
+  version "2.0.0"
+  resolved "http://ires.58corp.com/repository/58npm/atob-lite/-/atob-lite-2.0.0.tgz#0fef5ad46f1bd7a8502c65727f0367d5ee43d696"
 
 atob@^2.1.1:
   version "2.1.2"
@@ -909,6 +927,10 @@ flagged-respawn@^1.0.0:
   version "1.0.1"
   resolved "http://ires.58corp.com/repository/58npm/flagged-respawn/-/flagged-respawn-1.0.1.tgz#e7de6f1279ddd9ca9aac8a5971d618606b3aab41"
 
+flatten@^1.0.2:
+  version "1.0.2"
+  resolved "http://ires.58corp.com/repository/58npm/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
+
 for-in@^1.0.1, for-in@^1.0.2:
   version "1.0.2"
   resolved "http://ires.58corp.com/repository/58npm/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
@@ -1050,6 +1072,14 @@ gulp-rename@^1.2.2:
   version "1.4.0"
   resolved "http://ires.58corp.com/repository/58npm/gulp-rename/-/gulp-rename-1.4.0.tgz#de1c718e7c4095ae861f7296ef4f3248648240bd"
 
+gulp-replace-async@^0.0.1:
+  version "0.0.1"
+  resolved "http://ires.58corp.com/repository/58npm/gulp-replace-async/-/gulp-replace-async-0.0.1.tgz#b46f1713a9f57b7691d81733d9f3d4a27fc934aa"
+  dependencies:
+    async-replace "^1.0.0"
+    gulp-util "^3.0.1"
+    through2 "^0.6.3"
+
 gulp-replace@^1.0.0:
   version "1.0.0"
   resolved "http://ires.58corp.com/repository/58npm/gulp-replace/-/gulp-replace-1.0.0.tgz#b32bd61654d97b8d78430a67b3e8ce067b7c9143"
@@ -1064,7 +1094,7 @@ gulp-sequence@^1.0.0:
   dependencies:
     thunks "^4.9.0"
 
-gulp-util@^3.0.0:
+gulp-util@^3.0.0, gulp-util@^3.0.1:
   version "3.0.8"
   resolved "http://ires.58corp.com/repository/58npm/gulp-util/-/gulp-util-3.0.8.tgz#0054e1e744502e27c04c187c3ecc505dd54bbb4f"
   dependencies:
@@ -1117,6 +1147,10 @@ has-ansi@^2.0.0:
   dependencies:
     ansi-regex "^2.0.0"
 
+has-flag@^1.0.0:
+  version "1.0.0"
+  resolved "http://ires.58corp.com/repository/58npm/has-flag/-/has-flag-1.0.0.tgz#9d9e793165ce017a00f00418c43f942a7b1d11fa"
+
 has-flag@^3.0.0:
   version "3.0.0"
   resolved "http://ires.58corp.com/repository/58npm/has-flag/-/has-flag-3.0.0.tgz#b5d454dc2199ae225699f3467e5a07f3b955bafd"
@@ -1167,6 +1201,10 @@ homedir-polyfill@^1.0.1:
   dependencies:
     parse-passwd "^1.0.0"
 
+indexes-of@^1.0.1:
+  version "1.0.1"
+  resolved "http://ires.58corp.com/repository/58npm/indexes-of/-/indexes-of-1.0.1.tgz#f30f716c8e2bd346c7b67d3df3915566a7c05607"
+
 inflight@^1.0.4:
   version "1.0.6"
   resolved "http://ires.58corp.com/repository/58npm/inflight/-/inflight-1.0.6.tgz#49bd6331d7d02d0c09bc910a1075ba8165b56df9"
@@ -1178,7 +1216,7 @@ inherits@1:
   version "1.0.2"
   resolved "http://ires.58corp.com/repository/58npm/inherits/-/inherits-1.0.2.tgz#ca4309dadee6b54cc0b8d247e8d7c7a0975bdc9b"
 
-inherits@2, inherits@~2.0.1, inherits@~2.0.3:
+inherits@2, inherits@^2.0.3, inherits@~2.0.1, inherits@~2.0.3:
   version "2.0.3"
   resolved "http://ires.58corp.com/repository/58npm/inherits/-/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
 
@@ -1214,6 +1252,10 @@ is-accessor-descriptor@^1.0.0:
   resolved "http://ires.58corp.com/repository/58npm/is-accessor-descriptor/-/is-accessor-descriptor-1.0.0.tgz#169c2f6d3df1f992618072365c9b0ea1f6878656"
   dependencies:
     kind-of "^6.0.0"
+
+is-base64@^0.1.0:
+  version "0.1.0"
+  resolved "http://ires.58corp.com/repository/58npm/is-base64/-/is-base64-0.1.0.tgz#a6f20610c6ef4863a51cba32bc0222544b932622"
 
 is-buffer@^1.1.5:
   version "1.1.6"
@@ -1334,6 +1376,10 @@ istextorbinary@2.2.1:
     binaryextensions "2"
     editions "^1.3.3"
     textextensions "2"
+
+js-base64@^2.1.9:
+  version "2.5.0"
+  resolved "http://ires.58corp.com/repository/58npm/js-base64/-/js-base64-2.5.0.tgz#42255ba183ab67ce59a0dee640afdc00ab5ae93e"
 
 "js-tokens@^3.0.0 || ^4.0.0", js-tokens@^4.0.0:
   version "4.0.0"
@@ -1520,6 +1566,16 @@ map-visit@^1.0.0:
   resolved "http://ires.58corp.com/repository/58npm/map-visit/-/map-visit-1.0.0.tgz#ecdca8f13144e660f1b5bd41f12f3479d98dfb8f"
   dependencies:
     object-visit "^1.0.0"
+
+md5-hex@^2.0.0:
+  version "2.0.0"
+  resolved "http://ires.58corp.com/repository/58npm/md5-hex/-/md5-hex-2.0.0.tgz#d0588e9f1c74954492ecd24ac0ac6ce997d92e33"
+  dependencies:
+    md5-o-matic "^0.1.1"
+
+md5-o-matic@^0.1.1:
+  version "0.1.1"
+  resolved "http://ires.58corp.com/repository/58npm/md5-o-matic/-/md5-o-matic-0.1.1.tgz#822bccd65e117c514fab176b25945d54100a03c3"
 
 micromatch@^3.0.4:
   version "3.1.10"
@@ -1744,6 +1800,23 @@ posix-character-classes@^0.1.0:
   version "0.1.1"
   resolved "http://ires.58corp.com/repository/58npm/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
 
+postcss-selector-parser@2.2.3:
+  version "2.2.3"
+  resolved "http://ires.58corp.com/repository/58npm/postcss-selector-parser/-/postcss-selector-parser-2.2.3.tgz#f9437788606c3c9acee16ffe8d8b16297f27bb90"
+  dependencies:
+    flatten "^1.0.2"
+    indexes-of "^1.0.1"
+    uniq "^1.0.1"
+
+postcss@5.2.16:
+  version "5.2.16"
+  resolved "http://ires.58corp.com/repository/58npm/postcss/-/postcss-5.2.16.tgz#732b3100000f9ff8379a48a53839ed097376ad57"
+  dependencies:
+    chalk "^1.1.3"
+    js-base64 "^2.1.9"
+    source-map "^0.5.6"
+    supports-color "^3.2.3"
+
 pretty-hrtime@^1.0.0:
   version "1.0.3"
   resolved "http://ires.58corp.com/repository/58npm/pretty-hrtime/-/pretty-hrtime-1.0.3.tgz#b7e3ea42435a4c9b2759d99e0f201eb195802ee1"
@@ -1755,6 +1828,14 @@ private@^0.1.6, private@^0.1.8:
 process-nextick-args@~2.0.0:
   version "2.0.0"
   resolved "http://ires.58corp.com/repository/58npm/process-nextick-args/-/process-nextick-args-2.0.0.tgz#a37d732f4271b4ab1ad070d35508e8290788ffaa"
+
+"readable-stream@2 || 3":
+  version "3.1.1"
+  resolved "http://ires.58corp.com/repository/58npm/readable-stream/-/readable-stream-3.1.1.tgz#ed6bbc6c5ba58b090039ff18ce670515795aeb06"
+  dependencies:
+    inherits "^2.0.3"
+    string_decoder "^1.1.1"
+    util-deprecate "^1.0.1"
 
 "readable-stream@>=1.0.33-1 <1.1.0-0":
   version "1.0.34"
@@ -2010,6 +2091,19 @@ stream-consume@~0.1.0:
   version "0.1.1"
   resolved "http://ires.58corp.com/repository/58npm/stream-consume/-/stream-consume-0.1.1.tgz#d3bdb598c2bd0ae82b8cac7ac50b1107a7996c48"
 
+string-to-arraybuffer@^1.0.2:
+  version "1.0.2"
+  resolved "http://ires.58corp.com/repository/58npm/string-to-arraybuffer/-/string-to-arraybuffer-1.0.2.tgz#161147fbadea02e28b0935002cec4c40f1ca7f0a"
+  dependencies:
+    atob-lite "^2.0.0"
+    is-base64 "^0.1.0"
+
+string_decoder@^1.1.1:
+  version "1.2.0"
+  resolved "http://ires.58corp.com/repository/58npm/string_decoder/-/string_decoder-1.2.0.tgz#fe86e738b19544afe70469243b2a1ee9240eae8d"
+  dependencies:
+    safe-buffer "~5.1.0"
+
 string_decoder@~0.10.x:
   version "0.10.31"
   resolved "http://ires.58corp.com/repository/58npm/string_decoder/-/string_decoder-0.10.31.tgz#62e203bc41766c6c28c9fc84301dab1c5310fa94"
@@ -2037,6 +2131,12 @@ supports-color@^2.0.0:
   version "2.0.0"
   resolved "http://ires.58corp.com/repository/58npm/supports-color/-/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
 
+supports-color@^3.2.3:
+  version "3.2.3"
+  resolved "http://ires.58corp.com/repository/58npm/supports-color/-/supports-color-3.2.3.tgz#65ac0504b3954171d8a64946b2ae3cbb8a5f54f6"
+  dependencies:
+    has-flag "^1.0.0"
+
 supports-color@^5.3.0:
   version "5.5.0"
   resolved "http://ires.58corp.com/repository/58npm/supports-color/-/supports-color-5.5.0.tgz#e2e69a44ac8772f78a1ec0b35b689df6530efc8f"
@@ -2047,7 +2147,7 @@ textextensions@2:
   version "2.4.0"
   resolved "http://ires.58corp.com/repository/58npm/textextensions/-/textextensions-2.4.0.tgz#6a143a985464384cc2cff11aea448cd5b018e72b"
 
-through2@^0.6.1:
+through2@^0.6.1, through2@^0.6.3:
   version "0.6.5"
   resolved "http://ires.58corp.com/repository/58npm/through2/-/through2-0.6.5.tgz#41ab9c67b29d57209071410e1d7a7a968cd3ad48"
   dependencies:
@@ -2059,6 +2159,13 @@ through2@^2.0.0:
   resolved "http://ires.58corp.com/repository/58npm/through2/-/through2-2.0.5.tgz#01c1e39eb31d07cb7d03a96a70823260b23132cd"
   dependencies:
     readable-stream "~2.3.6"
+    xtend "~4.0.1"
+
+through2@^3.0.0:
+  version "3.0.0"
+  resolved "http://ires.58corp.com/repository/58npm/through2/-/through2-3.0.0.tgz#468b461df9cd9fcc170f22ebf6852e467e578ff2"
+  dependencies:
+    readable-stream "2 || 3"
     xtend "~4.0.1"
 
 thunks@^4.9.0:
@@ -2074,6 +2181,10 @@ tildify@^1.0.0:
 time-stamp@^1.0.0:
   version "1.1.0"
   resolved "http://ires.58corp.com/repository/58npm/time-stamp/-/time-stamp-1.1.0.tgz#764a5a11af50561921b133f3b44e618687e0f5c3"
+
+to-buffer@^1.1.1:
+  version "1.1.1"
+  resolved "http://ires.58corp.com/repository/58npm/to-buffer/-/to-buffer-1.1.1.tgz#493bd48f62d7c43fcded313a03dcadb2e1213a80"
 
 to-fast-properties@^1.0.3:
   version "1.0.3"
@@ -2126,6 +2237,10 @@ union-value@^1.0.0:
     is-extendable "^0.1.1"
     set-value "^0.4.3"
 
+uniq@^1.0.1:
+  version "1.0.1"
+  resolved "http://ires.58corp.com/repository/58npm/uniq/-/uniq-1.0.1.tgz#b31c5ae8254844a3a8281541ce2b04b865a734ff"
+
 unique-stream@^1.0.0:
   version "1.0.0"
   resolved "http://ires.58corp.com/repository/58npm/unique-stream/-/unique-stream-1.0.0.tgz#d59a4a75427447d9aa6c91e70263f8d26a4b104b"
@@ -2153,7 +2268,7 @@ user-home@^1.1.1:
   version "1.1.1"
   resolved "http://ires.58corp.com/repository/58npm/user-home/-/user-home-1.1.1.tgz#2b5be23a32b63a7c9deb8d0f28d485724a3df190"
 
-util-deprecate@~1.0.1:
+util-deprecate@^1.0.1, util-deprecate@~1.0.1:
   version "1.0.2"
   resolved "http://ires.58corp.com/repository/58npm/util-deprecate/-/util-deprecate-1.0.2.tgz#450d4dc9fa70de732762fbd2d4a28981419a0ccf"
 
@@ -2206,6 +2321,10 @@ which@^1.2.14:
 wrappy@1:
   version "1.0.2"
   resolved "http://ires.58corp.com/repository/58npm/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
+
+xmldom@^0.1.27:
+  version "0.1.27"
+  resolved "http://ires.58corp.com/repository/58npm/xmldom/-/xmldom-0.1.27.tgz#d501f97b3bdb403af8ef9ecc20573187aadac0e9"
 
 "xtend@>=4.0.0 <4.1.0-0", xtend@~4.0.1:
   version "4.0.1"
