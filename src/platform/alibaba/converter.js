@@ -15,6 +15,38 @@ const through2 = require('through2');
 const DOMParser = require('xmldom').DOMParser;
 const scopeView = require('../../scope/scope-view');
 
+function extractFn(source, name) {
+  const fnRegex = [
+    // attached(arg) {}
+    new RegExp(name + '\\(([^\\)]*)\\)[\\s\\S]*'),
+    // attached: function(args) {}
+    new RegExp(name + ':\\s*function\\s*\\(([^\\)]*)\\)[\\s\\S]*'),
+    // attached: (args) => {}
+    new RegExp(name + ':\\s*\\(([^\\)]*)\\)\\s*=>[\\s\\S]*')
+  ];
+
+  let args = '';
+  let body = '';
+
+  for (let i = 0; i < fnRegex.length; i += 1) {
+    let reg = fnRegex[i];
+    let matched = source.match(reg);
+
+    if (matched) {
+      args = matched[1];
+      body = matched[0];
+      break;
+    }
+  }
+
+
+  if (body) {
+    body = balancingGroup(body);
+  }
+
+  return {name, args, body};
+}
+
 function convert(opt = {}) {
   const src = opt.source || './src';
   const dest = opt.target || './alibaba';
@@ -62,36 +94,6 @@ function convert(opt = {}) {
       .pipe(replace('wx:', 'a:'))
       .pipe(replace('a:for-items', 'a:for'))
       .pipe(replace('.wxml', '.axml'))
-      .pipe(through2.obj(function(file, enc, cb) {
-        let path = file.history[0].replace(file.base, '').replace('.wxml', '');
-        let jsonPath = file.history[0].replace('.wxml', '.json');
-
-        fs.exists(jsonPath, (exist) => {
-          if (exist) {
-            let json = fs.readFileSync(jsonPath);
-            let isCom = /"component":\s*true/.test(json);
-
-            if (isCom) {
-              let md5 = '_' + md5Hex(path);
-              let str = ab2str(file.contents);
-              let node = new DOMParser().parseFromString(str);
-              scopeView(node, md5);
-              let nodeStr = node.toString()
-                .replace(/xmlns:a=""/, '').replace(/&amp;/g, '&').replace(/&quot;/g, "'");
-
-              file.contents = str2ab(nodeStr);
-              this.push(file);
-              cb();
-            } else {
-              this.push(file);
-              cb();
-            }
-          } else {
-            this.push(file);
-            cb();
-          }
-        });
-      }))
       .pipe(replace(/\s+formType=['"]\w+['"]/g, function(match) {
         return match.replace('formType', 'form-type');
       }))
@@ -122,6 +124,40 @@ function convert(opt = {}) {
       .pipe(replace(/\s+catch[\w]+=['"]/ig, function(match, p1) {
         // 事件绑定名称对齐
         return match.replace(/catch(\w)/g, (m, p1) => {return ['on', p1.toUpperCase()].join('')})
+      }))
+      .pipe(through2.obj(function(file, enc, cb) {
+        let path = file.history[0].replace(file.base, '').replace('.wxml', '');
+        let jsonPath = file.history[0].replace('.wxml', '.json');
+
+        fs.exists(jsonPath, (exist) => {
+          if (exist) {
+            let json = fs.readFileSync(jsonPath);
+            let isCom = /"component":\s*true/.test(json);
+
+            if (isCom) {
+              let md5 = '_' + md5Hex(path);
+              let str = ab2str(file.contents);
+              let node = new DOMParser().parseFromString(str);
+              scopeView(node, md5);
+              let nodeStr = node.toString()
+                .replace(/xmlns:a=""/, '')
+                .replace(/&amp;/g, '&')
+                .replace(/&quot;/g, "'")
+                .replace(/&lt;/g, '<')
+                .replace(/&gt;/g, '>');
+
+              file.contents = str2ab(nodeStr);
+              this.push(file);
+              cb();
+            } else {
+              this.push(file);
+              cb();
+            }
+          } else {
+            this.push(file);
+            cb();
+          }
+        });
       }))
       .pipe(rename(function(path) {
         path.extname = ".axml";
@@ -225,10 +261,32 @@ function convert(opt = {}) {
           match,
           `triggerEvent: function(name, opt) {
             this.props[\'on\' + name[0].toUpperCase() + name.substring(1)](opt);
-          },`
+          },\r\n`
         ].join('');
       }))
       .pipe(replace(/[\s\S]+/, function(match) {
+        // 只处理组件
+        if (!match.match(/Component\(/)) return match;
+
+        const lifeCircleNames = ['created', 'attached', 'ready', 'detached'];
+        let lifeCircleFns = '';
+        lifeCircleNames.map((name) => {
+          let {args, body} = extractFn(match, name);
+          lifeCircleFns += name + '(' + args + ')' + (body || '{}') + ',\r\n';
+        });
+
+        let methods = (match.match(/methods:[\s\n]*{/) || {})[0];
+        if (methods) {
+          match = match.replace(methods, [methods, lifeCircleFns].join('\r\n'));
+        } else {
+          match = match.replace('Component({', [
+            'Component({',
+            'methods: {',
+            lifeCircleFns,
+            '}'
+          ].join('\r\n'))
+        }
+
         let props = (match.match(/props:[\s\S]+/)||{})[0] || '';
         if (!props) {
           return match;
@@ -274,21 +332,11 @@ function convert(opt = {}) {
           this.created && this.created.apply(this, arguments);
           this.attached && this.attached.apply(this, arguments);
           this.ready && this.ready.apply(this, arguments);
-          
-          if (this.lifetimes) {
-            this.lifetimes.created && this.lifetimes.created.apply(this, arguments);
-            this.lifetimes.attached && this.lifetimes.attached.apply(this, arguments);
-            this.lifetimes.ready && this.lifetimes.ready.apply(this, arguments);
-          }
         }`;
 
         let didUnmount = `,
         didUnmount() {
           this.detached && this.detached.apply(this, arguments);
-          
-          if (this.lifetimes) {
-            this.lifetimes.detached && this.lifetimes.detached.apply(this, arguments);
-          }
         }`;
 
         let didUpdate = ',';
