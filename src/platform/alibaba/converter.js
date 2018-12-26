@@ -97,6 +97,10 @@ function convert(opt = {}) {
       .pipe(replace(/\s+formType=['"]\w+['"]/g, function(match) {
         return match.replace('formType', 'form-type');
       }))
+      .pipe(replace(/<canvas[^>]+(canvas-id)=['"]/g, function(match, p1) {
+        // canvas-id to id
+        return match.replace(p1, 'id');
+      }))
       .pipe(replace(/a:for-index=['"]({{\w+}})['"]/ig, function(match, p1) {
         // s:for-index="{{idx}}" -> s:for-index="idx"
         return match.replace('{{', '').replace('}}', '');
@@ -260,7 +264,7 @@ function convert(opt = {}) {
         return [
           match,
           `triggerEvent: function(name, opt) {
-            this.props[\'on\' + name[0].toUpperCase() + name.substring(1)](opt);
+            this.props[\'on\' + name[0].toUpperCase() + name.substring(1)]({detail:opt});
           },\r\n`
         ].join('');
       }))
