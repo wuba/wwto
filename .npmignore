@@ -3,3 +3,4 @@ node_modules
 src
 gulpfile.js
 yarn.lock
+publish258npm.sh
