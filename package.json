@@ -1,13 +1,16 @@
 {
   "name": "wto-cli",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "weChat mini-program to other mini-program",
-  "main": "src/index.js",
+  "main": "lib/index.js",
   "bin": {
     "wto": "bin/index.js"
   },
   "scripts": {
-    "test": "gulp test"
+    "test": "gulp test",
+    "dev": "gulp watch",
+    "build": "gulp build",
+    "prepare": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -28,9 +31,12 @@
     "gulp-replace": "^1.0.0",
     "gulp-replace-async": "^0.0.1",
     "gulp-sequence": "^1.0.0",
+    "gulp-uglify-es": "^1.0.4",
+    "gulp-watch": "^5.0.1",
     "md5-hex": "^2.0.0",
     "postcss": "5.2.16",
     "postcss-selector-parser": "2.2.3",
+    "pump": "^3.0.0",
     "string-to-arraybuffer": "^1.0.2",
     "through2": "^3.0.0",
     "to-buffer": "^1.1.1",

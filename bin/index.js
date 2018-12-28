@@ -2,7 +2,7 @@
 const commander = require('commander');
 const fs = require('fs');
 const path = require('path');
-const wto = require('../src/index.js');
+const wto = require('../lib/index.js');
 
 function readFile(p) {
   let rst = '';

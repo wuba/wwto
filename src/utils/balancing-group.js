@@ -28,7 +28,7 @@ function find(row) {
   return result;
 }
 
-var testStr = `
+const testStr = `
   /**
    * 组件的属性列表
    */
@@ -76,5 +76,6 @@ var testStr = `
     inputValue: 0,
   }
 `;
+// find(testStr);
 
 module.exports = find;
