@@ -77,7 +77,7 @@ if (!wx['has_ali_hook_flag']) {
       fail: o.fail,
       complete: o.complete
     };
-    o.success = function (res) {
+    o.success = function(res) {
       res.code = res.authCode;
       delete res.authCode;
       bak.success && bak.success(res);
@@ -93,7 +93,7 @@ if (!wx['has_ali_hook_flag']) {
       complete: o.complete
     };
 
-    o.success = function (res) {
+    o.success = function(res) {
       let rst = {};
       for (let k in res) {
         rst[k === 'avatar' ? 'avatarUrl' : k] = res[k];
@@ -104,7 +104,8 @@ if (!wx['has_ali_hook_flag']) {
     return getAuthUserInfo(o);
   };
 
-  wx.showShareMenu = wx.showShareMenu || ((opt) => {});
+  wx.showShareMenu = wx.showShareMenu || ((opt) => {
+  });
 
   const createSelectorQuery = wx.createSelectorQuery;
   wx.createSelectorQuery = function() {
@@ -117,32 +118,11 @@ if (!wx['has_ali_hook_flag']) {
 
   // websocket适配
   const connectSocket = wx.connectSocket;
-  const onSocketOpen = wx.onSocketOpen;
-  const onSocketError = wx.onSocketError;
-  const onSocketClose = wx.onSocketClose;
-  const onSocketMessage = wx.onSocketMessage;
-
-  let onOpenCb, onCloseCb, onErrorCb, onMessageCb;
-
-  wx.onSocketOpen = function(res) {
-    onSocketOpen.apply(this, arguments);
-    onOpenCb && onOpenCb(res);
-  };
-  wx.onSocketError = function(res) {
-    onSocketError.apply(this, arguments);
-    onErrorCb && onErrorCb(res);
-  };
-  wx.onSocketClose = function(res) {
-    onSocketClose.apply(this, arguments);
-    onCloseCb && onCloseCb(res);
-  };
-  wx.onSocketMessage = function(res) {
-    onSocketMessage.apply(this, arguments);
-    onMessageCb && onMessageCb(res);
-  };
-
   wx.connectSocket = function() {
-    connectSocket.apply(this, arguments);
+    setTimeout(() => {
+      // 处理onOpen回调无法触发的问题
+      connectSocket.apply(this, arguments);
+    }, 100);
 
     return {
       send: function() {
@@ -152,25 +132,23 @@ if (!wx['has_ali_hook_flag']) {
         wx.closeSocket.apply(this, arguments);
       },
       onOpen: function(cb) {
-        onOpenCb = cb && cb.bind(this);
+        wx.onSocketOpen(cb);
       },
       onClose: function(cb) {
-        onCloseCb = cb && cb.bind(this);
+        wx.onSocketClose(cb);
       },
       onError: function(cb) {
-        onErrorCb = cb && cb.bind(this);
+        wx.onSocketError(cb);
       },
       onMessage: function(cb) {
-        onMessageCb = cb && cb.bind(this);
+        wx.onSocketMessage(cb);
       }
     };
   };
 
-  /**
-   * wx模态弹窗不同的参数对应到支付宝confirm和alert API
-   */
-  function showModal(options) {
-    let params = paramsMap(options);
+  // wx模态弹窗不同的参数对应到支付宝confirm和alert API
+  function showModal(opt) {
+    let params = paramsMap(opt);
     let showCancel = params.showCancel;
 
     if (typeof showCancel === 'undefined') {
@@ -180,13 +158,112 @@ if (!wx['has_ali_hook_flag']) {
     // 确认框
     if (showCancel) {
       params.confirmButtonText = params.confirmText;
-      params.cancelButtonText = params.cancelText
+      params.cancelButtonText = params.cancelText;
     } else {
       // 提醒框
-      params.buttonText = params.confirmText
+      params.buttonText = params.confirmText;
     }
 
     wx[showCancel ? 'confirm' : 'alert'](params)
   }
+
   wx.showModal = wx.showModal || showModal;
+
+  // toast提示
+  const showToast = wx.showToast;
+  wx.showToast = function(opt) {
+    showToast.call(this, paramsMap(opt, {
+      title: 'content',
+      icon: 'type'
+    }));
+  };
+
+  // 图片预览
+  const previewImage = wx.previewImage;
+  wx.previewImage = function(opt) {
+    let params = paramsMap(opt);
+    let current = params.current;
+
+    if (current) {
+      current = opt.urls.indexOf(current)
+    }
+
+    if (current === -1 || !current) {
+      current = 0
+    }
+
+    params.current = current;
+
+    previewImage.call(this, params);
+  };
+
+  // 拨打电话
+  const makePhoneCall = wx.makePhoneCall;
+  wx.makePhoneCall = function(opt) {
+    makePhoneCall.call(this, paramsMap(opt, {
+      phoneNumber: 'number'
+    }));
+  };
+
+  // 获取系统信息
+  const getSystemInfo = wx.getSystemInfo;
+  wx.getSystemInfo = function(opt) {
+    let success = opt.success || emptyFn;
+    opt.success = function(res) {
+      res.system = res.platform + " " + res.system;
+
+      // 支付宝小程序windowHeight可能拿到0
+      if (!res.windowHeight) {
+        res.windowHeight = parseInt(res.screenHeight * res.windowWidth / res.screenWidth, 10) - 40;
+      }
+      success(res);
+    };
+    getSystemInfo.call(this, opt);
+  };
+
+  // 显示操作菜单
+  const showActionSheet = wx.showActionSheet;
+  wx.showActionSheet = function(opt) {
+    let params = paramsMap(opt, {
+      itemList: 'items'
+    });
+
+    let success = params.success || emptyFn;
+    let fail = params.fail || emptyFn;
+
+    params.success = function({index: tapIndex }) {
+      if (tapIndex === -1) {
+        fail({
+          errMsg: 'showActionSheet:fail cancel'
+        });
+      } else {
+        success({
+          tapIndex
+        });
+      }
+    };
+
+    showActionSheet.call(this, params);
+  };
+
+  // 发起支付
+  const requestPayment = wx.tradePay;
+  wx.requestPayment = function(opt) {
+    let params = paramsMap(opt, {
+      alipay_trade_body: 'orderStr'
+    });
+
+    let success = params.success || emptyFn;
+    let fail = params.fail || emptyFn;
+
+    params.success = function (res) {
+      if (res.resultCode === 9000) {
+        success();
+      } else {
+        fail();
+      }
+    };
+
+    requestPayment.call(this, params);
+  };
 }
