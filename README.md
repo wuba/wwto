@@ -5,6 +5,10 @@
 **wto**是一款支持将原生微信小程序转换成其他小程序的工具集合。  
 使用**wto**，几乎不需要对已有的微信小程序做任何改动，可以接近零成本获得`百度小程序`、`阿里小程序`、`头条小程序`。
 
+## 前提
+- node >= 8.9.3
+- gulp <= 3.9.1
+
 ## 安装
 ```shell
   npm config set registry http://ires.58corp.com/repository/58npm

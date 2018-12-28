@@ -58,6 +58,9 @@ function convert(opt = {}) {
 
     const patch = fs.readFileSync(__dirname + '/patch.js', 'utf8');
     gulp.src(src + "/**/*.js")
+      .pipe(replace(/['"](\/\/\w+\.\w+)/g, function(match, p1) {
+        return match.replace(p1, ['https:', p1].join(''));
+      }))
       .pipe(replace(/([\s\S]*)/, patch + '$1'))
       .pipe(replace(/\.option\.transition\.delay/g, '.delay'))
       .pipe(replace(/\.option\.transition\.duration/g, '.duration'))
