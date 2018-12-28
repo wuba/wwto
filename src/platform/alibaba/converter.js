@@ -349,7 +349,8 @@ function convert(opt = {}) {
           didUpdate: function(prevProps, preData) {
             for (let key in this.props) {
               if (typeof(_observers[key]) === 'function') {
-                if (JSON.stringify(preData[key]) !== JSON.stringify(this.props[key])) {
+                if (JSON.stringify(prevProps[key]) !== JSON.stringify(this.props[key]) && 
+                JSON.stringify(preData[key]) !== JSON.stringify(this.props[key])) {
                   this.setData(Object.assign({}, this.data, {[key]: this.props[key]}));
                   _observers[key].apply(this, [this.props[key], prevProps[key]]);
                 }
@@ -363,6 +364,17 @@ function convert(opt = {}) {
         let newProps = props.replace(str, uneval(propMap).replace(/^\(|\)$/g, ''));
 
         return match.replace('Component({', 'let _observers = ' + observers + ';\r\nComponent({\r\n' + lifeCircle).replace(props, newProps);
+      }))
+      .pipe(replace(/methods:[\s\n]*{[\s\S]*/g, function(match) {
+        // e.target.targetDataset -> e.target.dataset;
+        return match.replace(/on\w+\((\w+)\)\s*{/g, function(m, p1) {
+          return [
+            m,
+            'if (' + p1 + ' && ' + p1 + '.target && ' + p1 + '.target.targetDataset) {',
+            p1 + '.target.dataset = ' + p1 + '.target.targetDataset;',
+            '}'
+          ].join('\r\n');
+        });
       }))
       .pipe(replace(/([\s\S]*)/, patch + '$1'))
       .pipe(gulp.dest(dest));
