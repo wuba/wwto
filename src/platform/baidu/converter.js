@@ -10,7 +10,7 @@ function convert(opt = {}) {
   const dest = opt.target || './baidu';
   const assets = opt.assets || config.getAssets(src);
 
-  fse.remove(dest).then(() => {
+  // fse.remove(dest).then(() => {
     gulp.src(assets)
       .pipe(gulp.dest(dest));
 
@@ -119,7 +119,7 @@ function convert(opt = {}) {
       .pipe(replace(/\.option\.transition\.timingFunction/g, '.duration'))
       .pipe(replace(/([\s\S]*)/, patch + '$1'))
       .pipe(gulp.dest(dest));
-  });
+  // });
 }
 
 module.exports = convert;

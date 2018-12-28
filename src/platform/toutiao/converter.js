@@ -10,7 +10,7 @@ function convert(opt = {}) {
   const dest = opt.target || './toutiao';
   const assets = opt.assets || config.getAssets(src);
 
-  fse.remove(dest).then(() => {
+  // fse.remove(dest).then(() => {
     gulp.src(assets)
       .pipe(gulp.dest(dest));
 
@@ -74,7 +74,7 @@ function convert(opt = {}) {
         return match;
       }))
       .pipe(gulp.dest(dest));
-  });
+  // });
 }
 
 module.exports = convert;

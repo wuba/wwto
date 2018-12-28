@@ -54,7 +54,7 @@ if (!wx['has_ali_hook_flag']) {
 
   wx.request = function(opt) {
     opt.headers = opt.header || opt.headers || {};
-    opt.headers['referer'] = '';
+    opt.headers['referer'] = 'https://2018122162655290.hybrid.alipay-eco.com/2018122162655290/0.1.1812281752.11/index.html#pages/index/index';
     opt.headers['content-type'] = opt.headers['content-type'] || 'application/json';
 
     let success = opt.success || emptyFn;
