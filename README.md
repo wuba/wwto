@@ -79,3 +79,5 @@ gulp.task('all', function(cb) {
 - `triggerEvent(name, data)`，`name`目前只支持字符串直接量，不支持变量
 - `swiper`组件手动设置`current`后，不会自动触发`bindChange`事件，如果需要主动触发
 - 只能存在一个`websocket`连接
+- 组件样式不是隔离的，父子组件之间class不要重复
+- 自定义组件不能响应事件（如：bindTap）
