@@ -144,7 +144,7 @@ function convert(opt = {}) {
               let node = new DOMParser().parseFromString(str);
               scopeView(node, md5);
               let nodeStr = node.toString()
-                .replace(/xmlns:a=""/, '')
+                .replace(/xmlns:a=""/g, '')
                 .replace(/&amp;/g, '&')
                 .replace(/&quot;/g, "'")
                 .replace(/&lt;/g, '<')
