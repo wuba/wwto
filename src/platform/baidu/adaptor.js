@@ -1,5 +1,5 @@
-var wx = swan;
-if (!wx['has_baidu_hook_flag']) {
+function getInstance() {
+  var wx = swan;
   wx['has_baidu_hook_flag'] = true;
 
   const getStorageSync = swan['getStorageSync'];
@@ -54,4 +54,8 @@ if (!wx['has_baidu_hook_flag']) {
   };
 
   wx.showShareMenu = wx.showShareMenu || ((opt) => {});
+
+  return wx;
 }
+
+export default getInstance();

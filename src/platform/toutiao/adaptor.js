@@ -1,4 +1,3 @@
-var wx = tt;
 var emptyFn = () => {};
 var ignoreFn = function(opt) {
   if (opt) {
@@ -12,7 +11,9 @@ var ignoreFn = function(opt) {
   }
 };
 
-if (!wx['has_toutiao_hook_flag']) {
+function getInstance() {
+  var wx = tt;
+
   wx['has_toutiao_hook_flag'] = true;
 
   wx.reportAnalytics = wx.reportAnalytics || emptyFn;
@@ -34,4 +35,8 @@ if (!wx['has_toutiao_hook_flag']) {
       return api(opt);
     }
   });
+
+  return wx;
 }
+
+export default getInstance();
