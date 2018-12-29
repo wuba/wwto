@@ -193,7 +193,12 @@ function convert(opt = {}) {
       }))
       .pipe(gulp.dest(dest));
 
-    const patch = fs.readFileSync(__dirname + '/patch.js', 'utf8');
+    // 注入适配器代码
+    //fs.readFileSync(__dirname + '/patch.js', 'utf8');
+    gulp.src(__dirname + '/adaptor.js').pipe(gulp.dest(dest)).on('end', () => {
+      console.log('复制：adaptor.js');
+    });
+
     gulp.src(src + "/**/*.js")
       .pipe(replace(/(require\(['"])(\w+)/g, '$1./$2'))
       .pipe(replace(/(from\s+['"])(\w+)/g, function(match, p1) {
@@ -376,7 +381,19 @@ function convert(opt = {}) {
           ].join('\r\n');
         });
       }))
-      .pipe(replace(/([\s\S]*)/, patch + '$1'))
+      .pipe(through2.obj(function(file, enc, cb) {
+        let path = file.history[0].replace(file.base, '');
+        let spec = path.split('/');
+        let adaptor = new Array(spec.length).fill('..').concat('adaptor.js').join('/');
+        let str = [
+          'import wx from \'' + adaptor.replace(/^\.\./, '.') + '\';',
+          ab2str(file.contents)
+        ].join('\r\n');
+        file.contents = str2ab(str);
+
+        this.push(file);
+        cb();
+      }))
       .pipe(gulp.dest(dest));
   // });
 }

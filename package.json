@@ -1,6 +1,6 @@
 {
   "name": "wto-cli",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "description": "weChat mini-program to other mini-program",
   "main": "lib/index.js",
   "bin": {

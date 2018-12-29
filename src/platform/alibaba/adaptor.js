@@ -1,5 +1,6 @@
-var wx = my;
-if (!wx['has_ali_hook_flag']) {
+function getInstance() {
+  var wx = my;
+
   wx['has_ali_hook_flag'] = true;
 
   function paramsMap(options, maps = {}) {
@@ -54,7 +55,7 @@ if (!wx['has_ali_hook_flag']) {
 
   wx.request = function(opt) {
     opt.headers = opt.header || opt.headers || {};
-    opt.headers['referer'] = 'https://2018122162655290.hybrid.alipay-eco.com/2018122162655290/0.1.1812281752.11/index.html#pages/index/index';
+    opt.headers['referer'] = '';
     opt.headers['content-type'] = opt.headers['content-type'] || 'application/json';
 
     let success = opt.success || emptyFn;
@@ -266,4 +267,8 @@ if (!wx['has_ali_hook_flag']) {
 
     requestPayment.call(this, params);
   };
+
+  return wx;
 }
+
+export default getInstance();

@@ -39,17 +39,20 @@ gulp.task('test', function(cb) {
   )
 });
 
-gulp.task('watch', function(cb) {
+const UGLIFY_OPTIONS = {
+  compress: {}
+};
+
+gulp.task('watch', ['build'], function() {
   return watch('src/**/*.js', function(file) {
     const path = file.history[0];
     console.log('开始压缩：', path);
 
     return gulp.src(path)
-      .pipe(uglifyES())
+      .pipe(uglifyES(UGLIFY_OPTIONS))
       .pipe(gulp.dest('lib'))
       .on('end', () => {
         console.log('压缩完成：', path);
-        cb && cb();
       });
   });
 });
@@ -58,7 +61,7 @@ gulp.task('build', function(cb) {
   console.log('开始转换...');
   pump([
     gulp.src('src/**/*.js'),
-    uglifyES(),
+    uglifyES(UGLIFY_OPTIONS),
     gulp.dest('lib')
   ], () => {
     console.log('转换完成！');

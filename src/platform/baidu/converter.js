@@ -1,6 +1,9 @@
 const fs = require('fs');
 const gulp = require('gulp');
 const fse = require('fs-extra');
+const ab2str = require('arraybuffer-to-string');
+const str2ab = require('to-buffer');
+const through2 = require('through2');
 const rename = require('gulp-rename');
 const replace = require('gulp-replace');
 const config = require('../../config');
@@ -109,7 +112,12 @@ function convert(opt = {}) {
       }))
       .pipe(gulp.dest(dest));
 
-    const patch = fs.readFileSync(__dirname + '/patch.js', 'utf8');
+    // 注入适配器代码
+    //fs.readFileSync(__dirname + '/patch.js', 'utf8');
+    gulp.src(__dirname + '/adaptor.js').pipe(gulp.dest(dest)).on('end', () => {
+      console.log('复制：adaptor.js');
+    });
+
     return gulp.src(src + "/**/*.js")
       .pipe(replace(/['"](\/\/\w+\.\w+)/g, function(match, p1) {
         return match.replace(p1, ['https:', p1].join(''));
@@ -117,7 +125,19 @@ function convert(opt = {}) {
       .pipe(replace(/\.option\.transition\.delay/g, '.delay'))
       .pipe(replace(/\.option\.transition\.duration/g, '.duration'))
       .pipe(replace(/\.option\.transition\.timingFunction/g, '.duration'))
-      .pipe(replace(/([\s\S]*)/, patch + '$1'))
+      .pipe(through2.obj(function(file, enc, cb) {
+        let path = file.history[0].replace(file.base, '');
+        let spec = path.split('/');
+        let adaptor = new Array(spec.length).fill('..').concat('adaptor.js').join('/');
+        let str = [
+          'import wx from \'' + adaptor.replace(/^\.\./, '.') + '\';',
+          ab2str(file.contents)
+        ].join('\r\n');
+        file.contents = str2ab(str);
+
+        this.push(file);
+        cb();
+      }))
       .pipe(gulp.dest(dest));
   // });
 }
