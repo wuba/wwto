@@ -5,7 +5,7 @@ const pump = require('pump');
 const watch = require('gulp-watch');
 const sequence = require('gulp-sequence');
 const uglifyES = require('gulp-uglify-es').default;
-const wto = require('./lib/index');
+const wto = require('./src/index');
 
 gulp.task('baidu', function() {
   return wto.toBaidu({
