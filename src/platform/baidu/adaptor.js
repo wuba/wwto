@@ -25,7 +25,7 @@ function getInstance() {
       opt.header['content-type'] = 'application/x-www-form-urlencoded';
     }
 
-    request(opt);
+    return request(opt);
   };
 
   const createAnimation = wx.createAnimation;
@@ -54,6 +54,19 @@ function getInstance() {
   };
 
   wx.showShareMenu = wx.showShareMenu || ((opt) => {});
+
+  // 画布导出为图片
+  const canvasToTempFilePath = wx.canvasToTempFilePath;
+  wx.canvasToTempFilePath = function(opt, self) {
+    const success = opt.success || emptyFn;
+    opt.success = function(res) {
+      if (res) {
+        res.tempFilePath = res.tempFilePath || res.tempImagePath;
+      }
+      success(res);
+    };
+    canvasToTempFilePath.call(this, opt, self);
+  };
 
   return wx;
 }
