@@ -85,7 +85,7 @@ function convert(opt = {}) {
         let spec = path.split('/');
         let adaptor = new Array(spec.length).fill('..').concat('adaptor.js').join('/');
         let str = [
-          'import wx from \'' + adaptor.replace(/^\.\./, '.') + '\';',
+          'var wx = require(\'' + adaptor.replace(/^\.\./, '.') + '\').default;',
           ab2str(file.contents)
         ].join('\r\n');
         file.contents = str2ab(str);
