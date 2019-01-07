@@ -57,7 +57,14 @@ function convert(opt = {}) {
       }))
       .pipe(gulp.dest(dest));
 
-    gulp.src(src + "/**/*.json").pipe(gulp.dest(dest));
+    const destConfigFile = dest + '/project.config.json';
+    const jsonSrc = [src + "/**/*.json"];
+    fs.exists(destConfigFile, (exist) => {
+      if(exist) {
+        jsonSrc.push('!' + src + '/project.config.json');
+      }
+      gulp.src(jsonSrc).pipe(gulp.dest(dest));
+    });
 
     // 注入适配器代码
     //fs.readFileSync(__dirname + '/patch.js', 'utf8');
@@ -74,10 +81,10 @@ function convert(opt = {}) {
       .pipe(replace(/\.option\.transition\.timingFunction/g, '.duration'))
       .pipe(replace(/([\w]+)\.setData\([^)]+}\)/g, function(match, p1) {
         // 解决嵌套字段更新后无法刷新视图的问题
-        const nest = /['"][\w]+\.[\w]+['"]/.test(match);
+        /*const nest = /['"][\w]+\.[\w]+['"]/.test(match);
         if (nest) {
           return match.replace(match, [match, ';', p1, '.setData(' + p1 + '.data);'].join(''))
-        }
+        }*/
         return match;
       }))
       .pipe(through2.obj(function(file, enc, cb) {

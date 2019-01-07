@@ -101,16 +101,24 @@ function convert(opt = {}) {
       }))
       .pipe(gulp.dest(dest));
 
-    gulp.src(src + "/**/*.json")
-      .pipe(replace(/usingComponents([^}]+)/g, function(match, p1) {
-        return match.replace(/"([\w]+)":/ig, (m, p1) => {
-          // 自定义组件命名不能用驼峰
-          return m.replace(p1, p1.replace(/[A-Z]/g, (m) => {
-            return ['-', m.toLowerCase()].join('')
-          }));
-        });
-      }))
-      .pipe(gulp.dest(dest));
+    const destConfigFile = dest + '/project.config.json';
+    const jsonSrc = [src + "/**/*.json"];
+    fs.exists(destConfigFile, (exist) => {
+      if(exist) {
+        jsonSrc.push('!' + src + '/project.config.json');
+      }
+
+      gulp.src(jsonSrc)
+        .pipe(replace(/usingComponents([^}]+)/g, function(match, p1) {
+          return match.replace(/"([\w]+)":/ig, (m, p1) => {
+            // 自定义组件命名不能用驼峰
+            return m.replace(p1, p1.replace(/[A-Z]/g, (m) => {
+              return ['-', m.toLowerCase()].join('')
+            }));
+          });
+        }))
+        .pipe(gulp.dest(dest));
+    });
 
     // 注入适配器代码
     //fs.readFileSync(__dirname + '/patch.js', 'utf8');

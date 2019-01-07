@@ -75,6 +75,7 @@ gulp.task('all', function(cb) {
 - 图片的`src`属性不能用数组赋值（如：`<image src="{{arr}}"></image>`）
 - `wx:for`不支持对象，从源码规避（转换一下）
 - 不支持`selectComponent`，可以通过监听属性的`observer`来实现外部的调用
+- 自定义组件不能响应事件（如：`bindTap`），需要添加一层容器来捕获事件
 
 ### 阿里小程序
 - `json`文件或模板绝对路径必须以`/`开头，相对路径必须以./开头
@@ -85,4 +86,4 @@ gulp.task('all', function(cb) {
 - `swiper`组件手动设置`current`后，不会自动触发`bindChange`事件，如果需要主动触发
 - 只能存在一个`websocket`连接
 - 组件样式不是隔离的，父子组件之间class不要重复
-- 自定义组件不能响应事件（如：bindTap）
+- 自定义组件不能响应事件（如：`bindTap`），需要添加一层容器来捕获事件
