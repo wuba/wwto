@@ -14,10 +14,12 @@ module.exports = postcss.plugin('add-id', function (id) {
 
       node.selector = selectorParser(function (selectors) {
         selectors.each(function (selector) {
-          var node = null;
+          let node = null;
+
           selector.each(function (n) {
             if (n.type !== 'pseudo') node = n;
           });
+
           selector.insertAfter(node, selectorParser.className({
             value: id
           }));

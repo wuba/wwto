@@ -7,45 +7,13 @@ const uneval = require('uneval');
 const md5Hex = require('md5-hex');
 const config = require('../../config');
 const balancingGroup = require('../../utils/balancing-group');
-const transpiler = require('./transpiler');
-const scopedHandler = require('../../scope/scope-hander');
 const ab2str = require('arraybuffer-to-string');
 const str2ab = require('to-buffer');
 const through2 = require('through2');
 const DOMParser = require('xmldom').DOMParser;
-const scopeView = require('../../scope/scope-view');
-
-function extractFn(source, name) {
-  const fnRegex = [
-    // attached(arg) {}
-    new RegExp(name + '\\(([^\\)]*)\\)[\\s\\S]*'),
-    // attached: function(args) {}
-    new RegExp(name + ':\\s*function\\s*\\(([^\\)]*)\\)[\\s\\S]*'),
-    // attached: (args) => {}
-    new RegExp(name + ':\\s*\\(([^\\)]*)\\)\\s*=>[\\s\\S]*')
-  ];
-
-  let args = '';
-  let body = '';
-
-  for (let i = 0; i < fnRegex.length; i += 1) {
-    let reg = fnRegex[i];
-    let matched = source.match(reg);
-
-    if (matched) {
-      args = matched[1];
-      body = matched[0];
-      break;
-    }
-  }
-
-
-  if (body) {
-    body = balancingGroup(body);
-  }
-
-  return {name, args, body};
-}
+const extractFn = require('../../utils/extra-function');
+const scopeStyle = require('../../scope/scope-style');
+const scopeTemplate = require('../../scope/scope-template');
 
 function convert(opt = {}) {
   const src = opt.source || './src';
@@ -70,7 +38,7 @@ function convert(opt = {}) {
             if (isCom) {
               let md5 = '_' + md5Hex(path);
               let str = ab2str(file.contents);
-              scopedHandler(md5, str).then((css) => {
+              scopeStyle(md5, str).then((css) => {
                 file.contents = str2ab(css);
                 this.push(file);
                 cb();
@@ -142,7 +110,7 @@ function convert(opt = {}) {
               let md5 = '_' + md5Hex(path);
               let str = ab2str(file.contents);
               let node = new DOMParser().parseFromString(str);
-              scopeView(node, md5);
+              scopeTemplate(node, md5);
               let nodeStr = node.toString()
                 .replace(/xmlns:a=""/g, '')
                 .replace(/&amp;/g, '&')

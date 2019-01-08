@@ -1,5 +1,6 @@
-var emptyFn = () => {};
-var ignoreFn = function(opt) {
+const emptyFn = () => {};
+
+function ignoreFn(opt) {
   if (opt) {
     if (opt.success) {
       opt.success();
@@ -9,7 +10,7 @@ var ignoreFn = function(opt) {
       opt.fail();
     }
   }
-};
+}
 
 function getInstance() {
   var wx = tt;
@@ -25,16 +26,6 @@ function getInstance() {
   wx.showTabBar = wx.showTabBar || ignoreFn;
   wx.navigateToMiniProgram = wx.navigateToMiniProgram || ignoreFn;
   wx.onUserCaptureScreen = wx.onUserCaptureScreen || emptyFn;
-
-  // 导航URL修正
-  const jumpApis = ['navigateTo', 'redirectTo', 'switchTab', 'reLaunch'];
-  jumpApis.forEach((apiName) => {
-    const api = wx[apiName];
-    wx[apiName] = (opt) => {
-      // opt.url = opt.url.replace(/^\//, '');
-      return api(opt);
-    }
-  });
 
   const bakSetTimeout = setTimeout;
   setTimeout = function(fn, timeout) {
