@@ -1,6 +1,7 @@
 demo
 node_modules
 src
+DEV.md
 gulpfile.js
 yarn.lock
 publish258npm.sh
