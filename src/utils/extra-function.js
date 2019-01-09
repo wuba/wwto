@@ -36,3 +36,5 @@ function extractFn(source, name) {
 
   return {name, args, body};
 }
+
+module.exports = extractFn;

@@ -15,6 +15,10 @@ const extractFn = require('../../utils/extra-function');
 const scopeStyle = require('../../scope/scope-style');
 const scopeTemplate = require('../../scope/scope-template');
 
+function defQuery(match, opt) {
+  return [match, `${opt} = ${opt} || {}; ${opt}.query = ${opt}.query || {};`].join('');
+}
+
 function convert(opt = {}) {
   const src = opt.source || './src';
   const dest = opt.target || './alibaba';
@@ -187,53 +191,17 @@ function convert(opt = {}) {
         // fetch是全局只读对象，不允许赋值
         return match.replace(/fetch/g, 'renameFetch');
       }))
-      .pipe(replace(/App\({[\s\S]+onLaunch:\s*function\s*\(\s*(\w+)\s*\)[^{]*{/g, function(match, p1) {
+      .pipe(replace(/App\({[\s\S]+(onLaunch|onShow):\s*function\s*\(\s*(\w+)\s*\)[^{]*{/g, function(match, p1, p2) {
         // query默认值{}
-        return [
-          match,
-          p1 + ' = ' + p1 + '|| {};',
-          p1 + '.query = ' + p1 + '.query || {};'
-        ].join('');
+        return defQuery(match, p2);
       }))
-      .pipe(replace(/App\({[\s\S]+onLaunch\s*\(\s*(\w+)\s*\)[^{]*{/g, function(match, p1) {
+      .pipe(replace(/App\({[\s\S]+(onLaunch|onShow)\s*\(\s*(\w+)\s*\)[^{]*{/g, function(match, p1, p2) {
         // query默认值{}
-        return [
-          match,
-          p1 + ' = ' + p1 + '|| {};',
-          p1 + '.query = ' + p1 + '.query || {};'
-        ].join('');
+        return defQuery(match, p2);
       }))
-      .pipe(replace(/App\({[\s\S]+onLaunch:\s*\(\s*(\w+)\s*\)\s*=>\s*[^{]*{/g, function(match, p1) {
+      .pipe(replace(/App\({[\s\S]+(onLaunch|onShow):\s*\(\s*(\w+)\s*\)\s*=>\s*[^{]*{/g, function(match, p1, p2) {
         // query默认值{}
-        return [
-          match,
-          p1 + ' = ' + p1 + '|| {};',
-          p1 + '.query = ' + p1 + '.query || {};'
-        ].join('');
-      }))
-      .pipe(replace(/App\({[\s\S]+onShow:\s*function\s*\(\s*(\w+)\s*\)[^{]*{/g, function(match, p1) {
-        // query默认值{}
-        return [
-          match,
-          p1 + ' = ' + p1 + '|| {};',
-          p1 + '.query = ' + p1 + '.query || {};'
-        ].join('');
-      }))
-      .pipe(replace(/App\({[\s\S]+onShow\s*\(\s*(\w+)\s*\)[^{]*{/g, function(match, p1) {
-        // query默认值{}
-        return [
-          match,
-          p1 + ' = ' + p1 + '|| {};',
-          p1 + '.query = ' + p1 + '.query || {};'
-        ].join('');
-      }))
-      .pipe(replace(/App\({[\s\S]+onShow:\s*\(\s*(\w+)\s*\)\s*=>\s*[^{]*{/g, function(match, p1) {
-        // query默认值{}
-        return [
-          match,
-          p1 + ' = ' + p1 + '|| {};',
-          p1 + '.query = ' + p1 + '.query || {};'
-        ].join('');
+        return defQuery(match, p2);
       }))
       .pipe(replace(/Component\([\s\S]+properties:[^{]*{/, function(match) {
         return match.replace('properties', 'props');
@@ -351,9 +319,9 @@ function convert(opt = {}) {
         return match.replace(/on\w+\((\w+)\)\s*{/g, function(m, p1) {
           return [
             m,
-            'if (' + p1 + ' && ' + p1 + '.target && ' + p1 + '.target.targetDataset) {',
-            p1 + '.target.dataset = ' + p1 + '.target.targetDataset;',
-            '}'
+            `if (${p1} && ${p1}.target && ${p1}.target.targetDataset) {
+              ${p1}.target.dataset = ${p1}.target.targetDataset;
+            }`
           ].join('\r\n');
         });
       }))
