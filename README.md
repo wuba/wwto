@@ -64,6 +64,7 @@ gulp.task('all', function(cb) {
 - 不要使用`setData`保存视图不需要的变量（如原生变量：`Animation`），继承字段会被丢弃
 - 图片的`src`属性不能用数组赋值（如：`<image src="{{arr}}"></image>`）
 - 在同一个标签上，`wx:for`和`wx:if`不能同时使用
+- wxml不支持`hidden`
 
 ### 头条小程序
 - 不支持组件（如：`movable-area`、`movable-view`、`cover-view`、`cover-image`、`map`、`audio`、`canmera`等）
