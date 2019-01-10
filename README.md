@@ -65,6 +65,7 @@ gulp.task('all', function(cb) {
 - 图片的`src`属性不能用数组赋值（如：`<image src="{{arr}}"></image>`）
 - 在同一个标签上，`wx:for`和`wx:if`不能同时使用
 - wxml不支持`hidden`
+- 通过`properties`绑定的数据，在子组件更新后**不会**同步到父组件（重要）
 
 ### 头条小程序
 - 不支持组件（如：`movable-area`、`movable-view`、`cover-view`、`cover-image`、`map`、`audio`、`canmera`等）
