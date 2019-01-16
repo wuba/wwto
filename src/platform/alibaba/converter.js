@@ -95,7 +95,9 @@ function convert(opt = {}) {
       }))
       .pipe(replace(/\s+bind[\w]+=['"]/ig, function(match, p1) {
         // 事件绑定名称对齐
-        return match.replace(/bind(\w)/g, (m, p1) => {return ['on', p1.toUpperCase()].join('')})
+        return match.replace(/bindscrolltolower/gi, 'bindScrollToLower')
+          .replace(/bindscrolltoupper/gi, 'bindScrollToUpper')
+          .replace(/bind(\w)/g, (m, p1) => {return ['on', p1.toUpperCase()].join('')})
       }))
       .pipe(replace(/\s+catch[\w]+=['"]/ig, function(match, p1) {
         // 事件绑定名称对齐
