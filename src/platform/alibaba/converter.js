@@ -101,7 +101,7 @@ function convert(opt = {}) {
       }))
       .pipe(replace(/\s+catch[\w]+=['"]/ig, function(match, p1) {
         // 事件绑定名称对齐
-        return match.replace(/catch(\w)/g, (m, p1) => {return ['on', p1.toUpperCase()].join('')})
+        return match.replace(/catch(\w)/g, (m, p1) => {return ['catch', p1.toUpperCase()].join('')})
       }))
       .pipe(through2.obj(function(file, enc, cb) {
         let path = file.history[0].replace(file.base, '').replace('.wxml', '');
