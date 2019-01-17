@@ -294,12 +294,10 @@ function convert(opt = {}) {
           this.detached && this.detached.apply(this, arguments);
         }`;
 
-        let didUpdate = ',';
-        if (observerMap) {
-          didUpdate = `,
+        let didUpdate = `,
           didUpdate: function(prevProps, preData) {
             for (let key in this.props) {
-              if (typeof(_observers[key]) === 'function') {
+              if (_observers && typeof(_observers[key]) === 'function') {
                 if (JSON.stringify(prevProps[key]) !== JSON.stringify(this.props[key]) && 
                 JSON.stringify(preData[key]) !== JSON.stringify(this.props[key])) {
                   this.setData(Object.assign({}, this.data, {[key]: this.props[key]}));
@@ -311,7 +309,6 @@ function convert(opt = {}) {
               }
             }
           },`;
-        }
 
         let lifeCircle = [didMount, didUnmount, didUpdate].join('');
         let observers = (uneval(observerMap)).replace(/^\(|\)$/g, '').replace(/observer\(/g, 'function(').replace(/\(\) => {/g, 'function() {');
