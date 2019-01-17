@@ -304,10 +304,10 @@ function convert(opt = {}) {
                 JSON.stringify(preData[key]) !== JSON.stringify(this.props[key])) {
                   this.setData(Object.assign({}, this.data, {[key]: this.props[key]}));
                   _observers[key].apply(this, [this.props[key], prevProps[key]]);
-                } else if (this.props[key] !== prevProps[key]) {
-                  this.data[key] = this.props[key];
-                  this.setData(this.data);
                 }
+              } else if (this.props[key] !== prevProps[key]) {
+                this.data[key] = this.props[key];
+                this.setData(this.data);
               }
             }
           },`;
