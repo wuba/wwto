@@ -29,7 +29,9 @@ function convert(opt = {}) {
       .pipe(gulp.dest(dest));
 
     gulp.src(src + "/**/*.wxss")
-      .pipe(replace('.wxss"', '"'))
+      .pipe(replace(/\.wxss(["'])/g, function(match, p1) {
+        return p1;
+      }))
       .pipe(through2.obj(function(file, enc, cb) {
         let path = file.history[0].replace(file.base, '').replace('.wxss', '');
         let jsonPath = file.history[0].replace('.wxss', '.json');
