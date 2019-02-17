@@ -1,9 +1,13 @@
 const baiduConverter = require('./platform/baidu/converter');
 const alibabaConverter = require('./platform/alibaba/converter');
 const toutiaoConverter = require('./platform/toutiao/converter');
+const baiduLint = require('./platform/baidu/codeLint');
 
 module.exports = {
-  toBaidu: baiduConverter,
+  toBaidu: (opt) => {
+    baiduConverter(Object.assign({}, opt, { target: opt.baiduTarget }));
+    baiduLint(Object.assign({}, opt, { target: opt.baiduTarget }));
+  },
   toAlibaba: alibabaConverter,
   toToutiao: toutiaoConverter,
 
