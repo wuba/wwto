@@ -1,4 +1,5 @@
 const fs = require('fs');
+const sysPath = require('path');
 const gulp = require('gulp');
 const fse = require('fs-extra');
 const ab2str = require('arraybuffer-to-string');
@@ -83,7 +84,7 @@ function convert(opt = {}) {
       .pipe(replace(/\.option\.transition\.timingFunction/g, '.duration'))
       .pipe(through2.obj(function(file, enc, cb) {
         let path = file.history[0].replace(file.base, '');
-        let spec = path.split('/');
+        let spec = path.split(sysPath.sep);
         let adaptor = new Array(spec.length).fill('..').concat('adaptor.js').join('/');
         let str = [
           'var wx = require(\'' + adaptor.replace(/^\.\./, '.') + '\').default;',

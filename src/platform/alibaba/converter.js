@@ -1,4 +1,5 @@
 const fs = require('fs');
+const sysPath = require('path');
 const gulp = require('gulp');
 const fse = require('fs-extra');
 const rename = require('gulp-rename');
@@ -332,7 +333,7 @@ function convert(opt = {}) {
       }))
       .pipe(through2.obj(function(file, enc, cb) {
         let path = file.history[0].replace(file.base, '');
-        let spec = path.split('/');
+        let spec = path.split(sysPath.sep);
         let adaptor = new Array(spec.length).fill('..').concat('adaptor.js').join('/');
         let str = [
           'import wx from \'' + adaptor.replace(/^\.\./, '.') + '\';',
