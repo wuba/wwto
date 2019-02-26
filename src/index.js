@@ -1,19 +1,40 @@
+const baiduLinter = require('./platform/baidu/linter');
+const alibabaLinter = require('./platform/alibaba/linter');
+const toutiaoLinter = require('./platform/toutiao/linter');
 const baiduConverter = require('./platform/baidu/converter');
 const alibabaConverter = require('./platform/alibaba/converter');
 const toutiaoConverter = require('./platform/toutiao/converter');
-const baiduLint = require('./platform/baidu/codeLint');
 
 module.exports = {
-  toBaidu: (opt) => {
-    baiduConverter(Object.assign({}, opt, { target: opt.baiduTarget }));
-    baiduLint(Object.assign({}, opt, { target: opt.baiduTarget }));
+  lintBaidu: baiduLinter,
+  lintAlibaba: alibabaLinter,
+  lintToutiao: toutiaoLinter,
+  lintAll: (src) => {
+    baiduConverter(src);
+    alibabaLinter(src);
+    toutiaoLinter(src);
   },
-  toAlibaba: alibabaConverter,
-  toToutiao: toutiaoConverter,
+
+  toBaidu: (opt) => {
+    baiduConverter(opt);
+    baiduLinter(opt.source);
+  },
+  toAlibaba: (opt) => {
+    alibabaConverter(opt);
+    alibabaLinter(opt.source);
+  },
+  toToutiao: (opt) => {
+    toutiaoConverter(opt);
+    toutiaoLinter(opt.source);
+  },
 
   toAll: (opt) => {
     baiduConverter(Object.assign({}, opt, { target: opt.baiduTarget }));
     alibabaConverter(Object.assign({}, opt, { target: opt.alibabaTarget }));
     toutiaoConverter(Object.assign({}, opt, { target: opt.toutiaoTarget }));
+
+    baiduLinter(opt.source);
+    alibabaLinter(opt.source);
+    toutiaoLinter(opt.source);
   }
 };

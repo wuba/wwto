@@ -44,6 +44,25 @@ commander.option('-v, --version', '显示版本号', () => {
   displayVersion();
 });
 
+commander.command('lint')
+  .description('检测项目')
+  .option('-p, --platform <platform>', '目标平台')
+  .option('-s, --source <source>', '源码目录')
+  .action(cmd => {
+      if (cmd.platform === 'baidu') {
+        wto.lintBaidu(cmd.source);
+      } else if (cmd.platform === 'alibaba') {
+        wto.lintAlibaba(cmd.source);
+      } else if (cmd.platform === 'toutiao') {
+        wto.lintToutiao(cmd);
+      } else {
+        wto.lintBaidu(cmd.source);
+        wto.lintAlibaba(cmd.source);
+        wto.lintToutiao(cmd);
+      }
+    }
+  );
+
 commander.command('build')
   .description('编译项目')
   .option('-p, --platform <platform>', '目标平台')

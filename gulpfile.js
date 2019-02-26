@@ -43,7 +43,7 @@ const UGLIFY_OPTIONS = {
   compress: {}
 };
 
-gulp.task('watch', ['build'], function() {
+gulp.task('debug', ['build'], function() {
   return watch('src/**/*.js', function(file) {
     const path = file.history[0];
     console.log('开始压缩：', path);

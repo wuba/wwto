@@ -13,6 +13,7 @@ const str2ab = require('to-buffer');
 const through2 = require('through2');
 const DOMParser = require('xmldom').DOMParser;
 const extractFn = require('../../utils/extra-function');
+const logger = require('../../utils/logger');
 const scopeStyle = require('../../scope/scope-style');
 const scopeTemplate = require('../../scope/scope-template');
 
@@ -182,7 +183,7 @@ function convert(opt = {}) {
     // 注入适配器代码
     //fs.readFileSync(__dirname + '/patch.js', 'utf8');
     gulp.src(__dirname + '/adaptor.js').pipe(gulp.dest(dest)).on('end', () => {
-      console.log('复制：adaptor.js');
+      logger.info('复制 adaptor.js');
     });
 
     gulp.src(src + "/**/*.js")

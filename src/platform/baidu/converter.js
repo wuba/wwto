@@ -8,6 +8,7 @@ const through2 = require('through2');
 const rename = require('gulp-rename');
 const replace = require('gulp-replace');
 const config = require('../../config');
+const logger = require('../../utils/logger');
 
 function convert(opt = {}) {
   const src = opt.source || './src';
@@ -126,7 +127,7 @@ function convert(opt = {}) {
   // 注入适配器代码
   //fs.readFileSync(__dirname + '/patch.js', 'utf8');
   gulp.src(__dirname + '/adaptor.js').pipe(gulp.dest(dest)).on('end', () => {
-    console.log('复制：adaptor.js');
+    logger.info('复制 adaptor.js');
   });
 
   return gulp.src(src + "/**/*.js")

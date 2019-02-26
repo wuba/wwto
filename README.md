@@ -24,15 +24,23 @@
 ```shell
   # 转换成百度小程序
   wto build -p baidu -s src -t dist/baidu
+  # 检测源码对百度小程序的兼容性
+  wto lint -p baidu -s src
   
   # 转换成阿里小程序
   wto build -p alibaba -s src -t dist/alibaba
+  # 检测源码对阿里小程序的兼容性
+  wto lint -p alibaba -s src
   
   # 转换成头条小程序
   wto build -p toutiao -s src -t dist/toutiao
+  # 检测源码对头条小程序的兼容性
+  wto lint -p toutiao -s src
   
   # 转换成百度&&阿里&&头条小程序
   wto build -s src -t dist
+  # 检测源码对百度&&阿里&&头条小程序的兼容性
+  wto lint -s src
 ```
 
 ### 打包工具
@@ -59,13 +67,13 @@ gulp.task('all', function(cb) {
 注意事项是各平台不支持且无法通过本工具转换完成的一些点，如果要开发跨平台的应用需要规避或者降级处理。
 
 ### 百度小程序
-- bind*={{str}}   `str`不能包含函数调用（如：`bindtap="flag ? 'fn1' : 'fn2'"`）
-- wx:for={{arr}}  `arr`不能包含函数调用（如：`wx:for="{{flag ? arr1 : arr2}}"`）
-- 不要使用`setData`保存视图不需要的变量（如原生变量：`Animation`），继承字段会被丢弃
-- 图片的`src`属性不能用数组赋值（如：`<image src="{{arr}}"></image>`）
+- bind*={{str}} `str`只能是函数名（字符串），不能包含表达式计算（如：`bindtap="flag ? 'fn1' : 'fn2'"`）
+- wx:for={{arr}}  `arr`只能是变量名（字符串），不能包含表达式计算（如：`wx:for="{{flag ? arr1 : arr2}}"`）
 - 在同一个标签上，`wx:for`和`wx:if`不能同时使用
 - wxml不支持`hidden`
 - 通过`properties`绑定的数据，在子组件更新后**不会**同步到父组件（重要）
+- 图片的`src`属性不能用数组赋值（如：`<image src="{{arr}}"></image>`）
+- 不要使用`setData`保存视图不需要的变量（如原生变量：`Animation`），继承字段会被丢弃
 
 ### 头条小程序
 - 不支持组件（如：`movable-area`、`movable-view`、`cover-view`、`cover-image`、`map`、`audio`、`canmera`等）
