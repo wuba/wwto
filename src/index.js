@@ -9,10 +9,10 @@ module.exports = {
   lintBaidu: baiduLinter,
   lintAlibaba: alibabaLinter,
   lintToutiao: toutiaoLinter,
-  lintAll: (src) => {
-    baiduConverter(src);
-    alibabaLinter(src);
-    toutiaoLinter(src);
+  lintAll: (opt) => {
+    baiduLinter(opt);
+    alibabaLinter(opt);
+    toutiaoLinter(opt);
   },
 
   toBaidu: (opt) => {

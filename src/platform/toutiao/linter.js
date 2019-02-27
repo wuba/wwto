@@ -79,7 +79,8 @@ const jsLineRules = [
 ];
 const jsFileRules = [];
 
-function lint(sourcePath = './src') {
+function lint(opt = {}) {
+  const sourcePath = opt.source || './src';
   commonLint(sourcePath + '/**/*.wxml', wxmlFileRules, wxmlLineRules);
   commonLint(sourcePath + '/**/*.js', jsFileRules, jsLineRules);
 }

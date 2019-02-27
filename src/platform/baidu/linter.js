@@ -60,7 +60,8 @@ const wxmlFileRules = [
   }
 ];
 
-function lint(sourcePath = './src') {
+function lint(opt = {}) {
+  const sourcePath = opt.source || './src';
   commonLint(sourcePath + '/**/*.wxml', wxmlFileRules, wxmlLineRules);
 }
 

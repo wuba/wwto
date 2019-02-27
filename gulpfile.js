@@ -68,3 +68,9 @@ gulp.task('build', function(cb) {
     cb && cb();
   });
 });
+
+gulp.task('lint', function(cb) {
+  return wto.lintAll({
+    source: './demo/miniprogram-demo'
+  });
+});

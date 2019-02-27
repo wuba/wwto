@@ -14,20 +14,20 @@ colors.setTheme({
   ERROR: 'red'
 });
 
-function warn(str, cmd = 'WARN') {
-  console.warn(colors.yellow('\n[' + cmd + '] ' + str));
+function warn(str, cmd = '\n[WARN] ') {
+  console.warn(colors.yellow(cmd + str));
 }
 
-function error(str, cmd = 'Error') {
-  console.warn(colors.red('\n[' + cmd + '] ' + str));
+function error(str, cmd = '\n[Error] ') {
+  console.warn(colors.red(cmd + str));
 }
 
-function success(str, cmd = 'SUCCESS') {
-  console.warn(colors.green('[' + cmd + '] ' + str));
+function success(str, cmd = '[SUCCESS] ') {
+  console.warn(colors.green(cmd + str));
 }
 
-function info(str, cmd = 'INFO') {
-  console.warn(colors.cyan('[' + cmd + '] ' + str));
+function info(str, cmd = '[INFO] ') {
+  console.warn(colors.cyan(cmd + str));
 }
 
 /**

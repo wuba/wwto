@@ -2,6 +2,7 @@
 const commander = require('commander');
 const fs = require('fs');
 const path = require('path');
+const logger = require('../lib/utils/logger');
 const wto = require('../lib/index.js');
 
 function readFile(p) {
@@ -29,14 +30,15 @@ function getVersion() {
 function displayVersion() {
   let version = getVersion();
   let chars = [
-    '   _   _____  __  ',
+    '   _   _____   __  ',
     ' ( \/\/ )  |   ( - )',
     ' )   (   |  (     ) ',
     '(__/\__)  |   ( _ ) ',
     '                                         '
   ].join('\n');
-  console.log('\n v' + version + '\n');
-  console.log(chars);
+
+  logger.info(version, '\n v');
+  logger.info(chars, '\n');
 }
 
 commander.usage('[command] <options ...>');
@@ -45,7 +47,7 @@ commander.option('-v, --version', '显示版本号', () => {
 });
 
 commander.command('lint')
-  .description('检测项目')
+  .description('检测源码兼容性')
   .option('-p, --platform <platform>', '目标平台')
   .option('-s, --source <source>', '源码目录')
   .action(cmd => {
@@ -56,8 +58,8 @@ commander.command('lint')
       } else if (cmd.platform === 'toutiao') {
         wto.lintToutiao(cmd);
       } else {
-        wto.lintBaidu(cmd.source);
-        wto.lintAlibaba(cmd.source);
+        wto.lintBaidu(cmd);
+        wto.lintAlibaba(cmd);
         wto.lintToutiao(cmd);
       }
     }

@@ -22,6 +22,15 @@
 ## 使用
 ### 命令行
 ```shell
+  # 查看帮助
+  wto --help
+  # 查看转换命令使用说明
+  wto build --help
+  # 查看源码兼容性检测使用说明
+  wto lint --help
+  # 查看版本号
+  wto -v
+
   # 转换成百度小程序
   wto build -p baidu -s src -t dist/baidu
   # 检测源码对百度小程序的兼容性
@@ -49,12 +58,19 @@ const gulp = require('gulp');
 const wto = require('wto-cli');
 
 // 转换成百度/阿里/头条小程序
-gulp.task('all', function(cb) {
+gulp.task('build', function(cb) {
     wto.toAll({
       source: './miniprogram-demo',
       baiduTarget: './baidu-miniprogram-demo',
       alibabaTarget: './alibaba-miniprogram-demo',
       toutiaoTarget: './toutiao-miniprogram-demo',
+    });
+});
+
+// 检测源码对各平台的兼容性
+gulp.task('lint', function(cb) {
+    wto.lintAll({
+      source: './miniprogram-demo'
     });
 });
 ```
