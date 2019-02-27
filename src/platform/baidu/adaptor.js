@@ -25,6 +25,11 @@ function getInstance() {
       opt.header['content-type'] = 'application/x-www-form-urlencoded';
     }
 
+    // 默认按text解析！
+    if (!opt.responseType) {
+      opt.responseType = 'json';
+    }
+
     return request(opt);
   };
 
