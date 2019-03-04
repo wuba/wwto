@@ -103,6 +103,10 @@ function convert(opt = {}) {
           .replace(/bindscrolltoupper/gi, 'bindScrollToUpper')
           .replace(/bind(\w)/g, (m, p1) => {return ['on', p1.toUpperCase()].join('')})
       }))
+      .pipe(replace(/\s+touch(start|end|move|cancel)=/g, (match, p1) => {
+        // touch事件名称对齐
+        return match.replace(p1, p1.substring(0, 1).toUpperCase() + p1.substring(1));
+      }))
       .pipe(replace(/\s+catch[\w]+=['"]/ig, function(match, p1) {
         // 事件绑定名称对齐
         return match.replace(/catchsubmit/ig, 'onSubmit')
