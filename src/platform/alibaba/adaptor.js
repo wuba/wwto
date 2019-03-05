@@ -69,6 +69,30 @@ function getInstance() {
     return wx.httpRequest(opt);
   };
 
+  const getFileInfo = wx.getFileInfo;
+  wx.getFileInfo = function(opt) {
+    let params = paramsMap(opt, {
+      filePath: 'apFilePath'
+    });
+    return getFileInfo(params);
+  };
+
+  const uploadFile = wx.uploadFile;
+  wx.uploadFile = function(opt) {
+    const paths = opt.filePath.split(/\\|\//);
+    const fileName = paths[paths.length - 1];
+    const isImg = /\.(png|jpg|jpeg|gif|webp)/i.test(fileName);
+    const isVideo = /\.(mp4|mov|WMV|3GP|FLV|RMVB|WebM|AVI|ASF|MPEG|MPG|DAT|MKV)/i.test(fileName);
+    const fileType = isImg ? 'image' : (isVideo ? 'video' : 'audio');
+
+    opt = Object.assign({}, opt, {
+      fileName: fileName,
+      fileType: fileType,
+    });
+
+    return uploadFile(opt);
+  };
+
   wx.setNavigationBarTitle = wx.setNavigationBar;
   wx.setNavigationBarColor = wx.setNavigationBar;
 
@@ -99,14 +123,15 @@ function getInstance() {
       for (let k in res) {
         rst[k === 'avatar' ? 'avatarUrl' : k] = res[k];
       }
-      bak.success && bak.success({userInfo: rst});
+      bak.success && bak.success({
+        userInfo: rst
+      });
     };
 
     return getAuthUserInfo(o);
   };
 
-  wx.showShareMenu = wx.showShareMenu || ((opt) => {
-  });
+  wx.showShareMenu = wx.showShareMenu || ((opt) => {});
 
   const createSelectorQuery = wx.createSelectorQuery;
   wx.createSelectorQuery = function() {
@@ -232,7 +257,9 @@ function getInstance() {
     let success = params.success || emptyFn;
     let fail = params.fail || emptyFn;
 
-    params.success = function({index: tapIndex }) {
+    params.success = function({
+      index: tapIndex
+    }) {
       if (tapIndex === -1) {
         fail({
           errMsg: 'showActionSheet:fail cancel'
@@ -257,7 +284,7 @@ function getInstance() {
     let success = params.success || emptyFn;
     let fail = params.fail || emptyFn;
 
-    params.success = function (res) {
+    params.success = function(res) {
       if (res.resultCode === 9000) {
         success();
       } else {
