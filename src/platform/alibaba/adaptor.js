@@ -701,6 +701,15 @@ function getInstance() {
 
 
   ///////////低功耗蓝牙
+  // wx.readBLECharacteristicValue=my.readBLECharacteristicValue
+  // wx.onBLECharacteristicValueChange=my.onBLECharacteristicValueChange
+  // wx.notifyBLECharacteristicValueChange=my.notifyBLECharacteristicValueChange
+  // wx.getBLEDeviceServices=my.getBLEDeviceServices
+  // wx.getBLEDeviceCharacteristics=my.getBLEDeviceCharacteristics
+  // wx.writeBLECharacteristicValue=my.writeBLECharacteristicValue
+  wx.onBLEConnectionStateChange=wx.onBLEConnectionStateChanged
+  wx.createBLEConnection=wx.connectBLEDevice
+  wx.closeBLEConnection=wx.disconnectBLEDevice
 
 
   //////////蓝牙
