@@ -69,7 +69,7 @@ function getInstance() {
       }
       success(res);
     };
-    getSystemInfo.call(this, opt);
+    return getSystemInfo.call(this, opt);
   };
 
   wx.getUpdateManager = wx.getUpdateManager || ((opt) => {
@@ -99,7 +99,7 @@ function getInstance() {
     if (typeof opt['icon'] === 'undefined') {
       opt['icon'] = 'success'
     }
-    showToast.call(this, paramsMap(opt, {
+    return showToast.call(this, paramsMap(opt, {
       title: 'content',
       icon: 'type'
     }));
@@ -131,7 +131,7 @@ function getInstance() {
   // loading
   const showLoading = wx.showLoading;
   wx.showLoading = function (opt) {
-    showLoading.call(this, paramsMap(opt, {
+    return showLoading.call(this, paramsMap(opt, {
       title: "content"
     }))
   };
@@ -160,7 +160,7 @@ function getInstance() {
       }
     };
 
-    showActionSheet.call(this, params);
+    return showActionSheet.call(this, params);
   };
 
   /////// 界面导航栏
@@ -338,7 +338,7 @@ function getInstance() {
         });
       }
     };
-    getStorage.call(this, opt);
+    return getStorage.call(this, opt);
   };
 
   ////////地图
@@ -354,7 +354,7 @@ function getInstance() {
   ////////图片
   // wx.getImageInfo=my.getImageInfo
   wx.saveImageToPhotosAlbum = function (opt) {
-    wx.saveImage(paramsMap(opt, {
+    return wx.saveImage(paramsMap(opt, {
       filePath: 'url'
     }))
   };
@@ -374,13 +374,13 @@ function getInstance() {
 
     params.current = current;
 
-    previewImage.call(this, params);
+    return previewImage.call(this, params);
   };
   const compressImage = wx.compressImage;
   wx.compressImage = function (opt) {
     let src = opt.src;
     let success = opt.success || fn();
-    compressImage.call(this, Object.assign({}, opt, {
+    return compressImage.call(this, Object.assign({}, opt, {
       compressLevel: 4,
       apFilePath: [src],
       success(res) {
@@ -394,7 +394,7 @@ function getInstance() {
   const chooseImage = wx.chooseImage;
   wx.chooseImage = function (opt) {
     let success = opt.success || emptyFn;
-    chooseImage.call(this, Object.assign({}, opt, {
+    return chooseImage.call(this, Object.assign({}, opt, {
       success(res) {
         let tempFilePaths = [].concat(res.apFilePaths);
         let arr = [];
@@ -573,14 +573,14 @@ function getInstance() {
     if (typeof opt['address'] === 'undefined') {
       opt['address'] = "-"
     }
-    openLocation.call(this, opt)
+    return openLocation.call(this, opt)
   };
 
   // res 无speed	number accuracy	number altitude	number verticalAccuracy  horizontalAccuracy
   const getLocation = wx.getLocation;
   wx.getLocation = function (opt) {
     let success = opt.success || fn();
-    getLocation(Object.assign({}, opt, {
+    return getLocation(Object.assign({}, opt, {
       type: 0
     }))
   };
@@ -599,6 +599,7 @@ function getInstance() {
     canvasContext['arcTo'] = () => canvasContext;
     canvasContext['createPattern'] = () => canvasContext;
     canvasContext['strokeText'] = () => canvasContext
+    return canvasContext
   };
 
   const canvasToTempFilePath = wx.canvasToTempFilePath;
@@ -636,7 +637,7 @@ function getInstance() {
   wx.saveFile = function (opt) {
     let success = opt.success || fn();
     let apFilePath = opt.tempFilePath;
-    saveFile.call(this, Object.assign({}, opt, {
+    return saveFile.call(this, Object.assign({}, opt, {
       apFilePath: apFilePath,
       success(res) {
         res['tempFilePath'] = res['apFilePath'];
@@ -647,7 +648,7 @@ function getInstance() {
 
   const removeSavedFile = wx.removeSavedFile;
   wx.removeSavedFile = function (opt) {
-    removeSavedFile.call(this, paramsMap(opt, {
+    return removeSavedFile.call(this, paramsMap(opt, {
       filePath: apFilePath
     }))
   };
@@ -655,7 +656,7 @@ function getInstance() {
   const getSavedFileList = wx.getSavedFileList;
   wx.getSavedFileList = function (opt) {
     let success = opt.success || fn();
-    getSavedFileList.call(this, {}, opt, {
+    return getSavedFileList.call(this, {}, opt, {
       success(res) {
         res.fileList.map((item) => {
           item['filePath'] = item.apFilePath
@@ -667,14 +668,14 @@ function getInstance() {
 
   const getSavedFileInfo = wx.getSavedFileInfo;
   wx.getSavedFileInfo = function (opt) {
-    getSavedFileInfo.call(this, paramsMap(opt, {
+    return getSavedFileInfo.call(this, paramsMap(opt, {
       filePath: "apFilePath"
     }))
   };
 
   const getFileInfo = wx.getFileInfo;
   wx.getFileInfo = function (opt) {
-    getFileInfo.call(this, paramsMap(opt, {
+    return getFileInfo.call(this, paramsMap(opt, {
       filePath: 'apFilePath'
     }))
   };
@@ -720,14 +721,14 @@ function getInstance() {
 
   ////////剪贴板
   wx.setClipboardData = function (opt) {
-    wx.setClipboard(paramsMap(opt, {
+    return wx.setClipboard(paramsMap(opt, {
       data: 'text'
     }))
   };
 
   wx.getClipboardData = function (opt) {
     let success = opt.success;
-    wx.getClipboard(Object.assign({}, opt, {
+    return wx.getClipboard(Object.assign({}, opt, {
       success(res) {
         res['data'] = res.text;
         success(res)
@@ -748,7 +749,7 @@ function getInstance() {
   const getNetworkType = wx.getNetworkType;
   wx.getNetworkType = function (opt) {
     let success = opt.success || fn();
-    getNetworkType(Object.assign({}, opt, {
+    return getNetworkType(Object.assign({}, opt, {
       success(res) {
         res.networkType = res.networkType.toLocaleLowerCase();
         success(res)
@@ -758,7 +759,7 @@ function getInstance() {
 
   let onNetworkStatusChange = wx.onNetworkStatusChange;
   wx.onNetworkStatusChange = function (fn) {
-    onNetworkStatusChange(function (res) {
+    return onNetworkStatusChange(function (res) {
       res.networkType = res.networkType.toLocaleLowerCase();
       fn(res)
     })
@@ -774,7 +775,7 @@ function getInstance() {
   //////////电话
   const makePhoneCall = wx.makePhoneCall;
   wx.makePhoneCall = function (opt) {
-    makePhoneCall.call(this, paramsMap(opt, {
+    return makePhoneCall.call(this, paramsMap(opt, {
       phoneNumber: 'number'
     }));
   };
@@ -811,7 +812,7 @@ function getInstance() {
       'barCode': "bar"
     };
     let success = opt.success || fn();
-    wx.scan(Object.assign({}, opt, {
+    return wx.scan(Object.assign({}, opt, {
       hideAlbum: typeof opt.onlyFromCamera === 'undefined' ? true : opt.onlyFromCamera,
       type: typeof opt.scanType === 'undefined' ? "qr" : typeMap[opt.scanType[0]],
       success(res) {
@@ -914,7 +915,7 @@ function getInstance() {
       }
     };
 
-    requestPayment.call(this, params);
+    return requestPayment.call(this, params);
   };
 
   return wx;
