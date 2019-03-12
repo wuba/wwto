@@ -35,11 +35,10 @@ gulp.task('toutiao', function() {
 });
 
 gulp.task('test', function(cb) {
-  sequence(
-    'baidu',
-    'alibaba',
-    'toutiao'
-  )
+  console.log('开始转换...');
+  sequence('baidu', 'alibaba', 'toutiao')(function() {
+    // console.log('转换完毕!');
+  })
 });
 
 const UGLIFY_OPTIONS = {

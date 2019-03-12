@@ -121,8 +121,10 @@ function convert(opt = {}) {
   });
 
   // 注入适配器代码
-  gulp.src(__dirname + '/adaptor.js').pipe(gulp.dest(dest)).on('end', () => {
-    logger.info('复制 adaptor.js');
+  gulp.src('node_modules/mp-adaptor/lib/alibaba.js')
+    .pipe(rename('adaptor.js'))
+    .pipe(gulp.dest(dest)).on('end', () => {
+      logger.info('复制 adaptor.js 完成！');
   });
 
   // 处理脚本文件
