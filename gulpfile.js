@@ -10,7 +10,8 @@ const wto = require('./src/index');
 const source = [
   'src/**/*.js',
   '!src/converter/**/*.*',
-  '!src/linter/**/*.*'
+  '!src/linter/**/*.*',
+  '!src/adaptor/**/*.*'
 ];
 
 gulp.task('baidu', function() {
