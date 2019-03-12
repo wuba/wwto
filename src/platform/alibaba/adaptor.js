@@ -60,7 +60,6 @@ function getInstance() {
   const getSystemInfo = wx.getSystemInfo;
   wx.getSystemInfo = function (opt) {
     let success = opt.success || emptyFn;
-    console.log(success)
     opt.success = function (res) {
       res.system = res.platform + " " + res.system;
 
@@ -80,7 +79,7 @@ function getInstance() {
       onUpdateFailed: fn(),
       onUpdateReady: fn()
     }
-  })
+  });
 
   ///////////路由
   // wx.redirectTo=my.redirectTo
@@ -187,7 +186,7 @@ function getInstance() {
   wx.hideTabBarRedDot = fn();
 
   ////////// 界面字体
-  wx.loadFontFace = fn()
+  wx.loadFontFace = fn();
 
   ////////// 下拉刷新
   // wx.stopPullDownRefresh = my.stopPullDownRefresh
@@ -244,21 +243,21 @@ function getInstance() {
   //////////下载
   const downloadFile = wx.downloadFile;
   wx.downloadFile = function (opt) {
-    let success = opt.success || fn()
+    let success = opt.success || fn();
     let downTask = downloadFile(Object.assign({}, opt, {
       success(res) {
         res['tempFilePath'] = res.apFilePath;
         res['statusCode'] = 200;
         success(res)
       }
-    }))
+    }));
     downTask['abort'] = fn();
     downTask['offHeadersReceived'] = fn();
     downTask['offProgressUpdate'] = fn();
     downTask['onHeadersReceived'] = fn();
     downTask['onProgressUpdate'] = fn();
     return downTask;
-  }
+  };
 
   ///////上传
   const uploadFile = wx.uploadFile;
@@ -350,7 +349,7 @@ function getInstance() {
     mapContext['getScale'] = fn();
     mapContext['includePoints'] = fn();
     return mapContext;
-  }
+  };
 
   ////////图片
   // wx.getImageInfo=my.getImageInfo
@@ -358,7 +357,7 @@ function getInstance() {
     wx.saveImage(paramsMap(opt, {
       filePath: 'url'
     }))
-  }
+  };
 
   const previewImage = wx.previewImage;
   wx.previewImage = function (opt) {
@@ -379,8 +378,8 @@ function getInstance() {
   };
   const compressImage = wx.compressImage;
   wx.compressImage = function (opt) {
-    let src = opt.src
-    let success = opt.success || fn()
+    let src = opt.src;
+    let success = opt.success || fn();
     compressImage.call(this, Object.assign({}, opt, {
       compressLevel: 4,
       apFilePath: [src],
@@ -390,26 +389,26 @@ function getInstance() {
         }
       }
     }))
-  }
+  };
   wx.chooseMessageFile = fn();
   const chooseImage = wx.chooseImage;
   wx.chooseImage = function (opt) {
     let success = opt.success || emptyFn;
     chooseImage.call(this, Object.assign({}, opt, {
       success(res) {
-        let tempFilePaths = [].concat(res.apFilePaths)
-        let arr = []
+        let tempFilePaths = [].concat(res.apFilePaths);
+        let arr = [];
         res.apFilePaths.map(function (item) {
           arr.push({
             path: item,
             size: null
           })
-        })
-        let tempFiles = [].concat(arr)
+        });
+        let tempFiles = [].concat(arr);
         success({tempFilePaths, tempFiles})
       }
     }))
-  }
+  };
 
   //////////视频
   wx.saveVideoToPhotosAlbum = fn();
@@ -426,7 +425,7 @@ function getInstance() {
       showStatusBar: fn(),
       stop: fn()
     }
-  }
+  };
   wx.chooseVideo = fn();
 
   ///////////音频
@@ -463,7 +462,7 @@ function getInstance() {
       seek: fn(),
       stop: fn()
     }
-  }
+  };
 
 
   ////////北京音频
@@ -474,7 +473,7 @@ function getInstance() {
       pause: fn(),
       play: fn()
     }
-  }
+  };
 
   wx.stopBackgroundAudio = fn();
   wx.seekBackgroundAudio = fn();
@@ -521,7 +520,7 @@ function getInstance() {
       switchCamera: fn(),
       toggleTorch: fn()
     }
-  }
+  };
 
   wx.createLivePlayerContext = function () {
     return {
@@ -533,7 +532,7 @@ function getInstance() {
       resume: fn(),
       stop: fn()
     }
-  }
+  };
 
   //////////录音
   wx.stopRecord = fn();
@@ -553,7 +552,7 @@ function getInstance() {
       start: fn(),
       stop: fn()
     }
-  }
+  };
 
   //////////相机
   wx.createCameraContext = function () {
@@ -562,7 +561,7 @@ function getInstance() {
       stopRecord: fn(),
       takePhoto: fn()
     }
-  }
+  };
 
   //////////位置
   // wx.chooseLocation=my.chooseLocation
@@ -575,21 +574,21 @@ function getInstance() {
       opt['address'] = "-"
     }
     openLocation.call(this, opt)
-  }
+  };
 
   // res 无speed	number accuracy	number altitude	number verticalAccuracy  horizontalAccuracy
   const getLocation = wx.getLocation;
   wx.getLocation = function (opt) {
-    let success = opt.success || fn()
+    let success = opt.success || fn();
     getLocation(Object.assign({}, opt, {
       type: 0
     }))
-  }
+  };
 
   //////////分享
   // wx.hideShareMenu=my.hideShareMenu
-  wx.updateShareMenu = fn()
-  wx.getShareInfo = fn()
+  wx.updateShareMenu = fn();
+  wx.getShareInfo = fn();
   wx.showShareMenu = wx.showShareMenu || ((opt) => {
   });
 
@@ -597,10 +596,10 @@ function getInstance() {
   const createCanvasContext = wx.createCanvasContext;
   wx.createCanvasContext = function (opt) {
     let canvasContext = createCanvasContext.call(this, opt);
-    canvasContext['arcTo'] = () => canvasContext
+    canvasContext['arcTo'] = () => canvasContext;
     canvasContext['createPattern'] = () => canvasContext;
     canvasContext['strokeText'] = () => canvasContext
-  }
+  };
 
   const canvasToTempFilePath = wx.canvasToTempFilePath;
   wx.canvasToTempFilePath = function (opt) {
@@ -608,18 +607,18 @@ function getInstance() {
     let success = opt.success || fn();
     canvasContext.toTempFilePath(Object.assign({}, opt, {
       success(res) {
-        res['tempFilePath'] = res.apFilePath
+        res['tempFilePath'] = res.apFilePath;
         success(res);
       }
     }))
-  }
+  };
 
   const canvasPutImageData = wx.canvasPutImageData;
   wx.canvasPutImageData = function (opt) {
     let canvasContext = wx.createCanvasContext(opt.canvasId);
     let success = opt.success || fn();
     canvasContext.putImageData(opt)
-  }
+  };
 
   const canvasGetImageData = wx.canvasGetImageData;
   wx.canvasGetImageData = function (opt) {
@@ -630,13 +629,13 @@ function getInstance() {
         success(res);
       }
     }))
-  }
+  };
 
   //////////文件
   const saveFile = wx.saveFile;
   wx.saveFile = function (opt) {
-    let success = opt.success || fn()
-    let apFilePath = opt.tempFilePath
+    let success = opt.success || fn();
+    let apFilePath = opt.tempFilePath;
     saveFile.call(this, Object.assign({}, opt, {
       apFilePath: apFilePath,
       success(res) {
@@ -644,45 +643,45 @@ function getInstance() {
         success(res);
       }
     }))
-  }
+  };
 
   const removeSavedFile = wx.removeSavedFile;
   wx.removeSavedFile = function (opt) {
     removeSavedFile.call(this, paramsMap(opt, {
       filePath: apFilePath
     }))
-  }
+  };
 
   const getSavedFileList = wx.getSavedFileList;
   wx.getSavedFileList = function (opt) {
-    let success = opt.success || fn()
+    let success = opt.success || fn();
     getSavedFileList.call(this, {}, opt, {
       success(res) {
         res.fileList.map((item) => {
           item['filePath'] = item.apFilePath
-        })
+        });
         success(res)
       }
     })
-  }
+  };
 
   const getSavedFileInfo = wx.getSavedFileInfo;
   wx.getSavedFileInfo = function (opt) {
     getSavedFileInfo.call(this, paramsMap(opt, {
       filePath: "apFilePath"
     }))
-  }
+  };
 
   const getFileInfo = wx.getFileInfo;
   wx.getFileInfo = function (opt) {
     getFileInfo.call(this, paramsMap(opt, {
       filePath: 'apFilePath'
     }))
-  }
+  };
 
   wx.getFileSystemManager = function () {
     return {}
-  }
+  };
 
 
   //////////设备
@@ -694,14 +693,14 @@ function getInstance() {
   // wx.getBeacons=my.getBeacons
 
   //////////wifi
-  wx.stopWifi = fn()
-  wx.startWifi = fn()
-  wx.setWifiList = fn()
-  wx.onWifiConnected = fn()
-  wx.onGetWifiList = fn()
-  wx.getWifiList = fn()
-  wx.getConnectedWifi = fn()
-  wx.connectWifi = fn()
+  wx.stopWifi = fn();
+  wx.startWifi = fn();
+  wx.setWifiList = fn();
+  wx.onWifiConnected = fn();
+  wx.onGetWifiList = fn();
+  wx.getWifiList = fn();
+  wx.getConnectedWifi = fn();
+  wx.connectWifi = fn();
 
 
   //////////蓝牙
@@ -716,7 +715,7 @@ function getInstance() {
   };
   wx.getBatteryInfo = function () {
     return {}
-  }
+  };
 
 
   ////////剪贴板
@@ -724,46 +723,46 @@ function getInstance() {
     wx.setClipboard(paramsMap(opt, {
       data: 'text'
     }))
-  }
+  };
 
   wx.getClipboardData = function (opt) {
-    let success = opt.success
+    let success = opt.success;
     wx.getClipboard(Object.assign({}, opt, {
       success(res) {
-        res['data'] = res.text
+        res['data'] = res.text;
         success(res)
       }
     }))
-  }
+  };
 
 
   ///////////nfc
-  wx.stopHCE = fn()
-  wx.startHCE = fn()
-  wx.sendHCEMessage = fn()
-  wx.onHCEMessage = fn()
-  wx.getHCEState = fn()
+  wx.stopHCE = fn();
+  wx.startHCE = fn();
+  wx.sendHCEMessage = fn();
+  wx.onHCEMessage = fn();
+  wx.getHCEState = fn();
 
   //////////网络
   //getNetworkType
   const getNetworkType = wx.getNetworkType;
   wx.getNetworkType = function (opt) {
-    let success = opt.success || fn()
+    let success = opt.success || fn();
     getNetworkType(Object.assign({}, opt, {
       success(res) {
-        res.networkType = res.networkType.toLocaleLowerCase()
+        res.networkType = res.networkType.toLocaleLowerCase();
         success(res)
       }
     }))
-  }
+  };
 
   let onNetworkStatusChange = wx.onNetworkStatusChange;
   wx.onNetworkStatusChange = function (fn) {
     onNetworkStatusChange(function (res) {
-      res.networkType = res.networkType.toLocaleLowerCase()
+      res.networkType = res.networkType.toLocaleLowerCase();
       fn(res)
     })
-  }
+  };
 
 
   ////////屏幕
@@ -783,25 +782,25 @@ function getInstance() {
   /////////加速器
   // wx.stopAccelerometer=my.stopAccelerometer
   // wx.onAccelerometerChange=my.onAccelerometerChange
-  wx.startAccelerometer = fn()
+  wx.startAccelerometer = fn();
 
 
   ////////罗盘
   // stopCompass
   // wx.onCompassChange=my.onCompassChange
   wx.stopCompass = wx.offCompassChange();
-  wx.startCompass=fn()
+  wx.startCompass=fn();
 
   /////////设备方向
-  wx.stopDeviceMotionListening = fn()
-  wx.startDeviceMotionListening = fn()
-  wx.onDeviceMotionChange = fn()
+  wx.stopDeviceMotionListening = fn();
+  wx.startDeviceMotionListening = fn();
+  wx.onDeviceMotionChange = fn();
 
 
   //////////设备方向
   // wx.onGyroscopeChange=my.onGyroscopeChange
-  wx.stopGyroscope = wx.offGyroscopeChange
-  wx.startGyroscope = fn()
+  wx.stopGyroscope = wx.offGyroscopeChange;
+  wx.startGyroscope = fn();
 
   //性能
 
@@ -810,13 +809,13 @@ function getInstance() {
     let typeMap = {
       'qrCode': "qr",
       'barCode': "bar"
-    }
-    let success = opt.success || fn()
+    };
+    let success = opt.success || fn();
     wx.scan(Object.assign({}, opt, {
       hideAlbum: typeof opt.onlyFromCamera === 'undefined' ? true : opt.onlyFromCamera,
       type: typeof opt.scanType === 'undefined' ? "qr" : typeMap[opt.scanType[0]],
       success(res) {
-        let scanType = ""
+        let scanType = "";
         if (res.qrCode) {
           scanType = "QR_CODE"
         }
@@ -830,7 +829,7 @@ function getInstance() {
         })
       }
     }))
-  }
+  };
 
   //////////震动
   // wx.vibrateShort=my.vibrateShort
@@ -841,8 +840,8 @@ function getInstance() {
 
 
   /////////第三方平台
-  wx.getExtConfigSync = fn()
-  wx.getExtConfig = fn()
+  wx.getExtConfigSync = fn();
+  wx.getExtConfig = fn();
 
 
   ///////////WXML
@@ -859,7 +858,7 @@ function getInstance() {
 
   wx.createIntersectionObserver = function () {
     return {}
-  }
+  };
 
   //////////// 开放接口
   wx.login = (o) => {
