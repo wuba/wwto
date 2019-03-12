@@ -7,6 +7,12 @@ const sequence = require('gulp-sequence');
 const uglifyES = require('gulp-uglify-es').default;
 const wto = require('./src/index');
 
+const source = [
+  'src/**/*.js',
+  '!src/converter/**/*.*',
+  '!src/linter/**/*.*'
+];
+
 gulp.task('baidu', function() {
   return wto.toBaidu({
     source: './demo/miniprogram-demo',
@@ -32,10 +38,7 @@ gulp.task('test', function(cb) {
   sequence(
     'baidu',
     'alibaba',
-    'toutiao',
-    () => {
-      console.log('转换完毕！');
-    }
+    'toutiao'
   )
 });
 
@@ -44,7 +47,7 @@ const UGLIFY_OPTIONS = {
 };
 
 gulp.task('debug', ['build'], function() {
-  return watch('src/**/*.js', function(file) {
+  return watch(source, function(file) {
     const path = file.history[0];
     console.log('开始压缩：', path);
 
@@ -60,7 +63,7 @@ gulp.task('debug', ['build'], function() {
 gulp.task('build', function(cb) {
   console.log('开始转换...');
   pump([
-    gulp.src('src/**/*.js'),
+    gulp.src(source),
     uglifyES(UGLIFY_OPTIONS),
     gulp.dest('lib')
   ], () => {
