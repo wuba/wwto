@@ -568,7 +568,7 @@ function getInstance() {
   const openLocation = wx.openLocation;
   wx.openLocation = function (opt) {
     if (typeof opt['name'] === 'undefined') {
-      opt['name'] = '我的位置'
+      opt['name'] = '位置'
     }
     if (typeof opt['address'] === 'undefined') {
       opt['address'] = "-"
