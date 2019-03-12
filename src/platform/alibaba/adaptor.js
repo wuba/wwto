@@ -700,7 +700,19 @@ function getInstance() {
   wx.connectWifi = fn();
 
 
+  ///////////低功耗蓝牙
+
+
   //////////蓝牙
+  // wx.stopBluetoothDevicesDiscovery=my.stopBluetoothDevicesDiscovery
+  // wx.startBluetoothDevicesDiscovery=my.startBluetoothDevicesDiscovery
+  // wx.openBluetoothAdapter=my.openBluetoothAdapter
+  // wx.onBluetoothDeviceFound=my.onBluetoothDeviceFound
+  // wx.onBluetoothAdapterStateChange=my.onBluetoothAdapterStateChange
+  // wx.getConnectedBluetoothDevices=my.getConnectedBluetoothDevices
+  // wx.getBluetoothDevices=my.getBluetoothDevices
+  // wx.getBluetoothAdapterState=my.getBluetoothAdapterState
+  // wx.closeBluetoothAdapter=my.closeBluetoothAdapter
 
   /////////联系人
   // wx.addPhoneContact=my.addPhoneContact
