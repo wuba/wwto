@@ -625,11 +625,7 @@ function getInstance() {
   wx.canvasGetImageData = function (opt) {
     let canvasContext = wx.createCanvasContext(opt.canvasId);
     let success = opt.success || fn();
-    canvasContext.getImageData(Object.assign({}, opt, {
-      success(res) {
-        success(res);
-      }
-    }))
+    canvasContext.getImageData(opt)
   };
 
   //////////文件
