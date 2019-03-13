@@ -200,7 +200,7 @@ function getInstance() {
 
   // 文件
   const saveFile = wx.saveFile;
-  wx.saveFile = function(opt, self){
+  wx.saveFile = function(opt){
     const success = opt.success || emptyFn;
     opt.success = function(res) {
       if (res) {
@@ -209,7 +209,7 @@ function getInstance() {
       }
       success(res);
     };
-    saveFile.call(this, opt, self);
+    saveFile.call(this, opt);
   };
   // wx.getSavedFileList = wx.getSavedFileList
   // wx.getSavedFileInfo = wx.getSavedFileInfo
@@ -263,7 +263,7 @@ function getInstance() {
 
   // 位置
   const getLocation = wx.getLocation;
-  wx.getLocation = function(opt, self){
+  wx.getLocation = function(opt){
     const success = opt.success || emptyFn;
     opt.success = function(res){
       res["street"] = res.street;
@@ -275,7 +275,7 @@ function getInstance() {
       res["district"] = res.district;
       success(res);
     };
-    getLocation.call(this,opt,self);
+    getLocation.call(this,opt);
   };
   // wx.chooseLocation = wx.chooseLocation
   const openLocation = wx.openLocation;
@@ -297,11 +297,371 @@ function getInstance() {
   const createCanvasContext = wx.createCanvasContext;
   wx.createCanvasContext = function(opt){
     let canvasContext = createCanvasContext.call(this, opt);
-    canvasContext["setLineDashOffset"] = ((opt)=>{});
-    canvasContext["font"] = ((opt)=>{});
+    // 处理canvasContext对象某些字段更新
+    canvasContext["lineCap"] = canvasContext.setLineCap;
+    canvasContext["lineJoin"] = canvasContext.setLineJoin;
+    canvasContext["lineDashOffset"] = canvasContext.setLineDash;
+    canvasContext["miterLimit"] = canvasContext.setMiterLimit;
     return canvasContext;
   };
+  // wx.showToast = wx.showToast
+  // wx.showLoading = wx.showLoading
+  // wx.hideToast = wx.hideToast // 百度中没有填写success,fail，complate回调,但是有
+  // wx.hideLoading = wx.hideLoading // 百度中没有填写success,fail，complate回调,但是有
+  // wx.showModal = wx.showModal
+  // wx.showActionSheet = wx.showActionSheet 参数itemColor的默认值不同
+  // wx.setNavigationBarTitle = wx.setNavigationBarTitle
+  // wx.showNavigationBarLoading = wx.showNavigationBarLoading // 百度中没有填写success,fail，complate回调,但是有
+  // wx.hideNavigationBarLoading = wx.hideNavigationBarLoading // 百度中没有填写success,fail，complate回调,但是有
+  // wx.setNavigationBarColor = wx.setNavigationBarColor
+  // wx.setTabBarBadge = wx.setTabBarBadge
+  // wx.removeTabBarBadge = wx.removeTabBarBadge
+  // wx.showTabBarRedDot = wx.showTabBarRedDot
+  // wx.hideTabBarRedDot = wx.hideTabBarRedDot
+  // wx.setTabBarStyle = wx.setTabBarStyle
+  // wx.setTabBarItem = wx.setTabBarItem
+  // wx.showTabBar = wx.showTabBar
+  // wx.hideTabBar = wx.hideTabBar
+  // wx.navigateTo = wx.navigateTo
+  // wx.redirectTo = wx.redirectTo
+  // wx.switchTab = wx.switchTab
+  // wx.navigateBack = wx.navigateBack
+  // wx.reLaunch = wx.reLaunch
 
+  const animation = wx.createAnimation;
+  wx.createAnimation = function (opt) {
+    let animations = animation.call(this, opt);
+    // 处理animation对象中无export、step字段
+    animations["export"] = (()=>{});
+    animations["step"] = (()=>{});
+    return animations;
+  };
+  // wx.pageScrollTo = wx.pageScrollTo
+  // wx.setBackgroundColor = wx.setBackgroundColor
+  // wx.setBackgroundTextStyle = wx.setBackgroundTextStyle
+  // wx.startPullDownRefresh = wx.startPullDownRefresh
+  // wx.stopPullDownRefresh = wx.stopPullDownRefresh // 百度中没有填写success,fail，complate回调,但是有
+  // wx.nextTick = wx.nextTick
+
+  //节点信息
+  // wx.createIntersectionObserver = wx.createIntersectionObserver
+  const selectorQuery = wx.createSelectorQuery;
+  wx.createSelectorQuery = function(opt){
+    let self = this;
+    let selectorQuerys = selectorQuery.call(self,opt);
+    const execs = selectorQuery.exec;
+    selectorQuerys.exec = function(opt){
+      let that = this;
+      let exec = execs.call(that,opt);
+      exec["context"] = (()=>{});
+    };
+    const selects = selectorQuery.select;
+    selectorQuerys.select = function(opt){
+      let that = this;
+      let select = selects.call(that,opt);
+      select["context"] = (()=>{});
+    };
+    const selectAlls = selectorQuery.selectAll;
+    selectorQuerys.selectAll = function(opt){
+      let that = this;
+      let selectAll = selectAlls.call(that,opt);
+      selectAll["context"] = (()=>{});
+    };
+    const selectViewports = selectorQuery.selectViewport;
+    selectorQuerys.selectViewport = function(){
+      let that = this;
+      let selectViewport = selectViewports.call(that,opt);
+      selectViewport["context"] = (()=>{});
+    };
+    return selectorQuerys;
+  };
+
+  wx.loadFontFace = wx.loadFontFace || ((opt)=>{}); // 字体
+  wx.setTopBarText = wx.setTopBarText || ((opt)=>{});
+  wx.getMenuButtonBoundingClientRect = wx.getMenuButtonBoundingClientRect || ((opt)=>{});
+  wx.onWindowResize = wx.onWindowResize || ((opt)=>{});
+  wx.offWindowResize = wx.offWindowResize || ((opt)=>{});
+
+  // 设备
+  let fieldMissing = function(res){
+    if(res){
+      res["benchmarkLevel"] = 0;
+      res["albumAuthorized"] = true;
+      res["locationAuthorized"] = true;
+      res["microphoneAuthorized"] = true;
+      res["notificationAuthorized"] = true;
+      res["notificationAlertAuthorized"] = true;
+      res["notificationBadgeAuthorized"] = true;
+      res["notificationSoundAuthorized"] = true;
+      res["bluetoothEnabled"] = true;
+      res["locationEnabled"] = true;
+      res["wifiEnabled"] = true;
+      res["cameraAuthorized"] = true;
+    }
+  };
+  // const getSystemInfo = wx.getSystemInfo;
+  // wx.getSystemInfo = function(opt){
+  //   const success = opt.success || emptyFn;
+  //   opt.succes = function(res){
+  //     // 处理success回调返回值字段缺失问题
+  //     fieldMissing(res);
+  //     success(res);
+  //   };
+  //   getSystemInfo.call(this,opt);
+  // };
+  //
+  // const getSystemInfoSync = wx.getSystemInfoSync;
+  // wx.getSystemInfoSync = function(opt){
+  //   const success = opt.success || emptyFn;
+  //   opt.succes = function(res){
+  //     // 处理success回调返回值字段缺失问题
+  //     fieldMissing(res);
+  //     success(res);
+  //   };
+  //   getSystemInfoSync.call(this,opt);
+  // };
+
+  // wx.canIUse = wx.canIUse
+  // wx.onMemoryWarning = wx.onMemoryWarning
+  // wx.getNetworkType = wx.getNetworkType
+  // wx.onNetworkStatusChange = wx.onNetworkStatusChange
+  // wx.onAccelerometerChange = wx.onAccelerometerChange
+  // wx.startAcceleromete = wx.startAcceleromete
+  // wx.stopAccelerometer = wx.stopAccelerometer
+  const onCompassChange= wx.onCompassChange;
+  wx.onCompassChange = function(fn){
+    let f = fn;
+    // 处理回调返回值字段缺失问题
+    return onCompassChange.call(this,function(res){
+      f({direction:res.direction,accuracy:res.accuracy || ""});
+    });
+  };
+  // wx.startCompass = wx.startCompass
+  // wx.stopCompass = wx.stopCompass
+
+  //扫码
+  const scanCode = wx.scanCode;
+  wx.scanCode = function(opt){
+    const success = opt.success;
+    opt.success = function(res){
+      // 处理success回调字段缺失
+      if(res){
+        res["path"] = '';
+        res['rawData'] = '';
+      }
+      success(res);
+    };
+    return scanCode.call(this,opt);
+  };
+
+  // wx.setScreenBrightness = wx.setScreenBrightness
+  // wx.getScreenBrightnes = wx.getScreenBrightnes
+  // wx.setKeepScreenOn = wx.setKeepScreenOn
+  // wx.onUserCaptureScreen = wx.onUserCaptureScreen
+  // wx.vibrateShort = wx.vibrateShort
+  // wx.vibrateLong = wx.vibrateLong
+  // wx.addPhoneContact = wx.addPhoneContact
+  // wx.makePhoneCall = wx.makePhoneCall
+  // wx.setClipboardData = wx.setClipboardData
+  // wx.getClipboardData = wx.getClipboardData
+
+  // 陀螺仪
+  wx.onGyroscopeChange = wx.onGyroscopeChange || ((opt)=>{});
+  wx.stopGyroscope = wx.stopGyroscope || ((opt)=>{});
+  wx.startGyroscope = wx.startGyroscope || ((opt)=>{});
+  // 设备方向
+  wx.onDeviceMotionChange = wx.onDeviceMotionChange || ((opt)=>{});
+  wx.startDeviceMotionListening = wx.startDeviceMotionListening || ((opt)=>{});
+  wx.stopDeviceMotionListening = wx.stopDeviceMotionListening || ((opt)=>{});
+  // NFC
+  wx.stopHCE = wx.stopHCE || ((opt)=>{});
+  wx.startHCE = wx.startHCE || ((opt)=>{});
+  wx.sendHCEMessage = wx.sendHCEMessage || ((opt)=>{});
+  wx.onHCEMessage = wx.onHCEMessage || ((opt)=>{});
+  wx.getHCEState = wx.getHCEState || ((opt)=>{});
+  // 电量
+  wx.getBatteryInfoSync = wx.getBatteryInfoSync || ((opt)=>{});
+  wx.getBatteryInfo = wx.getBatteryInfo || ((opt)=>{});
+  // 蓝牙
+  wx.stopBluetoothDevicesDiscovery = wx.stopBluetoothDevicesDiscovery || ((opt)=>{});
+  wx.startBluetoothDevicesDiscovery = wx.startBluetoothDevicesDiscovery || ((opt)=>{});
+  wx.openBluetoothAdapte = wx.openBluetoothAdapte || ((opt)=>{});
+  wx.onBluetoothDeviceFound = wx.onBluetoothDeviceFound || ((opt)=>{});
+  wx.onBluetoothAdapterStateChange = wx.onBluetoothAdapterStateChange || ((opt)=>{});
+  wx.getConnectedBluetoothDevices = wx.getConnectedBluetoothDevices || ((opt)=>{});
+  wx.getBluetoothDevices = wx.getBluetoothDevices|| ((opt)=>{});
+  wx.getBluetoothAdapterState = wx.getBluetoothAdapterState || ((opt)=>{});
+  wx.closeBluetoothAdapter = wx.closeBluetoothAdapter || ((opt)=>{});
+  // 低功耗蓝牙
+  wx.readBLECharacteristicValue = wx.readBLECharacteristicValue || ((opt)=>{});
+  wx.onBLEConnectionStateChange = wx.onBLEConnectionStateChange || ((opt)=>{});
+  wx.onBLECharacteristicValueChange = wx.onBLECharacteristicValueChange || ((opt)=>{});
+  wx.notifyBLECharacteristicValueChange = wx.notifyBLECharacteristicValueChange || ((opt)=>{});
+  wx.getBLEDeviceServices = wx.getBLEDeviceServices || ((opt)=>{});
+  wx.getBLEDeviceCharacteristics = wx.getBLEDeviceCharacteristics || ((opt)=>{});
+  wx.createBLEConnection = wx.createBLEConnection || ((opt)=>{});
+  wx.closeBLEConnection = wx.closeBLEConnection || ((opt)=>{});
+  wx.writeBLECharacteristicValue = wx.writeBLECharacteristicValue || ((opt)=>{});
+  // iBeacon
+  wx.stopBeaconDiscovery = wx.stopBeaconDiscovery || ((opt)=>{});
+  wx.startBeaconDiscovery = wx.startBeaconDiscovery || ((opt)=>{});
+  // wx.onBeaconUpdate = wx.onBeaconUpdate || ((opt)=>{});
+  wx.onBeaconServiceChange = wx.onBeaconServiceChange || ((opt)=>{});
+  wx.getBeacons = wx.getBeacons || ((opt)=>{});
+  // WI_FI
+  wx.stopWifi = wx.stopWifi || ((opt)=>{});
+  wx.startWifi = wx.startWifi || ((opt)=>{});
+  wx.setWifiList = wx.setWifiList || ((opt)=>{});
+  wx.onWifiConnected = wx.onWifiConnected || ((opt)=>{});
+  // wx.onGetWifiList = wx.onGetWifiList || ((opt)=>{});
+  wx.getWifiList = wx.getWifiList || ((opt)=>{});
+  wx.getConnectedWifi = wx.getConnectedWifi || ((opt)=>{});
+  wx.connectWifi = wx.connectWifi || ((opt)=>{});
+
+  // 小程序声明周期
+  wx.getLaunchOptionsSync = wx.getLaunchOptionsSync || (()=>{});
+  // 应用级事件
+  wx.onPageNotFound = wx.onPageNotFound || (()=>{});
+  wx.onError = wx.onError || (()=>{});
+  wx.onAudioInterruptionBegin = wx.onAudioInterruptionBegin || (()=>{});
+  wx.onAppShow = wx.onAppShow || (()=>{});
+  wx.onAppHide = wx.onAppHide || (()=>{});
+  wx.offPageNotFound = wx.offPageNotFound || (()=>{});
+  wx.offError = wx.offError || (()=>{});
+  wx.offAudioInterruptionBegin = wx.offAudioInterruptionBegin || (()=>{});
+  wx.offAppShow = wx.offAppShow|| (()=>{});
+  wx.offAppHide  = wx.offAppHide || (()=>{});
+
+
+
+  // 第三方平台
+  wx.getExtConfig = wx.getExtConfig || ((opt)=>{});
+  wx.getExtConfigSync = wx.getExtConfigSync || ((opt)=>{});
+
+  // 开放接口
+
+  // wx.login = wx.login
+  // wx.checkSession = wx.checkSession
+  // wx.authorize = wx.authorize // 传递参数scope列表百度和微信不完全一样
+  // 更新
+  // wx.getUpdateManager = wx.getUpdateManager
+  // 调试
+  // wx.setEnableDebug = wx.setEnableDebug // 百度中没有填写success,fail，complate回调,但是有
+  wx.getLogManager = function(){
+    return{
+      debug:(()=>{}),
+      info: (()=>{}),
+      log: (()=>{}),
+      warn: (()=>{})
+    }
+  };
+  // 小程序跳转
+  wx.navigateBackMiniProgram = wx.navigateToSmartProgram;
+  wx.navigateBackMiniProgram = function(opt){
+    // 处理传入参数appid与appKey映射问题
+    if(opt){
+      opt.appId = opt.appKey
+    }
+    return opt;
+  };
+  wx.navigateToMiniProgram = wx.navigateBackSmartProgram;
+
+  // 发票
+  const chooseInvoiceTitle = wx.chooseInvoiceTitle;
+  wx.chooseInvoiceTitle = function(opt){
+    const success = opt.success;
+    opt.success = function(res){
+      // 处理success回调字段errMsg缺失问题
+      if(res){
+        res["errMsg"] = '';
+      }
+      success(res);
+    };
+    return chooseInvoiceTitle.call(this,opt);
+  };
+  wx.chooseInvoice = wx.chooseInvoice || (()=>{});
+
+  // 收获地址
+  const chooseAddress = wx.chooseAddress;
+  wx.chooseAddress = function(opt){
+    const success = opt.success;
+    opt.success = function(res){
+      // 处理success回调字段errMsg缺失问题
+      if(res){
+        res["errMsg"] = '';
+      }
+      success(res);
+    };
+    return chooseAddress.call(this, opt);
+  };
+
+  // 设置
+  // wx.getSetting = wx.getSetting
+  // wx.openSetting = wx.openSetting
+
+  // 用户信息
+  const getUserInfo = wx.getUserInfo;
+  wx.getUserInfo = function(opt){
+    const success = opt.success;
+    opt.success = function(res){
+      // 处理success回调字段rawData、signature缺失及字段名称encryptedData不对应问题
+      if(res){
+        res["rawData"] = '';
+        res["signature"] = '';
+        res["encryptedData"] = res.data;
+        let userInfo = res.userInfo;
+        userInfo['country'] = '';
+        userInfo['province'] = '';
+        userInfo['city'] = '';
+        userInfo['language'] = '';
+        // userInfo['isAnonymous'] = false; // 表示用户信息是否为匿名，若是用户未登录或者拒绝授权为true，正常流程为false。
+      }
+      success(res);
+    };
+    return getUserInfo.call(this,opt);
+  };
+
+  // 帐号信息
+  wx.getAccountInfoSync = wx.getAccountInfoSync || ((opt)=>{});
+
+  // 数据上报
+  wx.reportMonitor = wx.reportMonitor || ((opt)=>{});
+
+  // 支付
+  wx.requestPayment = wx.requestPayment || ((opt)=>{});
+
+  // 卡劵
+  wx.openCard = wx.openCard || ((opt)=>{});
+  wx.addCard = wx.addCard || ((opt)=>{});
+  wx.startSoterAuthentication = wx.startSoterAuthentication || ((opt)=>{});
+  wx.checkIsSupportSoterAuthentication = wx.checkIsSupportSoterAuthentication || ((opt)=>{});
+  wx.checkIsSoterEnrolledInDevice = wx.checkIsSoterEnrolledInDevice || ((opt)=>{});
+  // 微信运动
+  // wx.getWeRunData = wx.getWeRunData
+
+  // 数据分析
+  // wx.reportAnalytics = wx.reportAnalytics
+
+  // 定时器
+  // clearInterval = clearInterval
+  // clearTimeout = clearTimeout
+  // setInterval = setInterval
+  // setTimeout = setTimeout
+
+  // 转发
+  wx.updateShareMenu = wx.updateShareMenu || (()=>{});
+  wx.showShareMenu = wx.showShareMenu || (()=>{});
+  wx.hideShareMenu = wx.hideShareMenu || (()=>{});
+  wx.getShareInfo = wx.getShareInfo || (()=>{});
+
+  // Worker
+  wx.createWorker = function(){
+    return{
+      postMessage: (()=>{}),
+      onMessage: (()=>{}),
+      terminate: (()=>{})
+    }
+  };
   return wx;
 }
 

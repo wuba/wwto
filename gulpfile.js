@@ -74,3 +74,13 @@ gulp.task('lint', function(cb) {
     source: './demo/miniprogram-demo'
   });
 });
+
+// 实时监听
+gulp.task('watch',function(){
+  watch('./demo/miniprogram-demo/**/*.*', function(){
+    wto.toBaidu({
+      source: './demo/miniprogram-demo',
+      target: './demo/dist/baidu-miniprogram-demo'
+    });
+  })
+});
