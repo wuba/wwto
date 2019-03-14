@@ -6,12 +6,12 @@ function defQuery(match, opt) {
   return [match, `${opt} = ${opt} || {}; ${opt}.query = ${opt}.query || {};`].join('');
 }
 
-function convert(jsText) {
+function convert(jsText, isWpy) {
   return jsText
     .replace(/(require\(['"])(\w+)/g, '$1./$2')
     .replace(/(from\s+['"])(\w+)/g, function(match, p1) {
       // 相对路径以./开头
-      return match.replace(p1, [p1, './'].join(''))
+      return match.replace(p1, [p1, isWpy ? '' : './'].join(''))
     })
     .replace(/(let|var|const)\s+fetch\s*=/g, '$1 renameFetch = ')
     .replace(/(\s+)fetch([;\s]*)$/, '$1renameFetch$2')
@@ -52,7 +52,10 @@ function convert(jsText) {
       const lifeCircleNames = ['created', 'attached', 'ready', 'detached'];
       let lifeCircleFns = '';
       lifeCircleNames.map((name) => {
-        let {args, body} = extractFn(match, name);
+        let {
+          args,
+          body
+        } = extractFn(match, name);
         lifeCircleFns += name + '(' + args + ')' + (body || '{}') + ',\r\n';
       });
 
@@ -68,7 +71,7 @@ function convert(jsText) {
         ].join('\r\n'))
       }
 
-      let props = (match.match(/props:[\s\S]+/)||{})[0] || '';
+      let props = (match.match(/props:[\s\S]+/) || {})[0] || '';
       if (!props) {
         return match;
       }
@@ -99,7 +102,7 @@ function convert(jsText) {
               observerMap[key] = item.observer;
             } else {
               observerMap[key] = eval(`() => {
-                  this["`+item.observer+`"].apply(this, arguments);
+                  this["` + item.observer + `"].apply(this, arguments);
                 }`);
             }
           }
