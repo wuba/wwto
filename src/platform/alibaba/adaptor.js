@@ -5,12 +5,9 @@ function getInstance() {
 
   // wx.hideNavigationBarLoading = my.hideNavigationBarLoading
   // wx.navigateToMiniProgram=my.navigateToMiniProgram
-  // wx.openSetting=my.openSetting
-  // wx.getSetting=my.getSetting
   // Animation = Animation
   // wx.navigateBackMiniProgram=my.navigateBackMiniProgram
   // wx.navigateToMiniProgram=my.navigateToMiniProgram
-
 
 
   function paramsMap(options, maps = {}) {
@@ -59,7 +56,7 @@ function getInstance() {
 
   const getSystemInfo = wx.getSystemInfo;
   wx.getSystemInfo = function (opt) {
-    let success = opt.success || emptyFn;
+    let success = opt.success || fn();
     opt.success = function (res) {
       res.system = res.platform + " " + res.system;
 
@@ -72,14 +69,19 @@ function getInstance() {
     return getSystemInfo.call(this, opt);
   };
 
-  wx.getUpdateManager = wx.getUpdateManager || ((opt) => {
-    return {
-      applyUpdate: fn(),
-      onCheckForUpdate: fn(),
-      onUpdateFailed: fn(),
-      onUpdateReady: fn()
-    }
-  });
+  const getUpdateManager = wx.getUpdateManager;
+  wx.getUpdateManager = function (opt) {
+    let obj = getUpdateManager()
+    obj['applyUpdate'] = obj['applyUpdate'] || ((opt) => {
+    })
+    obj['onCheckForUpdate'] = obj['onCheckForUpdate'] || ((opt) => {
+    })
+    obj['onUpdateFailed'] = obj['onUpdateFailed'] || ((opt) => {
+    })
+    obj['onUpdateReady'] = obj['onUpdateReady'] || ((opt) => {
+    })
+    return obj;
+  }
 
   ///////////路由
   // wx.redirectTo=my.redirectTo
@@ -143,8 +145,8 @@ function getInstance() {
       itemList: 'items'
     });
 
-    let success = params.success || emptyFn;
-    let fail = params.fail || emptyFn;
+    let success = params.success || fn();
+    let fail = params.fail || fn();
 
     params.success = function ({
                                  index: tapIndex
@@ -178,22 +180,25 @@ function getInstance() {
   // wx.showTabBar=my.showTabBar
   // wx.hideTabBar=my.hideTabBar
 
-  wx.showTabBarRedDot = fn();
-  wx.setTabBarStyle = fn();
-  wx.setTabBarItem = fn();
-  wx.setTabBarBadge = fn();
-  wx.removeTabBarBadge = fn();
-  wx.hideTabBarRedDot = fn();
+  wx.showTabBarRedDot = wx.showTabBarRedDot || fn();
+  wx.setTabBarStyle = wx.setTabBarStyle || fn();
+  wx.setTabBarItem = wx.setTabBarItem || fn();
+  wx.setTabBarBadge = wx.setTabBarBadge || fn();
+  wx.removeTabBarBadge = wx.removeTabBarBadge || fn();
+  wx.hideTabBarRedDot = wx.hideTabBarRedDot || fn();
 
   ////////// 界面字体
-  wx.loadFontFace = fn();
+  wx.loadFontFace = wx.loadFontFace || fn();
 
   ////////// 下拉刷新
   // wx.stopPullDownRefresh = my.stopPullDownRefresh
+  wx.startPullDownRefresh = wx.startPullDownRefresh || fn()
 
   ////////// 滚动
   const pageScrollTo = wx.pageScrollTo;
   wx.pageScrollTo = function (opt) {
+    opt.success = opt.success || fn()
+    opt.fail = opt.fail || fn()
     try {
       pageScrollTo(opt);
       opt.success({errMsg: 'pageScrollTo:ok'})
@@ -208,17 +213,17 @@ function getInstance() {
 
 
   //////////置顶
-  wx.setTopBarText = fn();
+  wx.setTopBarText = wx.setTopBarText || fn();
 
   ///////// 自定义组价
-  wx.nextTick = fn();
+  wx.nextTick = wx.nextTick || fn();
 
   ////////菜单
-  wx.getMenuButtonBoundingClientRect = fn();
+  wx.getMenuButtonBoundingClientRect = wx.getMenuButtonBoundingClientRect || fn();
 
   ////////窗口
-  wx.onWindowResize = fn();
-  wx.offWindowResize = fn();
+  wx.onWindowResize = wx.onWindowResize || fn();
+  wx.offWindowResize = wx.offWindowResize || fn();
 
   ////////网络 发起请求
   wx.request = function (opt) {
@@ -226,7 +231,7 @@ function getInstance() {
     opt.headers['referer'] = '';
     opt.headers['content-type'] = opt.headers['content-type'] || 'application/json';
 
-    let success = opt.success || emptyFn;
+    let success = opt.success || fn();
     opt.success = function (res) {
       success.call(this, paramsMap(res, {
         headers: 'header',
@@ -345,17 +350,33 @@ function getInstance() {
   const createMapContext = wx.createMapContext;
   wx.createMapContext = function (opt) {
     let mapContext = createMapContext(opt);
-    mapContext['getRegion'] = fn();
-    mapContext['getScale'] = fn();
-    mapContext['includePoints'] = fn();
+    mapContext['getRegion'] = mapContext['getRegion'] || fn();
+    mapContext['getScale'] = mapContext['getScale'] || fn();
+    mapContext['includePoints'] = mapContext['includePoints'] || fn();
     return mapContext;
   };
 
   ////////图片
   // wx.getImageInfo=my.getImageInfo
+  const getImageInfo = wx.getImageInfo;
+  wx.getImageInfo = function (opt) {
+    let success = opt.success
+    return getImageInfo.call(this, Object.assign({}, opt, {
+      success(res) {
+        let type = res.type.substring(0, res.type.indexOf('?'))
+        res.type = type
+        success(res)
+      }
+    }))
+  }
+
   wx.saveImageToPhotosAlbum = function (opt) {
-    return wx.saveImage(paramsMap(opt, {
-      filePath: 'url'
+    return wx.saveImage(Object.assign({}, opt, {
+      url: opt.filePath,
+      success(res) {
+        res['errMsg'] = "saveImageToPhotosAlbum:ok"
+        opt.success && opt.success(res)
+      }
     }))
   };
 
@@ -382,18 +403,18 @@ function getInstance() {
     let success = opt.success || fn();
     return compressImage.call(this, Object.assign({}, opt, {
       compressLevel: 4,
-      apFilePath: [src],
+      apFilePaths: [src],
       success(res) {
-        if (res.length > 0) {
-          success(res[0])
-        }
+        res['tempFilePath'] = res.apFilePaths[0] || ""
+        success(res)
       }
     }))
   };
-  wx.chooseMessageFile = fn();
+  wx.chooseMessageFile = wx.chooseMessageFile || fn();
   const chooseImage = wx.chooseImage;
   wx.chooseImage = function (opt) {
-    let success = opt.success || emptyFn;
+    let success = opt.success || fn();
+    opt.count = opt.count || 9
     return chooseImage.call(this, Object.assign({}, opt, {
       success(res) {
         let tempFilePaths = [].concat(res.apFilePaths);
@@ -411,8 +432,8 @@ function getInstance() {
   };
 
   //////////视频
-  wx.saveVideoToPhotosAlbum = fn();
-  wx.createVideoContext = function () {
+  wx.saveVideoToPhotosAlbum = wx.saveVideoToPhotosAlbum || fn();
+  wx.createVideoContext = wx.createVideoContext || function () {
     return {
       exitFullScreen: fn(),
       hideStatusBar: fn(),
@@ -426,15 +447,15 @@ function getInstance() {
       stop: fn()
     }
   };
-  wx.chooseVideo = fn();
+  wx.chooseVideo = wx.chooseVideo || fn();
 
   ///////////音频
-  wx.stopVoice = fn();
-  wx.setInnerAudioOption = fn();
-  wx.playVoice = fn();
-  wx.pauseVoice = fn();
-  wx.getAvailableAudioSources = fn();
-  wx.createInnerAudioContext = function () {
+  wx.stopVoice = wx.stopVoice || fn();
+  wx.setInnerAudioOption = wx.setInnerAudioOption || fn();
+  wx.playVoice = wx.playVoice || fn();
+  wx.pauseVoice = wx.pauseVoice || fn();
+  wx.getAvailableAudioSources = wx.getAvailableAudioSources || fn();
+  wx.createInnerAudioContext = wx.createInnerAudioContext || function () {
     return {
       destroy: fn(),
       offCanplay: fn(),
@@ -465,8 +486,8 @@ function getInstance() {
   };
 
 
-  ////////北京音频
-  wx.createAudioContext = function () {
+  ////////背景音频
+  wx.createAudioContext = wx.createAudioContext || function () {
     return {
       seek: fn(),
       setSrc: fn(),
@@ -475,15 +496,15 @@ function getInstance() {
     }
   };
 
-  wx.stopBackgroundAudio = fn();
-  wx.seekBackgroundAudio = fn();
-  wx.playBackgroundAudio = fn();
-  wx.pauseBackgroundAudio = fn();
-  wx.onBackgroundAudioStop = fn();
-  wx.onBackgroundAudioPlay = fn();
-  wx.onBackgroundAudioPause = fn();
-  wx.getBackgroundAudioPlayerState = fn();
-  wx.getBackgroundAudioManager = function () {
+  wx.stopBackgroundAudio = wx.stopBackgroundAudio || fn();
+  wx.seekBackgroundAudio = wx.seekBackgroundAudio || fn();
+  wx.playBackgroundAudio = wx.playBackgroundAudio || fn();
+  wx.pauseBackgroundAudio = wx.pauseBackgroundAudio || fn();
+  wx.onBackgroundAudioStop = wx.onBackgroundAudioStop || fn();
+  wx.onBackgroundAudioPlay = wx.onBackgroundAudioPlay || fn();
+  wx.onBackgroundAudioPause = wx.onBackgroundAudioPause || fn();
+  wx.getBackgroundAudioPlayerState = wx.getBackgroundAudioPlayerState || fn();
+  wx.getBackgroundAudioManager = wx.getBackgroundAudioManager || function () {
     return {
       onCanplay: fn(),
       onEnded: fn(),
@@ -505,7 +526,7 @@ function getInstance() {
   };
 
   ////////////实时音视频
-  wx.createLivePusherContext = function () {
+  wx.createLivePusherContext = wx.createLivePusherContext || function () {
     return {
       pause: fn(),
       pauseBGM: fn(),
@@ -522,7 +543,7 @@ function getInstance() {
     }
   };
 
-  wx.createLivePlayerContext = function () {
+  wx.createLivePlayerContext = wx.createLivePlayerContext || function () {
     return {
       exitFullScreen: fn(),
       mute: fn(),
@@ -535,9 +556,9 @@ function getInstance() {
   };
 
   //////////录音
-  wx.stopRecord = fn();
-  wx.startRecord = fn();
-  wx.getRecorderManager = function () {
+  wx.stopRecord = wx.stopRecord || fn();
+  wx.startRecord = wx.startRecord || fn();
+  wx.getRecorderManager = wx.getRecorderManager || function () {
     return {
       onError: fn(),
       onFrameRecorded: fn(),
@@ -555,7 +576,7 @@ function getInstance() {
   };
 
   //////////相机
-  wx.createCameraContext = function () {
+  wx.createCameraContext = wx.createCameraContext || function () {
     return {
       startRecord: fn(),
       stopRecord: fn(),
@@ -576,7 +597,7 @@ function getInstance() {
     return openLocation.call(this, opt)
   };
 
-  // res 无speed	number accuracy	number altitude	number verticalAccuracy  horizontalAccuracy
+  // res 无speed	 accuracy	 altitude	 verticalAccuracy  horizontalAccuracy
   const getLocation = wx.getLocation;
   wx.getLocation = function (opt) {
     let success = opt.success || fn();
@@ -587,18 +608,21 @@ function getInstance() {
 
   //////////分享
   // wx.hideShareMenu=my.hideShareMenu
-  wx.updateShareMenu = fn();
-  wx.getShareInfo = fn();
-  wx.showShareMenu = wx.showShareMenu || ((opt) => {
-  });
+  wx.updateShareMenu = wx.updateShareMenu || fn();
+  wx.getShareInfo = wx.getShareInfo || fn();
+  wx.showShareMenu = wx.showShareMenu || fn()
 
   /////////画布
   const createCanvasContext = wx.createCanvasContext;
   wx.createCanvasContext = function (opt) {
     let canvasContext = createCanvasContext.call(this, opt);
-    canvasContext['arcTo'] = () => canvasContext;
-    canvasContext['createPattern'] = () => canvasContext;
-    canvasContext['strokeText'] = () => canvasContext
+    canvasContext['arcTo'] = canvasContext['arcTo'] || (() => canvasContext);
+    canvasContext['createPattern'] = canvasContext['createPattern'] || (() => canvasContext);
+    canvasContext['strokeText'] = canvasContext['strokeText'] || (() => canvasContext)
+    canvasContext['miterLimit'] = canvasContext.setMiterLimit
+    canvasContext['lineCap'] = canvasContext.setLineCap
+    canvasContext['lineDashOffset'] = canvasContext.setLineDash
+    canvasContext['lineJoin'] = canvasContext.setLineJoin
     return canvasContext
   };
 
@@ -628,6 +652,7 @@ function getInstance() {
     canvasContext.getImageData(opt)
   };
 
+
   //////////文件
   const saveFile = wx.saveFile;
   wx.saveFile = function (opt) {
@@ -636,7 +661,7 @@ function getInstance() {
     return saveFile.call(this, Object.assign({}, opt, {
       apFilePath: apFilePath,
       success(res) {
-        res['tempFilePath'] = res['apFilePath'];
+        res['savedFilePath'] = res['apFilePath'];
         success(res);
       }
     }))
@@ -676,9 +701,30 @@ function getInstance() {
     }))
   };
 
-  wx.getFileSystemManager = function () {
-    return {}
-  };
+  let getFileSystemManager = null;
+  if (wx['getFileSystemManager']) {
+    getFileSystemManager = wx.getFileSystemManager;
+    wx.getFileSystemManager = function (opt) {
+      let FileSystemManager = getFileSystemManager.call(this, opt) || {};
+      let maApiList = [
+        "access", "accessSync", "appendFile", "appendFileSync",
+        "copyFile", "copyFileSync", "getFileInfo", "getSavedFileList",
+        "mkdir", "mkdirSync", "readdir", "readdirSync",
+        "readFile", "readFileSync", "removeSavedFile", "rename",
+        "renameSync", "rmdir", "rmdirSync", "saveFile",
+        "saveFileSync", "stat", "statSync", "unlink",
+        "unlinkSync", "unzip", "writeFile", "writeFileSync"
+      ];
+      maApiList.map(function (item) {
+        FileSystemManager[item] = FileSystemManager[item] || (() => {})
+      });
+      return FileSystemManager
+    }
+  } else {
+    wx['getFileSystemManager'] = function () {
+      return {}
+    }
+  }
 
 
   //////////设备
@@ -707,9 +753,9 @@ function getInstance() {
   // wx.getBLEDeviceServices=my.getBLEDeviceServices
   // wx.getBLEDeviceCharacteristics=my.getBLEDeviceCharacteristics
   // wx.writeBLECharacteristicValue=my.writeBLECharacteristicValue
-  wx.onBLEConnectionStateChange=wx.onBLEConnectionStateChanged
-  wx.createBLEConnection=wx.connectBLEDevice
-  wx.closeBLEConnection=wx.disconnectBLEDevice
+  wx.onBLEConnectionStateChange = wx.onBLEConnectionStateChanged
+  wx.createBLEConnection = wx.connectBLEDevice
+  wx.closeBLEConnection = wx.disconnectBLEDevice
 
 
   //////////蓝牙
@@ -806,8 +852,15 @@ function getInstance() {
   ////////罗盘
   // stopCompass
   // wx.onCompassChange=my.onCompassChange
+  const onCompassChange = wx.onCompassChange;
+  wx.onCompassChange = function (fn) {
+    let oldFn = fn;
+    return onCompassChange.call(this, function (res) {
+      oldFn({direction: res.direction, accuracy: res.accuracy || ""})
+    })
+  }
   wx.stopCompass = wx.offCompassChange();
-  wx.startCompass=fn();
+  wx.startCompass = fn();
 
   /////////设备方向
   wx.stopDeviceMotionListening = fn();
@@ -921,8 +974,8 @@ function getInstance() {
       alipay_trade_body: 'orderStr'
     });
 
-    let success = params.success || emptyFn;
-    let fail = params.fail || emptyFn;
+    let success = params.success || fn();
+    let fail = params.fail || fn();
 
     params.success = function (res) {
       if (res.resultCode === 9000) {
@@ -934,6 +987,26 @@ function getInstance() {
 
     return requestPayment.call(this, params);
   };
+
+  wx.getAccountInfoSync = fn()
+  wx.reportMonitor = fn()
+  wx.reportAnalytics = fn()
+  wx.getWeRunData = fn()
+
+  wx.startSoterAuthentication = fn();
+  wx.checkIsSupportSoterAuthentication = fn()
+  wx.checkIsSoterEnrolledInDevice = fn()
+
+  wx.chooseInvoiceTitle = fn()
+  wx.chooseInvoice = fn()
+
+  wx.addCard = fn()
+  wx.openCard = fn()
+
+  wx.chooseAddress = fn()
+
+  // wx.openSetting=my.openSetting
+  // wx.getSetting=my.getSetting
 
   return wx;
 }
