@@ -256,11 +256,11 @@ function getInstance() {
         success(res)
       }
     }));
-    downTask['abort'] = fn();
-    downTask['offHeadersReceived'] = fn();
-    downTask['offProgressUpdate'] = fn();
-    downTask['onHeadersReceived'] = fn();
-    downTask['onProgressUpdate'] = fn();
+    downTask['abort'] = downTask['abort'] || fn();
+    downTask['offHeadersReceived'] = downTask['offHeadersReceived'] || fn();
+    downTask['offProgressUpdate'] = downTask['offProgressUpdate'] || fn();
+    downTask['onHeadersReceived'] = downTask['onHeadersReceived'] || fn();
+    downTask['onProgressUpdate'] = downTask['onProgressUpdate'] || fn();
     return downTask;
   };
 
@@ -319,16 +319,16 @@ function getInstance() {
   };
 
   //////////mDns
-  wx.stopLocalServiceDiscovery = fn();
-  wx.startLocalServiceDiscovery = fn();
-  wx.onLocalServiceResolveFail = fn();
-  wx.onLocalServiceLost = fn();
-  wx.onLocalServiceFound = fn();
-  wx.onLocalServiceDiscoveryStop = fn();
-  wx.offLocalServiceResolveFail = fn();
-  wx.offLocalServiceLost = fn();
-  wx.offLocalServiceFound = fn();
-  wx.offLocalServiceDiscoveryStop = fn();
+  wx.stopLocalServiceDiscovery = wx.stopLocalServiceDiscovery || fn();
+  wx.startLocalServiceDiscovery = wx.startLocalServiceDiscovery || fn();
+  wx.onLocalServiceResolveFail = wx.onLocalServiceResolveFail || fn();
+  wx.onLocalServiceLost = wx.onLocalServiceLost || fn();
+  wx.onLocalServiceFound = wx.onLocalServiceFound || fn();
+  wx.onLocalServiceDiscoveryStop = wx.onLocalServiceDiscoveryStop || fn();
+  wx.offLocalServiceResolveFail = wx.offLocalServiceResolveFail || fn();
+  wx.offLocalServiceLost = wx.offLocalServiceLost || fn();
+  wx.offLocalServiceFound = wx.offLocalServiceFound || fn();
+  wx.offLocalServiceDiscoveryStop = wx.offLocalServiceDiscoveryStop || fn();
 
   //////////数据缓存
   const getStorage = wx.getStorage;
@@ -716,7 +716,8 @@ function getInstance() {
         "unlinkSync", "unzip", "writeFile", "writeFileSync"
       ];
       maApiList.map(function (item) {
-        FileSystemManager[item] = FileSystemManager[item] || (() => {})
+        FileSystemManager[item] = FileSystemManager[item] || (() => {
+        })
       });
       return FileSystemManager
     }
@@ -736,14 +737,14 @@ function getInstance() {
   // wx.getBeacons=my.getBeacons
 
   //////////wifi
-  wx.stopWifi = fn();
-  wx.startWifi = fn();
-  wx.setWifiList = fn();
-  wx.onWifiConnected = fn();
-  wx.onGetWifiList = fn();
-  wx.getWifiList = fn();
-  wx.getConnectedWifi = fn();
-  wx.connectWifi = fn();
+  wx.stopWifi = wx.stopWifi || fn();
+  wx.startWifi = wx.startWifi || fn();
+  wx.setWifiList = wx.setWifiList || fn();
+  wx.onWifiConnected = wx.onWifiConnected || fn();
+  wx.onGetWifiList = wx.onGetWifiList || fn();
+  wx.getWifiList = wx.getWifiList || fn();
+  wx.getConnectedWifi = wx.getConnectedWifi || fn();
+  wx.connectWifi = wx.connectWifi || fn();
 
 
   ///////////低功耗蓝牙
@@ -774,10 +775,10 @@ function getInstance() {
 
 
   /////////电量
-  wx.getBatteryInfoSync = function () {
+  wx.getBatteryInfoSync = wx.getBatteryInfoSync || function () {
     return {}
   };
-  wx.getBatteryInfo = function () {
+  wx.getBatteryInfo = wx.getBatteryInfo || function () {
     return {}
   };
 
@@ -801,11 +802,11 @@ function getInstance() {
 
 
   ///////////nfc
-  wx.stopHCE = fn();
-  wx.startHCE = fn();
-  wx.sendHCEMessage = fn();
-  wx.onHCEMessage = fn();
-  wx.getHCEState = fn();
+  wx.stopHCE = wx.stopHCE || fn();
+  wx.startHCE = wx.startHCE || fn();
+  wx.sendHCEMessage = wx.sendHCEMessage || fn();
+  wx.onHCEMessage = wx.onHCEMessage || fn();
+  wx.getHCEState = wx.getHCEState || fn();
 
   //////////网络
   //getNetworkType
@@ -846,34 +847,37 @@ function getInstance() {
   /////////加速器
   // wx.stopAccelerometer=my.stopAccelerometer
   // wx.onAccelerometerChange=my.onAccelerometerChange
-  wx.startAccelerometer = fn();
+  wx.startAccelerometer = wx.startAccelerometer || fn();
 
 
   ////////罗盘
   // stopCompass
   // wx.onCompassChange=my.onCompassChange
+
+  //缺少accuracy
   const onCompassChange = wx.onCompassChange;
   wx.onCompassChange = function (fn) {
     let oldFn = fn;
     return onCompassChange.call(this, function (res) {
-      oldFn({direction: res.direction, accuracy: res.accuracy || ""})
+      oldFn({direction: res.direction})
     })
   }
-  wx.stopCompass = wx.offCompassChange();
-  wx.startCompass = fn();
+  wx.stopCompass = wx.offCompassChange;
+  wx.startCompass = wx.startCompass || fn();
 
   /////////设备方向
-  wx.stopDeviceMotionListening = fn();
-  wx.startDeviceMotionListening = fn();
-  wx.onDeviceMotionChange = fn();
+  wx.stopDeviceMotionListening = wx.stopDeviceMotionListening || fn();
+  wx.startDeviceMotionListening = wx.startDeviceMotionListening || fn();
+  wx.onDeviceMotionChange = wx.onDeviceMotionChange || fn();
 
 
   //////////设备方向
   // wx.onGyroscopeChange=my.onGyroscopeChange
   wx.stopGyroscope = wx.offGyroscopeChange;
-  wx.startGyroscope = fn();
+  wx.startGyroscope = wx.startGyroscope || fn();
 
   //性能
+  wx.onMemoryWarning = wx.onMemoryWarning || fn();
 
   ////////扫码
   wx.scanCode = function (opt) {
@@ -908,11 +912,30 @@ function getInstance() {
 
 
   /////////worker
+  if (wx['createWorker']) {
+    let createWorker = wx.createWorker;
+    wx.createWorker = function (scriptPath) {
+      let oworker = createWorker.call(this, scriptPath);
+      oworker['onMessage'] = oworker['onMessage'] || fn()
+      oworker['postMessage'] = oworker['postMessage'] || fn()
+      oworker['terminate'] = oworker['terminate'] || fn()
+      return oworker
+    }
+  }
+  else {
+    wx['createWorker'] = function () {
+      return {
+        'onMessage': fn(),
+        'postMessage': fn(),
+        'terminate': fn()
+      }
+    }
+  }
 
 
   /////////第三方平台
-  wx.getExtConfigSync = fn();
-  wx.getExtConfig = fn();
+  wx.getExtConfigSync = wx.getExtConfigSync || fn();
+  wx.getExtConfig = wx.getExtConfig || fn();
 
 
   ///////////WXML
@@ -927,9 +950,27 @@ function getInstance() {
     return query;
   };
 
-  wx.createIntersectionObserver = function () {
-    return {}
-  };
+  if(wx['createIntersectionObserver']){
+    let createIntersectionObserver=wx.createIntersectionObserver;
+    wx.createIntersectionObserver=function (thisObj,opt) {
+      let IntersectionObserver=createIntersectionObserver(thisObj,opt)
+      IntersectionObserver['disconnect']=IntersectionObserver['disconnect']||fn()
+      IntersectionObserver['observe']=IntersectionObserver['observe']||fn()
+      IntersectionObserver['relativeTo']=IntersectionObserver['relativeTo']||fn()
+      IntersectionObserver['relativeToViewport']=IntersectionObserver['relativeToViewport']||fn()
+      return IntersectionObserver
+    }
+  }
+  else{
+    wx['createIntersectionObserver']=function () {
+      return {
+        "disconnect":fn(),
+        "observe":fn(),
+        "relativeTo":fn(),
+        "relativeToViewport":fn()
+      }
+    }
+  }
 
   //////////// 开放接口
   wx.login = (o) => {
