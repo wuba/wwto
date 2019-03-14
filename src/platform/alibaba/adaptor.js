@@ -544,7 +544,11 @@ function getInstance() {
   }
 
   ////////////实时音视频
-  let livePusherApiList = ['pause', 'pauseBGM', 'playBGM', 'resume', 'resumeBGM', 'setBGMVolume', 'snapshot', 'start', 'stop', 'stopBGM', 'switchCamera', 'toggleTorch']
+  let livePusherApiList = [
+    'pause', 'pauseBGM', 'playBGM', 'resume',
+    'resumeBGM', 'setBGMVolume', 'snapshot', 'start',
+    'stop', 'stopBGM', 'switchCamera', 'toggleTorch'
+  ]
   if (wx['createLivePusherContext']) {
     let createLivePusherContext = wx.createLivePusherContext;
     wx.createLivePusherContext = function () {
