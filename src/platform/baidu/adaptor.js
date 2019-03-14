@@ -30,12 +30,13 @@ function getInstance() {
       opt.responseType = 'json';
     }
 
-    return request(opt);
+    // 处理requestTask对象字段缺失
+    let requestTask = request.call(this,opt) ? request.call(this,opt):{};
+    requestTask["abort"] = (()=>{});
+    requestTask["offHeadersReceived"] = (()=>{});
+    requestTask["onHeadersReceived"] = (()=>{});
+    return requestTask;
   };
-  // 处理requestTask对象字段缺失
-  let requestTask = wx.request;
-  requestTask["offHeadersReceived"] = (()=>{});
-  requestTask["onHeadersReceived"] = (()=>{});
 
   const createAnimation = wx.createAnimation;
   wx.createAnimation = function() {
@@ -62,12 +63,10 @@ function getInstance() {
     return animation;
   };
 
-  wx.showShareMenu = wx.showShareMenu || ((opt) => {});
-
   // 画布导出为图片
   // const canvasToTempFilePath = wx.canvasToTempFilePath;
   // wx.canvasToTempFilePath = function(opt, self) {
-  //   const success = opt.success || emptyFn;
+  //   const success = opt.success;
   //   opt.success = function(res) {
   //     if (res) {
   //       res.tempFilePath = res.tempFilePath || res.tempImagePath;
@@ -77,19 +76,34 @@ function getInstance() {
   //   canvasToTempFilePath.call(this, opt, self);
   // };
 
-  // wx.uploadFile = wx.uploadFile;
-  let uploadTask = wx.uploadFile;
-  // 处理uploadTask对象字段缺失问题
-  uploadTask["onProgressUpdate"] = (()=>{});
-  uploadTask["offProgressUpdate"] = (()=>{});
-  uploadTask["onHeadersReceived"] = (()=>{});
+  // 上传
+  const uploadFile = wx.uploadFile;
+  wx.uploadFile = function(opt){
+    let uploadTasks = uploadFile.call(this,opt);
+    // 处理uploadTask对象字段abort、offHeadersReceived缺失问题(百度文档写的有问题)
+    uploadTasks["abort"] = uploadTasks["abort"] || (()=>{});
+    uploadTasks["offHeadersReceived"] = (()=>{});
+    uploadTasks["offProgressUpdate"] = (()=>{});
+    uploadTasks["onHeadersReceived"] = (()=>{});
+    uploadTasks["onProgressUpdate"] = uploadTasks["onProgressUpdate"] || (()=>{});
 
-  // wx.downloadFile = wx.downloadFile; 此api参数中百度无filePath(指定文件下载后存储的路径)
-  let downloadTask = wx.downloadFile;
-  // 处理downloadTask对象字段缺失问题
-  downloadTask["onProgressUpdate"] = (()=>{});
-  downloadTask["offProgressUpdate"]= (()=>{});
-  downloadTask["onHeadersReceived"]= (()=>{});
+    return uploadTasks;
+  };
+
+  // wx.downloadFile; 此api参数中百度无filePath(指定文件下载后存储的路径)
+  const downloadFile = wx.downloadFile;
+  wx.downloadFile = function(opt){
+    let downloadTasks = downloadFile.call(this,opt);
+    // 处理downloadTask对象字段abort、offHeadersReceived缺失问题(百度文档写的有问题)
+    downloadTasks["offHeadersReceived"] = (()=>{});
+    downloadTasks["abort"]= downloadTasks["abort"] || (()=>{});
+    downloadTasks["offProgressUpdate"] = (()=>{});
+    downloadTasks["onHeadersReceived"] = (()=>{});
+    downloadTasks["onProgressUpdate"] = downloadTasks["onProgressUpdate"] || (()=>{});
+    return downloadTasks;
+  };
+
+  // websocket
 
   // wx.connectSocket = wx.connectSocket;  此api百度中无参数tcpNoDelay
   // wx.onSocketOpen = wx.onSocketOpen
@@ -123,13 +137,18 @@ function getInstance() {
   // 录音
   wx.stopRecord = wx.stopRecord || ((opt)=>{});
   wx.startRecord = wx.startRecord || ((opt)=>{});
-  let recorderManager = wx.getRecorderManager();
-  // 处理recorderManager对象字段缺失问题
-  recorderManager["onFrameRecorded"] = (()=>{});
-  recorderManager["onInterruptionBegin"] = (()=>{});
-  recorderManager["onInterruptionEnd"] = (()=>{});
-  recorderManager["onResume"] = (()=>{});
-  // recorderManager.start百度中无frameSize,audioSource两个参数,且采样率和码率有效值微信和百度不一样,具体可参考api进行传值
+  const recorderManager = wx.getRecorderManager;
+  wx.getRecorderManager = function(opt){
+    let recorderManagers = recorderManager.call(this,opt);
+    // 处理recorderManager对象字段缺失问题
+    recorderManagers["onFrameRecorded"] = (()=>{});
+    recorderManagers["onInterruptionBegin"] = (()=>{});
+    recorderManagers["onInterruptionEnd"] = (()=>{});
+    recorderManagers["onResume"] = (()=>{});
+    // recorderManager.start百度中无frameSize,audioSource两个参数,且采样率和码率有效值微信和百度不一样,具体可参考api进行传值
+    return recorderManagers;
+  };
+
 
   // 背景音频
   wx.stopBackgroundAudio = wx.stopBackgroundAudio || ((opt)=>{});
@@ -140,43 +159,67 @@ function getInstance() {
   wx.onBackgroundAudioPlay = wx.onBackgroundAudioPlay || ((opt)=>{});
   wx.onBackgroundAudioPause = wx.onBackgroundAudioPause || ((opt)=>{});
   wx.getBackgroundAudioPlayerState = wx.getBackgroundAudioPlayerState || ((opt)=>{});
-  let getBackgroundAudioManager = wx.getBackgroundAudioManager;
-  getBackgroundAudioManager["webUrl"] = '';
-  getBackgroundAudioManager["protocol"] = '';
-  getBackgroundAudioManager["buffered"] = 0;
-  getBackgroundAudioManager["onNext"] = (()=>{});
-  getBackgroundAudioManager["onPrev"] = (()=>{});
-  getBackgroundAudioManager["onSeeking"] = (()=>{});
-  getBackgroundAudioManager["onSeeked"] = (()=>{});
+  const getBackgroundAudioManager = wx.getBackgroundAudioManager;
+  wx.getBackgroundAudioManager = function(opt){
+    let getBackgroundAudioManagers = getBackgroundAudioManager.call(this,opt);
+    // 处理getBackgroundAudioManagers对象字段(包括属性和方法)缺失问题
+    getBackgroundAudioManagers["webUrl"] = '';
+    getBackgroundAudioManagers["protocol"] = '';
+    getBackgroundAudioManagers["buffered"] = 0;
+    getBackgroundAudioManagers["onNext"] = (()=>{});
+    getBackgroundAudioManagers["onPrev"] = (()=>{});
+    getBackgroundAudioManagers["onSeeking"] = (()=>{});
+    getBackgroundAudioManagers["onSeeked"] = (()=>{});
+    return getBackgroundAudioManagers;
+  };
 
   // 音频
   wx.stopVoice = wx.stopVoice || ((opt)=>{});
   wx.playVoice = wx.playVoice || ((opt)=>{});
   wx.pauseVoice = wx.pauseVoice || ((opt)=>{});
   wx.getAvailableAudioSources = wx.getAvailableAudioSources || ((opt)=>{});
-  wx.createAudioContext = function(){
+  wx.createAudioContext = wx.createAudioContext || ((opt)=>{
     return{
       seek: (()=>{}),
       setSrc: (()=>{}),
       pause: (()=>{}),
       play: (()=>{})
     }
-  };
+  });
   // wx.setInnerAudioOption = wx.setInnerAudioOption // obeyMuteSwitch字段在baidu中缺失
-  let  innerAudioContext =  wx.createInnerAudioContext;
-  innerAudioContext["buffered"] =  0;
+  const innerAudioContext = wx.createInnerAudioContext;
+  wx.createInnerAudioContext = function(opt){
+    let innerAudioContexts = innerAudioContext.call(this,opt);
+    // 处理innerAudioContext对象字段(buffered)缺失问题
+    innerAudioContext["buffered"] =  0;
+    return innerAudioContexts;
+  };
 
   // 视频
-  // wx.chooseVideo = wx.chooseVideo // camera字段在baidu中缺失
+  // wx.chooseVideo = wx.chooseVideo // camera字段在baidu中缺失,success回调返回值微信中有thumbTempFilePath、和errMsg字段(文档未说明)
   // wx.saveVideoToPhotosAlbum = wx.saveVideoToPhotosAlbum
-  let videoContext = wx.createVideoContext;
-  videoContext["playbackRate"] = (()=>{});
-  videoContext["stop"] = (()=>{});
-  // videoContext.requestFullScreen 进入全屏百度中无direction参数
+  const videoContext = wx.createVideoContext;
+  wx.createVideoContext = function(opt){
+    let videoContexts = videoContext.call(this,opt);
+    // 处理videoContexts对象字段缺失问题
+    videoContexts["playbackRate"] = (()=>{});
+    videoContexts["stop"] = (()=>{});
+    videoContexts["exitFullScreen"] = videoContexts["exitFullScreen"] || (()=>{});
+    videoContexts["hideStatusBar"] = videoContexts["hideStatusBar"] || (()=>{});
+    videoContexts["play"] = videoContexts["play"] || (()=>{});
+    videoContexts["requestFullScreen"] = videoContexts["requestFullScreen"] || (()=>{});
+    videoContexts["seek"] = videoContexts["seek"] || (()=>{});
+    videoContexts["sendDanmu"] = videoContexts["sendDanmu"] || (()=>{});
+    videoContexts["showStatusBar"] = videoContexts["showStatusBar"] || (()=>{});
+    videoContexts["pause"] = videoContexts["pause"] || (()=>{});
+    // videoContext.requestFullScreen 进入全屏百度中无direction参数
+    // 百度videoContexts对象中无方法(api文档有问题)
+    return videoContexts;
+  };
 
   // 实时音视频
-  // wx.createLivePlayerContext = wx.createLivePlayerContext // 百度中无参数Object this
-  wx.createLivePusherContext = function(){
+  // wx.createLivePlayerContext = wx.createLivePlayerContext
+  wx.createLivePusherContext = wx.createLivePusherContext || ((opt)=>{
     return{
       pause: (()=>{}),
       pauseBGM: (()=>{}),
@@ -191,7 +234,7 @@ function getInstance() {
       switchCamera: (()=>{}),
       toggleTorch: (()=>{})
     }
-  };
+  });
 
   // 相机组件控制
   // wx.createCameraContext = wx.createCameraContext
@@ -201,7 +244,7 @@ function getInstance() {
   // 文件
   const saveFile = wx.saveFile;
   wx.saveFile = function(opt){
-    const success = opt.success || emptyFn;
+    const success = opt.success;
     opt.success = function(res) {
       if (res) {
         // 处理成功回调参数savedFilePath类型
@@ -209,14 +252,14 @@ function getInstance() {
       }
       success(res);
     };
-    saveFile.call(this, opt);
+    return saveFile.call(this, opt);
   };
-  // wx.getSavedFileList = wx.getSavedFileList
-  // wx.getSavedFileInfo = wx.getSavedFileInfo
+  // wx.getSavedFileList = wx.getSavedFileList // 微信success返回值中有errMsg
+  // wx.getSavedFileInfo = wx.getSavedFileInfo // 百度success返回值有message、status字段
   // wx.removeSavedFile = wx.removeSavedFile
   // wx.openDocument = wx.openDocument
   // wx.getFileInfo = wx.getFileInfo
-  wx.getFileSystemManager = function(){
+  wx.getFileSystemManager = wx.getFileSystemManager || ((opt)=>{
     return {
       access: (()=>{}),
       accessSync: (()=>{}),
@@ -247,7 +290,7 @@ function getInstance() {
       writeFile:(()=>{}),
       writeFileSync:(()=>{})
     }
-  };
+  });
 
   // 数据存储
   // wx.setStorage = wx.setStorage
@@ -262,21 +305,10 @@ function getInstance() {
   // wx.clearStorageSync() = wx.clearStorageSync()
 
   // 位置
-  const getLocation = wx.getLocation;
-  wx.getLocation = function(opt){
-    const success = opt.success || emptyFn;
-    opt.success = function(res){
-      res["street"] = res.street;
-      res["cityCode"] = res.cityCode;
-      res["city"] = res.city;
-      res["country"] = res.country;
-      res["province"] = res.province;
-      res["streetNumber"] = res.streetNumber;
-      res["district"] = res.district;
-      success(res);
-    };
-    getLocation.call(this,opt);
-  };
+  // wx.getLocation = wx.getLocation
+  // wx.getLocation中回调参数,百度中有以下参数,微信中没有
+  // street、cityCode、city、province、streetNumber、district、country
+
   // wx.chooseLocation = wx.chooseLocation
   const openLocation = wx.openLocation;
   wx.openLocation = (opt)=>{
@@ -287,8 +319,8 @@ function getInstance() {
     return openLocation(opt);
   };
   // const mapContext = wx.createMapContext;
-  // mapContext.mapContext百度中无success,complete参数
-  // mapContext.includePoints百度中无success,file,complete参数
+  // mapContext.translateMarker百度api文档中无success,complete参数
+  // mapContext.includePoints百度api文档中无success,file,complete参数
 
   // 界面
   // wx.canvasGetImageData = wx.canvasGetImageData;
@@ -302,6 +334,9 @@ function getInstance() {
     canvasContext["lineJoin"] = canvasContext.setLineJoin;
     canvasContext["lineDashOffset"] = canvasContext.setLineDash;
     canvasContext["miterLimit"] = canvasContext.setMiterLimit;
+    //微信中canvasContext.setShadow从基础库 1.9.90 开始，接口停止维护，
+    //请使用 CanvasContext.shadowOffsetX|CanvasContext.shadowOffsetY|CanvasContext.shadowColor|CanvasContext.shadowBlur 代替
+    //这些是属性,不是方法
     return canvasContext;
   };
   // wx.showToast = wx.showToast
@@ -344,36 +379,48 @@ function getInstance() {
   // wx.nextTick = wx.nextTick
 
   //节点信息
+
   // wx.createIntersectionObserver = wx.createIntersectionObserver
-  const selectorQuery = wx.createSelectorQuery;
+  // wx.createSelectorQuery = wx.createSelectorQuery;
+  // selectorQuery调用方法的返回对象nodesRef.fields方法参数中，微信中有context字段，百度中无此字段
+  const createSelectorQuery = wx.createSelectorQuery;
   wx.createSelectorQuery = function(opt){
-    let self = this;
-    let selectorQuerys = selectorQuery.call(self,opt);
-    const execs = selectorQuery.exec;
-    selectorQuerys.exec = function(opt){
-      let that = this;
-      let exec = execs.call(that,opt);
-      exec["context"] = (()=>{});
+    let createSelectorQuerys = createSelectorQuery.call(this,opt);
+
+    let exec = createSelectorQuerys.exec;
+    let select = createSelectorQuerys.select;
+    let selectAll = createSelectorQuerys.selectAll;
+    let selectViewport = createSelectorQuerys.selectViewport;
+    // 处理NodesRef对象字段context方法缺失问题
+    createSelectorQuerys.exec = function(fn){
+      let f = fn;
+      return exec.call(this,function(res){
+        f({context: res.context || (()=>{})})
+      })
     };
-    const selects = selectorQuery.select;
-    selectorQuerys.select = function(opt){
-      let that = this;
-      let select = selects.call(that,opt);
-      select["context"] = (()=>{});
+    createSelectorQuerys.select = function(){
+      return select.call(this,function(res){
+        if(res){
+          res.content = res.context || (()=>{})
+        }
+      })
     };
-    const selectAlls = selectorQuery.selectAll;
-    selectorQuerys.selectAll = function(opt){
-      let that = this;
-      let selectAll = selectAlls.call(that,opt);
-      selectAll["context"] = (()=>{});
+    createSelectorQuerys.selectAll = function(){
+      return selectAll.call(this,function(res){
+        if(res){
+          res.content = res.context || (()=>{})
+        }
+      })
     };
-    const selectViewports = selectorQuery.selectViewport;
-    selectorQuerys.selectViewport = function(){
-      let that = this;
-      let selectViewport = selectViewports.call(that,opt);
-      selectViewport["context"] = (()=>{});
+    createSelectorQuerys.selectViewport = function(){
+      return selectViewport.call(this,function(res){
+        if(res){
+          res.content = res.context || (()=>{})
+        }
+      })
     };
-    return selectorQuerys;
+
+    return createSelectorQuerys;
   };
 
   wx.loadFontFace = wx.loadFontFace || ((opt)=>{}); // 字体
@@ -383,43 +430,14 @@ function getInstance() {
   wx.offWindowResize = wx.offWindowResize || ((opt)=>{});
 
   // 设备
-  let fieldMissing = function(res){
-    if(res){
-      res["benchmarkLevel"] = 0;
-      res["albumAuthorized"] = true;
-      res["locationAuthorized"] = true;
-      res["microphoneAuthorized"] = true;
-      res["notificationAuthorized"] = true;
-      res["notificationAlertAuthorized"] = true;
-      res["notificationBadgeAuthorized"] = true;
-      res["notificationSoundAuthorized"] = true;
-      res["bluetoothEnabled"] = true;
-      res["locationEnabled"] = true;
-      res["wifiEnabled"] = true;
-      res["cameraAuthorized"] = true;
-    }
-  };
-  // const getSystemInfo = wx.getSystemInfo;
-  // wx.getSystemInfo = function(opt){
-  //   const success = opt.success || emptyFn;
-  //   opt.succes = function(res){
-  //     // 处理success回调返回值字段缺失问题
-  //     fieldMissing(res);
-  //     success(res);
-  //   };
-  //   getSystemInfo.call(this,opt);
-  // };
-  //
-  // const getSystemInfoSync = wx.getSystemInfoSync;
-  // wx.getSystemInfoSync = function(opt){
-  //   const success = opt.success || emptyFn;
-  //   opt.succes = function(res){
-  //     // 处理success回调返回值字段缺失问题
-  //     fieldMissing(res);
-  //     success(res);
-  //   };
-  //   getSystemInfoSync.call(this,opt);
-  // };
+
+  // 系统信息
+  // wx.getSystemInfo = wx.getSystemInfo;
+  // wx.getSystemInfoSync = wx.getSystemInfoSync;
+
+  // 系统信息api返回值微信中有以下字段，百度没有
+  // benchmarkLevel、albumAuthorized、locationAuthorized、microphoneAuthorized、notificationAuthorized、notificationAlertAuthorized
+  // notificationBadgeAuthorized、notificationSoundAuthorized、bluetoothEnabled、locationEnabled、wifiEnabled、cameraAuthorized
 
   // wx.canIUse = wx.canIUse
   // wx.onMemoryWarning = wx.onMemoryWarning
@@ -428,10 +446,12 @@ function getInstance() {
   // wx.onAccelerometerChange = wx.onAccelerometerChange
   // wx.startAcceleromete = wx.startAcceleromete
   // wx.stopAccelerometer = wx.stopAccelerometer
+
+  //  罗盘
   const onCompassChange= wx.onCompassChange;
   wx.onCompassChange = function(fn){
     let f = fn;
-    // 处理回调返回值字段缺失问题
+    // 处理回调返回值字段accuracy缺失问题
     return onCompassChange.call(this,function(res){
       f({direction:res.direction,accuracy:res.accuracy || ""});
     });
@@ -454,14 +474,18 @@ function getInstance() {
     return scanCode.call(this,opt);
   };
 
+  // 屏幕亮度
   // wx.setScreenBrightness = wx.setScreenBrightness
   // wx.getScreenBrightnes = wx.getScreenBrightnes
   // wx.setKeepScreenOn = wx.setKeepScreenOn
   // wx.onUserCaptureScreen = wx.onUserCaptureScreen
+  // 振动
   // wx.vibrateShort = wx.vibrateShort
   // wx.vibrateLong = wx.vibrateLong
+  // 手机联系人
   // wx.addPhoneContact = wx.addPhoneContact
   // wx.makePhoneCall = wx.makePhoneCall
+  // 剪贴板
   // wx.setClipboardData = wx.setClipboardData
   // wx.getClipboardData = wx.getClipboardData
 
@@ -505,7 +529,14 @@ function getInstance() {
   // iBeacon
   wx.stopBeaconDiscovery = wx.stopBeaconDiscovery || ((opt)=>{});
   wx.startBeaconDiscovery = wx.startBeaconDiscovery || ((opt)=>{});
-  // wx.onBeaconUpdate = wx.onBeaconUpdate || ((opt)=>{});
+  const onBeaconUpdate = wx.onBeaconUpdate || ((opt)=>{});
+  wx.onBeaconUpdate = function(fn){
+    // 处理回调返回值缺失字段beacons
+    let f = fn;
+    return onBeaconUpdate.call(this,function(res){
+      f({beacons: res.beacons || []});
+    });
+  };
   wx.onBeaconServiceChange = wx.onBeaconServiceChange || ((opt)=>{});
   wx.getBeacons = wx.getBeacons || ((opt)=>{});
   // WI_FI
@@ -513,7 +544,14 @@ function getInstance() {
   wx.startWifi = wx.startWifi || ((opt)=>{});
   wx.setWifiList = wx.setWifiList || ((opt)=>{});
   wx.onWifiConnected = wx.onWifiConnected || ((opt)=>{});
-  // wx.onGetWifiList = wx.onGetWifiList || ((opt)=>{});
+  const onGetWifiList = wx.onGetWifiList || ((opt)=>{});
+  wx.onGetWifiList = function(fn){
+    //  处理回调返回值
+    let f = fn;
+    return onGetWifiList.call(this,function(res){
+      f({wifiList:res.wifiList || []});
+    });
+  };
   wx.getWifiList = wx.getWifiList || ((opt)=>{});
   wx.getConnectedWifi = wx.getConnectedWifi || ((opt)=>{});
   wx.connectWifi = wx.connectWifi || ((opt)=>{});
@@ -532,39 +570,38 @@ function getInstance() {
   wx.offAppShow = wx.offAppShow|| (()=>{});
   wx.offAppHide  = wx.offAppHide || (()=>{});
 
-
-
   // 第三方平台
-  wx.getExtConfig = wx.getExtConfig || ((opt)=>{});
-  wx.getExtConfigSync = wx.getExtConfigSync || ((opt)=>{});
+  // wx.getExtConfig = wx.getExtConfig;
+  // wx.getExtConfigSync = wx.getExtConfigSync;
 
   // 开放接口
 
   // wx.login = wx.login
   // wx.checkSession = wx.checkSession
-  // wx.authorize = wx.authorize // 传递参数scope列表百度和微信不完全一样
+  // wx.authorize = wx.authorize // 传递参数scope列表百度和微信不完全一样,百度中无scope.invoice、scope.werun,百度中是7个,微信是9个
   // 更新
   // wx.getUpdateManager = wx.getUpdateManager
   // 调试
   // wx.setEnableDebug = wx.setEnableDebug // 百度中没有填写success,fail，complate回调,但是有
-  wx.getLogManager = function(){
+  wx.getLogManager = wx.getLogManager || ((opt)=>{
     return{
       debug:(()=>{}),
       info: (()=>{}),
       log: (()=>{}),
       warn: (()=>{})
     }
-  };
+  });
+
   // 小程序跳转
-  wx.navigateBackMiniProgram = wx.navigateToSmartProgram;
+  wx.navigateBackMiniProgram = wx.navigateToSmartProgram; // 打开另一个小程序(百度中多两个参数appKey、path)
   wx.navigateBackMiniProgram = function(opt){
-    // 处理传入参数appid与appKey映射问题
+    // 处理传入参数微信appid与百度appKey映射问题
     if(opt){
       opt.appId = opt.appKey
     }
     return opt;
   };
-  wx.navigateToMiniProgram = wx.navigateBackSmartProgram;
+  wx.navigateToMiniProgram = wx.navigateBackSmartProgram; // 返回到上一个小程序
 
   // 发票
   const chooseInvoiceTitle = wx.chooseInvoiceTitle;
@@ -655,13 +692,13 @@ function getInstance() {
   wx.getShareInfo = wx.getShareInfo || (()=>{});
 
   // Worker
-  wx.createWorker = function(){
+  wx.createWorker = wx.createWorker || ((opt)=>{
     return{
       postMessage: (()=>{}),
       onMessage: (()=>{}),
       terminate: (()=>{})
     }
-  };
+  });
   return wx;
 }
 
