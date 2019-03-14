@@ -71,17 +71,13 @@ function getInstance() {
 
   const getUpdateManager = wx.getUpdateManager;
   wx.getUpdateManager = function (opt) {
-    let obj = getUpdateManager()
-    obj['applyUpdate'] = obj['applyUpdate'] || ((opt) => {
-    })
-    obj['onCheckForUpdate'] = obj['onCheckForUpdate'] || ((opt) => {
-    })
-    obj['onUpdateFailed'] = obj['onUpdateFailed'] || ((opt) => {
-    })
-    obj['onUpdateReady'] = obj['onUpdateReady'] || ((opt) => {
-    })
+    let obj = getUpdateManager();
+    obj['applyUpdate'] = obj['applyUpdate'] || fn();
+    obj['onCheckForUpdate'] = obj['onCheckForUpdate'] || fn();
+    obj['onUpdateFailed'] = obj['onUpdateFailed'] || fn();
+    obj['onUpdateReady'] = obj['onUpdateReady'] || fn();
     return obj;
-  }
+  };
 
   ///////////路由
   // wx.redirectTo=my.redirectTo
