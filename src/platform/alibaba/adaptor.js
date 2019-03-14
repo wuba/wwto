@@ -192,13 +192,13 @@ function getInstance() {
 
   ////////// 下拉刷新
   // wx.stopPullDownRefresh = my.stopPullDownRefresh
-  wx.startPullDownRefresh = wx.startPullDownRefresh || fn()
+  wx.startPullDownRefresh = wx.startPullDownRefresh || fn();
 
   ////////// 滚动
   const pageScrollTo = wx.pageScrollTo;
   wx.pageScrollTo = function (opt) {
-    opt.success = opt.success || fn()
-    opt.fail = opt.fail || fn()
+    opt.success = opt.success || fn();
+    opt.fail = opt.fail || fn();
     try {
       pageScrollTo(opt);
       opt.success({errMsg: 'pageScrollTo:ok'})
@@ -360,21 +360,21 @@ function getInstance() {
   // wx.getImageInfo=my.getImageInfo
   const getImageInfo = wx.getImageInfo;
   wx.getImageInfo = function (opt) {
-    let success = opt.success
+    let success = opt.success;
     return getImageInfo.call(this, Object.assign({}, opt, {
       success(res) {
-        let type = res.type.substring(0, res.type.indexOf('?'))
-        res.type = type
+        let type = res.type.substring(0, res.type.indexOf('?'));
+        res.type = type;
         success(res)
       }
     }))
-  }
+  };
 
   wx.saveImageToPhotosAlbum = function (opt) {
     return wx.saveImage(Object.assign({}, opt, {
       url: opt.filePath,
       success(res) {
-        res['errMsg'] = "saveImageToPhotosAlbum:ok"
+        res['errMsg'] = "saveImageToPhotosAlbum:ok";
         opt.success && opt.success(res)
       }
     }))
@@ -405,7 +405,7 @@ function getInstance() {
       compressLevel: 4,
       apFilePaths: [src],
       success(res) {
-        res['tempFilePath'] = res.apFilePaths[0] || ""
+        res['tempFilePath'] = res.apFilePaths[0] || "";
         success(res)
       }
     }))
@@ -414,7 +414,7 @@ function getInstance() {
   const chooseImage = wx.chooseImage;
   wx.chooseImage = function (opt) {
     let success = opt.success || fn();
-    opt.count = opt.count || 9
+    opt.count = opt.count || 9;
     return chooseImage.call(this, Object.assign({}, opt, {
       success(res) {
         let tempFilePaths = [].concat(res.apFilePaths);
@@ -455,46 +455,56 @@ function getInstance() {
   wx.playVoice = wx.playVoice || fn();
   wx.pauseVoice = wx.pauseVoice || fn();
   wx.getAvailableAudioSources = wx.getAvailableAudioSources || fn();
-  wx.createInnerAudioContext = wx.createInnerAudioContext || function () {
-    return {
-      destroy: fn(),
-      offCanplay: fn(),
-      offEnded: fn(),
-      offError: fn(),
-      offPause: fn(),
-      offPlay: fn(),
-      offSeeked: fn(),
-      offSeeking: fn(),
-      offStop: fn(),
-      offTimeUpdate: fn(),
-      offWaiting: fn(),
-      onCanplay: fn(),
-      onEnded: fn(),
-      onError: fn(),
-      onPause: fn(),
-      onPlay: fn(),
-      onSeeked: fn(),
-      onSeeking: fn(),
-      onStop: fn(),
-      onTimeUpdate: fn(),
-      onWaiting: fn(),
-      pause: fn(),
-      play: fn(),
-      seek: fn(),
-      stop: fn()
+  let audioApiList = [
+    "destroy", "offCanplay", 'offEnded', 'offError',
+    'offPause', 'offPlay', 'offSeeked', 'offSeeking',
+    'offStop', 'offTimeUpdate', 'offWaiting', 'onCanplay',
+    'onEnded', 'onError', 'onPause', 'onPlay',
+    'onSeeked', 'onSeeking', 'onStop', 'onTimeUpdate',
+    'onWaiting', 'pause', 'play', 'seek', 'stop'
+  ];
+  if (wx['createInnerAudioContext']) {
+    let createInnerAudioContext = wx.createInnerAudioContext;
+    wx.createInnerAudioContext = function () {
+      let AudioContext = createInnerAudioContext.apply(this, arguments);
+      audioApiList.map(function (item) {
+        AudioContext[item] = AudioContext[item] || fn()
+      });
+      return AudioContext
     }
-  };
+  }
+  else {
+    wx['createInnerAudioContext'] = function () {
+      let obj = {};
+      audioApiList.map(function (item) {
+        obj[item] = fn()
+      });
+      return obj
+    }
+  }
 
 
   ////////背景音频
-  wx.createAudioContext = wx.createAudioContext || function () {
-    return {
-      seek: fn(),
-      setSrc: fn(),
-      pause: fn(),
-      play: fn()
+  if (wx['createAudioContext']) {
+    let createAudioContext = wx.createAudioContext;
+    wx.createAudioContext = function () {
+      let audioContext = createAudioContext.apply(this, arguments);
+      audioContext['seek'] = audioContext['seek'] || fn();
+      audioContext['setSrc'] = audioContext['setSrc'] || fn();
+      audioContext['pause'] = audioContext['pause'] || fn();
+      audioContext['play'] = audioContext['play'] || fn()
     }
-  };
+  }
+  else {
+    wx['createAudioContext'] = function () {
+      return {
+        "seek": fn(),
+        "setSrc": fn(),
+        "pause": fn(),
+        "play": fn()
+      }
+    }
+  }
 
   wx.stopBackgroundAudio = wx.stopBackgroundAudio || fn();
   wx.seekBackgroundAudio = wx.seekBackgroundAudio || fn();
@@ -504,85 +514,133 @@ function getInstance() {
   wx.onBackgroundAudioPlay = wx.onBackgroundAudioPlay || fn();
   wx.onBackgroundAudioPause = wx.onBackgroundAudioPause || fn();
   wx.getBackgroundAudioPlayerState = wx.getBackgroundAudioPlayerState || fn();
-  wx.getBackgroundAudioManager = wx.getBackgroundAudioManager || function () {
-    return {
-      onCanplay: fn(),
-      onEnded: fn(),
-      onError: fn(),
-      onNext: fn(),
-      onPause: fn(),
-      onPlay: fn(),
-      onPrev: fn(),
-      onSeeked: fn(),
-      onSeeking: fn(),
-      onStop: fn(),
-      onTimeUpdate: fn(),
-      onWaiting: fn(),
-      pause: fn(),
-      play: fn(),
-      seek: fn(),
-      stop: fn()
+
+  let bgAudioStateApiList = [
+    "onCanplay", "onEnded", "onError", "onNext",
+    "onPause", "onPlay", "onPrev", "onSeeked",
+    "onStop", "onSeeking", "onTimeUpdate", "onWaiting",
+    "pause", "play", "seek", "stop",
+  ];
+
+  if (wx['getBackgroundAudioManager']) {
+    let getBackgroundAudioManager = wx.getBackgroundAudioManager;
+    wx.getBackgroundAudioManager = function () {
+      let audioManager = getBackgroundAudioManager.apply(this, arguments);
+      bgAudioStateApiList.map(function (item) {
+        bgAudioStateApiList[item] = bgAudioStateApiList[item] || fn()
+      });
+      return bgAudioStateApiList
     }
-  };
+  }
+  else {
+    wx.getBackgroundAudioManager = function () {
+      let obj = {};
+      bgAudioStateApiList.map(function (item) {
+        bgAudioStateApiList[item] = fn()
+      })
+    }
+  }
 
   ////////////实时音视频
-  wx.createLivePusherContext = wx.createLivePusherContext || function () {
-    return {
-      pause: fn(),
-      pauseBGM: fn(),
-      playBGM: fn(),
-      resume: fn(),
-      resumeBGM: fn(),
-      setBGMVolume: fn(),
-      snapshot: fn(),
-      start: fn(),
-      stop: fn(),
-      stopBGM: fn(),
-      switchCamera: fn(),
-      toggleTorch: fn()
+  let livePusherApiList = ['pause', 'pauseBGM', 'playBGM', 'resume', 'resumeBGM', 'setBGMVolume', 'snapshot', 'start', 'stop', 'stopBGM', 'switchCamera', 'toggleTorch']
+  if (wx['createLivePusherContext']) {
+    let createLivePusherContext = wx.createLivePusherContext;
+    wx.createLivePusherContext = function () {
+      let livePusherContext = createLivePusherContext.apply(this, arguments);
+      livePusherApiList.map(function (item) {
+        livePusherContext[item] = livePusherContext[item] || fn()
+      });
+      return livePusherContext
     }
-  };
+  }
+  else {
+    wx.createLivePusherContext = function () {
+      let obj = {};
+      livePusherApiList.map(function (item) {
+        obj[item] = fn()
+      });
+      return obj
+    }
+  }
 
-  wx.createLivePlayerContext = wx.createLivePlayerContext || function () {
-    return {
-      exitFullScreen: fn(),
-      mute: fn(),
-      pause: fn(),
-      play: fn(),
-      requestFullScreen: fn(),
-      resume: fn(),
-      stop: fn()
+  if (wx['createLivePlayerContext']) {
+    let createLivePlayerContext = wx.createLivePlayerContext;
+    wx.createLivePlayerContext = function () {
+      let playerContext = createLivePlayerContext.apply(this, arguments);
+      playerContext['exitFullScreen'] = playerContext['exitFullScreen'] || fn();
+      playerContext['mute'] = playerContext['mute'] || fn();
+      playerContext['pause'] = playerContext['pause'] || fn();
+      playerContext['play'] = playerContext['play'] || fn();
+      playerContext['requestFullScreen'] = playerContext['requestFullScreen'] || fn();
+      playerContext['resume'] = playerContext['resume'] || fn();
+      playerContext['stop'] = playerContext['stop'] || fn();
+      return playerContext
     }
-  };
+  }
+  else {
+    wx['createLivePlayerContext'] = function () {
+      return {
+        "exitFullScreen": fn(),
+        "mute": fn(),
+        "pause": fn(),
+        "play": fn(),
+        "requestFullScreen": fn(),
+        "resume": fn(),
+        "stop": fn()
+      }
+    }
+  }
+
 
   //////////录音
   wx.stopRecord = wx.stopRecord || fn();
   wx.startRecord = wx.startRecord || fn();
-  wx.getRecorderManager = wx.getRecorderManager || function () {
-    return {
-      onError: fn(),
-      onFrameRecorded: fn(),
-      onInterruptionBegin: fn(),
-      onInterruptionEnd: fn(),
-      onPause: fn(),
-      onResume: fn(),
-      onStart: fn(),
-      onStop: fn(),
-      pause: fn(),
-      resume: fn(),
-      start: fn(),
-      stop: fn()
+  let recorderApiList = [
+    'onError', 'onFrameRecorded', 'onInterruptionBegin', 'onInterruptionEnd',
+    'onPause', 'onResume', 'onStart', 'onStop', 'pause',
+    'resume', 'start', 'stop'
+  ];
+
+  if (wx['getRecorderManager']) {
+    let getRecorderManager = wx.getRecorderManager;
+    wx.getRecorderManager = function () {
+      let recorderManager = getRecorderManager.apply(this, arguments);
+      recorderApiList.map(function (item) {
+        recorderManager[item] = recorderManager[item] || fn()
+      });
+      return getRecorderManager
     }
-  };
+  }
+  else {
+    wx.getRecorderManager = function () {
+      let obj = {};
+      recorderApiList.map(function (item) {
+        obj[item] = fn()
+      });
+      return obj;
+    }
+  }
+
 
   //////////相机
-  wx.createCameraContext = wx.createCameraContext || function () {
-    return {
-      startRecord: fn(),
-      stopRecord: fn(),
-      takePhoto: fn()
+  if (wx['createCameraContext']) {
+    let createCameraContext = wx.createCameraContext;
+    wx.createCameraContext = function () {
+      let cameraContext = createCameraContext.apply(this, arguments)
+      cameraContext['startRecord'] = cameraContext['startRecord'] || fn();
+      cameraContext['stopRecord'] = cameraContext['stopRecord'] || fn();
+      cameraContext['takePhoto'] = cameraContext['takePhoto'] || fn();
     }
-  };
+  }
+  else {
+    wx.createCameraContext = function () {
+      return {
+        "startRecord": fn(),
+        "stopRecord": fn(),
+        "takePhoto": fn(),
+      }
+    }
+  }
 
   //////////位置
   // wx.chooseLocation=my.chooseLocation
@@ -754,9 +812,9 @@ function getInstance() {
   // wx.getBLEDeviceServices=my.getBLEDeviceServices
   // wx.getBLEDeviceCharacteristics=my.getBLEDeviceCharacteristics
   // wx.writeBLECharacteristicValue=my.writeBLECharacteristicValue
-  wx.onBLEConnectionStateChange = wx.onBLEConnectionStateChanged
-  wx.createBLEConnection = wx.connectBLEDevice
-  wx.closeBLEConnection = wx.disconnectBLEDevice
+  wx.onBLEConnectionStateChange = wx.onBLEConnectionStateChanged;
+  wx.createBLEConnection = wx.connectBLEDevice;
+  wx.closeBLEConnection = wx.disconnectBLEDevice;
 
 
   //////////蓝牙
@@ -916,9 +974,9 @@ function getInstance() {
     let createWorker = wx.createWorker;
     wx.createWorker = function (scriptPath) {
       let oworker = createWorker.call(this, scriptPath);
-      oworker['onMessage'] = oworker['onMessage'] || fn()
-      oworker['postMessage'] = oworker['postMessage'] || fn()
-      oworker['terminate'] = oworker['terminate'] || fn()
+      oworker['onMessage'] = oworker['onMessage'] || fn();
+      oworker['postMessage'] = oworker['postMessage'] || fn();
+      oworker['terminate'] = oworker['terminate'] || fn();
       return oworker
     }
   }
@@ -953,12 +1011,12 @@ function getInstance() {
 
   if (wx['createIntersectionObserver']) {
     let createIntersectionObserver = wx.createIntersectionObserver;
-    wx.createIntersectionObserver = function (thisObj, opt) {
-      let IntersectionObserver = createIntersectionObserver.call(this, thisObj, opt)
-      IntersectionObserver['disconnect'] = IntersectionObserver['disconnect'] || fn()
-      IntersectionObserver['observe'] = IntersectionObserver['observe'] || fn()
-      IntersectionObserver['relativeTo'] = IntersectionObserver['relativeTo'] || fn()
-      IntersectionObserver['relativeToViewport'] = IntersectionObserver['relativeToViewport'] || fn()
+    wx.createIntersectionObserver = function () {
+      let IntersectionObserver = createIntersectionObserver.apply(this,arguments);
+      IntersectionObserver['disconnect'] = IntersectionObserver['disconnect'] || fn();
+      IntersectionObserver['observe'] = IntersectionObserver['observe'] || fn();
+      IntersectionObserver['relativeTo'] = IntersectionObserver['relativeTo'] || fn();
+      IntersectionObserver['relativeToViewport'] = IntersectionObserver['relativeToViewport'] || fn();
       return IntersectionObserver
     }
   }
@@ -1030,22 +1088,22 @@ function getInstance() {
     return requestPayment.call(this, params);
   };
 
-  wx.getAccountInfoSync = fn()
-  wx.reportMonitor = fn()
-  wx.reportAnalytics = fn()
-  wx.getWeRunData = fn()
+  wx.getAccountInfoSync = wx.getAccountInfoSync || fn();
+  wx.reportMonitor = wx.reportMonitor || fn();
+  wx.reportAnalytics = wx.reportAnalytics || fn();
+  wx.getWeRunData = wx.getWeRunData || fn();
 
-  wx.startSoterAuthentication = fn();
-  wx.checkIsSupportSoterAuthentication = fn()
-  wx.checkIsSoterEnrolledInDevice = fn()
+  wx.startSoterAuthentication = wx.startSoterAuthentication || fn();
+  wx.checkIsSupportSoterAuthentication = wx.checkIsSupportSoterAuthentication || fn();
+  wx.checkIsSoterEnrolledInDevice = wx.checkIsSoterEnrolledInDevice || fn();
 
-  wx.chooseInvoiceTitle = fn()
-  wx.chooseInvoice = fn()
+  wx.chooseInvoiceTitle = wx.chooseInvoiceTitle || fn();
+  wx.chooseInvoice = wx.chooseInvoice || fn();
 
-  wx.addCard = fn()
-  wx.openCard = fn()
+  wx.addCard = wx.addCard || fn();
+  wx.openCard = wx.openCard || fn();
 
-  wx.chooseAddress = fn()
+  wx.chooseAddress = wx.chooseAddress || fn();
 
   // wx.openSetting=my.openSetting
   // wx.getSetting=my.getSetting
