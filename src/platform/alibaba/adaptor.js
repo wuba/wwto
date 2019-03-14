@@ -940,34 +940,35 @@ function getInstance() {
 
   ///////////WXML
   ///////////
-
+  //查找元素 返回的只有SelectorQuery对象
+  //SelectorQuery对象只有.exec .select .selectAll .selectViewport 方法
   const createSelectorQuery = wx.createSelectorQuery;
   wx.createSelectorQuery = function () {
     let query = createSelectorQuery.apply(this, arguments);
-    query.in = function () {
+    query['in'] = query['in'] || function () {
       return query;
     };
     return query;
   };
 
-  if(wx['createIntersectionObserver']){
-    let createIntersectionObserver=wx.createIntersectionObserver;
-    wx.createIntersectionObserver=function (thisObj,opt) {
-      let IntersectionObserver=createIntersectionObserver(thisObj,opt)
-      IntersectionObserver['disconnect']=IntersectionObserver['disconnect']||fn()
-      IntersectionObserver['observe']=IntersectionObserver['observe']||fn()
-      IntersectionObserver['relativeTo']=IntersectionObserver['relativeTo']||fn()
-      IntersectionObserver['relativeToViewport']=IntersectionObserver['relativeToViewport']||fn()
+  if (wx['createIntersectionObserver']) {
+    let createIntersectionObserver = wx.createIntersectionObserver;
+    wx.createIntersectionObserver = function (thisObj, opt) {
+      let IntersectionObserver = createIntersectionObserver.call(this, thisObj, opt)
+      IntersectionObserver['disconnect'] = IntersectionObserver['disconnect'] || fn()
+      IntersectionObserver['observe'] = IntersectionObserver['observe'] || fn()
+      IntersectionObserver['relativeTo'] = IntersectionObserver['relativeTo'] || fn()
+      IntersectionObserver['relativeToViewport'] = IntersectionObserver['relativeToViewport'] || fn()
       return IntersectionObserver
     }
   }
-  else{
-    wx['createIntersectionObserver']=function () {
+  else {
+    wx['createIntersectionObserver'] = function () {
       return {
-        "disconnect":fn(),
-        "observe":fn(),
-        "relativeTo":fn(),
-        "relativeToViewport":fn()
+        "disconnect": fn(),
+        "observe": fn(),
+        "relativeTo": fn(),
+        "relativeToViewport": fn()
       }
     }
   }
