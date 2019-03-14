@@ -144,9 +144,7 @@ function getInstance() {
     let success = params.success || fn();
     let fail = params.fail || fn();
 
-    params.success = function ({
-                                 index: tapIndex
-                               }) {
+    params.success = function ({index: tapIndex}) {
       if (tapIndex === -1) {
         fail({
           errMsg: 'showActionSheet:fail cancel'
@@ -275,11 +273,11 @@ function getInstance() {
     });
 
     let uploadTask = uploadFile(opt);
-    uploadTask['abort'] = fn();
-    uploadTask['offHeadersReceived'] = fn();
-    uploadTask['offProgressUpdate'] = fn();
-    uploadTask['onHeadersReceived'] = fn();
-    uploadTask['onProgressUpdate'] = fn();
+    uploadTask['abort'] =uploadTask['abort']|| fn();
+    uploadTask['offHeadersReceived'] =uploadTask['offHeadersReceived']|| fn();
+    uploadTask['offProgressUpdate'] =uploadTask['offProgressUpdate']|| fn();
+    uploadTask['onHeadersReceived'] =uploadTask['onHeadersReceived']|| fn();
+    uploadTask['onProgressUpdate'] =uploadTask['onProgressUpdate']|| fn();
 
     return uploadTask;
   };
@@ -429,20 +427,28 @@ function getInstance() {
 
   //////////视频
   wx.saveVideoToPhotosAlbum = wx.saveVideoToPhotosAlbum || fn();
-  wx.createVideoContext = wx.createVideoContext || function () {
-    return {
-      exitFullScreen: fn(),
-      hideStatusBar: fn(),
-      pause: fn(),
-      play: fn(),
-      playbackRate: fn(),
-      requestFullScreen: fn(),
-      seek: fn(),
-      sendDanmu: fn(),
-      showStatusBar: fn(),
-      stop: fn()
+
+  let videoContextApiList=['exitFullScreen','hideStatusBar','pause','play','playbackRate','requestFullScreen','seek','sendDanmu','showStatusBar','stop'];
+  if(wx['createVideoContext']){
+    let createVideoContext=wx.createVideoContext;
+    wx.createVideoContext=function () {
+      let videoContext=createVideoContext.apply(this,arguments);
+      videoContextApiList.map(function (item) {
+        createVideoContext[item]=createVideoContext[item]||fn()
+      });
+      return videoContext
     }
-  };
+  }
+  else{
+    wx['createVideoContext']=function () {
+      let obj={};
+      videoContextApiList.map(function (item) {
+        obj[item]=fn()
+      });
+      return obj;
+    }
+  }
+
   wx.chooseVideo = wx.chooseVideo || fn();
 
   ///////////音频
@@ -1008,7 +1014,7 @@ function getInstance() {
   if (wx['createIntersectionObserver']) {
     let createIntersectionObserver = wx.createIntersectionObserver;
     wx.createIntersectionObserver = function () {
-      let IntersectionObserver = createIntersectionObserver.apply(this,arguments);
+      let IntersectionObserver = createIntersectionObserver.apply(this, arguments);
       IntersectionObserver['disconnect'] = IntersectionObserver['disconnect'] || fn();
       IntersectionObserver['observe'] = IntersectionObserver['observe'] || fn();
       IntersectionObserver['relativeTo'] = IntersectionObserver['relativeTo'] || fn();
