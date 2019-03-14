@@ -383,45 +383,7 @@ function getInstance() {
   // wx.createIntersectionObserver = wx.createIntersectionObserver
   // wx.createSelectorQuery = wx.createSelectorQuery;
   // selectorQuery调用方法的返回对象nodesRef.fields方法参数中，微信中有context字段，百度中无此字段
-  const createSelectorQuery = wx.createSelectorQuery;
-  wx.createSelectorQuery = function(opt){
-    let createSelectorQuerys = createSelectorQuery.call(this,opt);
-
-    let exec = createSelectorQuerys.exec;
-    let select = createSelectorQuerys.select;
-    let selectAll = createSelectorQuerys.selectAll;
-    let selectViewport = createSelectorQuerys.selectViewport;
-    // 处理NodesRef对象字段context方法缺失问题
-    createSelectorQuerys.exec = function(fn){
-      let f = fn;
-      return exec.call(this,function(res){
-        f({context: res.context || (()=>{})})
-      })
-    };
-    createSelectorQuerys.select = function(){
-      return select.call(this,function(res){
-        if(res){
-          res.content = res.context || (()=>{})
-        }
-      })
-    };
-    createSelectorQuerys.selectAll = function(){
-      return selectAll.call(this,function(res){
-        if(res){
-          res.content = res.context || (()=>{})
-        }
-      })
-    };
-    createSelectorQuerys.selectViewport = function(){
-      return selectViewport.call(this,function(res){
-        if(res){
-          res.content = res.context || (()=>{})
-        }
-      })
-    };
-
-    return createSelectorQuerys;
-  };
+  // nodesRef对象百度中无content方法,使用时需注意
 
   wx.loadFontFace = wx.loadFontFace || ((opt)=>{}); // 字体
   wx.setTopBarText = wx.setTopBarText || ((opt)=>{});
@@ -529,29 +491,16 @@ function getInstance() {
   // iBeacon
   wx.stopBeaconDiscovery = wx.stopBeaconDiscovery || ((opt)=>{});
   wx.startBeaconDiscovery = wx.startBeaconDiscovery || ((opt)=>{});
-  const onBeaconUpdate = wx.onBeaconUpdate || ((opt)=>{});
-  wx.onBeaconUpdate = function(fn){
-    // 处理回调返回值缺失字段beacons
-    let f = fn;
-    return onBeaconUpdate.call(this,function(res){
-      f({beacons: res.beacons || []});
-    });
-  };
+  // wx.onBeaconUpdate = wx.onBeaconUpdate // 其返回值beacons即IBeaconInfo,在百度中不能进行操作,会报错
   wx.onBeaconServiceChange = wx.onBeaconServiceChange || ((opt)=>{});
   wx.getBeacons = wx.getBeacons || ((opt)=>{});
+
   // WI_FI
   wx.stopWifi = wx.stopWifi || ((opt)=>{});
   wx.startWifi = wx.startWifi || ((opt)=>{});
   wx.setWifiList = wx.setWifiList || ((opt)=>{});
   wx.onWifiConnected = wx.onWifiConnected || ((opt)=>{});
-  const onGetWifiList = wx.onGetWifiList || ((opt)=>{});
-  wx.onGetWifiList = function(fn){
-    //  处理回调返回值
-    let f = fn;
-    return onGetWifiList.call(this,function(res){
-      f({wifiList:res.wifiList || []});
-    });
-  };
+  wx.onGetWifiList = wx.onGetWifiList || ((opt)=>{}); // 其返回值wifiList即WifiInfo,在百度中不能进行操作,会报错
   wx.getWifiList = wx.getWifiList || ((opt)=>{});
   wx.getConnectedWifi = wx.getConnectedWifi || ((opt)=>{});
   wx.connectWifi = wx.connectWifi || ((opt)=>{});
@@ -651,7 +600,7 @@ function getInstance() {
         userInfo['province'] = '';
         userInfo['city'] = '';
         userInfo['language'] = '';
-        // userInfo['isAnonymous'] = false; // 表示用户信息是否为匿名，若是用户未登录或者拒绝授权为true，正常流程为false。
+        // userInfo['isAnonymous'] = false; // 此字段百度中有,表示用户信息是否为匿名，若是用户未登录或者拒绝授权为true，正常流程为false。
       }
       success(res);
     };
