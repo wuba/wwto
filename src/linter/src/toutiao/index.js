@@ -1,15 +1,23 @@
+const unsupportedFns = require('./unsupported-fns');
+const unsupportedTags = require('./unsupported-tags');
+
 const wxmlLineRules = [
   (source) => {
-    const rule = '不支持组件（如：`movable-area`、`movable-view`、`cover-view`、`cover-image`、`map`、`audio`、`canmera`等）';
-    const reg = /<(movable-\w+|map|audio|canmera|live-\w+)[^>]*>/;
-    const match = source.match(reg);
+    const rule = '组件头条小程序未实现';
 
-    if (match) {
-      return { source: match[0], rule };
+    for (let i = 0; i < unsupportedTags.length; i++) {
+      let fn = unsupportedTags[i];
+      let reg = new RegExp('<' + fn + '\\s+');
+      let match = source.match(reg);
+
+      if (match) {
+        return {source: source, rule: [fn, rule].join('')};
+      }
     }
 
     return null;
   },
+
   (source) => {
     const rule = '条件/循环渲染，不能进行函数调用运算（如：`wx:if="{{[\'aa\', \'bb\'].indexOf(\'aa\')===-1}}"`）';
     const reg = /wx:(for|if)=['"](.+)['"]/;
@@ -33,6 +41,22 @@ const wxssFileRules = [];
 
 const scriptLineRules = [
   (source) => {
+    const rule = '方法头条小程序未实现';
+
+    for (let i = 0; i < unsupportedFns.length; i++) {
+      let fn = unsupportedFns[i];
+      let reg = new RegExp('\\.' + fn + '\\(');
+      let match = source.match(reg);
+
+      if (match) {
+        return {source: source, rule: [fn, rule].join('')};
+      }
+    }
+
+    return null;
+  },
+
+  (source) => {
     const rule = '`websocket`不能使用全局事件（如：`wx.onSocketOpen`）';
     const reg = /wx\.onSocketOpen/;
     const match = source.match(reg);
@@ -43,28 +67,7 @@ const scriptLineRules = [
 
     return null;
   },
-  (source) => {
-    const rule = '录音功能没有全局方法（`wx.startRecord`, `wx.stopRecord`）';
-    const reg = /wx\.(startRecord|stopRecord)/;
-    const match = source.match(reg);
 
-    if (match) {
-      return { source: match[0], rule };
-    }
-
-    return null;
-  },
-  (source) => {
-    const rule = '不支持背景音频';
-    const reg = /wx\.\w+BackgroundAudio/;
-    const match = source.match(reg);
-
-    if (match) {
-      return { source: match[0], rule };
-    }
-
-    return null;
-  },
   (source) => {
     const rule = '不支持`selectComponent`，可以通过监听属性的`observer`来实现外部的调用';
     const reg = /\.selectComponent\(/;

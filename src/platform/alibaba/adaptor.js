@@ -387,6 +387,7 @@ function getInstance() {
 
     return previewImage.call(this, params);
   };
+
   const compressImage = wx.compressImage;
   wx.compressImage = function (opt) {
     let src = opt.src;
@@ -400,7 +401,9 @@ function getInstance() {
       }
     }))
   };
+
   wx.chooseMessageFile = wx.chooseMessageFile || fn();
+
   const chooseImage = wx.chooseImage;
   wx.chooseImage = function (opt) {
     let success = opt.success || fn();

@@ -1,6 +1,23 @@
 const utils = require('../utils/utils');
+const unsupportedFns = require('./unsupported-fns');
 
 const wxmlLineRules = [
+  (source) => {
+    const rule = '组件百度小程序未实现';
+
+    for (let i = 0; i < unsupportedTags.length; i++) {
+      let fn = unsupportedTags[i];
+      let reg = new RegExp('<' + fn + '\\s+');
+      let match = source.match(reg);
+
+      if (match) {
+        return {source: source, rule: [fn, rule].join('')};
+      }
+    }
+
+    return null;
+  },
+
   (source) => {
     const rule = 'bind*={{str}}  `str`只能是函数名（字符串），不能包含函数计算（如：`bindtap="flag ? \'fn1\' : \'fn2\'"`）';
     const regBind = /bind\w+\s*=\s*['"]([^'"]+)['"]/;
@@ -65,7 +82,23 @@ const wxssFileRules = [];
 
 const scriptFileRules = [];
 
-const scriptLineRules = [];
+const scriptLineRules = [
+  (source) => {
+    const rule = '方法百度小程序未实现';
+
+    for (let i = 0; i < unsupportedFns.length; i++) {
+      let fn = unsupportedFns[i];
+      let reg = new RegExp('\\.' + fn + '\\(');
+      let match = source.match(reg);
+
+      if (match) {
+        return {source: source, rule: [fn, rule].join('')};
+      }
+    }
+
+    return null;
+  }
+];
 
 module.exports = {
   wxmlFileRules,

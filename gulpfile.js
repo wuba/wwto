@@ -73,7 +73,7 @@ gulp.task('build', function(cb) {
 });
 
 gulp.task('lint', function(cb) {
-  return wto.lintAll({
+  return wto.lintAlibaba({
     source: './demo/miniprogram-demo'
   });
 });

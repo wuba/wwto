@@ -1,6 +1,24 @@
 const utils = require('../utils/utils');
+const unsupportedFns = require('./unsupported-fns');
+const unsupportedTags = require('./unsupported-tags');
 
-const wxmlLineRules = [];
+const wxmlLineRules = [
+  (source) => {
+    const rule = '组件阿里小程序未实现';
+
+    for (let i = 0; i < unsupportedTags.length; i++) {
+      let fn = unsupportedTags[i];
+      let reg = new RegExp('<' + fn + '\\s+');
+      let match = source.match(reg);
+
+      if (match) {
+        return {source: source, rule: [fn, rule].join('')};
+      }
+    }
+
+    return null;
+  }
+];
 
 const wxmlFileRules = [];
 
@@ -9,6 +27,21 @@ const wxssFileRules = [];
 const wxssLineRules = [];
 
 const scriptLineRules = [
+  (source) => {
+    const rule = '方法阿里小程序未实现';
+
+    for (let i = 0; i < unsupportedFns.length; i++) {
+      let fn = unsupportedFns[i];
+      let reg = new RegExp('\\.' + fn + '\\(');
+      let match = source.match(reg);
+
+      if (match) {
+        return {source: source, rule: [fn, rule].join('')};
+      }
+    }
+
+    return null;
+  }
 ];
 
 const scriptFileRules = [
@@ -27,6 +60,7 @@ const scriptFileRules = [
 
     return null;
   },
+
   (contents, path) => {
     const rule = 'triggerEvent(name, data)`，`name`目前只支持字符串直接量，不支持变量';
     const reg = /triggerEvent\(([^)]+)\)/;
