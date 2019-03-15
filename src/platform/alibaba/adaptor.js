@@ -531,7 +531,7 @@ function getInstance() {
       bgAudioStateApiList.map(function (item) {
         bgAudioStateApiList[item] = bgAudioStateApiList[item] || fn()
       });
-      return bgAudioStateApiList
+      return audioManager
     }
   }
   else {
@@ -540,6 +540,7 @@ function getInstance() {
       bgAudioStateApiList.map(function (item) {
         bgAudioStateApiList[item] = fn()
       })
+      return obj
     }
   }
 
