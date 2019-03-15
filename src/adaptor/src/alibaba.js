@@ -79,6 +79,19 @@ function getInstance() {
   wx.setEnableDebug = wx.setEnableDebug || fn();
   wx.getLogManager = wx.getLogManager || fn();
 
+  // 生命周期
+  wx.getLaunchOptionsSync = wx.getLaunchOptionsSync || fn()
+  wx.onPageNotFound = wx.onPageNotFound || fn()
+  wx.onError = wx.onError || fn()
+  wx.onAudioInterruptionBegin = wx.onAudioInterruptionBegin || fn()
+  wx.onAppShow = wx.onAppShow || fn()
+  wx.onAppHide = wx.onAppHide || fn()
+  wx.offPageNotFound = wx.offPageNotFound || fn()
+  wx.offError = wx.offError || fn()
+  wx.offAudioInterruptionBegin = wx.offAudioInterruptionBegin || fn()
+  wx.offAppShow = wx.offAppShow || fn()
+  wx.offAppHide = wx.offAppHide || fn()
+
   ///////////路由
   // wx.redirectTo=my.redirectTo
   // wx.navigateTo=my.navigateTo
@@ -558,14 +571,14 @@ function getInstance() {
   const getSavedFileList = wx.getSavedFileList;
   wx.getSavedFileList = function (opt) {
     let success = opt.success || fn();
-    return getSavedFileList.call(this, {}, opt, {
+    return getSavedFileList.call(this, Object.assign({}, opt, {
       success(res) {
         res.fileList.map((item) => {
           item['filePath'] = item.apFilePath
         });
         success(res)
       }
-    })
+    }))
   };
 
   const getSavedFileInfo = wx.getSavedFileInfo;
