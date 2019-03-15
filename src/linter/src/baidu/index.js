@@ -1,5 +1,6 @@
 const utils = require('../utils/utils');
 const unsupportedFns = require('./unsupported-fns');
+const unsupportedTags = require('./unsupported-tags');
 
 const wxmlLineRules = [
   (source) => {
