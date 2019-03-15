@@ -715,14 +715,15 @@ function getInstance() {
   };
 
   /////////加速器
-  // wx.stopAccelerometer=my.stopAccelerometer
   // wx.onAccelerometerChange=my.onAccelerometerChange
   wx.startAccelerometer = wx.startAccelerometer || fn();
+  wx.stopAccelerometer=wx.offAccelerometerChange;
 
 
   ////////罗盘
-  // stopCompass
   // wx.onCompassChange=my.onCompassChange
+  wx.stopCompass=wx.offCompassChange
+  wx.startCompass=wx.startCompass||fn()
 
   //缺少accuracy
   const onCompassChange = wx.onCompassChange;
@@ -741,7 +742,7 @@ function getInstance() {
   wx.onDeviceMotionChange = wx.onDeviceMotionChange || fn();
 
 
-  //////////设备方向
+  //////////陀螺仪
   // wx.onGyroscopeChange=my.onGyroscopeChange
   wx.stopGyroscope = wx.offGyroscopeChange;
   wx.startGyroscope = wx.startGyroscope || fn();
