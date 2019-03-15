@@ -4,10 +4,6 @@ function getInstance() {
   wx['has_ali_hook_flag'] = true;
 
   // wx.hideNavigationBarLoading = my.hideNavigationBarLoading
-  // wx.navigateToMiniProgram=my.navigateToMiniProgram
-  // Animation = Animation
-  // wx.navigateBackMiniProgram=my.navigateBackMiniProgram
-  // wx.navigateToMiniProgram=my.navigateToMiniProgram
 
 
   function paramsMap(options, maps = {}) {
@@ -273,11 +269,11 @@ function getInstance() {
     });
 
     let uploadTask = uploadFile(opt);
-    uploadTask['abort'] =uploadTask['abort']|| fn();
-    uploadTask['offHeadersReceived'] =uploadTask['offHeadersReceived']|| fn();
-    uploadTask['offProgressUpdate'] =uploadTask['offProgressUpdate']|| fn();
-    uploadTask['onHeadersReceived'] =uploadTask['onHeadersReceived']|| fn();
-    uploadTask['onProgressUpdate'] =uploadTask['onProgressUpdate']|| fn();
+    uploadTask['abort'] = uploadTask['abort'] || fn();
+    uploadTask['offHeadersReceived'] = uploadTask['offHeadersReceived'] || fn();
+    uploadTask['offProgressUpdate'] = uploadTask['offProgressUpdate'] || fn();
+    uploadTask['onHeadersReceived'] = uploadTask['onHeadersReceived'] || fn();
+    uploadTask['onProgressUpdate'] = uploadTask['onProgressUpdate'] || fn();
 
     return uploadTask;
   };
@@ -428,22 +424,22 @@ function getInstance() {
   //////////视频
   wx.saveVideoToPhotosAlbum = wx.saveVideoToPhotosAlbum || fn();
 
-  let videoContextApiList=['exitFullScreen','hideStatusBar','pause','play','playbackRate','requestFullScreen','seek','sendDanmu','showStatusBar','stop'];
-  if(wx['createVideoContext']){
-    let createVideoContext=wx.createVideoContext;
-    wx.createVideoContext=function () {
-      let videoContext=createVideoContext.apply(this,arguments);
+  let videoContextApiList = ['exitFullScreen', 'hideStatusBar', 'pause', 'play', 'playbackRate', 'requestFullScreen', 'seek', 'sendDanmu', 'showStatusBar', 'stop'];
+  if (wx['createVideoContext']) {
+    let createVideoContext = wx.createVideoContext;
+    wx.createVideoContext = function () {
+      let videoContext = createVideoContext.apply(this, arguments);
       videoContextApiList.map(function (item) {
-        createVideoContext[item]=createVideoContext[item]||fn()
+        createVideoContext[item] = createVideoContext[item] || fn()
       });
       return videoContext
     }
   }
-  else{
-    wx['createVideoContext']=function () {
-      let obj={};
+  else {
+    wx['createVideoContext'] = function () {
+      let obj = {};
       videoContextApiList.map(function (item) {
-        obj[item]=fn()
+        obj[item] = fn()
       });
       return obj;
     }
@@ -997,11 +993,9 @@ function getInstance() {
     }
   }
 
-
   /////////第三方平台
   wx.getExtConfigSync = wx.getExtConfigSync || fn();
   wx.getExtConfig = wx.getExtConfig || fn();
-
 
   ///////////WXML
   ///////////
@@ -1039,6 +1033,8 @@ function getInstance() {
   }
 
   //////////// 开放接口
+  // wx.navigateBackMiniProgram=my.navigateBackMiniProgram
+  // wx.navigateToMiniProgram=my.navigateToMiniProgram
   wx.login = (o) => {
     let bak = {
       success: o.success,
@@ -1052,6 +1048,8 @@ function getInstance() {
     };
     return wx.getAuthCode(o);
   };
+
+  wx.checkSession = wx.checkSession || fn();
 
   const getAuthUserInfo = wx.getAuthUserInfo;
   wx.getUserInfo = (o) => {
@@ -1099,21 +1097,42 @@ function getInstance() {
   wx.reportMonitor = wx.reportMonitor || fn();
   wx.reportAnalytics = wx.reportAnalytics || fn();
   wx.getWeRunData = wx.getWeRunData || fn();
-
+  wx.authorize = wx.authorize || fn();
   wx.startSoterAuthentication = wx.startSoterAuthentication || fn();
   wx.checkIsSupportSoterAuthentication = wx.checkIsSupportSoterAuthentication || fn();
   wx.checkIsSoterEnrolledInDevice = wx.checkIsSoterEnrolledInDevice || fn();
-
   wx.chooseInvoiceTitle = wx.chooseInvoiceTitle || fn();
   wx.chooseInvoice = wx.chooseInvoice || fn();
-
   wx.addCard = wx.addCard || fn();
   wx.openCard = wx.openCard || fn();
-
   wx.chooseAddress = wx.chooseAddress || fn();
 
-  // wx.openSetting=my.openSetting
-  // wx.getSetting=my.getSetting
+  // 设置
+  // authSetting 缺少address，invoiceTitle，invoice，werun
+  const getSetting = wx.getSetting;
+  wx.getSetting = function (opt) {
+    let success = opt.success || fn();
+    return getSetting(Object.assign({}, opt, {
+      success(res) {
+        res.authSetting["scope.userLocation"] = res.authSetting['scope.location'];
+        res.authSetting["scope.writePhotosAlbum"] = res.authSetting['scope.album'];
+        res.authSetting["scope.record"] = res.authSetting['scope.audioRecord'];
+        success(res)
+      }
+    }))
+  };
+  const openSetting = wx.openSetting;
+  wx.openSetting = function (opt) {
+    let success = opt.success || fn();
+    return openSetting(Object.assign({}, opt, {
+      success(res) {
+        res.authSetting["scope.userLocation"] = res.authSetting['scope.location'];
+        res.authSetting["scope.writePhotosAlbum"] = res.authSetting['scope.album'];
+        res.authSetting["scope.record"] = res.authSetting['scope.audioRecord'];
+        success(res)
+      }
+    }))
+  };
 
   return wx;
 }
