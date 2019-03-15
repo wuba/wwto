@@ -80,17 +80,17 @@ function getInstance() {
   wx.getLogManager = wx.getLogManager || fn();
 
   // 生命周期
-  wx.getLaunchOptionsSync = wx.getLaunchOptionsSync || fn()
-  wx.onPageNotFound = wx.onPageNotFound || fn()
-  wx.onError = wx.onError || fn()
-  wx.onAudioInterruptionBegin = wx.onAudioInterruptionBegin || fn()
-  wx.onAppShow = wx.onAppShow || fn()
-  wx.onAppHide = wx.onAppHide || fn()
-  wx.offPageNotFound = wx.offPageNotFound || fn()
-  wx.offError = wx.offError || fn()
-  wx.offAudioInterruptionBegin = wx.offAudioInterruptionBegin || fn()
-  wx.offAppShow = wx.offAppShow || fn()
-  wx.offAppHide = wx.offAppHide || fn()
+  wx.getLaunchOptionsSync = wx.getLaunchOptionsSync || fn();
+  wx.onPageNotFound = wx.onPageNotFound || fn();
+  wx.onError = wx.onError || fn();
+  wx.onAudioInterruptionBegin = wx.onAudioInterruptionBegin || fn();
+  wx.onAppShow = wx.onAppShow || fn();
+  wx.onAppHide = wx.onAppHide || fn();
+  wx.offPageNotFound = wx.offPageNotFound || fn();
+  wx.offError = wx.offError || fn();
+  wx.offAudioInterruptionBegin = wx.offAudioInterruptionBegin || fn();
+  wx.offAppShow = wx.offAppShow || fn();
+  wx.offAppHide = wx.offAppHide || fn();
 
   ///////////路由
   // wx.redirectTo=my.redirectTo
@@ -504,7 +504,7 @@ function getInstance() {
   // wx.hideShareMenu=my.hideShareMenu
   wx.updateShareMenu = wx.updateShareMenu || fn();
   wx.getShareInfo = wx.getShareInfo || fn();
-  wx.showShareMenu = wx.showShareMenu || fn()
+  wx.showShareMenu = wx.showShareMenu || fn();
 
   /////////画布
   const createCanvasContext = wx.createCanvasContext;
@@ -512,11 +512,11 @@ function getInstance() {
     let canvasContext = createCanvasContext.call(this, opt);
     canvasContext['arcTo'] = canvasContext['arcTo'] || (() => canvasContext);
     canvasContext['createPattern'] = canvasContext['createPattern'] || (() => canvasContext);
-    canvasContext['strokeText'] = canvasContext['strokeText'] || (() => canvasContext)
-    canvasContext['miterLimit'] = canvasContext.setMiterLimit
-    canvasContext['lineCap'] = canvasContext.setLineCap
-    canvasContext['lineDashOffset'] = canvasContext.setLineDash
-    canvasContext['lineJoin'] = canvasContext.setLineJoin
+    canvasContext['strokeText'] = canvasContext['strokeText'] || (() => canvasContext);
+    canvasContext['miterLimit'] = canvasContext.setMiterLimit;
+    canvasContext['lineCap'] = canvasContext.setLineCap;
+    canvasContext['lineDashOffset'] = canvasContext.setLineDash;
+    canvasContext['lineJoin'] = canvasContext.setLineJoin;
     return canvasContext
   };
 
@@ -730,16 +730,15 @@ function getInstance() {
   wx.startDeviceMotionListening = wx.startDeviceMotionListening || fn();
   wx.onDeviceMotionChange = wx.onDeviceMotionChange || fn();
 
-
-  //////////陀螺仪
+  // 陀螺仪
   // wx.onGyroscopeChange=my.onGyroscopeChange
   wx.stopGyroscope = wx.offGyroscopeChange;
   wx.startGyroscope = wx.startGyroscope || fn();
 
-  //性能
+  // 性能
   wx.onMemoryWarning = wx.onMemoryWarning || fn();
 
-  ////////扫码
+  // 扫码
   wx.scanCode = function (opt) {
     let typeMap = {
       'qrCode': "qr",
@@ -766,7 +765,7 @@ function getInstance() {
     }))
   };
 
-  //////////震动
+  // 震动
   // wx.vibrateShort=my.vibrateShort
   // wx.vibrateLong=my.vibrateLong
 
@@ -777,10 +776,9 @@ function getInstance() {
   wx.getExtConfigSync = wx.getExtConfigSync || fn();
   wx.getExtConfig = wx.getExtConfig || fn();
 
-  ///////////WXML
-  ///////////
-  //查找元素 返回的只有SelectorQuery对象
-  //SelectorQuery对象只有.exec .select .selectAll .selectViewport 方法
+  // WXML
+  // 查找元素 返回的只有SelectorQuery对象
+  // SelectorQuery对象只有.exec .select .selectAll .selectViewport 方法
   const createSelectorQuery = wx.createSelectorQuery;
   wx.createSelectorQuery = function () {
     let query = createSelectorQuery.apply(this, arguments);
