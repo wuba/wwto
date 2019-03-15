@@ -717,22 +717,11 @@ function getInstance() {
   /////////加速器
   // wx.onAccelerometerChange=my.onAccelerometerChange
   wx.startAccelerometer = wx.startAccelerometer || fn();
-  wx.stopAccelerometer=wx.offAccelerometerChange;
+  wx.stopAccelerometer = wx.offAccelerometerChange;
 
 
   ////////罗盘
-  // wx.onCompassChange=my.onCompassChange
-  wx.stopCompass=wx.offCompassChange
-  wx.startCompass=wx.startCompass||fn()
-
-  //缺少accuracy
-  const onCompassChange = wx.onCompassChange;
-  wx.onCompassChange = function (fn) {
-    let oldFn = fn;
-    return onCompassChange.call(this, function (res) {
-      oldFn({direction: res.direction})
-    })
-  }
+  // wx.onCompassChange=my.onCompassChange 缺少accuracy
   wx.stopCompass = wx.offCompassChange;
   wx.startCompass = wx.startCompass || fn();
 
