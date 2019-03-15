@@ -1397,7 +1397,7 @@ gulp-watch@^5.0.1:
     vinyl "^2.1.0"
     vinyl-file "^2.0.0"
 
-gulp@~3.9.1:
+gulp@^3.9.1, gulp@~3.9.1:
   version "3.9.1"
   resolved "http://ires.58corp.com/repository/58npm/gulp/-/gulp-3.9.1.tgz#571ce45928dd40af6514fc4011866016c13845b4"
   dependencies:
@@ -2029,6 +2029,45 @@ mkdirp@^0.5.0, mkdirp@^0.5.1:
   resolved "http://ires.58corp.com/repository/58npm/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
   dependencies:
     minimist "0.0.8"
+
+mp-adaptor@^1.0.0:
+  version "1.0.0"
+  resolved "http://ires.58corp.com/repository/58npm/mp-adaptor/-/mp-adaptor-1.0.0.tgz#551d5da15f2eb9d5b056d4210aef3fadfaaf9bb5"
+  dependencies:
+    gulp "^3.9.1"
+    gulp-uglify-es "^1.0.4"
+    gulp-watch "^5.0.1"
+    pump "^3.0.0"
+    uneval "^0.1.2"
+
+mp-converter@^1.0.1:
+  version "1.0.1"
+  resolved "http://ires.58corp.com/repository/58npm/mp-converter/-/mp-converter-1.0.1.tgz#66de8ad13100e57ba851a400a822045e34e506d2"
+  dependencies:
+    gulp "^3.9.1"
+    gulp-uglify-es "^1.0.4"
+    gulp-watch "^5.0.1"
+    pump "^3.0.0"
+    uneval "^0.1.2"
+
+mp-linter@1.0.2:
+  version "1.0.2"
+  resolved "http://ires.58corp.com/repository/58npm/mp-linter/-/mp-linter-1.0.2.tgz#073bd070103228ece805b070f50b3a95aac97556"
+  dependencies:
+    gulp "^3.9.1"
+    gulp-uglify-es "^1.0.4"
+    gulp-watch "^5.0.1"
+    mp-linter "^1.0.1"
+    pump "^3.0.0"
+
+mp-linter@^1.0.1:
+  version "1.0.1"
+  resolved "http://ires.58corp.com/repository/58npm/mp-linter/-/mp-linter-1.0.1.tgz#ad5673b4a24affa429b283df4eb5fead73a0baac"
+  dependencies:
+    gulp "^3.9.1"
+    gulp-uglify-es "^1.0.4"
+    gulp-watch "^5.0.1"
+    pump "^3.0.0"
 
 ms@2.0.0:
   version "2.0.0"

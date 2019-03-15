@@ -1,0 +1,19 @@
+{
+  "name": "mp-adaptor",
+  "version": "1.0.1",
+  "description": "static cross-platform mini-program converter",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "gulp build",
+    "prepare": "npm run build"
+  },
+  "author": "fulme@58.com",
+  "license": "MIT",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-uglify-es": "^1.0.4",
+    "gulp-watch": "^5.0.1",
+    "pump": "^3.0.0",
+    "uneval": "^0.1.2"
+  }
+}
