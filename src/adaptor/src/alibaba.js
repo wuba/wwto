@@ -767,7 +767,6 @@ function getInstance() {
   // wx.vibrateShort=my.vibrateShort
   // wx.vibrateLong=my.vibrateLong
 
-
   /////////worker
   wx.createWorker = wx.createWorker || fn();
 
