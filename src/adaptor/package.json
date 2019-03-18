@@ -3,7 +3,6 @@
   "version": "1.0.1",
   "description": "static cross-platform mini-program converter",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "gulp build",
     "prepare": "npm run build"
   },
