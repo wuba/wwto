@@ -1,1 +1,1 @@
-function calcLine(n,c){const e=n.indexOf(c);return n.substring(0,e).split("\n").length}module.exports={calcLine:calcLine};
+function calcLine(t,n){const e=t.indexOf(n);return t.substring(0,e).split("\n").length}function unsupportedAttrOrEvents(t,n,e,r,c){const s=[];return e.forEach(e=>{e.attrs.forEach(u=>{const o=new RegExp(`<${e}[^>]+${u}=`),i=t.match(o);if(i){const o=calcLine(t,i),p=`${r}小程序 ${e.tag} 组件不支持 ${u} ${c}`;s.push({path:n,line:o,source:i,rule:p})}})}),s}module.exports={calcLine:calcLine,unsupportedAttrOrEvents:unsupportedAttrOrEvents};

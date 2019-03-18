@@ -19,6 +19,18 @@ const wxmlLineRules = [
     }
 
     return null;
+  },
+  (source) => {
+    const attrs = ['contact', 'getUserInfo', 'getPhoneNumber', 'openSetting', 'feedback'].join('|');
+    const rule = `阿里小程 button 组件 不支持 ${attrs} 属性`;
+    const reg = new RegExp(`<button[^>]+open-type="${attrs}"`);
+    const match = source.match(reg);
+
+    if (match) {
+      return { source, rule };
+    }
+
+    return null;
   }
 ];
 
