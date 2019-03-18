@@ -89,7 +89,10 @@
     "page/API/pages/setting/setting",
     "page/API/pages/choose-invoice-title/choose-invoice-title",
     "page/API/pages/soter-authentication/soter-authentication",
-    "page/component/pages/map-styles/map-styles"
+    "page/component/pages/map-styles/map-styles",
+    "page/antTest/index/index",
+    "page/antTest/mine/mine",
+    "page/antTest/thi/thi"
   ],
   "window": {
     "navigationBarTextStyle": "black",

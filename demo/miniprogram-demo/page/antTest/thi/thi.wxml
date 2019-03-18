@@ -1,0 +1,3 @@
+<button bindtap="navigateBack">navigateBack</button>
+<button bindtap="saveFile">saveFile</button>
+<button bindtap="getSavedFileList">getSavedFileList</button>

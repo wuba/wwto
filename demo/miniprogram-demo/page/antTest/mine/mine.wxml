@@ -1,0 +1,43 @@
+<button bindtap="canIUse">canIUse</button>
+<button bindtap="getSystemInfoSync">getSystemInfoSync</button>
+<button bindtap="getSystemInfo">getSystemInfo</button>
+<button bindtap="getUpdateManager">getUpdateManager</button>
+<button bindtap="switchTap">switchTap</button>
+<button bindtap="reLaunch">reLaunch</button>
+<button bindtap="redirectTo">redirectTo</button>
+<button bindtap="navigateTo">navigateTo</button>
+<button bindtap="showToast">showToast</button>
+<button bindtap="showModal">showModal</button>
+<button bindtap="showLoading">showLoading</button>
+<button bindtap="hideLoading">hideLoading</button>
+<button bindtap="showActionSheet">showActionSheet</button>
+<button bindtap="showNavigationBarLoading">showNavigationBarLoading</button>
+<button bindtap="setNavigationBarTitle">setNavigationBarTitle</button>
+<button bindtap="setNavigationBarColor">setNavigationBarColor</button>
+<button bindtap="showTabBar">showTabBar</button>
+<button bindtap="hideTabBar">hideTabBar</button>
+<button bindtap="pageScrollTo">pageScrollTo</button>
+<button bindtap="downloadFile">downloadFile</button>
+<button bindtap="setStorageSync">setStorageSync</button>
+<button bindtap="setStorage">setStorage</button>
+<button bindtap="removeStorageSync">removeStorageSync</button>
+<button bindtap="removeStorage">removeStorage</button>
+<button bindtap="getStorageSync">getStorageSync</button>
+<button bindtap="getStorageInfoSync">getStorageInfoSync</button>
+<button bindtap="getStorageInfo">getStorageInfo</button>
+<button bindtap="getStorage">getStorage</button>
+<button bindtap="clearStorageSync">clearStorageSync</button>
+<button bindtap="clearStorage">clearStorage</button>
+<map
+  id="map"
+  show-location
+  style="width: 100%; height: 300px;"
+></map>
+<button bindtap="createMapContext">createMapContext</button>
+<button bindtap="getCenterLocation">getCenterLocation</button>
+<button bindtap="moveToLocation">moveToLocation</button>
+<image src="https://img.58cdn.com.cn/git/teg-app-fe/hash-ganghood/indexBg.png?a=111" bindtap="previewImage"></image>
+<button bindtap="getImageInfo">getImageInfo</button>
+<button bindtap="chooseImage">chooseImage</button>
+<button bindtap="getLocation">getLocation</button>
+<button bindtap="chooseLocation">chooseLocation</button>

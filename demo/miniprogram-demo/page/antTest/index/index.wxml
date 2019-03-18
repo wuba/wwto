@@ -1,0 +1,24 @@
+<button bindtap="createCanvasContext">createCanvasContext</button>
+<button bindtap="canvasToTempFilePath">canvasToTempFilePath</button>
+<button bindtap="canvasPutImageData">canvasPutImageData</button>
+<button bindtap="canvasGetImageData">canvasGetImageData</button>
+<button bindtap="arc">arc</button>
+<button bindtap="beginPath">beginPath</button>
+<button bindtap="bezierCurveTo">bezierCurveTo</button>
+<button bindtap="clearRect">clearRect</button>
+<button bindtap="clip">clip</button>
+<button bindtap="closePath">closePath</button>
+<button bindtap="createCircularGradient">createCircularGradient</button>
+<button bindtap="createLinearGradient">createLinearGradient</button>
+<button bindtap="quadraticCurveTo">quadraticCurveTo</button>
+<button bindtap="rotate">rotate</button>
+<button bindtap="scale">scale</button>
+<button bindtap="setGlobalAlpha">setGlobalAlpha</button>
+<button bindtap="setLineCap">setLineCap</button>
+<button bindtap="setLineDash">setLineDash</button>
+<button bindtap="setLineJoin">setLineJoin</button>
+<button bindtap="setMiterLimit">setMiterLimit</button>
+<button bindtap="setTextAlign">setTextAlign</button>
+<button bindtap="setTextBaseline">setTextBaseline</button>
+<button bindtap="translate">translate</button>
+<canvas style="width: 400px; height: 500px;" canvas-id="aaa"></canvas>
