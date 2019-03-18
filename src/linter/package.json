@@ -11,6 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "gulp": "^3.9.1",
+    "gulp-sequence": "^1.0.0",
     "gulp-uglify-es": "^1.0.4",
     "gulp-watch": "^5.0.1",
     "mp-linter": "^1.0.1",

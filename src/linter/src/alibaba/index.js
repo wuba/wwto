@@ -1,18 +1,19 @@
 const utils = require('../utils/utils');
 const unsupportedFns = require('./unsupported-fns');
 const unsupportedTags = require('./unsupported-tags');
+const unsupportedAttrs = require('./unsupported-attrs');
 
 const wxmlLineRules = [
   (source) => {
     const rule = '组件阿里小程序未实现';
 
     for (let i = 0; i < unsupportedTags.length; i++) {
-      let fn = unsupportedTags[i];
-      let reg = new RegExp('<' + fn + '\\s+');
-      let match = source.match(reg);
+      const fn = unsupportedTags[i];
+      const reg = new RegExp(`<${fn}\\s+`);
+      const match = source.match(reg);
 
       if (match) {
-        return {source: source, rule: [fn, rule].join('')};
+        return { source, rule: [fn, rule].join('') };
       }
     }
 
@@ -20,7 +21,28 @@ const wxmlLineRules = [
   }
 ];
 
-const wxmlFileRules = [];
+const wxmlFileRules = [
+  (contents, path) => {
+    const schemes = [];
+
+    unsupportedAttrs.forEach((com) => {
+      com.attrs.forEach((attr) => {
+        const reg = new RegExp(`<${com}[^>]+${attr}=`);
+        const match = contents.match(reg);
+
+        if (match) {
+          const line = utils.calcLine(contents, match);
+          const rule = `阿里小程序 ${com.tag} 组件不支持 ${attr} 属性`;
+          schemes.push({
+            path, line, source: match, rule
+          });
+        }
+      });
+    });
+
+    return schemes;
+  }
+];
 
 const wxssFileRules = [];
 
@@ -31,12 +53,12 @@ const scriptLineRules = [
     const rule = '方法阿里小程序未实现';
 
     for (let i = 0; i < unsupportedFns.length; i++) {
-      let fn = unsupportedFns[i];
-      let reg = new RegExp('\\.' + fn + '\\(');
-      let match = source.match(reg);
+      const fn = unsupportedFns[i];
+      const reg = new RegExp(`\\.${fn}\\(`);
+      const match = source.match(reg);
 
       if (match) {
-        return {source: source, rule: [fn, rule].join('')};
+        return { source, rule: [fn, rule].join('') };
       }
     }
 
@@ -53,8 +75,10 @@ const scriptFileRules = [
 
     if (match) {
       if (!regStr.test(match[1])) {
-        let line = utils.calcLine(contents, match[0]);
-        return { line, path, source: match[0], rule };
+        const line = utils.calcLine(contents, match[0]);
+        return {
+          line, path, source: match[0], rule
+        };
       }
     }
 
@@ -69,8 +93,10 @@ const scriptFileRules = [
 
     if (match) {
       if (!regStr.test(match[0])) {
-        let line = utils.calcLine(contents, match[0]);
-        return { line, path, source: match[0], rule };
+        const line = utils.calcLine(contents, match[0]);
+        return {
+          line, path, source: match[0], rule
+        };
       }
     }
 

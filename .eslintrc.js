@@ -36,6 +36,8 @@ module.exports = {
     'func-names': 'off',
     'no-nested-ternary': 'off',
     'no-unused-expressions': 'off',
-    'no-proto': 'off'
+    'no-proto': 'off',
+    'no-plusplus': 'off',
+    'eol-last': 'off'
   }
 };

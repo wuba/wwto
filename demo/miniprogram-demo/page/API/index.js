@@ -1,5 +1,4 @@
-var path = '../../util/util';
-var util = require(path);
+var util = require('../../util/util');
 
 Page({
   onShareAppMessage() {

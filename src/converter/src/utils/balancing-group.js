@@ -40,7 +40,7 @@
  }
  **/
 function extraBalancingGroup(row, tagOpen = '{', tagClose = '}') {
-  let start = row.indexOf(tagOpen);
+  const start = row.indexOf(tagOpen);
   let end = row.indexOf(tagClose);
   let result = '';
   let counter = 0;

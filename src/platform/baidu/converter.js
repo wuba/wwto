@@ -18,38 +18,32 @@ function convert(opt = {}) {
   gulp.src(assets).pipe(gulp.dest(dest));
 
   // 处理wxss
-  gulp.src(src + "/**/*.wxss")
-    .pipe(replace(/[\s\S]*/g, function(match) {
-      return converter.wxss(match);
-    }))
-    .pipe(rename(function(path) {
+  gulp.src(`${src}/**/*.wxss`)
+    .pipe(replace(/[\s\S]*/g, (match) => converter.wxss(match)))
+    .pipe(rename((path) => {
       path.extname = ".css";
     }))
     .pipe(gulp.dest(dest));
 
   // 处理wxml
-  gulp.src(src + "/**/*.wxml")
-    .pipe(replace(/[\s\S]*/g, function(match) {
-      return converter.wxml(match);
-    }))
-    .pipe(rename(function(path) {
+  gulp.src(`${src}/**/*.wxml`)
+    .pipe(replace(/[\s\S]*/g, (match) => converter.wxml(match)))
+    .pipe(rename((path) => {
       path.extname = ".swan";
     }))
     .pipe(gulp.dest(dest));
 
   // 处理json
-  const destConfigFile = dest + '/project.config.json';
-  const jsonSrc = [src + '/**/*.json'];
+  const destConfigFile = `${dest}/project.config.json`;
+  const jsonSrc = [`${src}/**/*.json`];
   fs.exists(destConfigFile, (exist) => {
     if (exist) {
       // 只复制一次
-      jsonSrc.push('!' + src + '/project.config.json');
+      jsonSrc.push(`!${src}/project.config.json`);
     }
 
     gulp.src(jsonSrc)
-      .pipe(replace(/[\s\S]*/g, function(match, p1) {
-        return converter.json(match);
-      }))
+      .pipe(replace(/[\s\S]*/g, (match, p1) => converter.json(match)))
       .pipe(gulp.dest(dest));
   });
 
@@ -58,19 +52,17 @@ function convert(opt = {}) {
     .pipe(rename('adaptor.js'))
     .pipe(gulp.dest(dest)).on('end', () => {
       logger.info('复制 adaptor.js 完成！');
-  });
+    });
 
   // 处理js
-  return gulp.src(src + "/**/*.js")
-    .pipe(replace(/[\s\S]*/g, function(match, p1) {
-      return converter.script(match);
-    }))
+  return gulp.src(`${src}/**/*.js`)
+    .pipe(replace(/[\s\S]*/g, (match) => converter.script(match)))
     .pipe(through2.obj(function(file, enc, cb) {
-      let path = file.history[0].replace(file.base, '');
-      let spec = path.split(sysPath.sep);
-      let adaptor = new Array(spec.length).fill('..').concat('adaptor.js').join('/');
-      let str = [
-        'import wx from \'' + adaptor.replace(/^\.\./, '.') + '\';',
+      const path = file.history[0].replace(file.base, '');
+      const spec = path.split(sysPath.sep);
+      const adaptor = new Array(spec.length).fill('..').concat('adaptor.js').join('/');
+      const str = [
+        `import wx from '${adaptor.replace(/^\.\./, '.')}';`,
         ab2str(file.contents)
       ].join('\r\n');
       file.contents = str2ab(str);

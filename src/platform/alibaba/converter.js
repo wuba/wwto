@@ -7,7 +7,7 @@ const md5Hex = require('md5-hex');
 const ab2str = require('arraybuffer-to-string');
 const str2ab = require('to-buffer');
 const through2 = require('through2');
-const DOMParser = require('xmldom').DOMParser;
+const { DOMParser } = require('xmldom');
 const config = require('../../config');
 const logger = require('../../utils/logger');
 const converter = require('mp-converter').alibaba;
@@ -22,23 +22,21 @@ function convert(opt = {}) {
   gulp.src(assets).pipe(gulp.dest(dest));
 
   // 处理样式文件
-  gulp.src(src + "/**/*.wxss")
-    .pipe(replace(/[\s\S]*/g, function(match, p1) {
-      return converter.wxss(match);
-    }))
+  gulp.src(`${src}/**/*.wxss`)
+    .pipe(replace(/[\s\S]*/g, (match) => converter.wxss(match)))
     .pipe(through2.obj(function(file, enc, cb) {
-      let path = file.history[0].replace(file.base, '').replace('.wxss', '');
-      let jsonPath = file.history[0].replace('.wxss', '.json');
+      const path = file.history[0].replace(file.base, '').replace('.wxss', '');
+      const jsonPath = file.history[0].replace('.wxss', '.json');
 
       // 对组件样式做scope处理
       fs.exists(jsonPath, (exist) => {
         if (exist) {
-          let json = fs.readFileSync(jsonPath);
-          let isCom = /"component":\s*true/.test(json);
+          const json = fs.readFileSync(jsonPath);
+          const isCom = /"component":\s*true/.test(json);
 
           if (isCom) {
-            let md5 = '_' + md5Hex(path);
-            let str = ab2str(file.contents);
+            const md5 = `_${md5Hex(path)}`;
+            const str = ab2str(file.contents);
             scopeStyle(md5, str).then((css) => {
               file.contents = str2ab(css);
               this.push(file);
@@ -54,32 +52,30 @@ function convert(opt = {}) {
         }
       });
     }))
-    .pipe(rename(function(file) {
+    .pipe(rename((file) => {
       file.extname = ".acss";
     }))
     .pipe(gulp.dest(dest));
 
   // 处理模板文件
-  gulp.src(src + "/**/*.wxml")
-    .pipe(replace(/[\s\S]*/g, function(match) {
-      return converter.wxml(match);
-    }))
+  gulp.src(`${src}/**/*.wxml`)
+    .pipe(replace(/[\s\S]*/g, (match) => converter.wxml(match)))
     .pipe(through2.obj(function(file, enc, cb) {
-      let path = file.history[0].replace(file.base, '').replace('.wxml', '');
-      let jsonPath = file.history[0].replace('.wxml', '.json');
+      const path = file.history[0].replace(file.base, '').replace('.wxml', '');
+      const jsonPath = file.history[0].replace('.wxml', '.json');
 
       // 对组件模板做scope处理
       fs.exists(jsonPath, (exist) => {
         if (exist) {
-          let json = fs.readFileSync(jsonPath);
-          let isCom = /"component":\s*true/.test(json);
+          const json = fs.readFileSync(jsonPath);
+          const isCom = /"component":\s*true/.test(json);
 
           if (isCom) {
-            let md5 = '_' + md5Hex(path);
-            let str = ab2str(file.contents);
-            let node = new DOMParser().parseFromString(str);
+            const md5 = `_${md5Hex(path)}`;
+            const str = ab2str(file.contents);
+            const node = new DOMParser().parseFromString(str);
             scopeTemplate(node, md5);
-            let nodeStr = node.toString()
+            const nodeStr = node.toString()
               .replace(/xmlns:a=""/g, '')
               .replace(/&amp;/g, '&')
               .replace(/&quot;/g, "'")
@@ -99,24 +95,22 @@ function convert(opt = {}) {
         }
       });
     }))
-    .pipe(rename(function(path) {
+    .pipe(rename((path) => {
       path.extname = ".axml";
     }))
     .pipe(gulp.dest(dest));
 
   // 处理配置文件
-  const destConfigFile = dest + '/project.config.json';
-  const jsonSrc = [src + "/**/*.json"];
+  const destConfigFile = `${dest}/project.config.json`;
+  const jsonSrc = [`${src}/**/*.json`];
   fs.exists(destConfigFile, (exist) => {
     if (exist) {
       // 只拷贝一次
-      jsonSrc.push('!' + src + '/project.config.json');
+      jsonSrc.push(`!${src}/project.config.json`);
     }
 
     gulp.src(jsonSrc)
-      .pipe(replace(/[\s\S]*/g, function(match) {
-        return converter.json(match);
-      }))
+      .pipe(replace(/[\s\S]*/g, (match) => converter.json(match)))
       .pipe(gulp.dest(dest));
   });
 
@@ -125,19 +119,17 @@ function convert(opt = {}) {
     .pipe(rename('adaptor.js'))
     .pipe(gulp.dest(dest)).on('end', () => {
       logger.info('复制 adaptor.js 完成！');
-  });
+    });
 
   // 处理脚本文件
-  gulp.src(src + "/**/*.js")
-    .pipe(replace(/[\s\S]*/g, function(match) {
-      return converter.script(match);
-    }))
+  gulp.src(`${src}/**/*.js`)
+    .pipe(replace(/[\s\S]*/g, (match) => converter.script(match)))
     .pipe(through2.obj(function(file, enc, cb) {
-      let path = file.history[0].replace(file.base, '');
-      let spec = path.split(sysPath.sep);
-      let adaptor = new Array(spec.length).fill('..').concat('adaptor.js').join('/');
-      let str = [
-        'import wx from \'' + adaptor.replace(/^\.\./, '.') + '\';',
+      const path = file.history[0].replace(file.base, '');
+      const spec = path.split(sysPath.sep);
+      const adaptor = new Array(spec.length).fill('..').concat('adaptor.js').join('/');
+      const str = [
+        `import wx from '${adaptor.replace(/^\.\./, '.')}';`,
         ab2str(file.contents)
       ].join('\r\n');
       file.contents = str2ab(str);

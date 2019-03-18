@@ -39,11 +39,11 @@ function info(str, cmd = '[INFO] ') {
  */
 function lintWarning(path, line, source, scheme) {
   warn([
-    '检测异常：' + path,
-    '\n> 第 ' + line + ' 行代码有兼容问题',
-    '\n> 建议修改此段代码 ' + source,
+    `检测异常：${path}`,
+    `\n> 第 ${line} 行代码有兼容问题`,
+    `\n> 建议修改此段代码 ${source}`,
     '\n> 修复提示：',
-    '\n> ' + scheme + '\n'
+    `\n> ${scheme}\n`
   ].join(''));
 }
 

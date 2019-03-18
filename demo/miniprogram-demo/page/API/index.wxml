@@ -31,20 +31,3 @@
     </view>
   </view>
 </view>
-
-<view>
-  <view bindtap="isSetTabBarPage ? 'enterSetTabBarPage' : 'enterSetTabBarPage'">bind*</view>
-
-  <view wx:for="{{isSetTabBarPage?[1]:[2,3]}}"></view>
-
-  <view wx:for="{{list}}" wx:if="{{item>0}}"></view>
-
-  <view
-    wx:for="{{list}}"
-    wx:if="{{item>0}}">
-  </view>
-
-  <movable-area></movable-area>
-
-  <view wx:if="{{['aa', 'bb'].indexOf('aa')===-1}}"></view>
-</view>

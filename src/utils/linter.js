@@ -11,7 +11,7 @@ function lintLine(source, lineRules) {
 
 function lintFile(file, fileRules) {
   const contents = ab2str(file.contents);
-  const path = file.path;
+  const { path } = file;
   let schemes = [];
 
   fileRules.forEach(fn => {
@@ -25,23 +25,25 @@ function lint(sourcePath = './src//**/*.wxml', fileRules, lineRules) {
   gulp.src(sourcePath)
     .pipe(through2.obj(function(file, encode, callback) {
       const stream = fs.createReadStream(file.path);
-      const reader = readLine.createInterface({input: stream});
+      const reader = readLine.createInterface({ input: stream });
       const schemes = lintFile(file, fileRules);
-      const path = file.path;
+      const { path } = file;
       let line = 0;
 
       reader.on('line', (source) => {
         line++;
         lintLine(source, lineRules).forEach((scheme) => {
-          schemes.push({path, line, source: scheme.source, rule: scheme.rule});
+          schemes.push({
+            path, line, source: scheme.source, rule: scheme.rule
+          });
         });
       });
 
       reader.on('close', () => {
         if (schemes.length === 0) {
-          logger.success('检测通过：' + file.path);
+          logger.success(`检测通过：${file.path}`);
         }
-        schemes.sort((a, b) => a.line > b.line ? 1 : -1);
+        schemes.sort((a, b) => (a.line > b.line ? 1 : -1));
         schemes.forEach(scheme => {
           logger.lintWarning(scheme.path, scheme.line, scheme.source, scheme.rule);
         });

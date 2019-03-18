@@ -18,29 +18,25 @@ function convert(opt = {}) {
   gulp.src(assets)
     .pipe(gulp.dest(dest));
 
-  gulp.src(src + "/**/*.wxss")
-    .pipe(replace(/[\s\S]*/g, function(match) {
-      return converter.wxss(match);
-    }))
-    .pipe(rename(function(path) {
+  gulp.src(`${src}/**/*.wxss`)
+    .pipe(replace(/[\s\S]*/g, (match) => converter.wxss(match)))
+    .pipe(rename((path) => {
       path.extname = ".ttss";
     }))
     .pipe(gulp.dest(dest));
 
-  gulp.src(src + "/**/*.wxml")
-    .pipe(replace(/[\s\S]*/g, function(match) {
-      return converter.wxml(match);
-    }))
-    .pipe(rename(function(path) {
+  gulp.src(`${src}/**/*.wxml`)
+    .pipe(replace(/[\s\S]*/g, (match) => converter.wxml(match)))
+    .pipe(rename((path) => {
       path.extname = ".ttml";
     }))
     .pipe(gulp.dest(dest));
 
-  const destConfigFile = dest + '/project.config.json';
-  const jsonSrc = [src + "/**/*.json"];
+  const destConfigFile = `${dest}/project.config.json`;
+  const jsonSrc = [`${src}/**/*.json`];
   fs.exists(destConfigFile, (exist) => {
     if (exist) {
-      jsonSrc.push('!' + src + '/project.config.json');
+      jsonSrc.push(`!${src}/project.config.json`);
     }
     gulp.src(jsonSrc).pipe(gulp.dest(dest));
   });
@@ -50,18 +46,16 @@ function convert(opt = {}) {
     .pipe(rename('adaptor.js'))
     .pipe(gulp.dest(dest)).on('end', () => {
       logger.info('复制 adaptor.js 完成！');
-  });
+    });
 
-  gulp.src(src + "/**/*.js")
-    .pipe(replace(/[\s\S]*/g, function(match) {
-      return converter.script(match);
-    }))
+  gulp.src(`${src}/**/*.js`)
+    .pipe(replace(/[\s\S]*/g, (match) => converter.script(match)))
     .pipe(through2.obj(function(file, enc, cb) {
-      let path = file.history[0].replace(file.base, '');
-      let spec = path.split(sysPath.sep);
-      let adaptor = new Array(spec.length).fill('..').concat('adaptor.js').join('/');
-      let str = [
-        'var wx = require(\'' + adaptor.replace(/^\.\./, '.') + '\').default;',
+      const path = file.history[0].replace(file.base, '');
+      const spec = path.split(sysPath.sep);
+      const adaptor = new Array(spec.length).fill('..').concat('adaptor.js').join('/');
+      const str = [
+        `var wx = require('${adaptor.replace(/^\.\./, '.')}').default;`,
         ab2str(file.contents)
       ].join('\r\n');
       file.contents = str2ab(str);
