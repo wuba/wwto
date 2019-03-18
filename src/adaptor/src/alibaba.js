@@ -110,7 +110,8 @@ function getInstance() {
     if (typeof opt['icon'] === 'undefined') {
       opt['icon'] = 'success'
     }
-    return showToast.call(this, paramsMap(opt, {
+    return showToast.call(this, paramsMap
+    (opt, {
       title: 'content',
       icon: 'type'
     }));
