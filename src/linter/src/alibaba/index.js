@@ -2,6 +2,7 @@ const utils = require('../utils/utils');
 const unsupportedFns = require('./unsupported-fns');
 const unsupportedTags = require('./unsupported-tags');
 const unsupportedAttrs = require('./unsupported-attrs');
+const unsupportedEvents = require('./unsupported-events');
 
 const wxmlLineRules = [
   (source) => {
@@ -22,26 +23,8 @@ const wxmlLineRules = [
 ];
 
 const wxmlFileRules = [
-  (contents, path) => {
-    const schemes = [];
-
-    unsupportedAttrs.forEach((com) => {
-      com.attrs.forEach((attr) => {
-        const reg = new RegExp(`<${com}[^>]+${attr}=`);
-        const match = contents.match(reg);
-
-        if (match) {
-          const line = utils.calcLine(contents, match);
-          const rule = `阿里小程序 ${com.tag} 组件不支持 ${attr} 属性`;
-          schemes.push({
-            path, line, source: match, rule
-          });
-        }
-      });
-    });
-
-    return schemes;
-  }
+  (contents, path) => utils.unsupportedAttrOrEvents(contents, path, unsupportedAttrs, '阿里', '属性'),
+  (contents, path) => utils.unsupportedAttrOrEvents(contents, path, unsupportedEvents, '阿里', '事件')
 ];
 
 const wxssFileRules = [];
