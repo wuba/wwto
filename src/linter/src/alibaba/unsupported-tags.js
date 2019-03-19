@@ -90,8 +90,15 @@ module.exports = [
   //  bindsuccess,bindfail,bindcomplete
 
   'functional-page-navigator',
-  'audio',
-  'video',
+  //  audio  支付宝无文档
+  //  缺失事件
+  //  bindended
+  //  对应事件
+  //  bindtimeupdate => onTimeUpdate
+  //  video 支付宝无文档
+  //  仅支持简单播放
+  //
+  //  camera 支付宝无文档
   'camera',
   'live-player',
   'live-pusher',
