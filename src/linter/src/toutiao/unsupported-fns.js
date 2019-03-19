@@ -1,4 +1,13 @@
 module.exports = [
+
+  // WebSocket
+  'sendSocketMessage',
+  'onSocketOpen',
+  'onSocketMessage',
+  'onSocketError',
+  'onSocketClose',
+  'closeSocket',
+
   // mDNS
   'stopLocalServiceDiscovery',
   'startLocalServiceDiscovery',
@@ -11,9 +20,22 @@ module.exports = [
   'offLocalServiceFound',
   'offLocalServiceDiscoveryStop',
 
+  'hideKeyboard',
+
   // 媒体
+
+  // 图片
   'chooseMessageFile',
   'compressImage',
+  'getImageInfo',
+
+  // 视频
+
+  'createVideoContext',
+
+  // 地图
+
+  'createMapContext',
 
   // 录音
   'stopRecord',
@@ -28,6 +50,7 @@ module.exports = [
   'onBackgroundAudioPlay',
   'onBackgroundAudioPause',
   'getBackgroundAudioPlayerState',
+  'getBackgroundAudioManager',
 
   // 音频
   'stopVoice',
@@ -35,17 +58,33 @@ module.exports = [
   'pauseVoice',
   'getAvailableAudioSources',
   'createAudioContext',
+  'setInnerAudioOption',
 
   // 实时音视频
   'createLivePusherContext',
+  'createLivePlayerContext',
+
+  // 相机
+
+  'createCameraContext',
 
   // 文件
   'getFileSystemManager',
+  'removeSavedFile',
+  'openDocument',
+  'getSavedFileList',
+  'getSavedFileInfo',
+  'getFileInfo',
 
   // 字体
   'loadFontFace',
 
+  // 自定义组件
+  'nextTick',
+
+  // 置顶
   'setTopBarText',
+  // 菜单
   'getMenuButtonBoundingClientRect',
 
   // 窗口
@@ -109,7 +148,6 @@ module.exports = [
   'onWifiConnected',
   'onGetWifiList',
   'getWifiList',
-  'getConnectedWifi',
   'connectWifi',
 
   // 小程序声明周期
@@ -119,16 +157,20 @@ module.exports = [
   'onPageNotFound',
   'onError',
   'onAudioInterruptionBegin',
+  'onAudioInterruptionEnd',
   'onAppShow',
   'onAppHide',
   'offPageNotFound',
   'offError',
   'offAudioInterruptionBegin',
+  'offAudioInterruptionEnd',
   'offAppShow',
   'offAppHide',
 
   // 发票
   'chooseInvoice',
+  'chooseInvoiceTitle',
+
 
   // 账号信息
   'getAccountInfoSync',
@@ -142,16 +184,94 @@ module.exports = [
   // 卡券
   'openCard',
   'addCard',
+
+  // 生物认证
   'startSoterAuthentication',
   'checkIsSupportSoterAuthentication',
   'checkIsSoterEnrolledInDevice',
 
   // 转发
   'updateShareMenu',
-  'showShareMenu',
-  'hideShareMenu',
   'getShareInfo',
 
   // worker
-  'createWorker'
+  'createWorker',
+
+  // 屏幕亮度
+
+  'setScreenBrightness',
+  'onUserCaptureScreen',
+  'getScreenBrightness',
+
+  // 联系人
+  'addPhoneContact',
+
+  // 性能
+  'onMemoryWarning',
+
+  // 画布
+  'canvasGetImageData',
+  'canvasPutImageData',
+
+  // 背景
+  'setBackgroundTextStyle',
+  'setBackgroundColor',
+
+  // Tab-Bar
+  'showTabBarRedDot',
+  'showTabBar',
+  'setTabBarStyle',
+  'setTabBarItem',
+  'setTabBarBadge',
+  'removeTabBarBadge',
+  'hideTabBarRedDot',
+  'hideTabBar',
+
+  // 第三方平台
+
+  'getExtConfig',
+  'getExtConfigSyn',
+
+  // 登录
+  'login',
+  'checkSession',
+
+  // 小程序跳转
+  'navigateToMiniProgram',
+  'navigateBackMiniProgram',
+
+  // 用户信息
+ 'getUserInfo',
+
+  // 数据分析
+  'reportAnalytics',
+
+  // 授权
+  'authorize',
+
+  // 设置
+
+  'openSetting',
+  'getSetting',
+
+  // 收货地址
+  'chooseAddres',
+
+  // 微信运动
+  'getWeRunData',
+
+  // 基础
+  'canIUse',
+
+  // 更新
+  'getUpdateManager',
+
+  // 调试
+  'setEnableDebug',
+  'getLogManager'
+
+
+
+
+
 ];

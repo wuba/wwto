@@ -17,15 +17,7 @@ function getInstance() {
 
   wx['has_toutiao_hook_flag'] = true;
 
-  wx.reportAnalytics = wx.reportAnalytics || emptyFn;
-  wx.hideShareMenu = wx.showShareMenu || ignoreFn;
-  wx.showShareMenu = wx.showShareMenu || ignoreFn;
   wx.hideKeyboard = wx.hideKeyboard || emptyFn;
-
-  wx.hideTabBar = wx.hideTabBar || ignoreFn;
-  wx.showTabBar = wx.showTabBar || ignoreFn;
-  wx.navigateToMiniProgram = wx.navigateToMiniProgram || ignoreFn;
-  wx.onUserCaptureScreen = wx.onUserCaptureScreen || emptyFn;
 
   const bakSetTimeout = setTimeout;
   setTimeout = function(fn, timeout) {
@@ -37,6 +29,16 @@ function getInstance() {
   setInterval = function(fn, timeout) {
     console.log('setInterval:', timeout, Math.floor(timeout || 0));
     return bakSetInterval.call(this, fn, Math.floor(timeout || 0));
+  };
+
+  const bakSetClearTimeout = clearTimeout;
+  clearTimeout = function(opt){
+    return bakSetClearTimeout.call(this, opt);
+  };
+
+  const bakSetClearInterval = clearInterval;
+  clearInterval = function(opt){
+    return bakSetClearInterval.call(this,opt);
   };
 
   //// 网络
@@ -700,19 +702,74 @@ function getInstance() {
   wx.navigateToMiniProgram = wx.navigateToMiniProgram || ignoreFn;
   wx.navigateBackMiniProgram = wx.navigateBackMiniProgram || ignoreFn;
 
+  // 账户信息
+  wx.getAccountInfoSync = wx.getAccountInfoSync || emptyFn;
 
+  // 用户信息
+  wx.getUserInfo = wx.getUserInfo || ignoreFn;
 
+  // 数据上报
+  wx.reportMonito = wx.reportMonito || emptyFn;
 
+  // 数据分析
+  wx.reportAnalytics = wx.reportAnalytics || emptyFn;
 
+  // 支付
+  wx.requestPayment = wx.requestPayment || emptyFn;
 
+  // 授权
+  wx.authorize = wx.authorize || ignoreFn;
 
+  // 设置
+  wx.openSetting = wx.openSetting || ignoreFn;
+  wx.getSetting = wx.getSetting || ignoreFn;
 
+  // 收货地址
+  wx.chooseAddres = wx.chooseAddres || ignoreFn;
 
+  // 卡劵
+  wx.openCard = wx.openCard || ignoreFn;
+  wx.addCard = wx.addCard || ignoreFn;
 
+  // 发票
+  wx.chooseInvoiceTitle = wx.chooseInvoiceTitle || ignoreFn;
+  wx.chooseInvoice = wx.chooseInvoice || ignoreFn;
 
+  // 生物认证
+  wx.startSoterAuthentication = wx.startSoterAuthentication || ignoreFn;
+  wx.checkIsSupportSoterAuthentication = wx.checkIsSupportSoterAuthentication || ignoreFn;
+  wx.checkIsSoterEnrolledInDevice = wx.checkIsSoterEnrolledInDevice || ignoreFn;
 
+  // 微信运动
+  wx.getWeRunData = wx.getWeRunData || ignoreFn;
 
+  // 基础
+  wx.canIUse = wx.canIUse || emptyFn;
 
+  // 更新
+  wx.getUpdateManager = wx.getUpdateManager || emptyFn;
+
+  // 小程序生命周期
+  wx.getLaunchOptionsSync = wx.getLaunchOptionsSync || emptyFn;
+
+  // 应用级事件
+
+  wx.onPageNotFound = wx.onPageNotFound || emptyFn;
+  wx.onError = wx.onError || emptyFn;
+  wx.onAudioInterruptionEnd = wx.onAudioInterruptionEnd || emptyFn;
+  wx.onAudioInterruptionBegin = wx.onAudioInterruptionBegin || emptyFn;
+  wx.onAppShow = wx.onAppShow || emptyFn;
+  wx.onAppHide = wx.onAppHide || emptyFn;
+  wx.offPageNotFound = wx.offPageNotFound || emptyFn;
+  wx.offError = wx.offError || emptyFn;
+  wx.offAudioInterruptionEnd = wx.offAudioInterruptionEnd || emptyFn;
+  wx.offAudioInterruptionBegin = wx.offAudioInterruptionBegin || emptyFn;
+  wx.offAppShow = wx.offAppShow || emptyFn;
+  wx.offAppHide = wx.offAppHide || emptyFn;
+
+  // 调试
+  wx.setEnableDebug = wx.setEnableDebug || ignoreFn;
+  wx.getLogManager = wx.getLogManager || emptyFn;
 
   return wx;
 }

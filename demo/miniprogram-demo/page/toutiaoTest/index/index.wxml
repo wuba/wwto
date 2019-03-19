@@ -1,0 +1,148 @@
+<!--index.wxml-->
+<view class="container">
+  <view bindtap="requestEvent" class="border">request</view>
+  <view bindtap="createAnimationEvent" class="border">createAnimation</view>
+  <view
+    animation="{{animationData}}"
+    style="background:red;height:50rpx;width:100rpx"
+  ></view>
+  <view bindtap="showShareMenuEvent" class="border">showShareMenu</view>
+  <view bindtap="uploadEvent" class="border">uploadFile</view>
+  <view bindtap="downloadfileEvent" class="border">downloadfile</view>
+  <view bindtap="connectSocketEvent" class="border">connectSocket</view>
+  <view class="title" class="border">mDNS(百度中无此api)</view>
+  <view bindtap="stopLocalServiceDiscoveryEvent" class="border">stopLocalServiceDiscovery</view>
+  <view bindtap="startLocalServiceDiscoveryEvent" class="border">startLocalServiceDiscovery</view>
+  <view bindtap="onLocalServiceResolveFailEvent" class="border">onLocalServiceResolveFail</view>
+  <view bindtap="onLocalServiceLostEvent" class="border">onLocalServiceLost</view>
+  <view bindtap="onLocalServiceFoundEvent" class="border">onLocalServiceFound</view>
+  <view bindtap="onLocalServiceDiscoveryStopEvent" class="border">onLocalServiceDiscoveryStop</view>
+  <view bindtap="offLocalServiceResolveFailEvent" class="border">offLocalServiceResolveFail</view>
+  <view bindtap="offLocalServiceLostEvent" class="border">offLocalServiceLost</view>
+  <view bindtap="offLocalServiceFoundEvent" class="border">offLocalServiceFound</view>
+  <view bindtap="offLocalServiceDiscoveryStopEvent" class="border">offLocalServiceDiscoveryStop</view>
+  <view class="title" class="border">媒体</view>
+  <view class="smallTitle" class="border">图片</view>
+  <view bindtap="chooseImageEvent" class="border">chooseImage</view>
+  <view bindtap="previewImageEvent" class="border">previewImage</view>
+  <view bindtap="getImageInfoEvent" class="border">getImageInfo</view>
+  <view bindtap="chooseMessageFileEvent" class="border">chooseMessageFile</view>
+  <view bindtap="compressImageEvent" class="border">compressImage</view>
+  <view class="smallTitle" class="border">录音管理</view>
+  <view bindtap="stopRecordEvent" class="border">stopRecord</view>
+  <view bindtap="startRecordEvent" class="border">startRecord</view>
+  <view bindtap="getRecorderManagerEvent" class="border">getRecorderManager</view>
+  <view class="smallTitle" class="border">背景音频</view>
+  <view bindtap="stopBackgroundAudioEvent" class="border">stopBackgroundAudio</view>
+  <view bindtap="seekBackgroundAudioEvent" class="border">seekBackgroundAudio</view>
+  <view bindtap="playBackgroundAudioEvent" class="border">playBackgroundAudio</view>
+  <view bindtap="pauseBackgroundAudioEvent" class="border">pauseBackgroundAudio</view>
+  <view bindtap="onBackgroundAudioStopEvent" class="border">onBackgroundAudioStop</view>
+  <view bindtap="onBackgroundAudioPlayEvent" class="border">onBackgroundAudioPlay</view>
+  <view bindtap="onBackgroundAudioPauseEvent" class="border">onBackgroundAudioPause</view>
+  <view bindtap="getBackgroundAudioPlayerStateEvent" class="border">getBackgroundAudioPlayerState</view>
+  <view bindtap="getBackgroundAudioManagerEvent" class="border">getBackgroundAudioManager</view>
+  <view class="smallTitle" class="border">音频</view>
+  <view bindtap="stopVoiceEvent" class="border">stopVoice</view>
+  <view bindtap="playVoiceEvent" class="border">playVoice</view>
+  <view bindtap="pauseVoiceEvent" class="border">pauseVoice</view>
+  <view bindtap="getAvailableAudioSourcesEvent" class="border">getAvailableAudioSources</view>
+  <view bindtap="createAudioContextEvent" class="border">createAudioContext</view>
+  <audio src="{{src}}" id="myAudio"></audio>
+  <button type="primary" bindtap="audioPlay">播放</button>
+  <button type="primary" bindtap="audioPause">暂停</button>
+  <button type="primary" bindtap="audio14">设置当前播放时间为14秒</button>
+  <button type="primary" bindtap="audioStart">回到开头</button>
+  <view bindtap="setInnerAudioOptionEvent" class="border">setInnerAudioOption</view>
+  <view bindtap="innerAudioContextEvent" class="border">innerAudioContext</view>
+  <view class="smallTitle" class="border">视频</view>
+  <view bindtap="chooseVideoEvent" class="border">chooseVideo</view>
+  <view bindtap="saveVideoToPhotosAlbumEvent" class="border">saveVideoToPhotosAlbum</view>
+  <view bindtap="createVideoContextEvent" class="border">createVideoContext</view>
+  <view class="section tc">
+    <video
+      id="myVideo"
+      src="http://127.0.0.1:8199/program/c4f04e4a6569ce0ab2e75ba2a1cfe93d/devices/baidu-0/tmp/1552553446735756.mp4"
+      enable-danmu
+      danmu-btn
+      controls
+    ></video>
+    <view class="btn-area">
+      <input bindblur="bindInputBlur" />
+      <button bindtap="bindSendDanmu">发送弹幕</button>
+    </view>
+  </view>
+  <view class="smallTitle" class="border">实时音视频</view>
+  <view bindtap="createLivePlayerContextEvent" class="border">createLivePlayerContext</view>
+  <live-player
+    id="plat"
+    src="http://tmp/wx728880895a6c0c3f.o6zAJs1cdOuPOWosYfVnGiC0ZKLM.Qjol4vZjmc7Ef225a50f6368b9bd9c74455ab2115649.mp4"
+    mode="RTC"
+    autoplay
+    bindstatechange="statechange"
+    binderror="error"
+    style="width: 300px; height: 225px;"
+  ></live-player>
+  <view bindtap="createLivePusherContextEvent" class="border">createLivePusherContext</view>
+  <view class="smallTitle" class="border">相机组件控制</view>
+  <view bindtap="createCameraContextEvent" class="border">createCameraContext</view>
+  <view class="smallTitle" class="border">文件</view>
+  <view bindtap="saveFileEvent" class="border">saveFile</view>
+  <view bindtap="getSavedFileListEvent" class="border">getSavedFileList</view>
+  <view bindtap="getSavedFileInfoEvent" class="border">getSavedFileInfo</view>
+  <view bindtap="removeSavedFileEvent" class="border">removeSavedFile</view>
+  <view bindtap="openDocumentEvent" class="border">openDocument</view>
+  <view bindtap="getFileInfoEvent" class="border">getFileInfo</view>
+  <view bindtap="getFileSystemManagerEvent" class="border">getFileSystemManager</view>
+  <view class="smallTitle" class="border">数据存储</view>
+  <view bindtap="setStorageEvent" class="border">setStorage</view>
+  <view bindtap="setStorageSyncEvent" class="border">setStorageSync</view>
+  <view bindtap="getStorageEvent" class="border">getStorage</view>
+  <view bindtap="getStorageSyncEvent" class="border">getStorageSync</view>
+  <view bindtap="getStorageInfoEvent" class="border">getStorageInfo</view>
+  <view bindtap="getStorageInfoSyncEvent" class="border">getStorageInfoSync</view>
+  <view bindtap="removeStorageEvent" class="border">removeStorage</view>
+  <view bindtap="removeStorageSyncEvent" class="border">removeStorageSync</view>
+  <view bindtap="clearStorageEvent" class="border">clearStorage</view>
+  <view bindtap="clearStorageSyncEvent" class="border">clearStorageSync</view>
+  <view class="smallTitle" class="border">位置</view>
+  <view bindtap="getLocationEvent" class="border">getLocation</view>
+  <view bindtap="chooseLocationEvent" class="border">chooseLocation</view>
+  <view bindtap="openLocationEvent" class="border">openLocation</view>
+  <view  class="border">
+    createMapContext
+    <map id="myMap"
+         style="width: 100%">
+    </map>
+    <button type="primary" bindtap="includePoints">缩放视野展示所有经纬度</button>
+  </view>
+  <view class="smallTitle" class="border">界面</view>
+  <canvas style="width: 300px; height: 200px;" canvas-id="firstCanvas" bindtap="canvasEvent"></canvas>
+  <view bindtap="canvasEvent">canvasGetImageData</view>
+  <view bindtap="canvasPutImageDataEvent">canvasPutImageData</view>
+  <view bindtap="canvasToTempFilePathEvent">canvasToTempFilePath</view>
+  <view bindtap="canvasContextEvent" class="border">canvasContext</view>
+  <view class="smallTitle" class="border">导航交互反馈</view>
+  <view bindtap="hideToastEvent" class="border">hideToast</view>
+  <view bindtap="hideLoadingEvent" class="border">hideLoading</view>
+  <view bindtap="showNavigationBarLoadingEvent" class="border">showNavigationBarLoading</view>
+  <view class="smallTitle" class="border">Animation动画</view>
+  <view bindtap="createAnimationEvent" class="border">createAnimation</view>
+  <view bindtap="stopPullDownRefreshEvent" class="border">stopPullDownRefresh</view>
+  <view bindtap="createSelectorQueryEvent" id="the-id" class="border">createSelectorQuery</view>
+  <view class="smallTitle" class="border">设备</view>
+  <view bindtap="getSystemInfoEvent"  class="border">getSystemInfo</view>
+  <view bindtap="getSystemInfoSyncEvent"  class="border">getSystemInfoSync</view>
+  <view bindtap="onCompassChangeEvent"  class="border">onCompassChange</view>
+  <view bindtap="scanCodeEvent"  class="border">scanCode</view>
+  <view class="smallTitle" class="border">陀螺仪</view>
+  <view bindtap="onGyroscopeChangeEvent"  class="border">onGyroscopeChange</view>
+  <view class="smallTitle" class="border">WI_FI</view>
+  <view bindtap="onGetWifiListEvent"  class="border">onGetWifiList</view>
+  <view class="smallTitle" class="border">iBeacon</view>
+  <view bindtap="onBeaconUpdateEvent"  class="border">onBeaconUpdate</view>
+  <view class="smallTitle" class="border">调试</view>
+  <view bindtap="setEnableDebugEvent"  class="border">setEnableDebug</view>
+  <view class="smallTitle" class="border">设置</view>
+  <view bindtap="getSettingEvent"  class="border">getSetting</view>
+</view>
