@@ -10,7 +10,6 @@ module.exports = [
 
   // swiper
 
-  // 缺失事件  百度中无bindtransition事件
   // 注意事项
   // 1.indicator-active-color属性默认值不同,微信中是#000000,百度中是#333
   // 2.previous-margin、next-margin属性在微信中接受px和rpx值,百度中是px
@@ -52,7 +51,6 @@ module.exports = [
   // 缺失属性  百度中无space属性
 
   // progress
-  // 缺失事件  百度中无bindactiveend事件
   // 注意事项
   // 1.该组件属性stroke-width的类型在微信小程序中是Number / String,默认值是6,单位是px（2.4.0起支持rpx）,在百度小程序中是Number,默认值是2,单位是px
 
@@ -62,7 +60,6 @@ module.exports = [
   //// 表单组件
   // button
 
-  // 缺失事件   百度中无bindcontact、binderror、bindlaunchapp事件
   // 注意事项
   // 1.该组件属性open-type 有效值：launchApp (打开APP，可以通过app-parameter属性设定向APP传的参数具体说明)、feedback (打开“意见反馈”页面，用户可提交反馈内容并上传日志，
   // 开发者可以登录小程序管理后台后进入左侧菜单“客服反馈”页面获取到反馈内容)在百度小程序中无这两个值
@@ -96,7 +93,6 @@ module.exports = [
   // 其中字段code是统计用区划代码，postcode是邮政编码百度中是event.detail = {value: value}
 
   // picker-view
-  // 缺失事件  百度中无bindpickstart	、bindpickend事件
   // 注意事项  微信中该组件滚动时在iOS自带振动反馈，可在系统设置 -> 声音与触感 -> 系统触感反馈中关闭
 
   // radio
@@ -139,14 +135,12 @@ module.exports = [
   // video
 
   // 差异属性  属性（当视频大小与 video 容器大小不一致时，视频的表现形式）微信中命名是object-fit,百度中命名是objectFit
-  // 缺失事件  百度中无bindplay、bindprogress事件
   // 注意事项
   // 1.微信中属性(在非全屏模式下，是否开启亮度与音量调节手势)有两种：page-gesture(废弃)和vslide-gesture,百度中是page-gesture
   // 2.该组件支持的视频格式和支持的视频编码格式在百度和微信中不一样
 
   //camera
 
-  // 缺失事件  百度中无bindscancode事件
   // 注意事项  组件Bug & Tip说明部分微信和百度中不完全一样
 
   // live-player
@@ -205,7 +199,6 @@ module.exports = [
 
   // web-view
 
-  // 缺失事件  百度中无bindload、binderror事件
   // 差异
   // 1.百度中相关接口2(web-view 网页中支持的接口有):设备(拨打电话)、开放接口(打开小程序)、开放接口(登录)、剪贴板、
   // 设备(获取网络类型)、媒体(预览图片)、开放接口(分享)、地理位置(使用内置地图打开地点)、地理位置(获取地理位置)、图像接口	(拍照或上传)

@@ -24,7 +24,6 @@ module.exports = [
 
   // swiper
 
-  // 缺失事件  头条中无bindtransition、bindanimationfinish事件
   // 注意事项  头条中Bug & Tip说明部分
 
   //// 基础内容
@@ -45,7 +44,6 @@ module.exports = [
 
   // progress
 
-  // 缺失事件  头条中无bindactiveend事件
   // 差异属性
   // 1.属性percent微信中类型是Float,默认值是空;头条中类型是Number,默认值是0;
   // 2.属性stroke-width微信中类型是Number / String,单位px（2.4.0起支持rpx）;头条中类型是是Number,单位没有说明
@@ -67,7 +65,6 @@ module.exports = [
   //  差异属性
   // 1.属性type取值范围微信和头条不太一样,微信中是primary(绿色)、default(白色)、warn(红色);头条中是primary(红色)、default(白色)
   // 2.属性open-type有效值头条中目前只支持share
-  //  缺失事件  头条中无bindgetuserinfo、bindcontact、bindgetphonenumber、bindlaunchapp、binderror、bindopensetting事件
   // 注意事项
   // 1.Bug & Tip说明部分微信和头条不完全一样
   // 2.头条中温馨提示：<button>组件的边框不是通过border属性来控制的，而是有个:after伪类，所以如果需要修改边框样式，请对改伪类元素设置样式
@@ -109,7 +106,6 @@ module.exports = [
 
   // picker-view
 
-  // 缺失事件  头条中无bindpickstart、bindpickend事件
   // 注意事项  微信中tip: 滚动时在iOS自带振动反馈，可在系统设置 -> 声音与触感 -> 系统触感反馈中关闭
 
   // radio
@@ -129,7 +125,6 @@ module.exports = [
   // textarea
 
   // 差异属性  属性cursor-spacing在微信中类型是Number / String	,单位px（2.4.0起支持rpx）;头条中类型是Number,单位未说明
-  // 缺失事件  头条中无bindlinechange事件
   // 差异事件
   // 1.事件bindblur微信中返回值是event.detail = {value, cursor};头条中返回值是event.detail={value};
   // 2.事件bindinput微信中返回值是event.detail = {value, cursor, keyCode}，keyCode 为键值，
@@ -143,7 +138,6 @@ module.exports = [
   // navigator
 
   // 差异属性  属性open-type取值范围头条中无reLaunch、exit
-  // 缺失事件  头条中无bindsuccess、bindfail	、bindcomplete
   // 注意事项  头条中对该组件使用限制、关于调试部分未作说明
 
   'functional-page-navigator', // 仅在插件中有效，用于跳转到插件功能页
@@ -161,14 +155,12 @@ module.exports = [
   // video
 
   // 差异属性  该组件头条中只有两个属性,分别是src和autoplay
-  // 缺失事件  头条中无bindplay、bindpause、bindended、bindtimeupdate、bindfullscreenchange、bindwaiting、binderror、bindprogress事件
   // 注意事项  头条中未对该组件支持的格式和支持的编码格式做具体说明
 
   //// 画布
 
   // canvas
 
-  // 缺失事件  头条中无bindtouchstart、bindtouchmove、bindtouchend、bindtouchcancel、bindlongtap、binderror事件
   // 注意事项  微信中
   // 1.说明同一页面中的 canvas-id 不可重复，如果使用一个已经出现过的 canvas-id，该 canvas 标签对应的画布将被隐藏并不再正常工作
   // 2.bug: 避免设置过大的宽高，在安卓下会有crash的问题
@@ -177,7 +169,6 @@ module.exports = [
 
   // web-view
 
-  // 缺失事件  头条中无bindload、binderror事件
   // 差异事件  事件bindmessage返回值头条未做说明
   // 注意事项
   // 1.该组件相关接口 1部分头条中无wx.miniProgram.postMessage

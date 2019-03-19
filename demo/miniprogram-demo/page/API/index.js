@@ -230,7 +230,7 @@ Page({
       console.log(res);
     });
 
-    wx.selectComponent();
+    // wx.selectComponent();
   },
   onHide() {
     this.leaveSetTabBarPage()
