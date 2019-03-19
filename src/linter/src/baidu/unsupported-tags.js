@@ -8,7 +8,7 @@ module.exports = [
   // scroll-view
 
   // 缺失属性  百度中无enable-back-to-top,aria-label属性
-  // 注意事项  微信小程序中属性upper-threshold、lower-threshold单位px，2.4.0起支持rpx,百度小程序中单位是px
+  // 注意事项  微信小程序中属性upper-threshold、lower-threshold、scroll-top、scroll-left单位px，2.4.0起支持rpx,百度小程序中单位是px
 
   // swiper
 
@@ -202,20 +202,37 @@ module.exports = [
   // 差异事件  事件bindcallouttap、bindcontroltap事件返回值在微信中会返回marker的id,bindcontroltap会返回control的id
 
   // 注意事项
-
   // 1.属性marker上的气泡label中的x,y在微信中已经废弃
   // 2.事件bindregionchange百度中没有具体说明事件的返回值
 
   //// 画布
 
   // canvas
-
+  // canvas = canvas
+  // 注意事项  百度和微信Bug & Tip说明部分不完全一样
+  // 1.微信：同一页面中的 canvas-id 不可重复，如果使用一个已经出现过的 canvas-id，该 canvas 标签对应的画布将被隐藏并不再正常工作;
+  // bug: 避免设置过大的宽高，在安卓下会有crash的问题
+  // 2.百度：基础库版本1.12.0开始支持事件捕获、冒泡;canvas 组件不能使用动画进行控制；
 
   //// 开放能力
 
   // open-data
 
+  //  缺失属性  百度中无open-gid、lang属性
+  //  差异属性  属性type有效值在百度和微信中不完全一样
+  // 1.百度中是userNickName(userNickName)、userAvatarUrl(用户图像)、userGender(用户性别)
+  // 2.微信中是groupName(拉取群名称)、userNickName(用户昵称)、userAvatarUrl(用户头像)、userGender(用户性别)、
+  //  userCity(用户所在城市)、userProvince(用户所在省份)、userCountry(用户所在国家)、userLanguage(用户的语言)
+  //  注意事项  微信中只有当前用户在此群内才能拉取到群名称、关于open-gid的获取请使用 wx.getShareInfo
+
   // web-view
+
+  // 缺失事件  百度中无bindload、binderror事件
+  // 差异
+  // 1.百度中相关接口2(web-view 网页中支持的接口有):设备(拨打电话)、开放接口(打开小程序)、开放接口(登录)、剪贴板、
+  // 设备(获取网络类型)、媒体(预览图片)、开放接口(分享)、地理位置(使用内置地图打开地点)、地理位置(获取地理位置)、图像接口	(拍照或上传)
+  // 2.微信中相关接口 2(<web-view>网页中仅支持以下JSSDK接口：)是判断客户端是否支持js、图像接口、音频接口、智能接口、设备信息、地理位置、摇一摇周边、
+  // 微信扫一扫、微信卡券、长按识别
 
   'ad', // 广告。目前暂时以邀请制开放申请，请留意后续模板消息的通知
   'official-account' // 用户扫码打开小程序时，开发者可在小程序内配置公众号关注组件，方便用户快捷关注公众号，可嵌套在原生组件内。
