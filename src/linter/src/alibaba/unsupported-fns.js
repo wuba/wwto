@@ -7,6 +7,23 @@ module.exports = [
   'removeTabBarBadge',
   'hideTabBarRedDot',
 
+  // 调试
+  'setEnableDebug',
+  'getLogManager',
+
+  //生命周期
+  'getLaunchOptionsSync',
+  'onPageNotFound',
+  'onError',
+  'onAudioInterruptionBegin',
+  'onAppShow',
+  'onAppHide',
+  'offPageNotFound',
+  'offError',
+  'offAudioInterruptionBegin',
+  'offAppShow',
+  'offAppHide',
+
   // 界面字体
   'loadFontFace',
 
@@ -40,8 +57,7 @@ module.exports = [
 
   // 视频
   'saveVideoToPhotosAlbum',
-
-  // 选择
+  'createVideoContext',
   'chooseVideo',
   'chooseMessageFile',
 
@@ -91,6 +107,10 @@ module.exports = [
   'getWifiList',
   'getConnectedWifi',
   'connectWifi',
+  //蓝牙
+  'onBLEConnectionStateChange',
+  'createBLEConnection',
+  'closeBLEConnection',
 
   // 电量
   'getBatteryInfoSync',
@@ -106,12 +126,16 @@ module.exports = [
 
   // 加速器
   'startAccelerometer',
+
+  //罗盘
   'startCompass',
 
   // 设备方向
   'stopDeviceMotionListening',
   'startDeviceMotionListening',
   'onDeviceMotionChange',
+
+  // 陀螺仪
   'startGyroscope',
 
   // 性能
