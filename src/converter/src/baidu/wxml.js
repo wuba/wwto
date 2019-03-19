@@ -58,7 +58,10 @@ function convert(wxmlContent) {
     .replace(/url\({{([^{}\s?=]+)}}/ig, (match, p1) => {
       // 背景url属性值必须带协议
       return match.replace(p1, `(${p1}[0]=='/' && ${p1}[1]=='/') ? 'https:' + ${p1}:${p1}`);
-    });
+    })
+    // video组件属性对齐
+    .replace(/<video[^>]+(object-fit)=/g, (match, p1) => match.replace(p1, 'objectFit'))
+    .replace(/<video[^>]+(vslide-gesture|page-gesture)=/g, (match, p1) => match.replace(p1, 'page-gesture'));
 }
 
 module.exports = convert;

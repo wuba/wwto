@@ -3,3 +3,7 @@
 <button open-type="getPhoneNumber"></button>
 <slider activeColor=""></slider>
 <slider block-color=""></slider>
+<video object-fit="ff"></video>
+
+<!--头条-->
+<progress activeColor="" backgroundColor></progress>
