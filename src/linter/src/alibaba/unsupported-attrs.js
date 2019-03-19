@@ -185,6 +185,34 @@ module.exports = [
     ]
   },
   {
+    tag: 'video',
+    attrs: [
+      'duration',
+      'danmu-list',
+      'danmu-btn',
+      'enable-danmu',
+      'loop',
+      'muted',
+      'initial-time',
+      'page-gesture',
+      'direction',
+      'show-progress',
+      'show-fullscreen-btn',
+      'show-center-play-btn',
+      'enable-progress-gesture',
+      'object-fit',
+      'poster',
+      'show-mute-btn',
+      'title',
+      'play-btn-position',
+      'enable-play-gesture',
+      'auto-pause-if-navigate',
+      'auto-pause-if-open-native',
+      'vslide-gesture',
+      'vslide-gesture-in-fullscreen'
+    ]
+  },
+  {
     tag: 'map',
     attrs: [
       'covers',
