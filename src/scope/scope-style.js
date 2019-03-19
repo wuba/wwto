@@ -12,8 +12,8 @@ module.exports = function (id, content) {
   // lazy 的 catch then 返回的是 Promise
   return postcss([scopeId(id)])
     .process(content)
-    .then(function (result) {
-      return result.css
+    .then((result) => {
+      return result.css;
     }).catch((e) => {
       return e;
     });

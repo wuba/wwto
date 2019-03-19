@@ -1,3 +1,4 @@
+/* eslint-disable no-eval */
 const uneval = require('uneval');
 const balancingGroup = require('../utils/balancing-group');
 const extractFn = require('../utils/extra-function');
@@ -9,57 +10,53 @@ function defQuery(match, opt) {
 function convert(jsText, isWpy) {
   return jsText
     .replace(/(require\(['"])(\w+)/g, '$1./$2')
-    .replace(/(from\s+['"])(\w+)/g, function(match, p1) {
+    .replace(/(from\s+['"])(\w+)/g, (match, p1) => {
       // 相对路径以./开头
-      return match.replace(p1, [p1, isWpy ? '' : './'].join(''))
+      return match.replace(p1, [p1, isWpy ? '' : './'].join(''));
     })
     .replace(/(let|var|const)\s+fetch\s*=/g, '$1 renameFetch = ')
     .replace(/(\s+)fetch([;\s]*)$/, '$1renameFetch$2')
-    .replace(/[^\w.'"]fetch[.(]/g, function(match) {
+    .replace(/[^\w.'"]fetch[.(]/g, (match) => {
       // fetch是全局只读对象，不允许赋值
       return match.replace(/fetch/g, 'renameFetch');
     })
-    .replace(/App\({[\s\S]+(onLaunch|onShow):\s*function\s*\(\s*(\w+)\s*\)[^{]*{/g, function(match, p1, p2) {
+    .replace(/App\({[\s\S]+(onLaunch|onShow):\s*function\s*\(\s*(\w+)\s*\)[^{]*{/g, (match, p1, p2) => {
       // query默认值{}
       return defQuery(match, p2);
     })
-    .replace(/App\({[\s\S]+(onLaunch|onShow)\s*\(\s*(\w+)\s*\)[^{]*{/g, function(match, p1, p2) {
+    .replace(/App\({[\s\S]+(onLaunch|onShow)\s*\(\s*(\w+)\s*\)[^{]*{/g, (match, p1, p2) => {
       // query默认值{}
       return defQuery(match, p2);
     })
-    .replace(/App\({[\s\S]+(onLaunch|onShow):\s*\(\s*(\w+)\s*\)\s*=>\s*[^{]*{/g, function(match, p1, p2) {
+    .replace(/App\({[\s\S]+(onLaunch|onShow):\s*\(\s*(\w+)\s*\)\s*=>\s*[^{]*{/g, (match, p1, p2) => {
       // query默认值{}
       return defQuery(match, p2);
     })
-    .replace(/Component\([\s\S]+properties:[^{]*{/, function(match) {
+    .replace(/Component\([\s\S]+properties:[^{]*{/, (match) => {
       return match.replace('properties', 'props');
     })
-    .replace(/\.properties/g, function(match) {
+    .replace(/\.properties/g, (match) => {
       return match.replace('.properties', '.props');
     })
-    .replace(/Component\([\s\S]+methods:[^{]*{/, function(match) {
+    .replace(/Component\([\s\S]+methods:[^{]*{/, (match) => {
       return [
         match,
         `triggerEvent: function(name, opt) {
-            this.props[\'on\' + name[0].toUpperCase() + name.substring(1)]({detail:opt});
+            this.props['on' + name[0].toUpperCase() + name.substring(1)]({detail:opt});
           },\r\n`
       ].join('');
     })
-    .replace(/[\s\S]+/, function(match) {
+    .replace(/[\s\S]+/, (match) => {
       // 只处理组件
       if (!match.match(/Component\(/)) return match;
 
       const lifeCircleNames = ['created', 'attached', 'ready', 'detached'];
-      let lifeCircleFns = '';
-      lifeCircleNames.map((name) => {
-        let {
-          args,
-          body
-        } = extractFn(match, name);
-        lifeCircleFns += name + '(' + args + ')' + (body || '{}') + ',\r\n';
-      });
+      const lifeCircleFns = lifeCircleNames.map((name) => {
+        const { args, body } = extractFn(match, name);
+        return `${name}(${args})${body || '{}'}`;
+      }).join(',\n');
 
-      let methods = (match.match(/methods:[\s\n]*{/) || {})[0];
+      const methods = (match.match(/methods:[\s\n]*{/) || {})[0];
       if (methods) {
         match = match.replace(methods, [methods, lifeCircleFns].join('\r\n'));
       } else {
@@ -68,31 +65,31 @@ function convert(jsText, isWpy) {
           'methods: {',
           lifeCircleFns,
           '}'
-        ].join('\r\n'))
+        ].join('\r\n'));
       }
 
-      let props = (match.match(/props:[\s\S]+/) || {})[0] || '';
+      const props = (match.match(/props:[\s\S]+/) || {})[0] || '';
       if (!props) {
         return match;
       }
 
-      let str = balancingGroup(props);
-      let obj = eval('(' + str + ')');
-      let has = Object.prototype.hasOwnProperty;
-      let propMap = {};
+      const str = balancingGroup(props);
+      const obj = eval(`(${str})`);
+      const has = Object.prototype.hasOwnProperty;
+      const propMap = {};
       let observerMap = null;
-      let events = match.match(/\.triggerEvent\(['"]\w+['"]/g) || [];
+      const events = match.match(/\.triggerEvent\(['"]\w+['"]/g) || [];
 
       for (let i = 0; i < events.length; i++) {
-        let event = events[i];
+        const event = events[i];
         let name = event.match(/\(['"](\w+)['"]/)[1];
-        name = 'on' + name[0].toUpperCase() + name.substring(1);
+        name = `on${name[0].toUpperCase()}${name.substring(1)}`;
         propMap[name] = () => {};
       }
 
-      for (let key in obj) {
+      Object.keys(obj).forEach((key) => {
         if (has.call(obj, key)) {
-          let item = obj[key];
+          const item = obj[key];
           propMap[key] = item.value;
 
           if (item.observer) {
@@ -102,14 +99,14 @@ function convert(jsText, isWpy) {
               observerMap[key] = item.observer;
             } else {
               observerMap[key] = eval(`() => {
-                  this["` + item.observer + `"].apply(this, arguments);
+                  this["${item.observer}"].apply(this, arguments);
                 }`);
             }
           }
         }
-      }
+      });
 
-      let didMount = `
+      const didMount = `
         didMount() {
           this.data = Object.assign({}, this.data, this.props);
           
@@ -118,12 +115,12 @@ function convert(jsText, isWpy) {
           this.ready && this.ready.apply(this, arguments);
         }`;
 
-      let didUnmount = `,
+      const didUnmount = `,
         didUnmount() {
           this.detached && this.detached.apply(this, arguments);
         }`;
 
-      let didUpdate = `,
+      const didUpdate = `,
           didUpdate: function(prevProps, preData) {
             for (let key in this.props) {
               if (_observers && typeof(_observers[key]) === 'function') {
@@ -139,15 +136,15 @@ function convert(jsText, isWpy) {
             }
           },`;
 
-      let lifeCircle = [didMount, didUnmount, didUpdate].join('');
-      let observers = (uneval(observerMap)).replace(/^\(|\)$/g, '').replace(/observer\(/g, 'function(').replace(/\(\) => {/g, 'function() {');
-      let newProps = props.replace(str, uneval(propMap).replace(/^\(|\)$/g, ''));
+      const lifeCircle = [didMount, didUnmount, didUpdate].join('');
+      const observers = (uneval(observerMap)).replace(/^\(|\)$/g, '').replace(/observer\(/g, 'function(').replace(/\(\) => {/g, 'function() {');
+      const newProps = props.replace(str, uneval(propMap).replace(/^\(|\)$/g, ''));
 
-      return match.replace('Component({', 'let _observers = ' + observers + ';\r\nComponent({\r\n' + lifeCircle).replace(props, newProps);
+      return match.replace('Component({', `let _observers = ${observers};\r\nComponent({\r\n${lifeCircle}`).replace(props, newProps);
     })
-    .replace(/methods:[\s\n]*{[\s\S]*/g, function(match) {
+    .replace(/methods:[\s\n]*{[\s\S]*/g, (match) => {
       // e.target.targetDataset -> e.target.dataset;
-      return match.replace(/on\w+\((\w+)\)\s*{/g, function(m, p1) {
+      return match.replace(/on\w+\((\w+)\)\s*{/g, (m, p1) => {
         return [
           m,
           `if (${p1} && ${p1}.target && ${p1}.target.targetDataset) {

@@ -1,7 +1,7 @@
 const postcss = require('postcss');
-const selectorParser =  require('postcss-selector-parser');
+const selectorParser = require('postcss-selector-parser');
 
-module.exports = postcss.plugin('add-id', function (id) {
+module.exports = postcss.plugin('add-id', (id) => {
   return function (root) {
     root.each(function rewriteSelector (node) {
       if (!node.selector) {
@@ -12,15 +12,17 @@ module.exports = postcss.plugin('add-id', function (id) {
         return;
       }
 
-      node.selector = selectorParser(function (selectors) {
-        selectors.each(function (selector) {
-          let node = null;
+      node.selector = selectorParser((selectors) => {
+        selectors.each((selector) => {
+          let target = null;
 
-          selector.each(function (n) {
-            if (n.type !== 'pseudo') node = n;
+          selector.each((n) => {
+            if (n.type !== 'pseudo') {
+              target = n;
+            }
           });
 
-          selector.insertAfter(node, selectorParser.className({
+          selector.insertAfter(target, selectorParser.className({
             value: id
           }));
         });

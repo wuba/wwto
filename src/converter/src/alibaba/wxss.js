@@ -1,6 +1,6 @@
 function convert(wxssText) {
   return wxssText
-    .replace(/\.wxss(["'])/g, function(match, p1) {
+    .replace(/\.wxss(["'])/g, (match, p1) => {
       return p1;
     });
 }

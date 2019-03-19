@@ -38,6 +38,7 @@ module.exports = {
     'no-unused-expressions': 'off',
     'no-proto': 'off',
     'no-plusplus': 'off',
-    'eol-last': 'off'
+    'eol-last': 'off',
+    'arrow-body-style': 'off'
   }
 };

@@ -24,8 +24,7 @@ function extractFn(source, name) {
     const matched = source.match(reg);
 
     if (matched) {
-      args = matched[1];
-      body = matched[0];
+      [args, body] = matched;
       break;
     }
   }
