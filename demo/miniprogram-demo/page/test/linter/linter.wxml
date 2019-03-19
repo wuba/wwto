@@ -7,3 +7,9 @@
 
 <!--头条-->
 <progress activeColor="" backgroundColor></progress>
+
+<!--BAIDU-->
+<scroll-view upper-threshold="22rpx"></scroll-view>
+<swiper ksks next-margin="22rpx"></swiper>
+<swiper previous-margin="22rpx"></swiper>
+<icon size="22rpx"></icon>

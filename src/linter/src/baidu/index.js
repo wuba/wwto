@@ -61,6 +61,42 @@ const wxmlLineRules = [
     }
 
     return null;
+  },
+
+  (source) => {
+    const rule = 'scroll-view组件upper-threshold、lower-threshold、scroll-top、scroll-left属性不支持rpx';
+    const reg = /<scroll-view[^>]*(upper-threshold|lower-threshold|scroll-top|scroll-left)=["']\d*rpx["']/;
+    const match = source.match(reg);
+
+    if (match) {
+      return { source, rule };
+    }
+
+    return null;
+  },
+
+  (source) => {
+    const rule = 'swiper组件previous-margin、next-margin属性不支持rpx';
+    const reg = /<swiper[^>]*(previous-margin|next-margin)=["']\d*rpx["']/;
+    const match = source.match(reg);
+
+    if (match) {
+      return { source, rule };
+    }
+
+    return null;
+  },
+
+  (source) => {
+    const rule = 'icon组件size属性不支持rpx';
+    const reg = /<icon[^>]*size=["']\d*rpx["']/;
+    const match = source.match(reg);
+
+    if (match) {
+      return { source, rule };
+    }
+
+    return null;
   }
 ];
 

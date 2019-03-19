@@ -1,3 +1,5 @@
+
+
 <button bindtap="createCanvasContext">createCanvasContext</button>
 <button bindtap="canvasToTempFilePath">canvasToTempFilePath</button>
 <button bindtap="canvasPutImageData">canvasPutImageData</button>
