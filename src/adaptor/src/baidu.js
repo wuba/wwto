@@ -6,7 +6,9 @@ function getInstance() {
 
   wx.has_baidu_hook_flag = true;
 
-  const { getStorageSync } = wx;
+  const {
+    getStorageSync
+  } = wx;
   wx.getStorageSync = (key) => {
     const val = getStorageSync(key);
     if (val === 'undefined') {
@@ -15,7 +17,9 @@ function getInstance() {
     return val;
   };
 
-  const { request } = wx;
+  const {
+    request
+  } = wx;
   wx.request = (opt) => {
     // 方法名必须大写
     if (opt.method) {
@@ -42,8 +46,10 @@ function getInstance() {
     return requestTask;
   };
 
-  const { createAnimation } = wx;
-  wx.createAnimation = function(...args) {
+  const {
+    createAnimation
+  } = wx;
+  wx.createAnimation = function (...args) {
     const animation = createAnimation.call(this, args);
 
     // 处理animation对象中无export、step字段
@@ -63,8 +69,10 @@ function getInstance() {
     }
 
     // 处理step方法链式调用BUG
-    const { step } = animation.__proto__;
-    animation.__proto__.step = function(...params) {
+    const {
+      step
+    } = animation.__proto__;
+    animation.__proto__.step = function (...params) {
       return step.apply(this, params) || this;
     };
 
@@ -85,8 +93,10 @@ function getInstance() {
   // };
 
   // 上传
-  const { uploadFile } = wx;
-  wx.uploadFile = function(opt){
+  const {
+    uploadFile
+  } = wx;
+  wx.uploadFile = function (opt) {
     const uploadTask = uploadFile.call(this, opt);
     // 处理uploadTask对象字段abort、offHeadersReceived缺失问题(百度文档写的有问题)
     const methods = ['abort', 'offHeadersReceived', 'offProgressUpdate', 'onHeadersReceived', 'onProgressUpdate'];
@@ -98,8 +108,10 @@ function getInstance() {
   };
 
   // wx.downloadFile; 此api参数中百度无filePath(指定文件下载后存储的路径)
-  const { downloadFile } = wx;
-  wx.downloadFile = function(opt){
+  const {
+    downloadFile
+  } = wx;
+  wx.downloadFile = function (opt) {
     const uploadTask = downloadFile.call(this, opt);
     // 处理downloadTask对象字段abort、offHeadersReceived缺失问题(百度文档写的有问题)
     const methods = ['abort', 'offHeadersReceived', 'offProgressUpdate', 'onHeadersReceived', 'onProgressUpdate'];
@@ -143,7 +155,7 @@ function getInstance() {
   wx.stopRecord = wx.stopRecord || emptyFn;
   wx.startRecord = wx.startRecord || emptyFn;
   const recorderManager = wx.getRecorderManager;
-  wx.getRecorderManager = function(opt){
+  wx.getRecorderManager = function (opt) {
     const recorderManagers = recorderManager.call(this, opt);
     const methods = ['onFrameRecorded', 'onInterruptionBegin', 'onInterruptionEnd', 'onResume'];
     // 处理recorderManager对象字段缺失问题
@@ -164,8 +176,10 @@ function getInstance() {
   wx.onBackgroundAudioPause = wx.onBackgroundAudioPause || emptyFn;
   wx.getBackgroundAudioPlayerState = wx.getBackgroundAudioPlayerState || emptyFn;
 
-  const { getBackgroundAudioManager } = wx;
-  wx.getBackgroundAudioManager = function(opt){
+  const {
+    getBackgroundAudioManager
+  } = wx;
+  wx.getBackgroundAudioManager = function (opt) {
     const getBackgroundAudioManagers = getBackgroundAudioManager.call(this, opt);
     // 处理getBackgroundAudioManagers对象字段(包括属性和方法)缺失问题
     getBackgroundAudioManagers.webUrl = '';
@@ -187,7 +201,7 @@ function getInstance() {
 
   // wx.setInnerAudioOption = wx.setInnerAudioOption // obeyMuteSwitch字段在baidu中缺失
   const innerAudioContext = wx.createInnerAudioContext;
-  wx.createInnerAudioContext = function(opt){
+  wx.createInnerAudioContext = function (opt) {
     const innerAudioContexts = innerAudioContext.call(this, opt);
     // 处理innerAudioContext对象字段(buffered)缺失问题
     innerAudioContext.buffered = 0;
@@ -199,7 +213,7 @@ function getInstance() {
   // camera字段在baidu中缺失,success回调返回值微信中有thumbTempFilePath、和errMsg字段(文档未说明)
   // wx.saveVideoToPhotosAlbum = wx.saveVideoToPhotosAlbum
   const videoContext = wx.createVideoContext;
-  wx.createVideoContext = function(opt){
+  wx.createVideoContext = function (opt) {
     const videoContexts = videoContext.call(this, opt);
     const methods = [
       'playbackRate',
@@ -233,10 +247,14 @@ function getInstance() {
   // cameraContext.startRecord 百度中无此timeoutCallback参数
 
   // 文件
-  const { saveFile } = wx;
-  wx.saveFile = function(opt){
-    const { success } = opt;
-    opt.success = function(res) {
+  const {
+    saveFile
+  } = wx;
+  wx.saveFile = function (opt) {
+    const {
+      success
+    } = opt;
+    opt.success = function (res) {
       if (res) {
         // 处理成功回调参数savedFilePath类型
         res.savedFilePath = res.savedFilePath.toString();
@@ -270,7 +288,9 @@ function getInstance() {
   // street、cityCode、city、province、streetNumber、district、country
 
   // wx.chooseLocation = wx.chooseLocation
-  const { openLocation } = wx;
+  const {
+    openLocation
+  } = wx;
   wx.openLocation = (opt) => {
     // 处理参数latitude、longitude、scale类型百度和小程序不一样问题
     opt.latitude = parseFloat(opt.latitude);
@@ -290,8 +310,10 @@ function getInstance() {
   // wx.canvasToTempFilePath = wx.canvasToTempFilePath
 
   // 画布
-  const { createCanvasContext } = wx;
-  wx.createCanvasContext = function(opt){
+  const {
+    createCanvasContext
+  } = wx;
+  wx.createCanvasContext = function (opt) {
     const canvasContext = createCanvasContext.call(this, opt);
     // 处理canvasContext对象某些字段更新
     canvasContext.lineCap = canvasContext.setLineCap;
@@ -484,13 +506,17 @@ function getInstance() {
   wx.onPageNotFound = wx.onPageNotFound || emptyFn;
   wx.onError = wx.onError || emptyFn;
   wx.onAudioInterruptionBegin = wx.onAudioInterruptionBegin || emptyFn;
+  wx.onAudioInterruptionEnd = onAudioInterruptionEnd || emptyFn;
   wx.onAppShow = wx.onAppShow || emptyFn;
   wx.onAppHide = wx.onAppHide || emptyFn;
   wx.offPageNotFound = wx.offPageNotFound || emptyFn;
   wx.offError = wx.offError || emptyFn;
   wx.offAudioInterruptionBegin = wx.offAudioInterruptionBegin || emptyFn;
+  wx.offAudioInterruptionEnd = wx.offAudioInterruptionEnd || emptyFn;
   wx.offAppShow = wx.offAppShow || emptyFn;
   wx.offAppHide = wx.offAppHide || emptyFn;
+
+
 
   // 第三方平台
   // wx.getExtConfig = wx.getExtConfig;
@@ -509,9 +535,9 @@ function getInstance() {
 
   // 小程序跳转
   wx.navigateToMiniProgram = wx.navigateToSmartProgram; // 打开另一个小程序 传的参数中百度无envVersion(要打开的小程序版本)
-  wx.navigateToSmartProgram = function(opt){
+  wx.navigateToSmartProgram = function (opt) {
     // 处理传入参数微信appid与百度appKey映射问题
-    if (opt){
+    if (opt) {
       opt.appKey = opt.appId;
     }
     return opt;
@@ -530,15 +556,19 @@ function getInstance() {
   // wx.openSetting = wx.openSetting
 
   // 用户信息
-  const { getUserInfo } = wx;
-  wx.getUserInfo = function(opt){
-    const { success } = opt;
-    opt.success = function(res){
+  const {
+    getUserInfo
+  } = wx;
+  wx.getUserInfo = function (opt) {
+    const {
+      success
+    } = opt;
+    opt.success = function (res) {
       // success回调中百度无rawData、signature字段
       // success回调字段userInfo对象中百度无country,province,language,city属性,
       // 多了isAnonymous属性(表示用户信息是否为匿名，若是用户未登录或者拒绝授权为true，正常流程为false。)
       // 处理success回调字段名称encryptedData不对应问题
-      if (res){
+      if (res) {
         res.encryptedData = res.data;
       }
       success(res);

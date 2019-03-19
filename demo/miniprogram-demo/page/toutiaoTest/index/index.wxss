@@ -1,0 +1,19 @@
+/**index.wxss**/
+.container{
+  text-align: center;
+}
+view{
+  margin-bottom: 15rpx;
+  line-height: 60rpx;
+}
+.border{
+  border-bottom: 1prx solid #ccc;
+}
+.title{
+  color:#000;
+  font-size: 35rpx;
+  font-weight: bold;
+}
+.smallTitle{
+  color:#888888;
+}

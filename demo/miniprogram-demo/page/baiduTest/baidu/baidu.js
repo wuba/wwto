@@ -1,4 +1,4 @@
-// pages/toutiao/toutiao.js
+// pages/toutiaoTest/toutiaoTest.js
 Page({
 
   /**

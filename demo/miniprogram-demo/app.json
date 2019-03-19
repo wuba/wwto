@@ -92,7 +92,11 @@
     "page/component/pages/map-styles/map-styles",
     "page/antTest/index/index",
     "page/antTest/mine/mine",
-    "page/antTest/thi/thi"
+    "page/antTest/thi/thi",
+    "page/baiduTest/baidu/baidu",
+    "page/baiduTest/index/index",
+    "page/toutiaoTest/index/index",
+    "page/toutiaoTest/toutiao/toutiao"
   ],
   "window": {
     "navigationBarTextStyle": "black",

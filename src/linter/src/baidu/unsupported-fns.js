@@ -126,6 +126,8 @@ module.exports = [
   'offAudioInterruptionBegin',
   'offAppShow',
   'offAppHide',
+  'offAudioInterruptionEnd',
+  'onAudioInterruptionEnd',
 
   // 发票
   'chooseInvoice',
