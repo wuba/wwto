@@ -1,8 +1,8 @@
 function convert(cssText) {
   return cssText
     .replace(/\.wxss(["'])/g, (match, p1) => {
-      // 移除后缀
-      return p1;
+      // 替换后缀
+      return '.css' + p1;
     })
     .replace(/url\(['"](\/\/[^'"]+)['"]\)/ig, (match) => {
       // 背景url属性值必须带协议

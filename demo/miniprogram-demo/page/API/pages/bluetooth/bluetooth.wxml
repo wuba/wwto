@@ -1,15 +1,6 @@
 <import src="../../../common/head.wxml" />
 <import src="../../../common/foot.wxml" />
 
-<wxs module="utils">
-module.exports.max = function(n1, n2) {
-  return Math.max(n1, n2)
-}
-module.exports.len = function(arr) {
-  arr = arr || []
-  return arr.length
-}
-</wxs>
 <view class="container">
   <template is="head" data="{{title: 'bluetooth'}}"/>
 
@@ -25,9 +16,9 @@ module.exports.len = function(arr) {
            class="device_item"
            hover-class="device_item_hover">
             <view style="font-size: 16px; color: #333;">{{item.name}}</view>
-            <view style="font-size: 10px">信号强度: {{item.RSSI}}dBm ({{utils.max(0, item.RSSI + 100)}}%)</view>
+            <view style="font-size: 10px">信号强度: {{item.RSSI}}dBm</view>
             <view style="font-size: 10px">UUID: {{item.deviceId}}</view>
-            <view style="font-size: 10px">Service数量: {{utils.len(item.advertisServiceUUIDs)}}</view>
+            <view style="font-size: 10px">Service数量: {{item.advertisServiceUUIDs}}</view>
           </view>
         </scroll-view>
       </view>
