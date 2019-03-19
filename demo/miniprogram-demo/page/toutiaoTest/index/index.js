@@ -61,25 +61,22 @@ Page({
   },
   // 请求
   requestEvent(){
-    const requestTask = wx.request({
-      url: 'http://www.baidu.com', // 仅为示例，并非真实的接口地址
+    let task = wx.request({
+      url: 'someurl',
       data: {
-        x: '',
-        y: ''
+        user_name: 'hello'
       },
       header: {
         'content-type': 'application/json'
       },
-      success(res) {
-        console.log(res)
+      success (res) {
+        console.log(`request调用成功 ${res}`);
+      },
+      fail (res) {
+        console.log(`request调用失败`);
       }
     });
-    console.log(requestTask,2);
-
-    requestTask.abort() // 取消请求任务
-    // console.log(requestTask.offHeadersReceived());
-    // console.log(requestTask.onHeadersReceived());
-
+    console.log(task);
   },
   // 动画
   createAnimationEvent(){
@@ -99,6 +96,16 @@ Page({
       }
     })
   },
+  hideShareMenuEvent(){
+    wx.hideShareMenu({
+      success (res) {
+        console.log(res);
+      },
+      fail (res) {
+        console.log(`hideShareMenu 调用失败`);
+      }
+    });
+  },
   uploadEvent(){
     wx.chooseImage({
       success(res) {
@@ -113,10 +120,9 @@ Page({
             // do something
           }
         });
+        console.log(task,12);
         task.onProgressUpdate((res) => {
-          this.setData({
-            progress: res.progress
-          });
+          console.log(res);
         });
         // task.abort();
       }
@@ -144,10 +150,21 @@ Page({
       }
     })
   },
+  saveImageToPhotosAlbumEvent(){
+    wx.saveImageToPhotosAlbum({
+      filePath: "http://127.0.0.1:20002/static/temImages/bb6f2a5709dd1b0c4c85c01096f457b1.jpg",
+      success (res) {
+        console.log(`saveImageToPhotosAlbum调用成功`,res);
+      },
+      fail (res) {
+        console.log(`saveImageToPhotosAlbum调用失败`,res);
+      }
+    });
+  },
   previewImageEvent(){
     wx.previewImage({
-      current: "http://127.0.0.1:8199/program/c4f04e4a6569ce0ab2e75ba2a1cfe93d/devices/baidu-0/tmp/1552551629018825.jpg", // 当前显示图片的http链接
-      urls: ["http://127.0.0.1:8199/program/c4f04e4a6569ce0ab2e75ba2a1cfe93d/devices/baidu-0/tmp/1552551629018825.jpg"] // 需要预览的图片http链接列表
+      current: "http://127.0.0.1:20002/static/temImages/bb6f2a5709dd1b0c4c85c01096f457b1.jpg", // 当前显示图片的http链接
+      urls: ["http://127.0.0.1:20002/static/temImages/bb6f2a5709dd1b0c4c85c01096f457b1.jpg"] // 需要预览的图片http链接列表
     })
   },
   getImageInfoEvent(){
@@ -318,11 +335,7 @@ Page({
   getBackgroundAudioPlayerStateEvent(){
     wx.getBackgroundAudioPlayerState({
       success(res) {
-        const status = res.status
-        const dataUrl = res.dataUrl
-        const currentPosition = res.currentPosition
-        const duration = res.duration
-        const downloadPercent = res.downloadPercent
+        console.log(res);
       }
     })
   },
@@ -361,21 +374,6 @@ Page({
         console.log('设置音频混播失败', err)
       }
     })
-  },
-  audioPlay() {
-    this.audioCtx.play()
-  },
-  audioPause() {
-    this.audioCtx.pause()
-  },
-  audio14() {
-    this.audioCtx.seek(14)
-  },
-  audioStart() {
-    this.audioCtx.seek(0)
-  },
-  createAudioContextEvent(){
-
   },
   innerAudioContextEvent(){
     let innerAudioContext = wx.createInnerAudioContext();
@@ -473,14 +471,7 @@ Page({
   removeSavedFileEvent(){
     wx.getSavedFileList({
       success: function (res) {
-        if (res.fileList.length > 0){
-          wx.removeSavedFile({
-            filePath: res.fileList[0].filePath,
-            success: function (res) {
-              console.log(res);
-            }
-          });
-        };
+        console.log(res);
       }
     });
   },
@@ -510,7 +501,6 @@ Page({
   getFileSystemManagerEvent(){
     let getFileSystemManager = wx.getFileSystemManager();
     console.log(getFileSystemManager);
-    console.log(getFileSystemManager.stat);
   },
   setStorageEvent(){
     wx.setStorage({
@@ -668,7 +658,7 @@ Page({
       height: 50,
       destWidth: 100,
       destHeight: 100,
-      canvasId: 'myCanvas',
+      canvasId: 'firstCanvas',
       success(res) {
         console.log(res)
       }
@@ -677,17 +667,6 @@ Page({
   canvasContextEvent(){
     const ctx = wx.createCanvasContext('firstCanvas');
     console.log(ctx);
-    ctx.setFillStyle('red')
-    // ctx.shadowOffsetX = 10;
-    // ctx.shadowOffsetY = 50;
-    // ctx.shadowBlur = 50;
-    // ctx.shadowColor = 'blue';
-    ctx.setShadow(10, 50, 50, 'blue');
-    ctx.fillRect(10, 10, 150, 75);
-    ctx.draw();
-    const metrics = ctx.measureText('Hello World')
-    console.log(metrics.width);
-    console.log(typeof metrics.width);
   },
   hideToastEvent(){
     wx.hideToast({
@@ -751,28 +730,18 @@ Page({
   createSelectorQueryEvent(){
     const query = wx.createSelectorQuery();
     query.select('#the-id').boundingClientRect();
-    console.log(query.select('#the-id').context(),13);
-    console.log(query.select('#the-id').fields({
-      dataset: true,
-      size: true,
-      scrollOffset: true,
-      properties: ['scrollX', 'scrollY'],
-      computedStyle: ['margin', 'backgroundColor'],
-      context: true})
-      ,12);
-    query.selectViewport().scrollOffset();
-    query.exec(function (res) {
-      res[0].top // #the-id节点的上边界坐标
-      res[1].scrollTop // 显示区域的竖直滚动位置
-    })
+    console.log(query);
+  },
+  createIntersectionObserverEvent(){
+    let createIntersectionObserver = wx.createIntersectionObserver(this, {
+      selectAll: true
+    });
+    console.log(createIntersectionObserver,12);
   },
   getSystemInfoEvent(){
     wx.getSystemInfo({
       success(res) {
         console.log(res);
-        console.log(res.benchmarkLevel);
-        console.log(res.albumAuthorized);
-        console.log(res.bluetoothEnabled);
       }
     });
   },
@@ -868,12 +837,235 @@ Page({
       }
     });
   },
+  createInnerAudioContextEvent(){
+    const innerAudioContext = wx.createInnerAudioContext()
+    innerAudioContext.autoplay = true
+    innerAudioContext.src = 'http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E061FF02C31F716658E5C81F5594D561F2E88B854E81CAAB7806D5E4F103E55D33C16F3FAC506D1AB172DE8600B37E43FAD&fromtag=46'
+    innerAudioContext.onPlay(() => {
+      console.log('开始播放')
+    })
+    innerAudioContext.onError((res) => {
+      console.log(res.errMsg)
+      console.log(res.errCode)
+    })
+  },
+  getNetworkTypeEvent(){
+    wx.getNetworkType({
+      success (res) {
+        console.log(res);
+      },
+      fail (res) {
+        console.log(res);
+      }
+    });
+  },
+  onNetworkStatusChangeEvent(){
+    wx.onNetworkStatusChange(function(res) {
+      console.log(res);
+    });
+  },
+  getConnectedWifiEvent(){
+    wx.getConnectedWifi({
+      success (res) {
+        console.log(res);
+      },
+      fail (res) {
+        console.log(`getConnectedWifi调用失败`);
+      }
+    });
+  },
+  startAccelerometerEvent(){
+    wx.startAccelerometer({
+      success (res) {
+        console.log(res);
+      },
+      fail (res) {
+        console.log(`startAccelerometer调用失败`);
+      }
+    });
+  },
+  stopAccelerometerEvent(){
+    wx.stopAccelerometer({
+      success (res) {
+        console.log(res);
+      },
+      fail (res) {
+        console.log(`stopAccelerometer调用失败`);
+      }
+    });
+  },
+  onAccelerometerChangeEvent(){
+    wx.onAccelerometerChange((res) => {
+      console.log(res);
+    });
+  },
+  startCompass(){
+    wx.startCompass({
+      success (res) {
+        console.log(res);
+      },
+      fail (res) {
+        console.log(`startCompass 调用失败`);
+      }
+    });
+  },
+  stopCompassEvent(){
+    wx.stopCompass({
+      success (res) {
+        console.log(res);
+      },
+      fail (res) {
+        console.log(`stopCompass 调用失败`);
+      }
+    });
+  },
+  makePhoneCallEvent(){
+    wx.makePhoneCall({
+      phoneNumber: '15829087682',
+      success (res) {
+        console.log(res);
+      },
+      fail (res) {
+        console.log(`makePhoneCall调用失败`);
+      }
+    });
+  },
+  getClipboardDataEvent(){
+    wx.getClipboardData({
+      success (res) {
+        console.log(res);
+      },
+      fail (res) {
+        console.log(`getClipboardData调用失败`);
+      }
+    });
+  },
+  setClipboardDataEvent(){
+    tt.setClipboardData({
+      data: 'hello kitty',
+      success (res) {
+        console.log(res);
+      },
+      fail (res) {
+        console.log(`setClipboardData调用失败`);
+      }
+    });
+  },
+  setKeepScreenOnEvent(){
+    wx.setKeepScreenOn({
+      keepScreenOn: false,
+      success (res) {
+        console.log(res);
+      },
+      fail (res) {
+        console.log(`setKeepScreenOn调用失败`);
+      }
+    });
+  },
+  vibrateShortEvent(){
+    wx.vibrateShort({
+      success (res) {
+        console.log(res);
+      },
+      fail (res) {
+        console.log(`vibrateShort调用失败`);
+      }
+    });
+  },
+  vibrateLongEvent(){
+    wx.vibrateLong({
+      success (res) {
+        console.log(res);
+      },
+      fail (res) {
+        console.log(`vibrateLong调用失败`);
+      }
+    });
+  },
+  showToastEvent(){
+    wx.showToast({
+      title: '添加购物车成功',
+      duration: 2000,
+      success (res) {
+        console.log(res);
+      },
+      fail (res) {
+        console.log(`showToast调用失败`);
+      }
+    });
+  },
+  showModalEvent(){
+    wx.showModal({
+      title: '请求获得定位权限',
+      content: '获得你的地理位置能够更好的为你推荐本地信息',
+      success (res) {
+        console.log(res);
+      },
+      fail (res) {
+        console.log(`showModal调用失败`);
+      }
+    });
+  },
+  showLoadingEvent(){
+    wx.showLoading({
+      title: '请求中，请稍后...',
+      success (res) {
+        console.log(res);
+      },
+      fail (res) {
+        console.log(`showLoading调用失败`);
+      }
+    });
+  },
+  showActionSheetEvent(){
+    const itemList = ['加精', '置顶', '删除', '封禁作者'];
+    wx.showActionSheet({
+      itemList,
+      success (res) {
+        console.log(res);
+      },
+      fail (res) {
+        console.log(`showActionSheet调用失败`);
+      }
+    });
+  },
+  setNavigationBarTitleEvent(){
+    wx.setNavigationBarTitle({
+      title: '新的标题',
+      success (res) {
+        console.log(res);
+      },
+      fail (res) {
+        console.log(`setNavigationBarTitle调用失败`);
+      }
+    });
+  },
+  pageScrollToEvent(){
+    tt.pageScrollTo({
+      scrollTop: 200,
+      duration: 1000,
+      success (res) {
+        console.log(res);
+      },
+      fail (res) {
+        console.log(`pageScrollTo调用失败`);
+      }
+    });
+  },
+  canvasGetImageDataEvent(){
+    wx.canvasGetImageData({
+      canvasId: 'firstCanvas',
+      x: 0,
+      y: 0,
+      width: 100,
+      height: 100,
+      success(res) {
+        console.log(res);
+      }
+    })
+  },
   onReady() {
     this.mapContext = wx.createMapContext('myMap');
-    // 使用 wx.createAudioContext 获取 audio 上下文 context
-    this.audioCtx = wx.createAudioContext('myAudio')
-    this.audioCtx.setSrc('http://ws.stream.qqmusic.qq.com/M500001VfvsJ21xFqb.mp3?guid=ffffffff82def4af4b12b3cd9337d5e7&uin=346897220&vkey=6292F51E1E384E06DCBDC9AB7C49FD713D632D313AC4858BACB8DDD29067D3C601481D36E62053BF8DFEAF74C0A5CCFADD6471160CAF3E6A&fromtag=46')
-    this.audioCtx.play()
     this.videoContext = wx.createVideoContext('myVideo')
     console.log(this.videoContext, 'wx.createVideoContext');
   },

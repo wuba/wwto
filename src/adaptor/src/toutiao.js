@@ -61,10 +61,12 @@ function getInstance() {
       opt.responseType = 'json';
     }
 
-    // 处理requestTask对象字段(onHeadersReceived、offHeadersReceived)缺失
-    let requestTask = request.call(this,opt) ? request.call(this,opt):{};
-    requestTask["offHeadersReceived"] = (()=>{});
-    requestTask["onHeadersReceived"] = (()=>{});
+    // 处理requestTask对象字段(onHeadersReceived、offHeadersReceived、abort)缺失
+    const requestTask = request.call(this,opt);
+    const methods = ['onHeadersReceived', 'offHeadersReceived', 'abort'];
+    methods.forEach((method) => {
+      requestTask[method] = requestTask[method] || emptyFn;
+    });
     return requestTask;
   };
 
@@ -72,30 +74,31 @@ function getInstance() {
   // 注意事项
   // 1.头条文档中该api没有指明success、fail、complete,但是示例中有这三个参数
 
-  const uploadFile = wx.uploadFile;
-  wx.uploadFile = function(opt){
-    let uploadTasks = uploadFile.call(this,opt);
+  const {uploadFile} = wx;
+  wx.uploadFile = function (opt) {
+    const uploadTask = uploadFile.call(this, opt);
     // 处理uploadTask对象字段(offHeadersReceived、offProgressUpdate、onHeadersReceived)缺失问题
-    uploadTasks["offHeadersReceived"] = (()=>{});
-    uploadTasks["offProgressUpdate"] = (()=>{});
-    uploadTasks["onHeadersReceived"] = (()=>{});
+    const methods = ['abort', 'offHeadersReceived', 'offProgressUpdate', 'onHeadersReceived', 'onProgressUpdate'];
+    methods.forEach((method) => {
+      uploadTask[method] = uploadTask[method] || emptyFn;
+    });
 
-    return uploadTasks;
+    return uploadTask;
   };
 
   // downloadFile
   // 注意事项
   // 1.头条文档中该api没有指明filePath、success、fail、complete(但是示例中有后面这三个参数)
 
-  const downloadFile = wx.downloadFile;
-  wx.downloadFile = function(opt){
-    let downloadTasks = downloadFile.call(this,opt);
+  const {downloadFile} = wx;
+  wx.downloadFile = function (opt) {
+    const uploadTask = downloadFile.call(this, opt);
     // 处理downloadTask对象字段(offHeadersReceived、offProgressUpdate、onHeadersReceived)缺失问题
-    downloadTasks["offHeadersReceived"] = (()=>{});
-    downloadTasks["offProgressUpdate"] = (()=>{});
-    downloadTasks["onHeadersReceived"] = (()=>{});
-
-    return downloadTasks;
+    const methods = ['abort', 'offHeadersReceived', 'offProgressUpdate', 'onHeadersReceived', 'onProgressUpdate'];
+    methods.forEach((method) => {
+      uploadTask[method] = uploadTask[method] || emptyFn;
+    });
+    return uploadTask;
   };
 
   // WebSocket
@@ -131,8 +134,8 @@ function getInstance() {
   // 图片
   // chooseImage(从本地相册选择图片或使用相机拍照)
   // 注意事项
-  // 1.头条文档中该api没有指明参数sizeType、success、fail、complete(但是示例中有后面三个参数)
-  // 2.头条文档中未对success回调返回值res.tempFiles 的结构做具体说明
+  // 1.头条文档中该api没有指明参数sizeType、success、fail、complete(示例中有后面三个参数)
+  // 2.头条文档中未对success回调返回值res.tempFiles的结构做具体说明(demo中校验res.tempFiles的结构包括path和size)
   // 3.头条中iOS 暂不支持同时从album和camera中选择，只能二者其一，当都传时使用album;暂不支持sizeType参数
 
   // wx.chooseImage = wx.chooseImage
@@ -163,11 +166,12 @@ function getInstance() {
 
   const recorderManager = wx.getRecorderManager;
   wx.getRecorderManager = function(opt){
-    let recorderManagers = recorderManager.call(this,opt);
+    const recorderManagers = recorderManager.call(this,opt);
     // 处理recorderManager对象字段(onResume、onInterruptionBegin、onInterruptionEnd)缺失问题
-    recorderManagers["onInterruptionBegin"] = (()=>{});
-    recorderManagers["onInterruptionEnd"] = (()=>{});
-    recorderManagers["onResume"] = (()=>{});
+    const methods = ['onInterruptionBegin', 'onInterruptionEnd', 'onResume'];
+    methods.forEach((method) => {
+      recorderManagers[method] = recorderManagers[method] || emptyFn;
+    });
 
     return recorderManagers;
   };
@@ -178,6 +182,7 @@ function getInstance() {
   // 音频
   // createInnerAudioContext
   // 注意事项  wx.createInnerAudioContext的返回值innerAudioContext对象中的onError方法中头条未指明该方法返回值
+  // wx.createInnerAudioContext = wx.createInnerAudioContext
 
   wx.stopVoice = wx.stopVoice || ignoreFn;
   wx.setInnerAudioOption = wx.setInnerAudioOption || ignoreFn;
@@ -272,7 +277,7 @@ function getInstance() {
   //// 位置
   // getLocation(获取设备当前的地理位置)
   // 注意事项
-  // 1.头条文档中该api没有指明参数altitude、success、fail、complete(其中后三个参数示例中有)
+  // 1.头条文档中该api没有指明参数altitude、success、fail、complete(后三个参数示例中有)
   // 2.该api参数success返回值中头条没有speed、accuracy、altitude、verticalAccuracy、horizontalAccuracy
   // 3.头条中暂不支持altitude参数
   // 4.头条中指出该 API 有一定性能消耗，请注意不要频繁调用以防设备过热和耗电过快。小程序框架也会做相应的节流处理。
@@ -283,7 +288,7 @@ function getInstance() {
 
   // openLocation(使用微信内置地图查看位置)
   // 注意事项
-  // 1.头条文档中该api没有指明参数altitude、success、fail、complete(但是示例中有)
+  // 1.头条文档中该api没有指明参数altitude、success、fail、complete(后三个参数示例中有)
   // 2.头条中提示输入的坐标坐标系应当为gcj02
   // wx.openLocation = wx.openLocation
   wx.chooseLocation = wx.chooseLocation || ignoreFn;
@@ -294,7 +299,7 @@ function getInstance() {
 
   // getSystemInfo(获取系统信息)
   // 注意事项
-  // 1.头条文档中该api没有指明参数altitude、success、fail、complete(但是示例中有)
+  // 1.头条文档中该api没有指明参数altitude、success、fail、complete(后三个参数示例中有)
   // 2.参数success返回值头条无statusBarHeight、language、fontSizeSetting、benchmarkLevel	、albumAuthorized	、cameraAuthorized、locationAuthorized
   // microphoneAuthorized、notificationAuthorized、notificationAlertAuthorized、notificationBadgeAuthorized、notificationSoundAuthorized、
   // bluetoothEnabled、locationEnabled、wifiEnabled
@@ -313,7 +318,7 @@ function getInstance() {
   // 网络状态
   // getNetworkType(获取网络类型)
   // 注意事项
-  // 1.头条文档中该api没有指明参数altitude、success、fail、complete(但是示例中有)
+  // 1.头条文档中该api没有指明参数altitude、success、fail、complete(后三个参数示例中有)
   // 2.头条中提示unknown在设备某些无法确定网络类型为前者之一的情况下会返回
   // wx.getNetworkType = wx.getNetworkType
 
@@ -326,7 +331,7 @@ function getInstance() {
   // WI_FI
   // getConnectedWifi(获取已连接中的 Wi-Fi 信息)
   // 注意事项
-  // 1.头条文档中该api没有指明参数altitude、success、fail、complete(但是示例中有)
+  // 1.头条文档中该api没有指明参数altitude、success、fail、complete(后三个参数示例中有)
   // 2.头条没有具体说明错误信息
   // wx.getConnectedWifi = wx.getConnectedWifi
 
@@ -566,7 +571,7 @@ function getInstance() {
   wx.createCanvasContext = function(opt){
     let canvasContext = createCanvasContext.call(this, opt);
     // 处理canvasContext对象字段缺失
-    canvasContext['createCircularGradient'] = (()=>{});
+    canvasContext['createCircularGradient'] = emptyFn;
     // 处理canvasContext对象某些字段更新
     canvasContext['setFillStyle'] = canvasContext.fillStyle;
     canvasContext['setFontSize'] = canvasContext.font;
@@ -577,8 +582,14 @@ function getInstance() {
     canvasContext['setLineWidth'] = canvasContext.lineWidth;
     canvasContext['setMiterLimit'] = canvasContext.miterLimit;
     // 微信中canvasContext.setShadow从从基础库 1.9.90 开始，停止维护，请使用
-    // canvasContext.shadowOffsetX|canvasContext.shadowOffsetY|canvasContext.shadowColor|canvasContext.shadowBlur 代替
-    // 头条中是canvasContext.shadowOffsetX|canvasContext.shadowOffsetY|canvasContext.shadowColor|canvasContext.shadowBlur
+    // canvasContext.shadowOffsetX
+    // |canvasContext.shadowOffsetY
+    // |canvasContext.shadowColor
+    // |canvasContext.shadowBlur 代替
+    // 头条中是canvasContext.shadowOffsetX
+    // |canvasContext.shadowOffsetY
+    // |canvasContext.shadowColor
+    // |canvasContext.shadowBlur
     canvasContext['setStrokeStyle'] = canvasContext.strokeStyle;
     canvasContext['setTextAlign'] = canvasContext.textAlign;
     canvasContext['setTextBaseline'] = canvasContext.textBaseline;

@@ -93,10 +93,8 @@
     "page/antTest/index/index",
     "page/antTest/mine/mine",
     "page/antTest/thi/thi",
-    "page/baiduTest/baidu/baidu",
     "page/baiduTest/index/index",
-    "page/toutiaoTest/index/index",
-    "page/toutiaoTest/toutiao/toutiao"
+    "page/toutiaoTest/index/index"
   ],
   "window": {
     "navigationBarTextStyle": "black",

@@ -6,7 +6,9 @@
     animation="{{animationData}}"
     style="background:red;height:50rpx;width:100rpx"
   ></view>
+  <view class="title" class="border">转发</view>
   <view bindtap="showShareMenuEvent" class="border">showShareMenu</view>
+  <view bindtap="hideShareMenuEvent" class="border">hideShareMenu</view>
   <view bindtap="uploadEvent" class="border">uploadFile</view>
   <view bindtap="downloadfileEvent" class="border">downloadfile</view>
   <view bindtap="connectSocketEvent" class="border">connectSocket</view>
@@ -28,6 +30,7 @@
   <view bindtap="getImageInfoEvent" class="border">getImageInfo</view>
   <view bindtap="chooseMessageFileEvent" class="border">chooseMessageFile</view>
   <view bindtap="compressImageEvent" class="border">compressImage</view>
+  <view bindtap="saveImageToPhotosAlbumEvent" class="border">saveImageToPhotosAlbum</view>
   <view class="smallTitle" class="border">录音管理</view>
   <view bindtap="stopRecordEvent" class="border">stopRecord</view>
   <view bindtap="startRecordEvent" class="border">startRecord</view>
@@ -43,16 +46,11 @@
   <view bindtap="getBackgroundAudioPlayerStateEvent" class="border">getBackgroundAudioPlayerState</view>
   <view bindtap="getBackgroundAudioManagerEvent" class="border">getBackgroundAudioManager</view>
   <view class="smallTitle" class="border">音频</view>
+  <view bindtap="createInnerAudioContextEvent" class="border">createInnerAudioContext</view>
   <view bindtap="stopVoiceEvent" class="border">stopVoice</view>
   <view bindtap="playVoiceEvent" class="border">playVoice</view>
   <view bindtap="pauseVoiceEvent" class="border">pauseVoice</view>
   <view bindtap="getAvailableAudioSourcesEvent" class="border">getAvailableAudioSources</view>
-  <view bindtap="createAudioContextEvent" class="border">createAudioContext</view>
-  <audio src="{{src}}" id="myAudio"></audio>
-  <button type="primary" bindtap="audioPlay">播放</button>
-  <button type="primary" bindtap="audioPause">暂停</button>
-  <button type="primary" bindtap="audio14">设置当前播放时间为14秒</button>
-  <button type="primary" bindtap="audioStart">回到开头</button>
   <view bindtap="setInnerAudioOptionEvent" class="border">setInnerAudioOption</view>
   <view bindtap="innerAudioContextEvent" class="border">innerAudioContext</view>
   <view class="smallTitle" class="border">视频</view>
@@ -130,19 +128,52 @@
   <view bindtap="createAnimationEvent" class="border">createAnimation</view>
   <view bindtap="stopPullDownRefreshEvent" class="border">stopPullDownRefresh</view>
   <view bindtap="createSelectorQueryEvent" id="the-id" class="border">createSelectorQuery</view>
+  <view bindtap="createIntersectionObserverEvent" id="the-id" class="border">createIntersectionObserver</view>
   <view class="smallTitle" class="border">设备</view>
   <view bindtap="getSystemInfoEvent"  class="border">getSystemInfo</view>
   <view bindtap="getSystemInfoSyncEvent"  class="border">getSystemInfoSync</view>
+  <view class="smallTitle" class="border">网络状态</view>
+  <view bindtap="getNetworkTypeEvent"  class="border">getNetworkType</view>
+  <view bindtap="onNetworkStatusChangeEvent"  class="border">onNetworkStatusChange</view>
+  <view class="smallTitle" class="border">加速度计</view>
+  <view bindtap="startAccelerometerEvent"  class="border">startAccelerometer</view>
+  <view bindtap="stopAccelerometerEvent"  class="border">stopAccelerometer</view>
+  <view bindtap="onAccelerometerChangeEvent"  class="border">onAccelerometerChange</view>
+  <view class="smallTitle" class="border">罗盘</view>
+  <view bindtap="startCompassEvent"  class="border">startCompass</view>
+  <view bindtap="stopCompassEvent"  class="border">stopCompass</view>
   <view bindtap="onCompassChangeEvent"  class="border">onCompassChange</view>
+  <view class="smallTitle" class="border">电话</view>
+  <view bindtap="makePhoneCallEvent"  class="border">makePhoneCall</view>
   <view bindtap="scanCodeEvent"  class="border">scanCode</view>
+  <view class="smallTitle" class="border">剪贴板</view>
+  <view bindtap="getClipboardDataEvent"  class="border">getClipboardData</view>
+  <view bindtap="setClipboardDataEvent"  class="border">setClipboardData</view>
+  <view class="smallTitle" class="border">屏幕亮度</view>
+  <view bindtap="setKeepScreenOnEvent"  class="border">setKeepScreenOn</view>
+  <view class="smallTitle" class="border">振动</view>
+  <view bindtap="vibrateShortEvent"  class="border">vibrateShort</view>
+  <view bindtap="vibrateLongEvent"  class="border">vibrateLong</view>
   <view class="smallTitle" class="border">陀螺仪</view>
   <view bindtap="onGyroscopeChangeEvent"  class="border">onGyroscopeChange</view>
   <view class="smallTitle" class="border">WI_FI</view>
   <view bindtap="onGetWifiListEvent"  class="border">onGetWifiList</view>
+  <view bindtap="getConnectedWifiEvent"  class="border">getConnectedWifi</view>
   <view class="smallTitle" class="border">iBeacon</view>
   <view bindtap="onBeaconUpdateEvent"  class="border">onBeaconUpdate</view>
   <view class="smallTitle" class="border">调试</view>
   <view bindtap="setEnableDebugEvent"  class="border">setEnableDebug</view>
   <view class="smallTitle" class="border">设置</view>
   <view bindtap="getSettingEvent"  class="border">getSetting</view>
+  <view class="smallTitle" class="border">交互</view>
+  <view bindtap="showToastEvent"  class="border">showToast</view>
+  <view bindtap="showModalEvent"  class="border">showModal</view>
+  <view bindtap="showLoadingEvent"  class="border">showLoading</view>
+  <view bindtap="showActionSheetEvent"  class="border">showActionSheet</view>
+  <view class="smallTitle" class="border">导航栏</view>
+  <view bindtap="setNavigationBarTitleEvent"  class="border">setNavigationBarTitle</view>
+  <view class="smallTitle" class="border">滚动</view>
+  <view bindtap="pageScrollToEvent"  class="border">pageScrollTo</view>
+  <view class="smallTitle" class="border">画布</view>
+  <view bindtap="canvasGetImageDataEvent"  class="border">canvasGetImageData</view>
 </view>
