@@ -2,3 +2,4 @@ node_modules
 demo/dist/
 .history/
 .idea/
+.DS_Store
