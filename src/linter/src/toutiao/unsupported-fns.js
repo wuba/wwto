@@ -76,6 +76,10 @@ module.exports = [
   'getSavedFileInfo',
   'getFileInfo',
 
+  // 位置
+  'chooseLocation',
+
+
   // 字体
   'loadFontFace',
 
@@ -268,10 +272,10 @@ module.exports = [
 
   // 调试
   'setEnableDebug',
-  'getLogManager'
+  'getLogManager',
 
-
-
-
-
+  // 导航栏
+  'showNavigationBarLoading',
+  'setNavigationBarColor',
+  'hideNavigationBarLoading'
 ];

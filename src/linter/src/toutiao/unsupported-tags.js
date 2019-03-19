@@ -16,7 +16,6 @@ module.exports = [
 
   // scroll-view
 
-  // 缺失属性  头条中无enable-back-to-top、aria-label属性
   // 差异属性
   // 1.属性upper-threshold	、lower-threshold、scroll-top、scroll-left在微信中单位px,2.4.0起支持rpx,类型是Number / String;头条中单位px,类型是Number;
   // 注意事项
@@ -25,7 +24,6 @@ module.exports = [
 
   // swiper
 
-  // 缺失属性  头条中无previous-margin、next-margin、skip-hidden-item-layout属性
   // 缺失事件  头条中无bindtransition、bindanimationfinish事件
   // 注意事项  头条中Bug & Tip说明部分
 
@@ -41,14 +39,12 @@ module.exports = [
 
   // rich-text
 
-  // 缺失属性  头条中无space属性
   // 差异
   // 1.头条中未对nodes属性进行详细阐述;未说明该组件支持默认事件有哪些;
   // 注意事项  头条文档中无Bug & Tip说明部分
 
   // progress
 
-  // 缺失属性  头条中无show-info、border-radius、font-size、aria-label属性
   // 缺失事件  头条中无bindactiveend事件
   // 差异属性
   // 1.属性percent微信中类型是Float,默认值是空;头条中类型是Number,默认值是0;
@@ -60,7 +56,6 @@ module.exports = [
 
   // icon
 
-  // 缺失属性  头条中无aria-label属性
   // 差异属性
   // 1.属性size微信中类型是Number / String,单位px（2.4.0起支持rpx）;头条中类型是Number,单位px
   // 2.属性color微信中类型是Color,头条中是String
@@ -69,8 +64,6 @@ module.exports = [
 
   // button
 
-  //  缺失属性  头条中无plain、lang、session-from、send-message-title、send-message-path、
-  //          send-message-img	、show-message-card、app-parameter、aria-label属性
   //  差异属性
   // 1.属性type取值范围微信和头条不太一样,微信中是primary(绿色)、default(白色)、warn(红色);头条中是primary(红色)、default(白色)
   // 2.属性open-type有效值头条中目前只支持share
@@ -90,13 +83,11 @@ module.exports = [
 
   // form
 
-  // 缺失属性  头条中无report-submit属性
   // 差异事件  事件bindsubmit微信中事件返回值是event.detail = {value : {'name': 'value'} , formId: ''};
   //         头条中是event.detail = {value : {'name': 'value'} , target: ''}
 
   // input
 
-  // 缺失属性  头条中无placeholder-class、confirm-type、confirm-hold、adjust-position、aria-label属性
   // 差异属性
   // 1.属性cursor-spacing微信中类型是Number / String	,单位px（2.4.0起支持rpx）;头条中类型是Number,单位未说明
   // 2.属性cursor微信中无默认值,头条默认值为-1
@@ -118,7 +109,6 @@ module.exports = [
 
   // picker-view
 
-  // 缺失属性  头条中无indicator-class、mask-class、aria-label属性
   // 缺失事件  头条中无bindpickstart、bindpickend事件
   // 注意事项  微信中tip: 滚动时在iOS自带振动反馈，可在系统设置 -> 声音与触感 -> 系统触感反馈中关闭
 
@@ -128,19 +118,16 @@ module.exports = [
 
   // slider
 
-  // 缺失属性  头条中无aria-label属性
   // 差异属性
   // 1.属性(背景条的颜色)在微信中是backgroundColor,头条中是background-color;
   // 2.属性(已选择的颜色)在微信中是activeColor,头条中是active-color
 
   // switch
 
-  // 缺失属性  头条中无aria-label、disabled属性
   // 注意事项  微信：tip: switch类型切换时在iOS自带振动反馈，可在系统设置 -> 声音与触感 -> 系统触感反馈中关闭
 
   // textarea
 
-  // 缺失属性  头条中无placeholder-class、auto-focus、show-confirm-bar、adjust-position、aria-label	属性
   // 差异属性  属性cursor-spacing在微信中类型是Number / String	,单位px（2.4.0起支持rpx）;头条中类型是Number,单位未说明
   // 缺失事件  头条中无bindlinechange事件
   // 差异事件
@@ -155,7 +142,6 @@ module.exports = [
 
   // navigator
 
-  // 缺失属性  头条中无target、app-id、path、extra-data	、version、aria-label属性
   // 差异属性  属性open-type取值范围头条中无reLaunch、exit
   // 缺失事件  头条中无bindsuccess、bindfail	、bindcomplete
   // 注意事项  头条中对该组件使用限制、关于调试部分未作说明
@@ -166,7 +152,6 @@ module.exports = [
 
   // image
 
-  // 缺失属性  头条中无aria-label属性
   // 差异属性  属性lazy-load	说明部分在微信和头条中不完全一样,
   // 1.头条中说明部分是图片懒加载。只针对page与scroll-view下的img有效;
   // 2.微信中是图片懒加载，在即将进入当前屏幕可视区域时才开始加载
@@ -175,10 +160,6 @@ module.exports = [
 
   // video
 
-  // 缺失属性  头条中无duration、controls、danmu-list、danmu-btn、enable-danmu	、loop、muted、initial-time、page-gesture(废弃)
-  //         direction、show-progress、show-fullscreen-btn、show-play-btn、show-center-play-btn、enable-progress-gesture、
-  //         object-fit、poster、show-mute-btn、title、play-btn-position、enable-play-gesture、auto-pause-if-navigate、
-  //         auto-pause-if-open-native、vslide-gesture	、vslide-gesture-in-fullscreen属性
   // 差异属性  该组件头条中只有两个属性,分别是src和autoplay
   // 缺失事件  头条中无bindplay、bindpause、bindended、bindtimeupdate、bindfullscreenchange、bindwaiting、binderror、bindprogress事件
   // 注意事项  头条中未对该组件支持的格式和支持的编码格式做具体说明
@@ -187,7 +168,6 @@ module.exports = [
 
   // canvas
 
-  // 缺失属性  头条中无disable-scroll属性
   // 缺失事件  头条中无bindtouchstart、bindtouchmove、bindtouchend、bindtouchcancel、bindlongtap、binderror事件
   // 注意事项  微信中
   // 1.说明同一页面中的 canvas-id 不可重复，如果使用一个已经出现过的 canvas-id，该 canvas 标签对应的画布将被隐藏并不再正常工作
