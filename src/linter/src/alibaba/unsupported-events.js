@@ -83,5 +83,12 @@ module.exports = [
       'bindload',
       'binderror'
     ]
+  },
+  {
+    tag: 'map',
+    attrs: [
+      'bindupdated',
+      'bindpoitap'
+    ]
   }
 ];

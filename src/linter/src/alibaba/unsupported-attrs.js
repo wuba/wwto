@@ -85,6 +85,12 @@ module.exports = [
     ]
   },
   {
+    tag: 'swiper-item',
+    attrs: [
+      'item-id'
+    ]
+  },
+  {
     tag: 'button',
     attrs: [
       'lang',
@@ -92,7 +98,9 @@ module.exports = [
       'send-message-title',
       'send-message-path',
       'send-message-img',
-      'show-message-card'
+      'show-message-card',
+      'app-parameter',
+      'aria-label'
     ]
   },
   {
@@ -117,6 +125,12 @@ module.exports = [
     ]
   },
   {
+    tag: 'picker-view',
+    attrs: [
+      'aria-label'
+    ]
+  },
+  {
     tag: 'radio',
     attrs: [
       'aria-label'
@@ -125,13 +139,16 @@ module.exports = [
   {
     tag: 'slider',
     attrs: [
-      'color'
+      'color',
+      'selected-color',
+      'aria-label'
     ]
   },
   {
     tag: 'switch',
     attrs: [
-      'type'
+      'type',
+      'aria-label'
     ]
   },
   {
@@ -157,7 +174,14 @@ module.exports = [
       'path',
       'extra-data',
       'version',
-      'hover-stop-propagation'
+      'hover-stop-propagation',
+      'aria-label'
+    ]
+  },
+  {
+    tag: 'image',
+    attrs: [
+      'aria-label'
     ]
   },
   {
