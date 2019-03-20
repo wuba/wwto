@@ -13,3 +13,8 @@
 <swiper ksks next-margin="22rpx"></swiper>
 <swiper previous-margin="22rpx"></swiper>
 <icon size="22rpx"></icon>
+<progress stroke-width="213rpx"></progress>
+<input type="idcard" cursor-spacing="1px" />
+<textarea name="" cursor-spacing="2rpx" id="" cols="30" rows="10"></textarea>
+<live-player src="ftp"></live-player>
+<live-player ss src="m3u8"></live-player>
