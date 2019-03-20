@@ -60,10 +60,10 @@ const wto = require('wto-cli');
 // 转换成百度/阿里/头条小程序
 gulp.task('build', function(cb) {
     wto.toAll({
-      source: './miniprogram-demo',
-      baiduTarget: './baidu-miniprogram-demo',
-      alibabaTarget: './alibaba-miniprogram-demo',
-      toutiaoTarget: './toutiao-miniprogram-demo',
+      source: './src',
+      baiduTarget: './baidu',
+      alibabaTarget: './alibaba',
+      toutiaoTarget: './toutiao',
     });
 });
 
