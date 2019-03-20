@@ -21,7 +21,7 @@ function lintFile(file, fileRules) {
   return schemes.filter(scheme => scheme);
 }
 
-function lint(sourcePath = './src//**/*.wxml', fileRules, lineRules) {
+function lint(platform, sourcePath = './src//**/*.wxml', fileRules, lineRules) {
   gulp.src(sourcePath)
     .pipe(through2.obj(function(file, encode, callback) {
       const stream = fs.createReadStream(file.path);
@@ -45,7 +45,7 @@ function lint(sourcePath = './src//**/*.wxml', fileRules, lineRules) {
         }
         schemes.sort((a, b) => (a.line > b.line ? 1 : -1));
         schemes.forEach(scheme => {
-          logger.lintWarning(scheme.path, scheme.line, scheme.source, scheme.rule);
+          logger.lintWarning(platform, scheme.path, scheme.line, scheme.source, scheme.rule);
         });
       });
 

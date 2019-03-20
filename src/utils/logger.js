@@ -32,14 +32,15 @@ function info(str, cmd = '[INFO] ') {
 
 /**
  * 控制台输出告警
- * @param {String} path   文件路径
- * @param {String} line   代码行号
- * @param {String} source 命中源码
- * @param {String} scheme 修复方案
+ * @param {String} platform   平台
+ * @param {String} path       文件路径
+ * @param {String} line       代码行号
+ * @param {String} source     命中源码
+ * @param {String} scheme     修复方案
  */
-function lintWarning(path, line, source, scheme) {
+function lintWarning(platform, path, line, source, scheme) {
   warn([
-    `检测异常：${path}`,
+    `[${platform}] 检测异常：${path}`,
     `\n> 第 ${line} 行代码有兼容问题`,
     `\n> 建议修改此段代码 ${source}`,
     '\n> 修复提示：',
