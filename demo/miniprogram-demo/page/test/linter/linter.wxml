@@ -9,6 +9,7 @@
 <progress activeColor="" backgroundColor></progress>
 
 <!--BAIDU-->
+<view hidden="true"></view>
 <scroll-view upper-threshold="22rpx"></scroll-view>
 <swiper ksks next-margin="22rpx"></swiper>
 <swiper previous-margin="22rpx"></swiper>

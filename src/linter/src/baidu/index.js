@@ -66,6 +66,10 @@ const wxmlLineRules = [
   (source) => {
     const regList = [
       {
+        rule: 'wxml不支持`hidden`',
+        reg: `\\s+hidden=["'].+['"]`
+      },
+      {
         rule: 'scroll-view组件upper-threshold、lower-threshold、scroll-top、scroll-left属性不支持rpx',
         reg: `<scroll-view[^>]*(upper-threshold|lower-threshold|scroll-top|scroll-left)=["']\\d*rpx["']`
       },
