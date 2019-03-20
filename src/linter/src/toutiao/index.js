@@ -76,6 +76,7 @@ const wxmlLineRules = [
         return { source, rule: regList[i].rule };
       }
     }
+
     return null;
   }
 ];
