@@ -64,38 +64,49 @@ const wxmlLineRules = [
   },
 
   (source) => {
-    const rule = 'scroll-view组件upper-threshold、lower-threshold、scroll-top、scroll-left属性不支持rpx';
-    const reg = /<scroll-view[^>]*(upper-threshold|lower-threshold|scroll-top|scroll-left)=["']\d*rpx["']/;
-    const match = source.match(reg);
+    const regList = [
+      {
+        rule: 'scroll-view组件upper-threshold、lower-threshold、scroll-top、scroll-left属性不支持rpx',
+        reg: `<scroll-view[^>]*(upper-threshold|lower-threshold|scroll-top|scroll-left)=["']\\d*rpx["']`
+      },
+      {
+        rule: 'swiper组件previous-margin、next-margin属性不支持rpx',
+        reg: `<swiper[^>]*(previous-margin|next-margin)=["']\\d*rpx["']`
+      },
+      {
+        rule: 'icon组件size属性不支持rpx',
+        reg: `<icon[^>]*size=["']\\d*rpx["']`
+      },
+      {
+        rule: 'progress组件stroke-width属性不支持rpx',
+        reg: `<progress[^>]*stroke-width=["']\\d*rpx["']`
+      },
+      {
+        rule: 'input组件cursor-spacing属性不支持rpx',
+        reg: `<input[^>]*cursor-spacing=["']\\d*rpx["']`
+      },
+      {
+        rule: 'textarea组件cursor-spacing属性不支持rpx',
+        reg: `<textarea[^>]*cursor-spacing=["']\\d*rpx["']`
+      },
+      {
+        rule: 'input组件type属性不支持idcard',
+        reg: `<input[^>]*type=["']idcard["']`
+      },
+      {
+        rule: 'live-player组件src属性仅支持m3u8',
+        reg: `<live-player[^>]*src=["']((?!m3u8).)*["']`
+      },
+    ];
 
-    if (match) {
-      return { source, rule };
+    for (let i = 0; i < regList.length; i++){
+      const reg = new RegExp(regList[i].reg);
+      const match = source.match(reg);
+
+      if (match) {
+        return { source, rule: regList[i].rule };
+      }
     }
-
-    return null;
-  },
-
-  (source) => {
-    const rule = 'swiper组件previous-margin、next-margin属性不支持rpx';
-    const reg = /<swiper[^>]*(previous-margin|next-margin)=["']\d*rpx["']/;
-    const match = source.match(reg);
-
-    if (match) {
-      return { source, rule };
-    }
-
-    return null;
-  },
-
-  (source) => {
-    const rule = 'icon组件size属性不支持rpx';
-    const reg = /<icon[^>]*size=["']\d*rpx["']/;
-    const match = source.match(reg);
-
-    if (match) {
-      return { source, rule };
-    }
-
     return null;
   }
 ];

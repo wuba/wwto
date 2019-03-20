@@ -26,7 +26,7 @@ module.exports = [
   // 注意事项
   // 1.微信中该组件覆盖在原生组件之上的文本视图，可覆盖的原生组件包括map、video、canvas、camera、live-player、live-pusher，只支持嵌套cover-view、cover-image，
   // 可在cover-view中使用button。
-  // 2.百度中该组件覆盖在原生组件之上的文本视图，可覆盖的原生组件包括 video 、 canvas 、 camera，只支持嵌套 cover-view 、 cover-image 。
+  // 2.百度中该组件覆盖在原生组件之上的文本视图，可覆盖的原生组件包括map、 video 、 canvas 、 camera，只支持嵌套 cover-view 、 cover-image 。
 
   // cover-image
 
@@ -88,7 +88,7 @@ module.exports = [
   // label = label
 
   // picker
-  // 缺失属性 mode="selector"、mode="multiSelector"和mode = "region"时,百度中多了一个title属性
+  // mode="selector"、mode="multiSelector"和mode = "region"时,百度中多了一个title属性
   // 差异事件 mode = "region"时事件bindchange返回值微信中是event.detail = {value: value, code: code, postcode: postcode},
   // 其中字段code是统计用区划代码，postcode是邮政编码百度中是event.detail = {value: value}
 
