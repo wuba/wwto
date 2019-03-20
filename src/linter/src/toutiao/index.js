@@ -34,6 +34,49 @@ const wxmlLineRules = [
     }
 
     return null;
+  },
+
+  (source) => {
+    const regList = [
+      {
+        rule: 'scroll-view组件upper-threshold、lower-threshold、scroll-top、scroll-left属性不支持rpx',
+        reg: `<scroll-view[^>]*(upper-threshold|lower-threshold|scroll-top|scroll-left)=["']\\d*rpx["']`
+      },
+      {
+        rule: 'icon组件size属性不支持rpx',
+        reg: `<icon[^>]*size=["']\\d*rpx["']`
+      },
+      {
+        rule: 'progress组件stroke-width属性不支持rpx',
+        reg: `<progress[^>]*stroke-width=["']\\d*rpx["']`
+      },
+      {
+        rule: 'button组件open-type仅支持share',
+        reg: `<button[^>]*open-type=["']((?!share).)*["']`
+      },
+      {
+        rule: 'input组件cursor-spacing属性不支持rpx',
+        reg: `<input[^>]*cursor-spacing=["']\\d*rpx["']`
+      },
+      {
+        rule: 'textarea组件cursor-spacing属性不支持rpx',
+        reg: `<textarea[^>]*cursor-spacing=["']\\d*rpx["']`
+      },
+      {
+        rule: 'navigator组件open-type不支持支持reLaunch、exit',
+        reg: `<navigator[^>]*open-type=["'](reLaunch|exit)["']`
+      }
+    ];
+
+    for (let i = 0; i < regList.length; i++){
+      const reg = new RegExp(regList[i].reg);
+      const match = source.match(reg);
+
+      if (match) {
+        return { source, rule: regList[i].rule };
+      }
+    }
+    return null;
   }
 ];
 

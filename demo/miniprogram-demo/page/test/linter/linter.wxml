@@ -7,6 +7,9 @@
 
 <!--头条-->
 <progress activeColor="" backgroundColor></progress>
+<button open-type="share"></button>
+<navigator open-type="reLaunch"></navigator>
+<navigator open-type="exit"></navigator>
 
 <!--BAIDU-->
 <view hidden="true"></view>
