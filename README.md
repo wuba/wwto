@@ -61,16 +61,16 @@ const wto = require('wto-cli');
 gulp.task('build', function(cb) {
     wto.toAll({
       source: './src',
-      baiduTarget: './baidu',
-      alibabaTarget: './alibaba',
-      toutiaoTarget: './toutiao',
+      baiduTarget: './dist/baidu',
+      alibabaTarget: './dist/alibaba',
+      toutiaoTarget: './dist/toutiao',
     });
 });
 
 // 检测源码对各平台的兼容性
 gulp.task('lint', function(cb) {
     wto.lintAll({
-      source: './miniprogram-demo'
+      source: './src'
     });
 });
 ```
