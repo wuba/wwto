@@ -37,7 +37,7 @@
     "md5-hex": "^2.0.0",
     "mp-adaptor": "^1.0.4",
     "mp-converter": "^1.0.4",
-    "mp-linter": "1.0.4",
+    "mp-linter": "1.0.5",
     "postcss": "5.2.16",
     "postcss-selector-parser": "2.2.3",
     "pump": "^3.0.0",
