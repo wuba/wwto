@@ -506,7 +506,7 @@ function getInstance() {
   wx.onPageNotFound = wx.onPageNotFound || emptyFn;
   wx.onError = wx.onError || emptyFn;
   wx.onAudioInterruptionBegin = wx.onAudioInterruptionBegin || emptyFn;
-  wx.onAudioInterruptionEnd = onAudioInterruptionEnd || emptyFn;
+  wx.onAudioInterruptionEnd = wx.onAudioInterruptionEnd || emptyFn;
   wx.onAppShow = wx.onAppShow || emptyFn;
   wx.onAppHide = wx.onAppHide || emptyFn;
   wx.offPageNotFound = wx.offPageNotFound || emptyFn;
