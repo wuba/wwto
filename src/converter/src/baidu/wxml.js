@@ -4,6 +4,8 @@ function convert(wxmlContent) {
     .replace(/s-for-items/, 's-for')
     .replace(/\.wxml/g, '.swan')
     .replace(/><\/input>/g, '/>')
+    // 表单属性不能用驼峰
+    .replace(/\s+form[A-Z]\w+=/g, (match) => match.replace(/[A-Z]/g, (m) => `-${m}`))
     .replace(/<[\w]+/ig, (match) => {
       // 自定义组件命名不能用驼峰
       return match.replace(/[A-Z]/g, (m) => { return ['-', m.toLowerCase()].join(''); });
