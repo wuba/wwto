@@ -52,9 +52,9 @@ commander.command('lint')
   .option('-s, --source <source>', '源码目录')
   .action(cmd => {
     if (cmd.platform === 'baidu') {
-      wto.lintBaidu(cmd.source);
+      wto.lintBaidu(cmd);
     } else if (cmd.platform === 'alibaba') {
-      wto.lintAlibaba(cmd.source);
+      wto.lintAlibaba(cmd);
     } else if (cmd.platform === 'toutiao') {
       wto.lintToutiao(cmd);
     } else {
