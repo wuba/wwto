@@ -6,6 +6,8 @@ function convert(wxmlText) {
     .replace(/\s+formType=['"]\w+['"]/g, (match) => match.replace('formType', 'form-type'))
     // canvas-id to id
     .replace(/<canvas[^>]+(canvas-id)=['"]/g, (match, p1) => match.replace(p1, 'id'))
+    //  data-set 全部转为小写
+    .replace(/data-\s*\S*=/g, (match) => match.toLocaleLowerCase())
     // // s:for-index="{{idx}}" -> s:for-index="idx"
     .replace(/a:for-index=['"]({{\w+}})['"]/ig, (match) => match.replace('{{', '').replace('}}', ''))
     // 模板相对路径必须以./开头
