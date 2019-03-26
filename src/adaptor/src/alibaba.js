@@ -233,13 +233,13 @@ function getInstance() {
   wx.onWindowResize = wx.onWindowResize || emptyFn;
   wx.offWindowResize = wx.offWindowResize || emptyFn;
 
-  ////////网络 发起请求
+  ////////网络 发起请求w
   wx.request = function(opt) {
     opt.headers = opt.header || opt.headers || {};
-    opt.headers.referer = '';
-    opt.headers['content-type'] = opt.headers['content-type'] || 'application/json';
+    opt.headers['referer'] = opt.referer||'';
+    opt.headers['content-type'] = opt.headers['Content-Type'] || 'application/json';
 
-    const success = opt.success || emptyFn;
+    let success = opt.success || emptyFn;
     opt.success = function(res) {
       success.call(this, paramsMap(res, {
         headers: 'header',
@@ -247,11 +247,9 @@ function getInstance() {
       }));
     };
 
-    if (wx.canIUse('request')) {
-      return wx.request(opt);
-    }
     return wx.httpRequest(opt);
   };
+
 
   //////////下载
   const { downloadFile } = wx;
