@@ -9,6 +9,7 @@ const replace = require('gulp-replace');
 const config = require('../../config');
 const logger = require('../../utils/logger');
 const converter = require('mp-converter').baidu;
+const plugin = require('mp-plugin');
 
 function convert(opt = {}) {
   const src = opt.source || './src';
@@ -43,8 +44,14 @@ function convert(opt = {}) {
     }
 
     gulp.src(jsonSrc)
-      .pipe(replace(/[\s\S]*/g, (match, p1) => converter.json(match)))
-      .pipe(gulp.dest(dest));
+      .pipe(replace(/[\s\S]*/g, (match) => converter.json(match)))
+      .pipe(gulp.dest(dest))
+      .on('end', () => {
+        console.log('plugin.convertPlugin');
+        plugin.convertPlugin({
+          source: dest
+        });
+      });
   });
 
   // 注入适配器代码
@@ -70,7 +77,10 @@ function convert(opt = {}) {
       this.push(file);
       cb();
     }))
-    .pipe(gulp.dest(dest));
+    .pipe(gulp.dest(dest))
+    .on('end', () => {
+      plugin.convertCaller({source: dest});
+    });
 }
 
 module.exports = convert;

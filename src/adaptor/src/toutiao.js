@@ -1,3 +1,4 @@
+/* eslint-disable object-curly-spacing */
 const emptyFn = () => {};
 
 function ignoreFn(opt) {
@@ -21,13 +22,11 @@ function getInstance() {
 
   const bakSetTimeout = setTimeout;
   setTimeout = function(fn, timeout) {
-    console.log('setTimeout:', timeout, Math.floor(timeout || 0));
     return bakSetTimeout.call(this, fn, Math.floor(timeout || 0));
   };
 
   const bakSetInterval = setInterval;
   setInterval = function(fn, timeout) {
-    console.log('setInterval:', timeout, Math.floor(timeout || 0));
     return bakSetInterval.call(this, fn, Math.floor(timeout || 0));
   };
 
@@ -38,7 +37,7 @@ function getInstance() {
 
   const bakSetClearInterval = clearInterval;
   clearInterval = function(opt){
-    return bakSetClearInterval.call(this,opt);
+    return bakSetClearInterval.call(this, opt);
   };
 
   //// 网络

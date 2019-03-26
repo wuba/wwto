@@ -1,7 +1,7 @@
 {
-  "name": "mp-converter",
-  "version": "1.0.5",
-  "description": "static cross-platform mini-program converter",
+  "name": "mp-plugin",
+  "version": "1.0.0",
+  "description": "static cross-platform mini-program plugin",
   "main": "lib/index.js",
   "scripts": {
     "build": "gulp build",
@@ -11,9 +11,11 @@
   "license": "MIT",
   "dependencies": {
     "gulp": "^3.9.1",
+    "gulp-sequence": "^1.0.0",
     "gulp-uglify-es": "^1.0.4",
     "gulp-watch": "^5.0.1",
-    "pump": "^3.0.0",
-    "uneval": "^0.1.2"
+    "string-to-arraybuffer": "^1.0.2",
+    "through2": "^3.0.0",
+    "to-buffer": "^1.1.1"
   }
 }

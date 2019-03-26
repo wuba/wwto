@@ -1,6 +1,6 @@
 {
   "name": "mp-linter",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "static cross-platform mini-program converter",
   "main": "lib/index.js",
   "scripts": {
