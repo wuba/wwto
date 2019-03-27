@@ -113,3 +113,4 @@ gulp.task('lint', function(cb) {
 - 只能存在一个`websocket`连接
 - 组件样式不是隔离的，父子组件之间class不要重复
 - 自定义组件不能响应事件（如：`bindTap`），需要添加一层容器来捕获事件
+- 唤起键盘不会上推position:fixed的元素
