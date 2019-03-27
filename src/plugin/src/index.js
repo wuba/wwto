@@ -32,8 +32,7 @@ function convertPlugin(opt) {
 
         str = str.replace(/plugin:\/\/(\w+)\/(\w+)/, (match, p1, p2) => {
           const coms = map.coms[p1] || {};
-          return match.replace('plugin://', `${seps}/plugins/`)
-            .replace(p2, coms[p2]);
+          return `${seps}/plugins/${p1}/${coms[p2]}`;
         });
 
         file.contents = str2ab(str);
@@ -47,7 +46,7 @@ function convertPlugin(opt) {
 
 function convertCaller(opt) {
   const src = opt.source || './src';
-  extraPluginCom(`${src}/plugins`, (map) => {
+  getPluginInfo(src, (map) => {
     // 处理js
     gulp.src(`${src}/**/*.js`)
       .pipe(through2.obj(function(file, enc, cb) {

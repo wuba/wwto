@@ -4,6 +4,7 @@ const toutiaoLinter = require('./platform/toutiao/linter');
 const baiduConverter = require('./platform/baidu/converter');
 const alibabaConverter = require('./platform/alibaba/converter');
 const toutiaoConverter = require('./platform/toutiao/converter');
+const pluginConverter = require('mp-plugin');
 
 module.exports = {
   lintBaidu: baiduLinter,
@@ -36,5 +37,8 @@ module.exports = {
     baiduLinter(opt.source);
     alibabaLinter(opt.source);
     toutiaoLinter(opt.source);
+  },
+  convertPlugin: (opt) => {
+    pluginConverter.convert(opt);
   }
 };

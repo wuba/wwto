@@ -47,7 +47,6 @@ function convert(opt = {}) {
       .pipe(replace(/[\s\S]*/g, (match) => converter.json(match)))
       .pipe(gulp.dest(dest))
       .on('end', () => {
-        console.log('plugin.convertPlugin');
         plugin.convertPlugin({
           source: dest
         });

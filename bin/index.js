@@ -85,4 +85,11 @@ commander.command('build')
     }
   });
 
+commander.command('plugin')
+  .description('编译插件')
+  .option('-s, --source <source>', '源码目录')
+  .action(cmd => {
+    wto.convertPlugin(cmd);
+  });
+
 commander.parse(process.argv);
