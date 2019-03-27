@@ -49,7 +49,7 @@ function lint(platform, sourcePath = './src//**/*.wxml', fileRules, lineRules) {
         });
       });
 
-      this.push(file);
+      // this.push(file);
       callback();
     }));
 }
