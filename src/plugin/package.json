@@ -1,6 +1,6 @@
 {
   "name": "mp-plugin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "static cross-platform mini-program plugin",
   "main": "lib/index.js",
   "scripts": {
@@ -10,6 +10,9 @@
   "author": "fulme@58.com",
   "license": "MIT",
   "dependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.4.0",
     "gulp": "^3.9.1",
     "gulp-sequence": "^1.0.0",
     "gulp-uglify-es": "^1.0.4",

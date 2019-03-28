@@ -4,6 +4,8 @@ const gulp = require('gulp');
 const str2ab = require('to-buffer');
 const through2 = require('through2');
 const ab2str = require('arraybuffer-to-string');
+const babel = require('@babel/core');
+
 const extraPluginCom = require('./utils/extra-plugin-com');
 
 let pluginInfo;
@@ -30,7 +32,7 @@ function convertPlugin(opt) {
         const seps = new Array(spec.length).fill('..').join('/').replace(/^\.\./, '.');
         let str = ab2str(file.contents);
 
-        str = str.replace(/plugin:\/\/(\w+)\/(\w+)/, (match, p1, p2) => {
+        str = str.replace(/plugin:\/\/(\w+)\/(\w+)/g, (match, p1, p2) => {
           const coms = map.coms[p1] || {};
           return `${seps}/plugins/${p1}/${coms[p2]}`;
         });
@@ -55,9 +57,15 @@ function convertCaller(opt) {
         const seps = new Array(spec.length).fill('..').join('/').replace(/^\.\./, '.');
         let str = ab2str(file.contents);
 
-        str = str.replace(/requirePlugin\(['"](\w+)['"]\)/, (match, p1) => {
+        str = str.replace(/requirePlugin\(['"](\w+)['"]\)/g, (match, p1) => {
           return match.replace('requirePlugin', 'require').replace(p1, `${seps}/plugins/${p1}/${map.main[p1]}`);
         });
+
+        let code = babel.transform(str, {
+          plugins: ["@babel/plugin-transform-modules-commonjs"]
+        });
+
+        str = code.code;
 
         file.contents = str2ab(str);
 
