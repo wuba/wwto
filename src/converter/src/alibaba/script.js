@@ -41,7 +41,7 @@ function convert(jsText, isWpy) {
     .replace(/Component\([\s\S]+methods:[^{]*{/, (match) => {
       return [
         match,
-        `,triggerEvent: function(name, opt) {
+        `,\r\ntriggerEvent: function(name, opt) {
             this.props['on' + name[0].toUpperCase() + name.substring(1)]({detail:opt});
           },\r\n`
       ].join('');
