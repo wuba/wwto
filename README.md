@@ -53,6 +53,9 @@
   wto build -s src -t dist
   # 检测源码对百度&&阿里&&头条小程序的兼容性
   wto lint -s src
+  
+  # 转换插件调用方式（提供给wbmp使用，原生微信小程序转换已集成到build命令）
+  wto plugin -s dist/baidu
 ```
 
 ### 打包工具
