@@ -8,13 +8,17 @@ function convert(wxmlContent) {
     .replace(/\s+form[A-Z]\w+=/g, (match) => match.replace(/[A-Z]/g, (m) => `-${m}`))
     .replace(/<[\w]+/ig, (match) => {
       // 自定义组件命名不能用驼峰
-      return match.replace(/[A-Z]/g, (m) => { return ['-', m.toLowerCase()].join(''); });
+      return match.replace(/[A-Z]/g, (m) => {
+        return ['-', m.toLowerCase()].join('');
+      });
     })
     //  data-set 全部转为小写
     .replace(/data-\s*\S*=/g, (match) => match.toLocaleLowerCase())
     .replace(/<\/[\w]+>/ig, (match) => {
       // 自定义组件命名不能用驼峰
-      return match.replace(/[A-Z]/g, (m) => { return ['-', m.toLowerCase()].join(''); });
+      return match.replace(/[A-Z]/g, (m) => {
+        return ['-', m.toLowerCase()].join('');
+      });
     })
     .replace(/{{[^}]+(<)[^=\s][^}]+}}/ig, (match, p1) => {
       // 三目运算 "<" 后面不能直接跟非空白字符
@@ -47,11 +51,7 @@ function convert(wxmlContent) {
       }
       return match.replace(p1, [' class="fix-image-cls" ', p1].join(''));
     })
-    .replace(/url\(['"](\/\/[^'"]+)['"]\)/ig, (match) => {
-      // 背景url属性值必须带协议
-      return match.replace(/\/\//g, m => `https:${m}`);
-    })
-    .replace(/url\((\/\/[^'"]+)\)/ig, (match) => {
+    .replace(/url\(['"]?\/\/[^)]+['"]?\)/ig, (match) => {
       // 背景url属性值必须带协议
       return match.replace(/\/\//g, m => `https:${m}`);
     })

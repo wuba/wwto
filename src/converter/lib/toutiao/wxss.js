@@ -1,1 +1,1 @@
-function convert(e){return e.replace(/\.wxss(["'])/g,(e,r)=>r).replace(/url\(['"](\/\/[^'"]+)['"]\)/gi,e=>e.replace(/\/\//g,e=>`https:${e}`)).replace(/url\((\/\/[^'"]+)\)/gi,e=>e.replace(/\/\//g,e=>`https:${e}`))}module.exports=convert;
+function convert(e){return e.replace(/\.wxss(["'])/g,(e,r)=>r).replace(/url\(['"]?\/\/[^)]+['"]?\)/gi,e=>e.replace(/\/\//g,e=>`https:${e}`))}module.exports=convert;

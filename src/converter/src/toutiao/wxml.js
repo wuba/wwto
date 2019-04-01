@@ -3,11 +3,7 @@ function convert(wxmlText) {
     .replace(/wx:/g, 'tt:')
     .replace(/tt:for-items/g, 'tt:for')
     .replace(/\.wxml/g, '.ttml')
-    .replace(/url\(['"](\/\/[^'"]+)['"]\)/ig, (match) => {
-      // 背景url属性值必须带协议
-      return match.replace(/\/\//g, m => `https:${m}`);
-    })
-    .replace(/url\((\/\/[^'"]+)\)/ig, (match) => {
+    .replace(/url\(['"]?\/\/[^)]+['"]?\)/ig, (match) => {
       // 背景url属性值必须带协议
       return match.replace(/\/\//g, m => `https:${m}`);
     })
