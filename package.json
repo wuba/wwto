@@ -36,7 +36,7 @@
     "gulp-uglify-es": "^1.0.4",
     "gulp-watch": "^5.0.1",
     "md5-hex": "^2.0.0",
-    "mp-adaptor": "^1.0.6",
+    "mp-adaptor": "^1.0.7",
     "mp-converter": "^1.0.7",
     "mp-linter": "1.0.7",
     "mp-plugin": "1.0.1",

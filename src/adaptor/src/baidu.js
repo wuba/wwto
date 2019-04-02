@@ -35,7 +35,7 @@ function getInstance() {
 
     // 默认按text解析！
     if (!opt.responseType) {
-      opt.responseType = 'json';
+      opt.responseType = 'text';
     }
 
     // 处理requestTask对象字段缺失
