@@ -13,7 +13,7 @@ function convert(wxmlContent) {
       });
     })
     //  data-set 全部转为小写
-    .replace(/data-\s*\S*=/g, (match) => match.toLocaleLowerCase())
+    .replace(/data-[^=\s]+=/g, (match) => match.toLocaleLowerCase())
     .replace(/<\/[\w]+>/ig, (match) => {
       // 自定义组件命名不能用驼峰
       return match.replace(/[A-Z]/g, (m) => {

@@ -1,6 +1,6 @@
 {
   "name": "mp-converter",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "static cross-platform mini-program converter",
   "main": "lib/index.js",
   "scripts": {

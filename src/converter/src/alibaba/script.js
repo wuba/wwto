@@ -52,7 +52,11 @@ function convert(jsText, isWpy) {
 
       const lifeCircleNames = ['created', 'attached', 'ready', 'detached'];
       const lifeCircleFns = lifeCircleNames.map((name) => {
-        const { args, body } = extractFn(match, name);
+        const {
+          args,
+          body
+        } = extractFn(match, name);
+
         return `${name}(${args})${body || '{}'}`;
       }).join(',\n');
 

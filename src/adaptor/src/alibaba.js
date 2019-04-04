@@ -1,4 +1,6 @@
-const { hasOwnProperty } = Object.prototype;
+const {
+  hasOwnProperty
+} = Object.prototype;
 
 function paramsMap(options, maps = {}) {
   const params = {};
@@ -40,7 +42,7 @@ function getInstance() {
         params = key;
       }
 
-      let result = storageBak[api](params).data;
+      let result = storageBak[api](params);
       if (api === 'getStorageSync') {
         result = result || '';
       }
@@ -53,7 +55,9 @@ function getInstance() {
   // wx.canIUse = my.canIUse
   // wx.getSystemInfoSync = my.getSystemInfoSync
 
-  const { getSystemInfo } = wx;
+  const {
+    getSystemInfo
+  } = wx;
   wx.getSystemInfo = function(opt) {
     const success = opt.success || emptyFn;
     opt.success = function(res) {
@@ -68,7 +72,9 @@ function getInstance() {
     return getSystemInfo.call(this, opt);
   };
 
-  const { getUpdateManager } = wx;
+  const {
+    getUpdateManager
+  } = wx;
   wx.getUpdateManager = function() {
     const manager = getUpdateManager();
     const apis = ['applyUpdate', 'onCheckForUpdate', 'onUpdateFailed', 'onUpdateReady'];
@@ -107,7 +113,9 @@ function getInstance() {
   // wx.hideLoading = my.hideLoading
 
   // toast提示
-  const { showToast } = wx;
+  const {
+    showToast
+  } = wx;
   wx.showToast = function(opt) {
     if (typeof opt.icon === 'undefined') {
       opt.icon = 'success';
@@ -121,7 +129,9 @@ function getInstance() {
   // wx模态弹窗不同的参数对应到支付宝confirm和alert API
   function showModal(opt) {
     const params = paramsMap(opt);
-    let { showCancel } = params;
+    let {
+      showCancel
+    } = params;
 
     if (typeof showCancel === 'undefined') {
       showCancel = true;
@@ -142,7 +152,9 @@ function getInstance() {
   wx.showModal = wx.showModal || showModal;
 
   // loading
-  const { showLoading } = wx;
+  const {
+    showLoading
+  } = wx;
   wx.showLoading = function(opt) {
     return showLoading.call(this, paramsMap(opt, {
       title: "content"
@@ -150,7 +162,9 @@ function getInstance() {
   };
 
   // 显示操作菜单
-  const { showActionSheet } = wx;
+  const {
+    showActionSheet
+  } = wx;
   wx.showActionSheet = function(opt) {
     const params = paramsMap(opt, {
       itemList: 'items'
@@ -159,7 +173,9 @@ function getInstance() {
     const success = params.success || emptyFn;
     const fail = params.fail || emptyFn;
 
-    params.success = function({ index: tapIndex }) {
+    params.success = function({
+      index: tapIndex
+    }) {
       if (tapIndex === -1) {
         fail({
           errMsg: 'showActionSheet:fail cancel'
@@ -204,14 +220,18 @@ function getInstance() {
   wx.startPullDownRefresh = wx.startPullDownRefresh || emptyFn;
 
   ////////// 滚动
-  const { pageScrollTo } = wx;
+  const {
+    pageScrollTo
+  } = wx;
   wx.pageScrollTo = function(opt) {
     opt.success = opt.success || emptyFn;
     opt.fail = opt.fail || emptyFn;
 
     try {
       pageScrollTo(opt);
-      opt.success({ errMsg: 'pageScrollTo:ok' });
+      opt.success({
+        errMsg: 'pageScrollTo:ok'
+      });
     } catch (e) {
       opt.fail(e);
     }
@@ -236,7 +256,7 @@ function getInstance() {
   ////////网络 发起请求w
   wx.request = function(opt) {
     opt.headers = opt.header || opt.headers || {};
-    opt.headers['referer'] = opt.referer||'';
+    opt.headers['referer'] = opt.referer || '';
     opt.headers['content-type'] = opt.headers['Content-Type'] || 'application/json';
 
     let success = opt.success || emptyFn;
@@ -252,7 +272,9 @@ function getInstance() {
 
 
   //////////下载
-  const { downloadFile } = wx;
+  const {
+    downloadFile
+  } = wx;
   wx.downloadFile = function(opt) {
     const success = opt.success || emptyFn;
     const downTask = downloadFile(Object.assign({}, opt, {
@@ -272,7 +294,9 @@ function getInstance() {
   };
 
   ///////上传
-  const { uploadFile } = wx;
+  const {
+    uploadFile
+  } = wx;
   wx.uploadFile = function(opt) {
     const paths = opt.filePath.split(/[/\\]/);
     const fileName = paths[paths.length - 1];
@@ -294,7 +318,9 @@ function getInstance() {
   };
 
   ///////websocket
-  const { connectSocket } = wx;
+  const {
+    connectSocket
+  } = wx;
   wx.connectSocket = function(...params) {
     setTimeout(() => {
       // 处理onOpen回调无法触发的问题
@@ -336,9 +362,13 @@ function getInstance() {
   wx.offLocalServiceDiscoveryStop = wx.offLocalServiceDiscoveryStop || emptyFn;
 
   //////////数据缓存
-  const { getStorage } = wx;
+  const {
+    getStorage
+  } = wx;
   wx.getStorage = function(opt) {
-    const { success } = opt;
+    const {
+      success
+    } = opt;
     opt.success = function(res) {
       if (res.data) {
         success(res);
@@ -352,7 +382,9 @@ function getInstance() {
   };
 
   ////////地图
-  const { createMapContext } = wx;
+  const {
+    createMapContext
+  } = wx;
   wx.createMapContext = function(opt) {
     const mapContext = createMapContext(opt);
     const attrs = ['getRegion', 'getScale', 'includePoints'];
@@ -364,9 +396,13 @@ function getInstance() {
 
   ////////图片
   // wx.getImageInfo = my.getImageInfo
-  const { getImageInfo } = wx;
+  const {
+    getImageInfo
+  } = wx;
   wx.getImageInfo = function(opt) {
-    const { success } = opt;
+    const {
+      success
+    } = opt;
     return getImageInfo.call(this, Object.assign({}, opt, {
       success(res) {
         res.type = res.type.substring(0, res.type.indexOf('?'));
@@ -385,10 +421,14 @@ function getInstance() {
     }));
   };
 
-  const { previewImage } = wx;
+  const {
+    previewImage
+  } = wx;
   wx.previewImage = function(opt) {
     const params = paramsMap(opt);
-    let { current } = params;
+    let {
+      current
+    } = params;
 
     if (current) {
       current = opt.urls.indexOf(current);
@@ -403,9 +443,13 @@ function getInstance() {
     return previewImage.call(this, params);
   };
 
-  const { compressImage } = wx;
+  const {
+    compressImage
+  } = wx;
   wx.compressImage = function(opt) {
-    const { src } = opt;
+    const {
+      src
+    } = opt;
     const success = opt.success || emptyFn;
     return compressImage.call(this, Object.assign({}, opt, {
       compressLevel: 4,
@@ -418,7 +462,9 @@ function getInstance() {
   };
 
   wx.chooseMessageFile = wx.chooseMessageFile || emptyFn;
-  const { chooseImage } = wx;
+  const {
+    chooseImage
+  } = wx;
   wx.chooseImage = function(opt) {
     const success = opt.success || emptyFn;
     opt.count = opt.count || 9;
@@ -431,7 +477,10 @@ function getInstance() {
           size: null
         }));
         const tempFiles = [].concat(arr);
-        success({ tempFilePaths, tempFiles });
+        success({
+          tempFilePaths,
+          tempFiles
+        });
       }
     }));
   };
@@ -476,7 +525,9 @@ function getInstance() {
 
   //////////位置
   // wx.chooseLocation = my.chooseLocation
-  const { openLocation } = wx;
+  const {
+    openLocation
+  } = wx;
   wx.openLocation = function(opt) {
     if (typeof opt.name === 'undefined') {
       opt.name = '位置';
@@ -488,7 +539,9 @@ function getInstance() {
   };
 
   // res无speed、accuracy、altitude、verticalAccuracy、horizontalAccuracy
-  const { getLocation } = wx;
+  const {
+    getLocation
+  } = wx;
   wx.getLocation = function(opt) {
     return getLocation(Object.assign({}, opt, {
       type: 0
@@ -502,7 +555,9 @@ function getInstance() {
   wx.showShareMenu = wx.showShareMenu || emptyFn;
 
   /////////画布
-  const { createCanvasContext } = wx;
+  const {
+    createCanvasContext
+  } = wx;
   wx.createCanvasContext = function(opt) {
     const canvasContext = createCanvasContext.call(this, opt);
     canvasContext.arcTo = canvasContext.arcTo || (() => canvasContext);
@@ -537,7 +592,9 @@ function getInstance() {
   };
 
   //////////文件
-  const { saveFile } = wx;
+  const {
+    saveFile
+  } = wx;
   wx.saveFile = function(opt) {
     const success = opt.success || emptyFn;
     const apFilePath = opt.tempFilePath;
@@ -550,14 +607,18 @@ function getInstance() {
     }));
   };
 
-  const { removeSavedFile } = wx;
+  const {
+    removeSavedFile
+  } = wx;
   wx.removeSavedFile = function(opt) {
     return removeSavedFile.call(this, paramsMap(opt, {
       filePath: 'apFilePath'
     }));
   };
 
-  const { getSavedFileList } = wx;
+  const {
+    getSavedFileList
+  } = wx;
   wx.getSavedFileList = function(opt) {
     const success = opt.success || emptyFn;
     return getSavedFileList.call(this, Object.assign({}, opt, {
@@ -571,14 +632,18 @@ function getInstance() {
     }));
   };
 
-  const { getSavedFileInfo } = wx;
+  const {
+    getSavedFileInfo
+  } = wx;
   wx.getSavedFileInfo = function(opt) {
     return getSavedFileInfo.call(this, paramsMap(opt, {
       filePath: "apFilePath"
     }));
   };
 
-  const { getFileInfo } = wx;
+  const {
+    getFileInfo
+  } = wx;
   wx.getFileInfo = function(opt) {
     return getFileInfo.call(this, paramsMap(opt, {
       filePath: 'apFilePath'
@@ -642,7 +707,9 @@ function getInstance() {
   };
 
   wx.getClipboardData = function(opt) {
-    const { success } = opt;
+    const {
+      success
+    } = opt;
     return wx.getClipboard(Object.assign({}, opt, {
       success(res) {
         res.data = res.text;
@@ -660,7 +727,9 @@ function getInstance() {
 
   //////////网络
   //getNetworkType
-  const { getNetworkType } = wx;
+  const {
+    getNetworkType
+  } = wx;
   wx.getNetworkType = function(opt) {
     const success = opt.success || emptyFn;
     return getNetworkType(Object.assign({}, opt, {
@@ -671,7 +740,9 @@ function getInstance() {
     }));
   };
 
-  const { onNetworkStatusChange } = wx;
+  const {
+    onNetworkStatusChange
+  } = wx;
   wx.onNetworkStatusChange = function(fn) {
     return onNetworkStatusChange((res) => {
       res.networkType = res.networkType.toLocaleLowerCase();
@@ -686,7 +757,9 @@ function getInstance() {
   // wx.onUserCaptureScreen = my.onUserCaptureScreen
 
   //////////电话
-  const { makePhoneCall } = wx;
+  const {
+    makePhoneCall
+  } = wx;
   wx.makePhoneCall = function(opt) {
     return makePhoneCall.call(this, paramsMap(opt, {
       phoneNumber: 'number'
@@ -756,7 +829,9 @@ function getInstance() {
   // WXML
   // 查找元素 返回的只有SelectorQuery对象
   // SelectorQuery对象只有.exec .select .selectAll .selectViewport 方法
-  const { createSelectorQuery } = wx;
+  const {
+    createSelectorQuery
+  } = wx;
   wx.createSelectorQuery = function(...args) {
     const query = createSelectorQuery.apply(this, args);
     query.in = query.in || function() {
@@ -786,7 +861,9 @@ function getInstance() {
 
   wx.checkSession = wx.checkSession || emptyFn;
 
-  const { getAuthUserInfo } = wx;
+  const {
+    getAuthUserInfo
+  } = wx;
   wx.getUserInfo = (o) => {
     const bak = {
       success: o.success,
@@ -845,7 +922,9 @@ function getInstance() {
 
   // 设置
   // authSetting 缺少address，invoiceTitle，invoice，werun
-  const { getSetting } = wx;
+  const {
+    getSetting
+  } = wx;
   wx.getSetting = function(opt) {
     const success = opt.success || emptyFn;
     return getSetting(Object.assign({}, opt, {
@@ -858,7 +937,9 @@ function getInstance() {
     }));
   };
 
-  const { openSetting } = wx;
+  const {
+    openSetting
+  } = wx;
   wx.openSetting = function(opt) {
     const success = opt.success || emptyFn;
     return openSetting(Object.assign({}, opt, {

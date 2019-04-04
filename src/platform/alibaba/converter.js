@@ -7,7 +7,9 @@ const md5Hex = require('md5-hex');
 const ab2str = require('arraybuffer-to-string');
 const str2ab = require('to-buffer');
 const through2 = require('through2');
-const { DOMParser } = require('xmldom');
+const {
+  DOMParser
+} = require('xmldom');
 const config = require('../../config');
 const logger = require('../../utils/logger');
 const converter = require('mp-converter').alibaba;
@@ -27,16 +29,19 @@ function convert(opt = {}) {
     .pipe(through2.obj(function(file, enc, cb) {
       const path = file.history[0].replace(file.base, '').replace('.wxss', '');
       const jsonPath = file.history[0].replace('.wxss', '.json');
+      const wxmlPath = file.history[0].replace('.wxss', '.wxml');
 
       // 对组件样式做scope处理
       fs.exists(jsonPath, (exist) => {
         if (exist) {
           const json = fs.readFileSync(jsonPath);
+          const wxml = fs.readFileSync(wxmlPath);
+          const str = ab2str(file.contents);
+          const hasImport = /<import/.test(wxml);
           const isCom = /"component":\s*true/.test(json);
 
-          if (isCom) {
+          if (!hasImport && isCom) {
             const md5 = `_${md5Hex(path)}`;
-            const str = ab2str(file.contents);
             scopeStyle(md5, str).then((css) => {
               file.contents = str2ab(css);
               this.push(file);

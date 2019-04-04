@@ -1,6 +1,6 @@
 {
   "name": "mp-adaptor",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "static cross-platform mini-program converter",
   "scripts": {
     "build": "gulp build",

@@ -9,11 +9,11 @@ const balancingGroup = require('./balancing-group');
 function extractFn(source, name) {
   const fnRegex = [
     // attached(arg) {}
-    new RegExp(`${name}\\(([^\\)]*)\\)[\\s\\S]*`),
+    new RegExp(`${name}\\(([^)]*)\\)([\\s\\S]*)`),
     // attached: function(args) {}
-    new RegExp(`${name}:\\s*function\\s*\\(([^\\)]*)\\)[\\s\\S]*`),
+    new RegExp(`${name}:\\s*function\\s*\\(([^)]*)\\)([\\s\\S]*)`),
     // attached: (args) => {}
-    new RegExp(`${name}:\\s*\\(([^\\)]*)\\)\\s*=>[\\s\\S]*`)
+    new RegExp(`${name}:\\s*\\(([^)]*)\\)\\s*=>([\\s\\S]*)`)
   ];
 
   let args = '';
@@ -34,7 +34,11 @@ function extractFn(source, name) {
     body = balancingGroup(body);
   }
 
-  return { name, args, body };
+  return {
+    name,
+    args,
+    body
+  };
 }
 
 module.exports = extractFn;

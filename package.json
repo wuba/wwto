@@ -1,6 +1,6 @@
 {
   "name": "wto-cli",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "weChat mini-program to other mini-program",
   "main": "lib/index.js",
   "bin": {
@@ -36,8 +36,8 @@
     "gulp-uglify-es": "^1.0.4",
     "gulp-watch": "^5.0.1",
     "md5-hex": "^2.0.0",
-    "mp-adaptor": "^1.0.7",
-    "mp-converter": "^1.0.7",
+    "mp-adaptor": "^1.0.8",
+    "mp-converter": "^1.0.8",
     "mp-linter": "1.0.7",
     "mp-plugin": "1.0.1",
     "postcss": "5.2.16",
