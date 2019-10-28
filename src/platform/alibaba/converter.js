@@ -32,7 +32,7 @@ function convert(opt = {}) {
       const wxmlPath = file.history[0].replace('.wxss', '.wxml');
 
       // 对组件样式做scope处理
-      fs.exists(jsonPath, (exist) => {
+      fs.exists(wxmlPath, (exist) => {
         if (exist) {
           const json = fs.readFileSync(jsonPath);
           const wxml = fs.readFileSync(wxmlPath);
@@ -120,7 +120,7 @@ function convert(opt = {}) {
   });
 
   // 注入适配器代码
-  gulp.src('node_modules/mp-adaptor/lib/alibaba.js')
+  gulp.src(sysPath.resolve(__dirname, '../../adaptor/lib/alibaba.js'))
     .pipe(rename('adaptor.js'))
     .pipe(gulp.dest(dest)).on('end', () => {
       logger.info('复制 adaptor.js 完成！');

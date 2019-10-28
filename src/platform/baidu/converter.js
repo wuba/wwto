@@ -9,6 +9,7 @@ const replace = require('gulp-replace');
 const config = require('../../config');
 const logger = require('../../utils/logger');
 const converter = require('mp-converter').baidu;
+
 const plugin = require('mp-plugin');
 
 function convert(opt = {}) {
@@ -53,10 +54,11 @@ function convert(opt = {}) {
       });
   });
 
-  // 注入适配器代码
-  gulp.src('node_modules/mp-adaptor/lib/baidu.js')
+    // 注入适配器代码
+    gulp.src(sysPath.resolve(__dirname, '../../adaptor/lib/baidu.js'))
     .pipe(rename('adaptor.js'))
-    .pipe(gulp.dest(dest)).on('end', () => {
+    .pipe(gulp.dest(dest))
+    .on('end', () => {
       logger.info('复制 adaptor.js 完成！');
     });
 
