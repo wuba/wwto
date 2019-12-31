@@ -3,3 +3,4 @@ demo/dist/
 .history/
 .idea/
 .DS_Store
+coverage
