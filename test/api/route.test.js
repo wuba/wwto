@@ -1,5 +1,5 @@
 const simulate = require('miniprogram-simulate')
-const _ = require('../utils')
+const _ = require('../utils/utils')
 
 test('navigateBack', async () => {
     const res = await _.wa(wx.navigateBack)

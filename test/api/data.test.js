@@ -1,5 +1,5 @@
 const simulate = require('miniprogram-simulate')
-const _ = require('../utils')
+const _ = require('../utils/utils')
 
 test('clearStorage', async () => {
     wx.setStorageSync('ta1', 123)

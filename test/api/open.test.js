@@ -1,7 +1,7 @@
 const crypto = require('crypto')
 
 const simulate = require('miniprogram-simulate')
-const _ = require('../utils')
+const _ = require('../utils/utils')
 
 test('getAccountInfoSync', () => {
     expect(wx.getAccountInfoSync()).toEqual({

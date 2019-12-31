@@ -1,7 +1,7 @@
 const crypto = require('crypto')
 
 const simulate = require('miniprogram-simulate')
-const _ = require('../utils')
+const _ = require('../utils/utils')
 
 test('getShareInfo', async () => {
     const appid = 'wx4f4bc4dec97d474b'

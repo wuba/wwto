@@ -1,5 +1,5 @@
 const simulate = require('miniprogram-simulate')
-const _ = require('../utils')
+const _ = require('../utils/utils')
 const MapContext = require('miniprogram-simulate/src/api/map')
 
 test('createMapContext', async () => {
