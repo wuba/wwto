@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for src/linter/lib/alibaba/index.js</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../../../prettify.css" />
+    <link rel="stylesheet" href="../../../../base.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+<body>
+<div class='wrapper'>
+  <div class='pad1'>
+    <h1>
+      <a href="../../../../index.html">All files</a> / <a href="index.html">src/linter/lib/alibaba</a> index.js
+    </h1>
+    <div class='clearfix'>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">24.49% </span>
+        <span class="quiet">Statements</span>
+        <span class='fraction'>12/49</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Branches</span>
+        <span class='fraction'>0/16</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">0% </span>
+        <span class="quiet">Functions</span>
+        <span class='fraction'>0/8</span>
+      </div>
+      <div class='fl pad1y space-right2'>
+        <span class="strong">100% </span>
+        <span class="quiet">Lines</span>
+        <span class='fraction'>1/1</span>
+      </div>
+    </div>
+    <p class="quiet">
+      Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+    </p>
+  </div>
+  <div class='status-line low'></div>
+<pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">const utils=require("../utils/utils"),unsupportedFns=require("./unsupported-fns"),unsupportedTags=require("./unsupported-tags"),unsupportedAttrs=require("./unsupported-attrs"),unsupportedEvents=require("./unsupported-events"),wxmlLineRules=[<span class="fstat-no" title="function not covered" >e=</span>&gt;{const r=<span class="cstat-no" title="statement not covered" >"组件阿里小程序未实现";<span class="cstat-no" title="statement not covered" ></span>for(let t=<span class="cstat-no" title="statement not covered" >0;</span>t&lt;unsupportedTags.length;t++){const s=<span class="cstat-no" title="statement not covered" >unsupportedTags[t],</span>u=<span class="cstat-no" title="statement not covered" >new RegExp(`&lt;${s}\\s+`);<span class="cstat-no" title="statement not covered" ></span>if(e.match(u))<span class="cstat-no" title="statement not covered" >return{source:e,rule:[s,r].join("")}}<span class="cstat-no" title="statement not covered" ></span></span>r</span>eturn null}</span>,<span class="fstat-no" title="function not covered" >e=</span>&gt;{const r=<span class="cstat-no" title="statement not covered" >`阿里小程序 button 组件 不支持 ${["contact","getUserInfo","getPhoneNumber","openSetting","feedback"].join("|")} 属性`;<span class="cstat-no" title="statement not covered" ></span>return e.match("&lt;button[^&gt;]*open-type=[\"'](contact|getUserInfo|getPhoneNumber|openSetting|feedback)[\"']")?{source:e,rule:r}:null}</span>,<span class="fstat-no" title="function not covered" >e=</span>&gt;{const r=<span class="cstat-no" title="statement not covered" >[{rule:"scroll-view组件upper-threshold、lower-threshold、scroll-top、scroll-left属性不支持rpx",reg:"&lt;scroll-view[^&gt;]*(upper-threshold|lower-threshold|scroll-top|scroll-left)=[\"']\\d*rpx[\"']"},{rule:"icon组件size属性不支持rpx",reg:"&lt;icon[^&gt;]*size=[\"']\\d*rpx[\"']"},{rule:"progress组件stroke-width属性不支持rpx",reg:"&lt;progress[^&gt;]*stroke-width=[\"']\\d*rpx[\"']"},{rule:"button组件open-type仅支持share",reg:"&lt;button[^&gt;]*open-type=[\"']((?!share).)*[\"']"},{rule:"navigator组件open-type不支持支持reLaunch、exit",reg:"&lt;navigator[^&gt;]*open-type=[\"'](reLaunch|exit)[\"']"}];<span class="cstat-no" title="statement not covered" ></span>for(let t=<span class="cstat-no" title="statement not covered" >0;</span>t&lt;r.length;t++){const s=<span class="cstat-no" title="statement not covered" >new RegExp(r[t].reg);<span class="cstat-no" title="statement not covered" ></span>if(e.match(s))<span class="cstat-no" title="statement not covered" >return{source:e,rule:r[t].rule}}<span class="cstat-no" title="statement not covered" ></span></span>r</span>eturn null}</span>],wxmlFileRules=[<span class="fstat-no" title="function not covered" >(e</span>,r)=&gt;<span class="cstat-no" title="statement not covered" >utils.unsupportedAttrOrEvents(e,r,unsupportedAttrs,"阿里","属性"),<span class="fstat-no" title="function not covered" ></span>(e</span>,r)=&gt;<span class="cstat-no" title="statement not covered" >utils.unsupportedAttrOrEvents(e,r,unsupportedEvents,"阿里","事件")]</span>,wxssFileRules=[],wxssLineRules=[],scriptLineRules=[<span class="fstat-no" title="function not covered" >e=</span>&gt;{const r=<span class="cstat-no" title="statement not covered" >"方法阿里小程序未实现";<span class="cstat-no" title="statement not covered" ></span>for(let t=<span class="cstat-no" title="statement not covered" >0;</span>t&lt;unsupportedFns.length;t++){const s=<span class="cstat-no" title="statement not covered" >unsupportedFns[t],</span>u=<span class="cstat-no" title="statement not covered" >new RegExp(`\\.${s}\\(`);<span class="cstat-no" title="statement not covered" ></span>if(e.match(u))<span class="cstat-no" title="statement not covered" >return{source:e,rule:[s,r].join("")}}<span class="cstat-no" title="statement not covered" ></span></span>r</span>eturn null}</span>],scriptFileRules=[<span class="fstat-no" title="function not covered" >(e</span>,r)=&gt;{const t=<span class="cstat-no" title="statement not covered" >/['"][\w\/.]+['"]/,</span>s=<span class="cstat-no" title="statement not covered" >e.match(/require\(([^)]+)\)/);<span class="cstat-no" title="statement not covered" ></span>if(s&amp;&amp;!t.test(s[1])){<span class="cstat-no" title="statement not covered" >return{line:utils.calcLine(e,s[0]),path:r,source:s[0],rule:"`require`，参数只能是字符串直接量，不能是变量（如：`var path = '/a/b/c'; require(path);`）"}}<span class="cstat-no" title="statement not covered" ></span>r</span>eturn null}</span>,<span class="fstat-no" title="function not covered" >(e</span>,r)=&gt;{const t=<span class="cstat-no" title="statement not covered" >/triggerEvent\(['"]/,</span>s=<span class="cstat-no" title="statement not covered" >e.match(/triggerEvent\(([^)]+)\)/);<span class="cstat-no" title="statement not covered" ></span>if(s&amp;&amp;!t.test(s[0])){<span class="cstat-no" title="statement not covered" >return{line:utils.calcLine(e,s[0]),path:r,source:s[0],rule:"triggerEvent(name, data)`，`name`目前只支持字符串直接量，不支持变量"}}<span class="cstat-no" title="statement not covered" ></span>r</span>eturn null}</span>];module.exports={wxmlLineRules:wxmlLineRules,wxmlFileRules:wxmlFileRules,wxssLineRules:wxssLineRules,wxssFileRules:wxssFileRules,scriptLineRules:scriptLineRules,scriptFileRules:scriptFileRules};</pre></td></tr>
+</table></pre>
+<div class='push'></div><!-- for sticky footer -->
+</div><!-- /wrapper -->
+<div class='footer quiet pad2 space-top1 center small'>
+  Code coverage
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Dec 31 2019 16:17:18 GMT+0800 (GMT+08:00)
+</div>
+</div>
+<script src="../../../../prettify.js"></script>
+<script>
+window.onload = function () {
+        if (typeof prettyPrint === 'function') {
+            prettyPrint();
+        }
+};
+</script>
+<script src="../../../../sorter.js"></script>
+<script src="../../../../block-navigation.js"></script>
+</body>
+</html>
