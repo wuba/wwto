@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1577959469916" clover="3.2.0">
-  <project timestamp="1577959469916" name="All files">
-    <metrics statements="207" coveredstatements="95" conditionals="144" coveredconditionals="6" methods="178" coveredmethods="71" elements="529" coveredelements="172" complexity="0" loc="207" ncloc="207" packages="15" files="45" classes="45"/>
+<coverage generated="1577965959262" clover="3.2.0">
+  <project timestamp="1577965959262" name="All files">
+    <metrics statements="207" coveredstatements="95" conditionals="144" coveredconditionals="6" methods="178" coveredmethods="83" elements="529" coveredelements="184" complexity="0" loc="207" ncloc="207" packages="15" files="45" classes="45"/>
     <package name="src">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="config.js" path="/Users/a58/Documents/项目/wto/wto/src/config.js">
@@ -64,26 +64,26 @@
       </file>
     </package>
     <package name="src.converter.lib.toutiao">
-      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="17" coveredmethods="0"/>
+      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="17" coveredmethods="12"/>
       <file name="index.js" path="/Users/a58/Documents/项目/wto/wto/src/converter/lib/toutiao/index.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
       </file>
       <file name="json.js" path="/Users/a58/Documents/项目/wto/wto/src/converter/lib/toutiao/json.js">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="2" type="stmt"/>
       </file>
       <file name="script.js" path="/Users/a58/Documents/项目/wto/wto/src/converter/lib/toutiao/script.js">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="1" count="2" type="stmt"/>
       </file>
       <file name="wxml.js" path="/Users/a58/Documents/项目/wto/wto/src/converter/lib/toutiao/wxml.js">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="10" coveredmethods="6"/>
+        <line num="1" count="2" type="stmt"/>
       </file>
       <file name="wxss.js" path="/Users/a58/Documents/项目/wto/wto/src/converter/lib/toutiao/wxss.js">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="3"/>
+        <line num="1" count="2" type="stmt"/>
       </file>
     </package>
     <package name="src.converter.lib.utils">
