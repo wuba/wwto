@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1577965959262" clover="3.2.0">
-  <project timestamp="1577965959262" name="All files">
-    <metrics statements="207" coveredstatements="95" conditionals="144" coveredconditionals="6" methods="178" coveredmethods="83" elements="529" coveredelements="184" complexity="0" loc="207" ncloc="207" packages="15" files="45" classes="45"/>
+<coverage generated="1577967979183" clover="3.2.0">
+  <project timestamp="1577967979184" name="All files">
+    <metrics statements="207" coveredstatements="95" conditionals="144" coveredconditionals="22" methods="178" coveredmethods="85" elements="529" coveredelements="202" complexity="0" loc="207" ncloc="207" packages="15" files="45" classes="45"/>
     <package name="src">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="config.js" path="/Users/a58/Documents/项目/wto/wto/src/config.js">
@@ -87,14 +87,14 @@
       </file>
     </package>
     <package name="src.converter.lib.utils">
-      <metrics statements="2" coveredstatements="2" conditionals="20" coveredconditionals="0" methods="2" coveredmethods="0"/>
+      <metrics statements="2" coveredstatements="2" conditionals="20" coveredconditionals="16" methods="2" coveredmethods="2"/>
       <file name="balancing-group.js" path="/Users/a58/Documents/项目/wto/wto/src/converter/lib/utils/balancing-group.js">
-        <metrics statements="1" coveredstatements="1" conditionals="12" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="1" count="2" type="cond" truecount="0" falsecount="12"/>
+        <metrics statements="1" coveredstatements="1" conditionals="12" coveredconditionals="11" methods="1" coveredmethods="1"/>
+        <line num="1" count="12" type="cond" truecount="11" falsecount="1"/>
       </file>
       <file name="extra-function.js" path="/Users/a58/Documents/项目/wto/wto/src/converter/lib/utils/extra-function.js">
-        <metrics statements="1" coveredstatements="1" conditionals="8" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="1" count="2" type="cond" truecount="0" falsecount="8"/>
+        <metrics statements="1" coveredstatements="1" conditionals="8" coveredconditionals="5" methods="1" coveredmethods="1"/>
+        <line num="1" count="3" type="cond" truecount="5" falsecount="3"/>
       </file>
     </package>
     <package name="src.linter.lib">
