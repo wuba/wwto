@@ -9,7 +9,7 @@ function testScript(testName, code1, code2) {
 testScript(
   'baidu script convert test:',
   convert(`
-  "https://github.com/fulme/wto-cli.git/issues"
+  "//github.com/fulme/wto-cli.git/issues"
   commander\.option()
   commander\.transition()
   commander\.timingFunction()`),

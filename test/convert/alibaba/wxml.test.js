@@ -37,8 +37,7 @@ testWxml(
   <slider activeColor=""></slider>
   <slider block-color=""></slider>
   <progress activeColor="" backgroundColor></progress>
-  <form catchsubmit="formSubmit" catchreset="formReset" bind:test></form>
-  `, true),
+  <form catchsubmit="formSubmit" catchreset="formReset" bind:test></form>`, true),
   `
   <import src="../././common/foot.axml" />
   <block a:for="{{list}}" a:key="{{item.id}}">
@@ -68,6 +67,5 @@ testWxml(
   <slider active-color=""></slider>
   <slider handle-color=""></slider>
   <progress active-color="" backgroundColor></progress>
-  <form onSubmit="formSubmit" catchReset="formReset" bindtest></form>
-  `
+  <form onSubmit="formSubmit" catchReset="formReset" bindtest></form>`
 )
