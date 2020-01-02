@@ -8,6 +8,8 @@ function testCode(testName, code01, code02) {
 
 testCode(
   'alibaba wxss convert test:',
-  wxss('test.wxss'),
-  'test.wxss'
+  // wxss('test.wxss\.wxss([])'),
+  wxss(`test.wxss\.wxss(["'])`),
+  `test.wxss.wxss([\"'])`
+  // 'test.wxss.wxss([])'
 )

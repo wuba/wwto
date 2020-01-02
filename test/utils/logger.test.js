@@ -14,19 +14,26 @@ testCode(
 
 testCode(
   'error testing:',
-  Plugins.warn('错误提示', '\n[Error] '),
+  Plugins.error('错误提示', '\n[Error] '),
   console.error('[Error] 错误提示')
 );
 
 testCode(
   'success testing:',
-  Plugins.warn('成功提示', '\n[SUCCESS] '),
+  Plugins.success('成功提示', '\n[SUCCESS] '),
   console.log('[SUCCESS] 成功提示')
 );
 
 testCode(
   'info testing:',
-  Plugins.warn('信息提示', '\n[INFO] '),
+  Plugins.info('信息提示', '\n[INFO] '),
   console.info('[INFO] 信息提示')
 );
+
+// 控制台输出警告
+testCode(
+  'lintWarning testing:',
+  Plugins.lintWarning('百度小程序', '/index/a', '33', '<a/>', ''),
+  undefined
+)
 

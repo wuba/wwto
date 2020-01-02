@@ -20,19 +20,19 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">4.55% </span>
+        <span class="strong">72.73% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>1/22</span>
+        <span class='fraction'>16/22</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">50% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/2</span>
+        <span class='fraction'>1/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">71.43% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/21</span>
+        <span class='fraction'>15/21</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
@@ -44,15 +44,15 @@
       Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
     </p>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line medium'></div>
 <pre><table class="coverage">
-<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">function <span class="fstat-no" title="function not covered" >convert(</span>e){<span class="cstat-no" title="statement not covered" >return e.replace(/wx:/g,"s-").replace(/s-for-items/,"s-for").replace(/\.wxml/g,".swan").replace(/&gt;&lt;\/input&gt;/g,"/&gt;").replace(/\s+form[A-Z]\w+=/g,<span class="fstat-no" title="function not covered" >e=</span>&gt;<span class="cstat-no" title="statement not covered" >e.replace(/[A-Z]/g,<span class="fstat-no" title="function not covered" >e=</span>&gt;<span class="cstat-no" title="statement not covered" >`-${e}`)</span>)</span>.replace(/&lt;[\w]+/gi,<span class="fstat-no" title="function not covered" >e=</span>&gt;<span class="cstat-no" title="statement not covered" >e.replace(/[A-Z]/g,<span class="fstat-no" title="function not covered" >e=</span>&gt;<span class="cstat-no" title="statement not covered" >["-",e.toLowerCase()].join(""))</span>)</span>.replace(/data-[^=\s]+=/g,<span class="fstat-no" title="function not covered" >e=</span>&gt;<span class="cstat-no" title="statement not covered" >e.toLocaleLowerCase())</span>.replace(/&lt;\/[\w]+&gt;/gi,<span class="fstat-no" title="function not covered" >e=</span>&gt;<span class="cstat-no" title="statement not covered" >e.replace(/[A-Z]/g,<span class="fstat-no" title="function not covered" >e=</span>&gt;<span class="cstat-no" title="statement not covered" >["-",e.toLowerCase()].join(""))</span>)</span>.replace(/{{[^}]+(&lt;)[^=\s][^}]+}}/gi,<span class="fstat-no" title="function not covered" >(e</span>,r)=&gt;<span class="cstat-no" title="statement not covered" >e.replace(r,[r," "].join("")))</span>.replace(/{{[^}\d\w]*(\.)[\d][^}]+}}/g,<span class="fstat-no" title="function not covered" >(e</span>,r)=&gt;<span class="cstat-no" title="statement not covered" >e.replace(r,["0",r].join("")))</span>.replace(/scroll-into-view=["']{{([^}]+)}}["']/g,<span class="fstat-no" title="function not covered" >(e</span>,r)=&gt;<span class="cstat-no" title="statement not covered" >e.replace("{{","").replace("}}","").replace(r,`{=${r}=}`))</span>.replace(/scroll-top=["']{{([^}]+)}}["']/g,<span class="fstat-no" title="function not covered" >(e</span>,r)=&gt;<span class="cstat-no" title="statement not covered" >e.replace("{{","").replace("}}","").replace(r,`{=${r}=}`))</span>.replace(/scroll-left=["']{{([^}]+)}}["']/g,<span class="fstat-no" title="function not covered" >(e</span>,r)=&gt;<span class="cstat-no" title="statement not covered" >e.replace("{{","").replace("}}","").replace(r,`{=${r}=}`))</span>.replace(/&lt;template.*\s+data=["']({{[^}]+}})/g,<span class="fstat-no" title="function not covered" >(e</span>,r)=&gt;<span class="cstat-no" title="statement not covered" >e.replace(r,`{${r}}`))</span>.replace(/&lt;image([^&gt;]+)&gt;/g,<span class="fstat-no" title="function not covered" >(e</span>,r)=&gt;<span class="cstat-no" title="statement not covered" >e.match(/class=/)?e:e.replace(r,[' class="fix-image-cls" ',r].join("")))</span>.replace(/url\(['"]?\/\/[^)]+['"]?\)/gi,<span class="fstat-no" title="function not covered" >e=</span>&gt;<span class="cstat-no" title="statement not covered" >e.replace(/\/\//g,<span class="fstat-no" title="function not covered" >e=</span>&gt;<span class="cstat-no" title="statement not covered" >`https:${e}`)</span>)</span>.replace(/url=["']{{([^{}\s?=]+)}}/gi,<span class="fstat-no" title="function not covered" >(e</span>,r)=&gt;<span class="cstat-no" title="statement not covered" >e.replace(r,`(${r}[0]=='/' &amp;&amp; ${r}[1]=='/') ? 'https:' + ${r}:${r}`))</span>.replace(/url\({{([^{}\s?=]+)}}/gi,<span class="fstat-no" title="function not covered" >(e</span>,r)=&gt;<span class="cstat-no" title="statement not covered" >e.replace(r,`(${r}[0]=='/' &amp;&amp; ${r}[1]=='/') ? 'https:' + ${r}:${r}`))</span>.replace(/&lt;video[^&gt;]+(object-fit)=/g,<span class="fstat-no" title="function not covered" >(e</span>,r)=&gt;<span class="cstat-no" title="statement not covered" >e.replace(r,"objectFit"))</span>.replace(/&lt;video[^&gt;]+(vslide-gesture|page-gesture)=/g,<span class="fstat-no" title="function not covered" >(e</span>,r)=&gt;<span class="cstat-no" title="statement not covered" >e.replace(r,"page-gesture"))</span>}</span>module.exports=convert;</pre></td></tr>
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">13x</span></td><td class="text"><pre class="prettyprint lang-js">function convert(e){return e.replace(/wx:/g,"s-").replace(/s-for-items/,"s-for").replace(/\.wxml/g,".swan").replace(/&gt;&lt;\/input&gt;/g,"/&gt;").replace(/\s+form[A-Z]\w+=/g,e=&gt;e.replace(/[A-Z]/g,e=&gt;`-${e}`)).replace(/&lt;[\w]+/gi,e=&gt;e.replace(/[A-Z]/g,e=&gt;["-",e.toLowerCase()].join(""))).replace(/data-[^=\s]+=/g,e=&gt;e.toLocaleLowerCase()).replace(/&lt;\/[\w]+&gt;/gi,e=&gt;e.replace(/[A-Z]/g,<span class="fstat-no" title="function not covered" >e=</span>&gt;<span class="cstat-no" title="statement not covered" >["-",e.toLowerCase()].join(""))</span>).replace(/{{[^}]+(&lt;)[^=\s][^}]+}}/gi,(e,r)=&gt;e.replace(r,[r," "].join(""))).replace(/{{[^}\d\w]*(\.)[\d][^}]+}}/g,<span class="fstat-no" title="function not covered" >(e</span>,r)=&gt;<span class="cstat-no" title="statement not covered" >e.replace(r,["0",r].join("")))</span>.replace(/scroll-into-view=["']{{([^}]+)}}["']/g,(e,r)=&gt;e.replace("{{","").replace("}}","").replace(r,`{=${r}=}`)).replace(/scroll-top=["']{{([^}]+)}}["']/g,(e,r)=&gt;e.replace("{{","").replace("}}","").replace(r,`{=${r}=}`)).replace(/scroll-left=["']{{([^}]+)}}["']/g,(e,r)=&gt;e.replace("{{","").replace("}}","").replace(r,`{=${r}=}`)).replace(/&lt;template.*\s+data=["']({{[^}]+}})/g,(e,r)=&gt;e.replace(r,`{${r}}`)).replace(/&lt;image([^&gt;]+)&gt;/g,(e,r)=&gt;e.match(/class=/)?<span class="branch-0 cbranch-no" title="branch not covered" >e:</span>e.replace(r,[' class="fix-image-cls" ',r].join(""))).replace(/url\(['"]?\/\/[^)]+['"]?\)/gi,<span class="fstat-no" title="function not covered" >e=</span>&gt;<span class="cstat-no" title="statement not covered" >e.replace(/\/\//g,<span class="fstat-no" title="function not covered" >e=</span>&gt;<span class="cstat-no" title="statement not covered" >`https:${e}`)</span>)</span>.replace(/url=["']{{([^{}\s?=]+)}}/gi,<span class="fstat-no" title="function not covered" >(e</span>,r)=&gt;<span class="cstat-no" title="statement not covered" >e.replace(r,`(${r}[0]=='/' &amp;&amp; ${r}[1]=='/') ? 'https:' + ${r}:${r}`))</span>.replace(/url\({{([^{}\s?=]+)}}/gi,<span class="fstat-no" title="function not covered" >(e</span>,r)=&gt;<span class="cstat-no" title="statement not covered" >e.replace(r,`(${r}[0]=='/' &amp;&amp; ${r}[1]=='/') ? 'https:' + ${r}:${r}`))</span>.replace(/&lt;video[^&gt;]+(object-fit)=/g,(e,r)=&gt;e.replace(r,"objectFit")).replace(/&lt;video[^&gt;]+(vslide-gesture|page-gesture)=/g,(e,r)=&gt;e.replace(r,"page-gesture"))}module.exports=convert;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Dec 31 2019 16:17:18 GMT+0800 (GMT+08:00)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Thu Jan 02 2020 16:55:48 GMT+0800 (GMT+08:00)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

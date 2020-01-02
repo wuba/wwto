@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1577780239092" clover="3.2.0">
-  <project timestamp="1577780239092" name="All files">
-    <metrics statements="207" coveredstatements="85" conditionals="144" coveredconditionals="15" methods="178" coveredmethods="16" elements="529" coveredelements="116" complexity="0" loc="207" ncloc="207" packages="15" files="45" classes="45"/>
+<coverage generated="1577955348455" clover="3.2.0">
+  <project timestamp="1577955348455" name="All files">
+    <metrics statements="207" coveredstatements="95" conditionals="144" coveredconditionals="6" methods="178" coveredmethods="67" elements="529" coveredelements="168" complexity="0" loc="207" ncloc="207" packages="15" files="45" classes="45"/>
     <package name="src">
-      <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="config.js" path="/Users/a58/Documents/项目/wto/wto/src/config.js">
-        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="8" count="0" type="stmt"/>
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.converter.lib">
@@ -18,22 +18,22 @@
       </file>
     </package>
     <package name="src.converter.lib.alibaba">
-      <metrics statements="5" coveredstatements="5" conditionals="28" coveredconditionals="12" methods="45" coveredmethods="9"/>
+      <metrics statements="5" coveredstatements="5" conditionals="28" coveredconditionals="2" methods="45" coveredmethods="30"/>
       <file name="index.js" path="/Users/a58/Documents/项目/wto/wto/src/converter/lib/alibaba/index.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
       </file>
       <file name="json.js" path="/Users/a58/Documents/项目/wto/wto/src/converter/lib/alibaba/json.js">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="7" coveredmethods="6"/>
+        <line num="1" count="2" type="stmt"/>
       </file>
       <file name="script.js" path="/Users/a58/Documents/项目/wto/wto/src/converter/lib/alibaba/script.js">
-        <metrics statements="1" coveredstatements="1" conditionals="26" coveredconditionals="11" methods="16" coveredmethods="3"/>
-        <line num="1" count="4" type="cond" truecount="11" falsecount="15"/>
+        <metrics statements="1" coveredstatements="1" conditionals="26" coveredconditionals="1" methods="16" coveredmethods="7"/>
+        <line num="1" count="2" type="cond" truecount="1" falsecount="25"/>
       </file>
       <file name="wxml.js" path="/Users/a58/Documents/项目/wto/wto/src/converter/lib/alibaba/wxml.js">
-        <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="1" methods="20" coveredmethods="5"/>
-        <line num="1" count="8" type="cond" truecount="1" falsecount="1"/>
+        <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="1" methods="20" coveredmethods="16"/>
+        <line num="1" count="19" type="cond" truecount="1" falsecount="1"/>
       </file>
       <file name="wxss.js" path="/Users/a58/Documents/项目/wto/wto/src/converter/lib/alibaba/wxss.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
@@ -41,26 +41,26 @@
       </file>
     </package>
     <package name="src.converter.lib.baidu">
-      <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="0" methods="32" coveredmethods="0"/>
+      <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="1" methods="32" coveredmethods="21"/>
       <file name="index.js" path="/Users/a58/Documents/项目/wto/wto/src/converter/lib/baidu/index.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
         <line num="1" count="1" type="stmt"/>
       </file>
       <file name="json.js" path="/Users/a58/Documents/项目/wto/wto/src/converter/lib/baidu/json.js">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+        <line num="1" count="2" type="stmt"/>
       </file>
       <file name="script.js" path="/Users/a58/Documents/项目/wto/wto/src/converter/lib/baidu/script.js">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="1"/>
+        <line num="1" count="2" type="stmt"/>
       </file>
       <file name="wxml.js" path="/Users/a58/Documents/项目/wto/wto/src/converter/lib/baidu/wxml.js">
-        <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="21" coveredmethods="0"/>
-        <line num="1" count="1" type="cond" truecount="0" falsecount="2"/>
+        <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="1" methods="21" coveredmethods="15"/>
+        <line num="1" count="13" type="cond" truecount="1" falsecount="1"/>
       </file>
       <file name="wxss.js" path="/Users/a58/Documents/项目/wto/wto/src/converter/lib/baidu/wxss.js">
-        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="5" coveredmethods="1"/>
+        <line num="1" count="2" type="stmt"/>
       </file>
     </package>
     <package name="src.converter.lib.toutiao">
@@ -87,14 +87,14 @@
       </file>
     </package>
     <package name="src.converter.lib.utils">
-      <metrics statements="2" coveredstatements="2" conditionals="20" coveredconditionals="2" methods="2" coveredmethods="1"/>
+      <metrics statements="2" coveredstatements="2" conditionals="20" coveredconditionals="0" methods="2" coveredmethods="0"/>
       <file name="balancing-group.js" path="/Users/a58/Documents/项目/wto/wto/src/converter/lib/utils/balancing-group.js">
         <metrics statements="1" coveredstatements="1" conditionals="12" coveredconditionals="0" methods="1" coveredmethods="0"/>
         <line num="1" count="2" type="cond" truecount="0" falsecount="12"/>
       </file>
       <file name="extra-function.js" path="/Users/a58/Documents/项目/wto/wto/src/converter/lib/utils/extra-function.js">
-        <metrics statements="1" coveredstatements="1" conditionals="8" coveredconditionals="2" methods="1" coveredmethods="1"/>
-        <line num="1" count="12" type="cond" truecount="2" falsecount="6"/>
+        <metrics statements="1" coveredstatements="1" conditionals="8" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="1" count="2" type="cond" truecount="0" falsecount="8"/>
       </file>
     </package>
     <package name="src.linter.lib">
@@ -131,23 +131,23 @@
       <metrics statements="5" coveredstatements="5" conditionals="16" coveredconditionals="0" methods="10" coveredmethods="0"/>
       <file name="index.js" path="/Users/a58/Documents/项目/wto/wto/src/linter/lib/baidu/index.js">
         <metrics statements="1" coveredstatements="1" conditionals="16" coveredconditionals="0" methods="10" coveredmethods="0"/>
-        <line num="1" count="1" type="cond" truecount="0" falsecount="16"/>
+        <line num="1" count="2" type="cond" truecount="0" falsecount="16"/>
       </file>
       <file name="unsupported-attrs.js" path="/Users/a58/Documents/项目/wto/wto/src/linter/lib/baidu/unsupported-attrs.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
+        <line num="1" count="2" type="stmt"/>
       </file>
       <file name="unsupported-events.js" path="/Users/a58/Documents/项目/wto/wto/src/linter/lib/baidu/unsupported-events.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
+        <line num="1" count="2" type="stmt"/>
       </file>
       <file name="unsupported-fns.js" path="/Users/a58/Documents/项目/wto/wto/src/linter/lib/baidu/unsupported-fns.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
+        <line num="1" count="2" type="stmt"/>
       </file>
       <file name="unsupported-tags.js" path="/Users/a58/Documents/项目/wto/wto/src/linter/lib/baidu/unsupported-tags.js">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
+        <line num="1" count="2" type="stmt"/>
       </file>
     </package>
     <package name="src.linter.lib.toutiao">
@@ -177,7 +177,7 @@
       <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
       <file name="utils.js" path="/Users/a58/Documents/项目/wto/wto/src/linter/lib/utils/utils.js">
         <metrics statements="1" coveredstatements="1" conditionals="2" coveredconditionals="0" methods="4" coveredmethods="0"/>
-        <line num="1" count="1" type="cond" truecount="0" falsecount="2"/>
+        <line num="1" count="2" type="cond" truecount="0" falsecount="2"/>
       </file>
     </package>
     <package name="src.platform.alibaba">
@@ -279,13 +279,13 @@
       </file>
     </package>
     <package name="src.scope">
-      <metrics statements="29" coveredstatements="7" conditionals="14" coveredconditionals="0" methods="11" coveredmethods="0"/>
+      <metrics statements="29" coveredstatements="11" conditionals="14" coveredconditionals="1" methods="11" coveredmethods="4"/>
       <file name="scope-id.js" path="/Users/a58/Documents/项目/wto/wto/src/scope/scope-id.js">
-        <metrics statements="16" coveredstatements="3" conditionals="8" coveredconditionals="0" methods="6" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="5" count="0" type="stmt"/>
+        <metrics statements="16" coveredstatements="4" conditionals="8" coveredconditionals="0" methods="6" coveredmethods="1"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
         <line num="6" count="0" type="stmt"/>
         <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="9" count="0" type="cond" truecount="0" falsecount="4"/>
@@ -300,18 +300,18 @@
         <line num="25" count="0" type="stmt"/>
       </file>
       <file name="scope-style.js" path="/Users/a58/Documents/项目/wto/wto/src/scope/scope-style.js">
-        <metrics statements="6" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
+        <metrics statements="6" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
         <line num="16" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
       </file>
       <file name="scope-template.js" path="/Users/a58/Documents/项目/wto/wto/src/scope/scope-template.js">
-        <metrics statements="7" coveredstatements="1" conditionals="6" coveredconditionals="0" methods="2" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="0" type="cond" truecount="0" falsecount="2"/>
+        <metrics statements="7" coveredstatements="2" conditionals="6" coveredconditionals="1" methods="2" coveredmethods="1"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="1" type="cond" truecount="1" falsecount="1"/>
         <line num="3" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="4" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="7" count="0" type="stmt"/>
@@ -320,15 +320,15 @@
       </file>
     </package>
     <package name="src.utils">
-      <metrics statements="44" coveredstatements="16" conditionals="9" coveredconditionals="0" methods="19" coveredmethods="2"/>
+      <metrics statements="44" coveredstatements="21" conditionals="9" coveredconditionals="1" methods="19" coveredmethods="7"/>
       <file name="linter.js" path="/Users/a58/Documents/项目/wto/wto/src/utils/linter.js">
-        <metrics statements="31" coveredstatements="7" conditionals="5" coveredconditionals="0" methods="13" coveredmethods="0"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="3" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="6" count="1" type="stmt"/>
+        <metrics statements="31" coveredstatements="8" conditionals="5" coveredconditionals="0" methods="13" coveredmethods="1"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
         <line num="9" count="0" type="stmt"/>
         <line num="13" count="0" type="stmt"/>
         <line num="14" count="0" type="stmt"/>
@@ -336,7 +336,7 @@
         <line num="17" count="0" type="stmt"/>
         <line num="18" count="0" type="stmt"/>
         <line num="21" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
         <line num="27" count="0" type="stmt"/>
         <line num="28" count="0" type="stmt"/>
         <line num="29" count="0" type="stmt"/>
@@ -353,19 +353,19 @@
         <line num="47" count="0" type="stmt"/>
         <line num="48" count="0" type="stmt"/>
         <line num="53" count="0" type="stmt"/>
-        <line num="57" count="1" type="stmt"/>
+        <line num="57" count="2" type="stmt"/>
       </file>
       <file name="logger.js" path="/Users/a58/Documents/项目/wto/wto/src/utils/logger.js">
-        <metrics statements="9" coveredstatements="5" conditionals="4" coveredconditionals="0" methods="5" coveredmethods="1"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="4" count="2" type="stmt"/>
-        <line num="18" count="4" type="stmt"/>
-        <line num="22" count="0" type="stmt"/>
-        <line num="26" count="0" type="stmt"/>
-        <line num="30" count="0" type="stmt"/>
-        <line num="42" count="0" type="stmt"/>
-        <line num="51" count="2" type="stmt"/>
+        <metrics statements="9" coveredstatements="9" conditionals="4" coveredconditionals="1" methods="5" coveredmethods="5"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="30" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="51" count="3" type="stmt"/>
       </file>
       <file name="utils.js" path="/Users/a58/Documents/项目/wto/wto/src/utils/utils.js">
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
