@@ -1,4 +1,4 @@
-const wxss = require('../../../src/converter/lib/baidu/wxss.js');
+const wxss = require('../../../src/converter/src/baidu/wxss.js');
 
 function testCode(testName, code01, code02) {
   test(testName || 'testing: ', () => {

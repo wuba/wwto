@@ -1,4 +1,4 @@
-const wxss = require('../../../src/converter/lib/alibaba/wxss.js');
+const wxss = require('../../../src/converter/src/alibaba/wxss.js');
 
 function testCode(testName, code01, code02) {
   test(testName || 'testing: ', () => {

@@ -20,31 +20,31 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">5.26% </span>
+        <span class="strong">94.74% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>1/19</span>
+        <span class='fraction'>18/19</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">83.33% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>0/12</span>
+        <span class='fraction'>10/12</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">0% </span>
+        <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>0/1</span>
+        <span class='fraction'>1/1</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">5.56% </span>
+        <span class="strong">94.44% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>1/18</span>
+        <span class='fraction'>17/18</span>
       </div>
     </div>
     <p class="quiet">
       Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
     </p>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -159,36 +159,36 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">14x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">10x</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">/**
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span></td><td class="text"><pre class="prettyprint lang-js">/**
  * 提取闭合标签内的内容（模拟正则平衡组的功能）
  * @param {String} row      源字符串
  * @param {String} tagOpen  开始标签
@@ -229,34 +229,34 @@
    }
  }
  **/
-function <span class="fstat-no" title="function not covered" >extraBalancingGroup(</span>row, tagOpen = <span class="branch-0 cbranch-no" title="branch not covered" >'{',</span> tagClose = <span class="branch-0 cbranch-no" title="branch not covered" >'}')</span> {
-  const start = <span class="cstat-no" title="statement not covered" >row.indexOf(tagOpen);</span>
-  let end = <span class="cstat-no" title="statement not covered" >row.indexOf(tagClose);</span>
-  let result = <span class="cstat-no" title="statement not covered" >'';</span>
-  let counter = <span class="cstat-no" title="statement not covered" >0;</span>
+function extraBalancingGroup(row, tagOpen = '{', tagClose = '}') {
+  const start = row.indexOf(tagOpen);
+  let end = row.indexOf(tagClose);
+  let result = '';
+  let counter = 0;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (end &lt;= start) {</span>
+  <span class="missing-if-branch" title="if path not taken" >I</span>if (end &lt;= start) {
 <span class="cstat-no" title="statement not covered" >    return result;</span>
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  for (let i = <span class="cstat-no" title="statement not covered" >start;</span> i &lt; row.length; i++) {</span>
-<span class="cstat-no" title="statement not covered" >    if (row[i] === tagOpen) {</span>
-<span class="cstat-no" title="statement not covered" >      counter++;</span>
-    } else <span class="cstat-no" title="statement not covered" >if (row[i] === tagClose) {</span>
-<span class="cstat-no" title="statement not covered" >      counter--;</span>
+  for (let i = start; i &lt; row.length; i++) {
+    if (row[i] === tagOpen) {
+      counter++;
+    } else if (row[i] === tagClose) {
+      counter--;
 &nbsp;
-<span class="cstat-no" title="statement not covered" >      if (counter === 0) {</span>
-<span class="cstat-no" title="statement not covered" >        end = i;</span>
-<span class="cstat-no" title="statement not covered" >        break;</span>
+      if (counter === 0) {
+        end = i;
+        break;
       }
     }
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  if (counter === 0) {</span>
-<span class="cstat-no" title="statement not covered" >    result = row.substring(start, end + 1);</span>
+  <span class="missing-if-branch" title="else path not taken" >E</span>if (counter === 0) {
+    result = row.substring(start, end + 1);
   }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return result;</span>
+  return result;
 }
 &nbsp;
 module.exports = extraBalancingGroup;</pre></td></tr>
@@ -265,7 +265,7 @@ module.exports = extraBalancingGroup;</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Dec 31 2019 16:15:55 GMT+0800 (GMT+08:00)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jan 03 2020 17:37:06 GMT+0800 (GMT+08:00)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

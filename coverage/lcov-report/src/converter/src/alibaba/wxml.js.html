@@ -20,9 +20,9 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">28.57% </span>
+        <span class="strong">80.95% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>6/21</span>
+        <span class='fraction'>17/21</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">50% </span>
@@ -30,21 +30,21 @@
         <span class='fraction'>1/2</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">25% </span>
+        <span class="strong">80% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>5/20</span>
+        <span class='fraction'>16/20</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">33.33% </span>
+        <span class="strong">83.33% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>6/18</span>
+        <span class='fraction'>15/18</span>
       </div>
     </div>
     <p class="quiet">
       Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
     </p>
   </div>
-  <div class='status-line low'></div>
+  <div class='status-line high'></div>
 <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -91,37 +91,37 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span></td><td class="text"><pre class="prettyprint lang-js">function convert(wxmlText, isWpy) {
@@ -130,13 +130,13 @@
     .replace(/a:for-items/g, 'a:for')
     .replace(/a:for-key/g, 'a:key')
     .replace(/\.wxml/g, '.axml')
-    .replace(/\s+formType=['"]\w+['"]/g, <span class="fstat-no" title="function not covered" >(m</span>atch) =&gt; <span class="cstat-no" title="statement not covered" >match.replace('formType', 'form-type'))</span>
+    .replace(/\s+formType=['"]\w+['"]/g, (match) =&gt; match.replace('formType', 'form-type'))
     // canvas-id to id
     .replace(/&lt;canvas[^&gt;]+(canvas-id)=['"]/g, (match, p1) =&gt; match.replace(p1, 'id'))
     //  data-set 全部转为小写
     .replace(/data-[^=\s]=/g, <span class="fstat-no" title="function not covered" >(m</span>atch) =&gt; <span class="cstat-no" title="statement not covered" >match.toLocaleLowerCase())</span>
     // // s:for-index="{{idx}}" -&gt; s:for-index="idx"
-    .replace(/a:for-index=['"]({{\w+}})['"]/ig, <span class="fstat-no" title="function not covered" >(m</span>atch) =&gt; <span class="cstat-no" title="statement not covered" >match.replace('{{', '').replace('}}', ''))</span>
+    .replace(/a:for-index=['"]({{\w+}})['"]/ig, (match) =&gt; match.replace('{{', '').replace('}}', ''))
     // 模板相对路径必须以./开头
     .replace(/&lt;import\s+src="([\w]+)/ig, <span class="fstat-no" title="function not covered" >(m</span>atch, p1) =&gt; <span class="cstat-no" title="statement not covered" >match.replace(p1, ['./', p1].join('')))</span>
     // 自定义组件命名不能用驼峰
@@ -144,9 +144,9 @@
       return isWpy ? match : <span class="branch-1 cbranch-no" title="branch not covered" >match.replace(/[A-Z]/g, <span class="fstat-no" title="function not covered" >(m</span>) =&gt; <span class="cstat-no" title="statement not covered" >['-', m.toLowerCase()].join(''))</span>;</span>
     })
     // 三目运算 "&lt;" 后面不能直接跟非空白字符
-    .replace(/{{[^}]+(&lt;)[^=\s][^}]+}}/ig, <span class="fstat-no" title="function not covered" >(m</span>atch, p1) =&gt; <span class="cstat-no" title="statement not covered" >match.replace(p1, [p1, ' '].join('')))</span>
+    .replace(/{{[^}]+(&lt;)[^=\s][^}]+}}/ig, (match, p1) =&gt; match.replace(p1, [p1, ' '].join('')))
     // 事件绑定名称对齐
-    .replace(/bind:\w+/g, <span class="fstat-no" title="function not covered" >(m</span>) =&gt; <span class="cstat-no" title="statement not covered" >m.replace(':', ''))</span>
+    .replace(/bind:\w+/g, (m) =&gt; m.replace(':', ''))
     .replace(/\s+bind[\w]+=['"]/ig, (match) =&gt; match
       .replace(/bindscrolltolower/gi, 'bindScrollToLower')
       .replace(/bindscrolltoupper/gi, 'bindScrollToUpper')
@@ -154,13 +154,13 @@
     // touch事件名称对齐
     .replace(/\s+onTouch(start|end|move|cancel)=/g, <span class="fstat-no" title="function not covered" >(m</span>atch, p1) =&gt; <span class="cstat-no" title="statement not covered" >match.replace(p1, p1.substring(0, 1).toUpperCase() + p1.substring(1)))</span>
     // 事件绑定名称对齐
-    .replace(/\s+catch[\w]+=['"]/ig, <span class="fstat-no" title="function not covered" >(m</span>atch) =&gt; <span class="cstat-no" title="statement not covered" >match.replace(/catchsubmit/ig, 'onSubmit')</span>
-      .replace(/catch(\w)/g, <span class="fstat-no" title="function not covered" >(m</span>, p1) =&gt; <span class="cstat-no" title="statement not covered" >['catch', p1.toUpperCase()].join(''))</span>)
+    .replace(/\s+catch[\w]+=['"]/ig, (match) =&gt; match.replace(/catchsubmit/ig, 'onSubmit')
+      .replace(/catch(\w)/g, (m, p1) =&gt; ['catch', p1.toUpperCase()].join('')))
     // progress属性映射
-    .replace(/&lt;progress[^&gt;]+(activeColor|backgroundColor)=/g, <span class="fstat-no" title="function not covered" >(m</span>atch, p1) =&gt; <span class="cstat-no" title="statement not covered" >match.replace(p1, p1.replace(/[A-Z]/, <span class="fstat-no" title="function not covered" >(m</span>) =&gt; <span class="cstat-no" title="statement not covered" >`-${m.toLowerCase()}`)</span>))</span>
+    .replace(/&lt;progress[^&gt;]+(activeColor|backgroundColor)=/g, (match, p1) =&gt; match.replace(p1, p1.replace(/[A-Z]/, (m) =&gt; `-${m.toLowerCase()}`)))
     // slider属性映射
-    .replace(/&lt;slider[^&gt;]+(activeColor|backgroundColor)=/g, <span class="fstat-no" title="function not covered" >(m</span>atch, p1) =&gt; <span class="cstat-no" title="statement not covered" >match.replace(p1, p1.replace(/[A-Z]/, <span class="fstat-no" title="function not covered" >(m</span>) =&gt; <span class="cstat-no" title="statement not covered" >`-${m.toLowerCase()}`)</span>))</span>
-    .replace(/&lt;slider[^&gt;]+(block-size|block-color)=/g, <span class="fstat-no" title="function not covered" >(m</span>atch, p1) =&gt; <span class="cstat-no" title="statement not covered" >match.replace(p1, p1.replace('block', 'handle')))</span>;
+    .replace(/&lt;slider[^&gt;]+(activeColor|backgroundColor)=/g, (match, p1) =&gt; match.replace(p1, p1.replace(/[A-Z]/, (m) =&gt; `-${m.toLowerCase()}`)))
+    .replace(/&lt;slider[^&gt;]+(block-size|block-color)=/g, (match, p1) =&gt; match.replace(p1, p1.replace('block', 'handle')));
 }
 &nbsp;
 module.exports = convert;</pre></td></tr>
@@ -169,7 +169,7 @@ module.exports = convert;</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Tue Dec 31 2019 16:15:55 GMT+0800 (GMT+08:00)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jan 03 2020 17:37:06 GMT+0800 (GMT+08:00)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

@@ -1,4 +1,4 @@
-const convert = require('../../../src/converter/lib/toutiao/json.js');
+const convert = require('../../../src/converter/src/toutiao/json.js');
 
 function testJson(testName, code1, code2) {
   test(testName || 'testing: ', () => {

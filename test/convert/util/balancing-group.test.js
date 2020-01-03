@@ -1,4 +1,4 @@
-const Plug = require('../../../src/converter/lib/utils/balancing-group.js');
+const Plug = require('../../../src/converter/src/utils/balancing-group.js');
 
 function testCode(testName, code01, code02) {
   test(testName || 'testing: ', () => {

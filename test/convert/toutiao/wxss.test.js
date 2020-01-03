@@ -1,4 +1,4 @@
-const wxss = require('../../../src/converter/lib/toutiao/wxss.js');
+const wxss = require('../../../src/converter/src/toutiao/wxss.js');
 
 function testCode(testName, code01, code02) {
   test(testName || 'testing: ', () => {

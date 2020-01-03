@@ -1,4 +1,4 @@
-const Plug = require('../../../src/converter/lib/utils/extra-function.js');
+const Plug = require('../../../src/converter/src/utils/extra-function.js');
 
 function testCode(testName, code01, code02) {
   test(testName || 'testing: ', () => {

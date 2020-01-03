@@ -1,4 +1,4 @@
-const convert = require('../../../src/converter/lib/toutiao/script.js');
+const convert = require('../../../src/converter/src/toutiao/script.js');
 
 function testScript(testName, code1, code2) {
   test(testName || 'testing: ', () => {

@@ -1,4 +1,4 @@
-const convert = require('../../../src/converter/lib/alibaba/json.js');
+const convert = require('../../../src/converter/src/alibaba/json.js');
 
 function testJson(testName, code1, code2) {
   test(testName || 'testing: ', () => {

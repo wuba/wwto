@@ -1,4 +1,4 @@
-const wxml = require('../../../src/converter/lib/toutiao/wxml.js');
+const wxml = require('../../../src/converter/src/toutiao/wxml.js');
 
 function testWxml(testName, code1, code2) {
   test(testName || 'testing: ', () => {

@@ -1,4 +1,4 @@
-const wxml = require('../../../src/converter/lib/alibaba/wxml.js');
+const wxml = require('../../../src/converter/src/alibaba/wxml.js');
 
 function testWxml(testName, code1, code2) {
   test(testName || 'testing: ', () => {

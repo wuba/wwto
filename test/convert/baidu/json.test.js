@@ -1,4 +1,4 @@
-const convert = require('../../../src/converter/lib/baidu/json.js');
+const convert = require('../../../src/converter/src/baidu/json.js');
 
 function testJson(testName, code1, code2) {
   test(testName || 'testing: ', () => {

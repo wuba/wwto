@@ -1,4 +1,4 @@
-const Plug = require('../../src/linter/lib/baidu/index.js')
+const Plug = require('../../src/linter/src/baidu/index.js')
 
 function testCode(testName, code01, code02) {
   test(testName || 'testing: ', () => {
@@ -8,8 +8,18 @@ function testCode(testName, code01, code02) {
 
 testCode(
   'linter baidu-wxmlLineRules testing:',
-  Plug.wxmlLineRules = ['../../src/platform/baidu/converter.js', '', '', '', ''],
-  ['../../src/platform/baidu/converter.js', '', '', '', '']
+  Plug.wxmlLineRules = [
+    '', 
+    `bindtap="flag ? \'fn1\' : \'fn2\'"`,
+    `wx:for=\'{{flag ? arr1 : arr2}}\'`, 
+    `<test hidden='a.b' />`, 
+    'test'],
+  [
+    '', 
+    `bindtap="flag ? \'fn1\' : \'fn2\'"`,
+    `wx:for=\'{{flag ? arr1 : arr2}}\'`, 
+    `<test hidden='a.b' />`, 
+    'test']
 )
 
 testCode(
