@@ -1,1 +1,1 @@
-module.exports=["functional-page-navigator","camera","live-player","live-pusher","open-data","ad","official-account"];
+module.exports = ["functional-page-navigator", "camera", "live-player", "live-pusher", "open-data", "ad", "official-account"];

@@ -1,8 +1,9 @@
+/* eslint-disable no-undef */
 const Plugins = require('../../src/utils/logger.js');
 
 function testCode(testName, code01, code02) {
   test(testName || 'testing: ', () => {
-      expect(code01).toBe(code02);
+    expect(code01).toBe(code02);
   });
 }
 
@@ -35,5 +36,4 @@ testCode(
   'lintWarning testing:',
   Plugins.lintWarning('百度小程序', '/index/a', '33', '<a/>', ''),
   undefined
-)
-
+);

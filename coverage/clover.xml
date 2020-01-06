@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1578295269789" clover="3.2.0">
-  <project timestamp="1578295269789" name="All files">
-    <metrics statements="432" coveredstatements="375" conditionals="117" coveredconditionals="73" methods="149" coveredmethods="118" elements="698" coveredelements="566" complexity="0" loc="432" ncloc="432" packages="12" files="37" classes="37"/>
+<coverage generated="1578309310570" clover="3.2.0">
+  <project timestamp="1578309310571" name="All files">
+    <metrics statements="431" coveredstatements="374" conditionals="117" coveredconditionals="73" methods="149" coveredmethods="118" elements="697" coveredelements="565" complexity="0" loc="431" ncloc="431" packages="12" files="37" classes="37"/>
     <package name="src">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="config.js" path="/Users/a58/Documents/项目/wto/wto/src/config.js">
@@ -494,14 +494,14 @@
         <line num="23" count="7" type="stmt"/>
         <line num="25" count="7" type="stmt"/>
         <line num="26" count="101" type="stmt"/>
+        <line num="27" count="301" type="stmt"/>
         <line num="28" count="301" type="stmt"/>
-        <line num="29" count="301" type="stmt"/>
-        <line num="31" count="301" type="cond" truecount="2" falsecount="0"/>
+        <line num="30" count="301" type="cond" truecount="2" falsecount="0"/>
+        <line num="31" count="4" type="stmt"/>
         <line num="32" count="4" type="stmt"/>
         <line num="33" count="4" type="stmt"/>
-        <line num="34" count="4" type="stmt"/>
-        <line num="41" count="7" type="stmt"/>
-        <line num="44" count="4" type="stmt"/>
+        <line num="40" count="7" type="stmt"/>
+        <line num="43" count="4" type="stmt"/>
       </file>
     </package>
     <package name="src.scope">
@@ -568,17 +568,16 @@
       </file>
     </package>
     <package name="test.utils">
-      <metrics statements="8" coveredstatements="7" conditionals="1" coveredconditionals="1" methods="5" coveredmethods="4"/>
+      <metrics statements="7" coveredstatements="6" conditionals="1" coveredconditionals="1" methods="5" coveredmethods="4"/>
       <file name="utils.js" path="/Users/a58/Documents/项目/wto/wto/test/utils/utils.js">
-        <metrics statements="8" coveredstatements="7" conditionals="1" coveredconditionals="1" methods="5" coveredmethods="4"/>
-        <line num="5" count="48" type="stmt"/>
+        <metrics statements="7" coveredstatements="6" conditionals="1" coveredconditionals="1" methods="5" coveredmethods="4"/>
         <line num="6" count="48" type="stmt"/>
-        <line num="8" count="48" type="stmt"/>
-        <line num="11" count="48" type="stmt"/>
-        <line num="14" count="0" type="stmt"/>
+        <line num="7" count="48" type="stmt"/>
+        <line num="10" count="48" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="16" count="48" type="stmt"/>
         <line num="17" count="48" type="stmt"/>
-        <line num="18" count="48" type="stmt"/>
-        <line num="24" count="9" type="stmt"/>
+        <line num="23" count="9" type="stmt"/>
       </file>
     </package>
   </project>

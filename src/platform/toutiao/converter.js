@@ -34,7 +34,8 @@ function convert(opt = {}) {
 
   const destConfigFile = `${dest}/project.config.json`;
   const jsonSrc = [`${src}/**/*.json`];
-  fs.exists(destConfigFile, (exist) => {
+  // fs.exists(destConfigFile, (exist) => {
+  fs.stat(destConfigFile, (exist) => {
     if (exist) {
       jsonSrc.push(`!${src}/project.config.json`);
     }

@@ -1,8 +1,9 @@
-const Plug = require('../../src/linter/src/utils/utils.js')
+/* eslint-disable no-undef */
+const Plug = require('../../src/linter/src/utils/utils.js');
 
 function testCode(testName, code01, code02) {
   test(testName || 'testing: ', () => {
-      expect(code01).toBe(code02);
+    expect(code01).toBe(code02);
   });
 }
 
@@ -18,11 +19,11 @@ testCode(
   "page/API/pages/pull-down-refresh/pull-down-refresh",
   "page/API/pages/animation/animation"`, 'loading'),
   6
-)
+);
 
 function testUtils(testName, code01, code02) {
   test(testName || 'testing: ', () => {
-      expect(code01).toStrictEqual(code02);
+    expect(code01).toStrictEqual(code02);
   });
 }
 
@@ -43,6 +44,6 @@ testUtils(
         }]
       }]
     }
-  })`, '../test', [{attrs: ['class', 'style']}], 'test', 'test'),
+  })`, '../test', [{ attrs: ['class', 'style'] }], 'test', 'test'),
   []
-)
+);

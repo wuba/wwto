@@ -17,7 +17,7 @@ module.exports = [
   // scroll-view
 
   // 差异属性
-  // 1.属性upper-threshold	、lower-threshold、scroll-top、scroll-left在微信中单位px,2.4.0起支持rpx,类型是Number / String;头条中单位px,类型是Number;
+  // 1.属性upper-threshold、lower-threshold、scroll-top、scroll-left在微信中单位px,2.4.0起支持rpx,类型是Number / String;头条中单位px,类型是Number;
   // 注意事项
   // 1.组件Bug & Tip说明部分在微信中有具体阐述,头条中没有
   // 2.bindscroll事件头条文档中没有对事件返回值进行说明,微信中事件返回值是event.detail = {scrollLeft, scrollTop, scrollHeight, scrollWidth, deltaX, deltaY}
@@ -86,7 +86,7 @@ module.exports = [
   // input
 
   // 差异属性
-  // 1.属性cursor-spacing微信中类型是Number / String	,单位px（2.4.0起支持rpx）;头条中类型是Number,单位未说明
+  // 1.属性cursor-spacing微信中类型是Number / String,单位px（2.4.0起支持rpx）;头条中类型是Number,单位未说明
   // 2.属性cursor微信中无默认值,头条默认值为-1
   // 差异事件  事件bindinput微信中返回值是event.detail = {value, cursor, keyCode}，keyCode 为键值，2.1.0 起支持;
   //         头条中是e.detail={value, cursor}
@@ -124,7 +124,7 @@ module.exports = [
 
   // textarea
 
-  // 差异属性  属性cursor-spacing在微信中类型是Number / String	,单位px（2.4.0起支持rpx）;头条中类型是Number,单位未说明
+  // 差异属性  属性cursor-spacing在微信中类型是Number / String,单位px（2.4.0起支持rpx）;头条中类型是Number,单位未说明
   // 差异事件
   // 1.事件bindblur微信中返回值是event.detail = {value, cursor};头条中返回值是event.detail={value};
   // 2.事件bindinput微信中返回值是event.detail = {value, cursor, keyCode}，keyCode 为键值，
@@ -146,7 +146,7 @@ module.exports = [
 
   // image
 
-  // 差异属性  属性lazy-load	说明部分在微信和头条中不完全一样,
+  // 差异属性  属性lazy-load说明部分在微信和头条中不完全一样,
   // 1.头条中说明部分是图片懒加载。只针对page与scroll-view下的img有效;
   // 2.微信中是图片懒加载，在即将进入当前屏幕可视区域时才开始加载
   // 差异事件  头条中未对事件binderror、bindload返回值做具体说明,
@@ -179,28 +179,5 @@ module.exports = [
   'open-data',
   'ad',
   'official-account',
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ];

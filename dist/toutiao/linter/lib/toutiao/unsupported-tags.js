@@ -1,0 +1,2 @@
+var wx = require('./../../../adaptor.js').default;
+module.exports=["movable-area","movable-view","cover-view","cover-image","map","audio","camera","live-player","live-pusher","functional-page-navigator","open-data","ad","official-account"];

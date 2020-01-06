@@ -1,8 +1,9 @@
+/* eslint-disable no-undef */
 const wxss = require('../../../src/converter/src/baidu/wxss.js');
 
 function testCode(testName, code01, code02) {
   test(testName || 'testing: ', () => {
-      expect(code01).toBe(code02);
+    expect(code01).toBe(code02);
   });
 }
 
@@ -20,4 +21,4 @@ testCode(
   .div{
     .fix-image-cls {}
   }`
-)
+);

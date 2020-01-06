@@ -24,7 +24,6 @@ function unsupportedAttrOrEvents(contents, path, coms, platform, type) {
 
   coms.forEach((com) => {
     com.attrs.forEach((attr) => {
-
       const reg = new RegExp(`<${com.tag}[^>]*${attr}=`);
       const match = contents.match(reg);
 

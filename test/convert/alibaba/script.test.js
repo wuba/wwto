@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const convert = require('../../../src/converter/src/alibaba/script.js');
 
 function testScript(testName, code1, code2) {
@@ -44,4 +45,4 @@ testScript(
   Component(
     props:{}
   )`
-)
+);

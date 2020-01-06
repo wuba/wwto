@@ -256,10 +256,10 @@ function getInstance() {
   ////////网络 发起请求w
   wx.request = function(opt) {
     opt.headers = opt.header || opt.headers || {};
-    opt.headers['referer'] = opt.referer || '';
+    opt.headers.referer = opt.referer || '';
     opt.headers['content-type'] = opt.headers['Content-Type'] || 'application/json';
 
-    let success = opt.success || emptyFn;
+    const success = opt.success || emptyFn;
     opt.success = function(res) {
       success.call(this, paramsMap(res, {
         headers: 'header',
@@ -269,7 +269,6 @@ function getInstance() {
 
     return wx.httpRequest(opt);
   };
-
 
   //////////下载
   const {

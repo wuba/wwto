@@ -116,7 +116,6 @@ module.exports = [
   'getBatteryInfoSync',
   'getBatteryInfo',
 
-
   // nfc
   'stopHCE',
   'startHCE',
@@ -143,7 +142,6 @@ module.exports = [
 
   // worker
   'createWorker',
-
 
   // 第三方平台
   'getExtConfigSync',

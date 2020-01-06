@@ -1,3 +1,4 @@
+/* eslint-disable node/no-deprecated-api */
 const fs = require('fs');
 const sysPath = require('path');
 const gulp = require('gulp');

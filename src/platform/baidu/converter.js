@@ -38,7 +38,8 @@ function convert(opt = {}) {
   // 处理json
   const destConfigFile = `${dest}/project.config.json`;
   const jsonSrc = [`${src}/**/*.json`];
-  fs.exists(destConfigFile, (exist) => {
+  // fs.exists(destConfigFile, (exist) => {
+  fs.stat(destConfigFile, (exist) => {
     if (exist) {
       // 只复制一次
       jsonSrc.push(`!${src}/project.config.json`);
@@ -54,8 +55,8 @@ function convert(opt = {}) {
       });
   });
 
-    // 注入适配器代码
-    gulp.src(sysPath.resolve(__dirname, '../../adaptor/lib/baidu.js'))
+  // 注入适配器代码
+  gulp.src(sysPath.resolve(__dirname, '../../adaptor/lib/baidu.js'))
     .pipe(rename('adaptor.js'))
     .pipe(gulp.dest(dest))
     .on('end', () => {
@@ -80,7 +81,7 @@ function convert(opt = {}) {
     }))
     .pipe(gulp.dest(dest))
     .on('end', () => {
-      plugin.convertCaller({source: dest});
+      plugin.convertCaller({ source: dest });
     });
 }
 

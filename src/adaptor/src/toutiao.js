@@ -1,3 +1,5 @@
+/* eslint-disable no-global-assign */
+/* eslint-disable no-undef */
 /* eslint-disable object-curly-spacing */
 const emptyFn = () => {};
 
@@ -16,7 +18,7 @@ function ignoreFn(opt) {
 function getInstance() {
   var wx = tt;
 
-  wx['has_toutiao_hook_flag'] = true;
+  wx.has_toutiao_hook_flag = true;
 
   wx.hideKeyboard = wx.hideKeyboard || emptyFn;
 
@@ -47,7 +49,7 @@ function getInstance() {
   // 2.头条文档中未对参数object.method 的合法值、object.dataType 的合法值、object.responseType 的合法值、以及data 参数做具体说明
 
   const request = wx.request;
-  wx.request = (opt)=>{
+  wx.request = (opt) => {
     // post请求会将数据序列化，字符串序列化会前后多一个双引号导致后端接口异常
     // TOO 还需要对返回结果处理
     if (opt.method === 'POST' && typeof opt.data === 'string') {
@@ -61,7 +63,7 @@ function getInstance() {
     }
 
     // 处理requestTask对象字段(onHeadersReceived、offHeadersReceived、abort)缺失
-    const requestTask = request.call(this,opt);
+    const requestTask = request.call(this, opt);
     const methods = ['onHeadersReceived', 'offHeadersReceived', 'abort'];
     methods.forEach((method) => {
       requestTask[method] = requestTask[method] || emptyFn;
@@ -165,7 +167,7 @@ function getInstance() {
 
   const recorderManager = wx.getRecorderManager;
   wx.getRecorderManager = function(opt){
-    const recorderManagers = recorderManager.call(this,opt);
+    const recorderManagers = recorderManager.call(this, opt);
     // 处理recorderManager对象字段(onResume、onInterruptionBegin、onInterruptionEnd)缺失问题
     const methods = ['onInterruptionBegin', 'onInterruptionEnd', 'onResume'];
     methods.forEach((method) => {
@@ -188,7 +190,7 @@ function getInstance() {
   wx.playVoice = wx.playVoice || ignoreFn;
   wx.pauseVoice = wx.pauseVoice || ignoreFn;
   wx.getAvailableAudioSources = wx.getAvailableAudioSources || ignoreFn;
-  wx.createAudioContext  = wx.createAudioContext || ignoreFn;
+  wx.createAudioContext = wx.createAudioContext || ignoreFn;
 
   // 视频
   // chooseVideo(拍摄视频或从手机相册中选视频)
@@ -200,7 +202,7 @@ function getInstance() {
 
   // saveVideoToPhotosAlbum(保存视频到系统相册)
   // 注意事项
-  // 1.头条文档中该api无参数success	、fail、complete(但是示例中有这三个参数)
+  // 1.头条文档中该api无参数success、fail、complete(但是示例中有这三个参数)
 
   wx.createVideoContext = wx.createVideoContext || emptyFn;
 
@@ -237,7 +239,7 @@ function getInstance() {
   wx.removeSavedFile = wx.removeSavedFile || ignoreFn;
   wx.openDocument = wx.openDocument || ignoreFn;
   wx.getSavedFileList = wx.getSavedFileList || ignoreFn;
-  wx.getSavedFileInfo= wx.getSavedFileInfo || ignoreFn;
+  wx.getSavedFileInfo = wx.getSavedFileInfo || ignoreFn;
   wx.getFileSystemManager = wx.getFileSystemManager || emptyFn;
   wx.getFileInfo = wx.getFileInfo || ignoreFn;
 
@@ -299,7 +301,7 @@ function getInstance() {
   // getSystemInfo(获取系统信息)
   // 注意事项
   // 1.头条文档中该api没有指明参数altitude、success、fail、complete(后三个参数示例中有)
-  // 2.参数success返回值头条无statusBarHeight、language、fontSizeSetting、benchmarkLevel	、albumAuthorized	、cameraAuthorized、locationAuthorized
+  // 2.参数success返回值头条无statusBarHeight、language、fontSizeSetting、benchmarkLevel、albumAuthorized、cameraAuthorized、locationAuthorized
   // microphoneAuthorized、notificationAuthorized、notificationAlertAuthorized、notificationBadgeAuthorized、notificationSoundAuthorized、
   // bluetoothEnabled、locationEnabled、wifiEnabled
   // 3.头条中有少量iOS设备的model字段返回如iPod7,1等值;SDKVersion 当前由 JSSDK 写死 1.0.0
@@ -308,7 +310,7 @@ function getInstance() {
 
   // getSystemInfoSync
   // 注意事项
-  // 1.参数success返回值头条无statusBarHeight、language、fontSizeSetting、benchmarkLevel	、albumAuthorized	、cameraAuthorized、locationAuthorized
+  // 1.参数success返回值头条无statusBarHeight、language、fontSizeSetting、benchmarkLevel、albumAuthorized、cameraAuthorized、locationAuthorized
   // microphoneAuthorized、notificationAuthorized、notificationAlertAuthorized、notificationBadgeAuthorized、notificationSoundAuthorized、
   // bluetoothEnabled、locationEnabled、wifiEnabled
 
@@ -341,7 +343,6 @@ function getInstance() {
   wx.onGetWifiList = wx.onGetWifiList || emptyFn;
   wx.getWifiList = wx.getWifiList || ignoreFn;
   wx.connectWif = wx.connectWif || ignoreFn;
-
 
   // startAccelerometer(开始监听加速度数据)
   // 注意事项
@@ -568,18 +569,18 @@ function getInstance() {
   // createCanvasContext
   const createCanvasContext = wx.createCanvasContext;
   wx.createCanvasContext = function(opt){
-    let canvasContext = createCanvasContext.call(this, opt);
+    const canvasContext = createCanvasContext.call(this, opt);
     // 处理canvasContext对象字段缺失
-    canvasContext['createCircularGradient'] = emptyFn;
+    canvasContext.createCircularGradient = emptyFn;
     // 处理canvasContext对象某些字段更新
-    canvasContext['setFillStyle'] = canvasContext.fillStyle;
-    canvasContext['setFontSize'] = canvasContext.font;
-    canvasContext['setGlobalAlpha'] = canvasContext.globalAlpha;
-    canvasContext['setLineCap'] = canvasContext.lineCap;
-    canvasContext['setLineDash'] = canvasContext.lineDashOffset;
-    canvasContext['setLineJoin'] = canvasContext.lineJoin;
-    canvasContext['setLineWidth'] = canvasContext.lineWidth;
-    canvasContext['setMiterLimit'] = canvasContext.miterLimit;
+    canvasContext.setFillStyle = canvasContext.fillStyle;
+    canvasContext.setFontSize = canvasContext.font;
+    canvasContext.setGlobalAlpha = canvasContext.globalAlpha;
+    canvasContext.setLineCap = canvasContext.lineCap;
+    canvasContext.setLineDash = canvasContext.lineDashOffset;
+    canvasContext.setLineJoin = canvasContext.lineJoin;
+    canvasContext.setLineWidth = canvasContext.lineWidth;
+    canvasContext.setMiterLimit = canvasContext.miterLimit;
     // 微信中canvasContext.setShadow从从基础库 1.9.90 开始，停止维护，请使用
     // canvasContext.shadowOffsetX
     // |canvasContext.shadowOffsetY
@@ -589,9 +590,9 @@ function getInstance() {
     // |canvasContext.shadowOffsetY
     // |canvasContext.shadowColor
     // |canvasContext.shadowBlur
-    canvasContext['setStrokeStyle'] = canvasContext.strokeStyle;
-    canvasContext['setTextAlign'] = canvasContext.textAlign;
-    canvasContext['setTextBaseline'] = canvasContext.textBaseline;
+    canvasContext.setStrokeStyle = canvasContext.strokeStyle;
+    canvasContext.setTextAlign = canvasContext.textAlign;
+    canvasContext.setTextBaseline = canvasContext.textBaseline;
 
     return canvasContext;
   };

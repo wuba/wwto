@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const wxml = require('../../../src/converter/src/alibaba/wxml.js');
 
 function testWxml(testName, code1, code2) {
@@ -68,4 +69,4 @@ testWxml(
   <slider handle-color=""></slider>
   <progress active-color="" backgroundColor></progress>
   <form onSubmit="formSubmit" catchReset="formReset" bindtest></form>`
-)
+);

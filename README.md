@@ -1,15 +1,19 @@
 # wto
+
 > **wto**: wechat mini-program to other mini-program
 
 ## 简介
+
 **wto**是一款支持将原生微信小程序转换成其他小程序的工具集合。  
 使用**wto**，几乎不需要对已有的微信小程序做任何改动，可以接近零成本获得`百度小程序`、`阿里小程序`、`头条小程序`。
 
 ## 前提
+
 - node >= 8.9.3
 - gulp <= 3.9.1
 
 ## 安装
+
 ```shell
   npm config set registry http://ires.58corp.com/repository/58npm
   npm i wto-cli -g
@@ -20,10 +24,11 @@
 ```
 
 ## 使用
+
 **注意：**如果包含插件，请将插件的源码拷贝到：`src/plugins/xxx`目录下，`xxx`为被调用插件名称。
 
-
 ### 命令行
+
 ```shell
   # 查看帮助
   wto --help
@@ -59,6 +64,7 @@
 ```
 
 ### 打包工具
+
 ```javascript
 const gulp = require('gulp');
 const wto = require('wto-cli');
@@ -82,13 +88,15 @@ gulp.task('lint', function(cb) {
 ```
 
 ## 使用案例
+
 `wto`已经投入了我们的生产环境中使用，包括`58微聊`和`神奇江湖`
 
-
 ## 注意事项
+
 注意事项是各平台不支持且无法通过本工具转换完成的一些点，如果要开发跨平台的应用需要规避或者降级处理。
 
 ### 百度小程序
+
 - bind*={{str}} `str`只能是函数名（字符串），不能包含表达式计算（如：`bindtap="flag ? 'fn1' : 'fn2'"`）
 - wx:for={{arr}}  `arr`只能是变量名（字符串），不能包含表达式计算（如：`wx:for="{{flag ? arr1 : arr2}}"`）
 - 在同一个标签上，`wx:for`和`wx:if`不能同时使用
@@ -98,6 +106,7 @@ gulp.task('lint', function(cb) {
 - 不要使用`setData`保存视图不需要的变量（如原生变量：`Animation`），继承字段会被丢弃
 
 ### 头条小程序
+
 - 不支持组件（如：`movable-area`、`movable-view`、`cover-view`、`cover-image`、`map`、`audio`、`canmera`等）
 - `websocket`不能使用全局事件（如：`wx.onSocketOpen`）
 - 录音功能没有全局方法（`wx.startRecord`, `wx.stopRecord`）
@@ -110,6 +119,7 @@ gulp.task('lint', function(cb) {
 - 自定义组件不能响应事件（如：`bindTap`），需要添加一层容器来捕获事件
 
 ### 阿里小程序
+
 - `json`文件或模板绝对路径必须以`/`开头，相对路径必须以./开头
 - 自定义组件命名只能使用短横线（custom-com）
 - `fetch`是全局只读对象，不能对其赋值

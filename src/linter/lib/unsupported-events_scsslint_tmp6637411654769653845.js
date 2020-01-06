@@ -1,1 +1,1 @@
-module.exports=["bindgetuserinfo"];
+module.exports = ["bindgetuserinfo"];

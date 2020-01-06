@@ -1,8 +1,9 @@
+/* eslint-disable no-undef */
 const Plug = require('../../../src/converter/src/utils/balancing-group.js');
 
 function testCode(testName, code01, code02) {
   test(testName || 'testing: ', () => {
-      expect(code01).toBe(code02);
+    expect(code01).toBe(code02);
   });
 }
 
@@ -14,4 +15,4 @@ testCode(
     name="{{name}}"
     author="{{author}}"></audio>`, '{', '}'),
     `{{poster}}`
-)
+);

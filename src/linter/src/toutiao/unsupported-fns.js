@@ -79,7 +79,6 @@ module.exports = [
   // 位置
   'chooseLocation',
 
-
   // 字体
   'loadFontFace',
 
@@ -175,7 +174,6 @@ module.exports = [
   'chooseInvoice',
   'chooseInvoiceTitle',
 
-
   // 账号信息
   'getAccountInfoSync',
 
@@ -245,7 +243,7 @@ module.exports = [
   'navigateBackMiniProgram',
 
   // 用户信息
- 'getUserInfo',
+  'getUserInfo',
 
   // 数据分析
   'reportAnalytics',

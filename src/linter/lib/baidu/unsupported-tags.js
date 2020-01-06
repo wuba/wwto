@@ -1,1 +1,1 @@
-module.exports=["functional-page-navigator","live-pusher","ad","official-account"];
+module.exports = ["functional-page-navigator", "live-pusher", "ad", "official-account"];

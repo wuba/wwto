@@ -66,7 +66,7 @@ module.exports = [
   // 2.该组件百度小程序无说明和注意事项部分
 
   // checkbox
-  // 缺失属性  百度中无aria-label	属性
+  // 缺失属性  百度中无aria-label属性
 
   // form
   // 注意事项
@@ -111,7 +111,6 @@ module.exports = [
   // 差异属性  属性cursor-spacing在微信中类型是Number / String,单位px（2.4.0起支持rpx）;百度中类型是Number,单位是px
   // 差异事件  事件bindlinechange的返回值在微信中是event.detail = {value, cursor, keyCode}，keyCode 为键值，目前工具还不支持返回keyCode参数,百度
   // 中是event.detail = {value, cursor}
-
 
   //// 导航
 
@@ -159,7 +158,7 @@ module.exports = [
 
   // map
   // 差异属性
-  // 1.属性show-compass、polygons、enable-overlooking	、enable-zoom、enable-scroll、enable-rotate百度中工具暂不支持
+  // 1.属性show-compass、polygons、enable-overlooking、enable-zoom、enable-scroll、enable-rotate百度中工具暂不支持
 
   // 2.属性markers中百度无zIndex,aria-label
 
@@ -170,7 +169,7 @@ module.exports = [
 
   // 5.属性polygons百度中无具体说明
 
-  // 缺失事件  百度中无bindpoitap	事件
+  // 缺失事件  百度中无bindpoitap事件
 
   // 差异事件  事件bindcallouttap、bindcontroltap事件返回值在微信中会返回marker的id,bindcontroltap会返回control的id
 
@@ -201,7 +200,7 @@ module.exports = [
 
   // 差异
   // 1.百度中相关接口2(web-view 网页中支持的接口有):设备(拨打电话)、开放接口(打开小程序)、开放接口(登录)、剪贴板、
-  // 设备(获取网络类型)、媒体(预览图片)、开放接口(分享)、地理位置(使用内置地图打开地点)、地理位置(获取地理位置)、图像接口	(拍照或上传)
+  // 设备(获取网络类型)、媒体(预览图片)、开放接口(分享)、地理位置(使用内置地图打开地点)、地理位置(获取地理位置)、图像接口(拍照或上传)
   // 2.微信中相关接口 2(<web-view>网页中仅支持以下JSSDK接口：)是判断客户端是否支持js、图像接口、音频接口、智能接口、设备信息、地理位置、摇一摇周边、
   // 微信扫一扫、微信卡券、长按识别
 

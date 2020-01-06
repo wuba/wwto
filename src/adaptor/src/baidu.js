@@ -516,8 +516,6 @@ function getInstance() {
   wx.offAppShow = wx.offAppShow || emptyFn;
   wx.offAppHide = wx.offAppHide || emptyFn;
 
-
-
   // 第三方平台
   // wx.getExtConfig = wx.getExtConfig;
   // wx.getExtConfigSync = wx.getExtConfigSync;

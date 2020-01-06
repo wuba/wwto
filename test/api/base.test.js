@@ -1,6 +1,6 @@
+/* eslint-disable no-undef */
 const simulate = require('miniprogram-simulate');
-const path = require('path')
-
+const path = require('path');
 
 test('canIUse', () => {
   // // 对象的属性或方法
@@ -23,4 +23,4 @@ test('canIUse', () => {
   // wx.canIUse('button.open-type.contact')
 
   expect(wx.canIUse('button.open-type.contact')).toBe(true);
-})
+});

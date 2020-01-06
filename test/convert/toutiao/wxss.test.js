@@ -1,8 +1,9 @@
+/* eslint-disable no-undef */
 const wxss = require('../../../src/converter/src/toutiao/wxss.js');
 
 function testCode(testName, code01, code02) {
   test(testName || 'testing: ', () => {
-      expect(code01).toBe(code02);
+    expect(code01).toBe(code02);
   });
 }
 
@@ -14,4 +15,4 @@ testCode(
   `
   test.wxss
   background: url("https://sungd.github.io/Pacifico.ttf") no-repeat;`
-)
+);

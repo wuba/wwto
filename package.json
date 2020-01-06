@@ -10,8 +10,12 @@
     "test": "gulp test",
     "dev": "gulp watch",
     "build": "gulp build",
-    "prepare": "npm run build"
+    "prepare": "npm run build",
+    "lint": "eslint --fix --ext .js src test"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/fulme/wto-cli.git"
@@ -20,12 +24,14 @@
     "@babel/core": "^7.2.2",
     "@babel/generator": "^7.0.0-beta.40",
     "@babel/template": "^7.0.0-beta.40",
+    "acorn": "^6.4.0",
     "arraybuffer-to-string": "^1.0.2",
     "babel-core": "^6.26.3",
     "babel-preset-es2015": "^6.24.1",
     "chalk": "^2.4.2",
     "colors": "^1.3.3",
     "commander": "^2.9.0",
+    "eslint": "^6.8.0",
     "fs-extra": "^7.0.1",
     "gulp": "~3.9.1",
     "gulp-babel": "^8.0.0",
@@ -37,11 +43,12 @@
     "gulp-watch": "^5.0.1",
     "md5-hex": "^2.0.0",
     "mp-adaptor": "^1.0.8",
-    "mp-converter": "^1.0.8",
-    "mp-linter": "1.0.7",
-    "mp-plugin": "1.0.1",
+    "mp-converter": "^1.0.10",
+    "mp-linter": "^1.0.7",
+    "mp-plugin": "^1.0.1",
     "postcss": "5.2.16",
     "postcss-selector-parser": "2.2.3",
+    "pre-commit": "^1.2.2",
     "pump": "^3.0.0",
     "string-to-arraybuffer": "^1.0.2",
     "through2": "^3.0.0",
@@ -72,6 +79,13 @@
   },
   "homepage": "https://github.com/fulme/wto-cli.git#readme",
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.7.5",
+    "babel-eslint": "^10.0.3",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.19.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "jest": "^24.9.0",
     "miniprogram-simulate": "^1.1.5"
   }

@@ -1,0 +1,1 @@
+npm publish  --registry http://ires.58corp.com/repository/npm/

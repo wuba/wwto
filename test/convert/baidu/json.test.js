@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const convert = require('../../../src/converter/src/baidu/json.js');
 
 function testJson(testName, code1, code2) {
@@ -14,8 +15,8 @@ testJson(
     "path": "/wto/ test/convert alibaba/json.test.js"
   }`),
   `
-  \"usingComponents\": {
+  "usingComponents": {
     "set-tab-bar": "./components/set-tab-bar/set-tab-bar",
     "path": "/wto/ test/convert alibaba/json.test.js"
   }`
-)
+);

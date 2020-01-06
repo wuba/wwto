@@ -1,14 +1,17 @@
 module.exports = {
   env: {
-    node: true
+    "browser": true,
+    "node": true,
+    "commonjs": true,
+    "es6": true
   },
-
+  parser: "babel-eslint",
   parserOptions: {
-    ecmaVersion: 6,
-    sourceType: "module"
+    "ecmaVersion": 6,
+    "sourceType": "module"
   },
 
-  extends: ["airbnb"],
+  extends: "standard",
 
   rules: {
     // new实例不赋值

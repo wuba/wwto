@@ -1,4 +1,4 @@
-const fs = require('fs');
+// const fs = require('fs');
 const sysPath = require('path');
 const gulp = require('gulp');
 const str2ab = require('to-buffer');
@@ -61,7 +61,7 @@ function convertCaller(opt) {
           return match.replace('requirePlugin', 'require').replace(p1, `${seps}/plugins/${p1}/${map.main[p1]}`);
         });
 
-        let code = babel.transform(str, {
+        const code = babel.transform(str, {
           plugins: ["@babel/plugin-transform-modules-commonjs"]
         });
 

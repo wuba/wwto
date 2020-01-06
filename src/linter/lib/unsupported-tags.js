@@ -1,1 +1,1 @@
-module.exports=["movable-area"];
+module.exports = ["movable-area"];
