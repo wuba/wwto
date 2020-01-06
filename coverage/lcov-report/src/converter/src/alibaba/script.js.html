@@ -20,24 +20,24 @@
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
-        <span class="strong">63.16% </span>
+        <span class="strong">68.42% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>36/57</span>
+        <span class='fraction'>39/57</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">42.31% </span>
+        <span class="strong">46.15% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>11/26</span>
+        <span class='fraction'>12/26</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">50% </span>
+        <span class="strong">68.75% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>8/16</span>
+        <span class='fraction'>11/16</span>
       </div>
       <div class='fl pad1y space-right2'>
-        <span class="strong">63.64% </span>
+        <span class="strong">69.09% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>35/55</span>
+        <span class='fraction'>38/55</span>
       </div>
     </div>
     <p class="quiet">
@@ -213,6 +213,20 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -221,25 +235,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
@@ -380,9 +380,9 @@ function defQuery(match, opt) {
 function convert(jsText, isWpy) {
   return jsText
     .replace(/(require\(['"])(\w+)/g, '$1./$2')
-    .replace(/(from\s+['"])(\w+)/g, <span class="fstat-no" title="function not covered" >(m</span>atch, p1) =&gt; {
+    .replace(/(from\s+['"])(\w+)/g, (match, p1) =&gt; {
       // 相对路径以./开头
-<span class="cstat-no" title="statement not covered" >      return match.replace(p1, [p1, isWpy ? '' : './'].join(''));</span>
+      return match.replace(p1, [p1, isWpy ? '' : <span class="branch-1 cbranch-no" title="branch not covered" >'./']</span>.join(''));
     })
     .replace(/(let|var|const)\s+fetch\s*=/g, '$1 renameFetch = ')
     .replace(/(\s+)fetch([;\s]*)$/, '$1renameFetch$2')
@@ -390,17 +390,17 @@ function convert(jsText, isWpy) {
       // fetch是全局只读对象，不允许赋值
       return match.replace(/fetch/g, 'renameFetch');
     })
-    .replace(/App\({[\s\S]+(onLaunch|onShow):\s*function\s*\(\s*(\w+)\s*\)[^{]*{/g, <span class="fstat-no" title="function not covered" >(m</span>atch, p1, p2) =&gt; {
+    .replace(/App\({[\s\S]+(onLaunch|onShow):\s*function\s*\(\s*(\w+)\s*\)[^{]*{/g, (match, p1, p2) =&gt; {
       // query默认值{}
-<span class="cstat-no" title="statement not covered" >      return defQuery(match, p2);</span>
+      return defQuery(match, p2);
     })
     .replace(/App\({[\s\S]+(onLaunch|onShow)\s*\(\s*(\w+)\s*\)[^{]*{/g, (match, p1, p2) =&gt; {
       // query默认值{}
       return defQuery(match, p2);
     })
-    .replace(/App\({[\s\S]+(onLaunch|onShow):\s*\(\s*(\w+)\s*\)\s*=&gt;\s*[^{]*{/g, <span class="fstat-no" title="function not covered" >(m</span>atch, p1, p2) =&gt; {
+    .replace(/App\({[\s\S]+(onLaunch|onShow):\s*\(\s*(\w+)\s*\)\s*=&gt;\s*[^{]*{/g, (match, p1, p2) =&gt; {
       // query默认值{}
-<span class="cstat-no" title="statement not covered" >      return defQuery(match, p2);</span>
+      return defQuery(match, p2);
     })
     .replace(/Component\([\s\S]+properties:[^{]*{/, (match) =&gt; {
       return match.replace('properties', 'props');
@@ -535,7 +535,7 @@ module.exports = convert;</pre></td></tr>
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Fri Jan 03 2020 17:37:06 GMT+0800 (GMT+08:00)
+  generated by <a href="https://istanbul.js.org/" target="_blank">istanbul</a> at Mon Jan 06 2020 15:21:09 GMT+0800 (GMT+08:00)
 </div>
 </div>
 <script src="../../../../prettify.js"></script>

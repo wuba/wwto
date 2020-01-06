@@ -10,16 +10,17 @@ testScript(
   'alibaba script convert test:',
   convert(`
   const fs = require('fs')
-  import wx from "././test"
+  import wx from "test"
   const fetch = this
   fetch.abs
   App({
     onLaunch( opts ) {
       console.log('App Launch', opts)
     },
-    onShow: (opts) {
+    onShow: function ( opts ) {
       console.log('App Show', opts)
-    }
+    },
+    onShow: ( opts ) => {}
   })
   if (item.properties.read){}
   Component(
@@ -27,16 +28,17 @@ testScript(
   )`, true),
   `
   const fs = require('./fs')
-  import wx from "././test"
+  import wx from "test"
   const renameFetch =  this
   renameFetch.abs
   App({
     onLaunch( opts ) {opts = opts || {}; opts.query = opts.query || {};
       console.log('App Launch', opts)
     },
-    onShow: (opts) {
+    onShow: function ( opts ) {opts = opts || {}; opts.query = opts.query || {};
       console.log('App Show', opts)
-    }
+    },
+    onShow: ( opts ) => {opts = opts || {}; opts.query = opts.query || {};}
   })
   if (item.props.read){}
   Component(
