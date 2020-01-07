@@ -1,4 +1,4 @@
-# wto [![travis][travis-image]][travis-url] [![npm][npm-image]][npm-url][![javascript style guide][standard-image]][standard-url] [![coverage][coverage-image]][coverage-url]
+# wto [![travis][travis-image]][travis-url] [![npm][npm-image]][npm-url] [![javascript style guide][standard-image]][standard-url] [![coverage][coverage-image]][coverage-url]
 
 [travis-image]: https://img.shields.io/travis/standard/eslint-config-standard/master.svg
 [travis-url]: https://travis-ci.org/standard/eslint-config-standard
