@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-// const cover = require('../../src/platform/alibaba/converter.js');
+const cover = require('../../src/platform/alibaba/converter.js');
 const lint = require('../../src/platform/alibaba/linter.js');
 
 function testCode(testName, code01, code02) {

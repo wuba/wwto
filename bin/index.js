@@ -31,9 +31,9 @@ function displayVersion() {
   const version = getVersion();
   const chars = [
     '   _   _____   __  ',
-    ' ( \/\/ )  |   ( - )',
+    ' ( // )  |   ( - )',
     ' )   (   |  (     ) ',
-    '(__/\__)  |   ( _ ) ',
+    '(__/__)  |   ( _ ) ',
     '                                         '
   ].join('\n');
 

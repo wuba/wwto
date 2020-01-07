@@ -1,15 +1,18 @@
-# wto [![travis][travis-image]][travis-url] [![npm][npm-image]][npm-url] [![license][license-image]][license-url] [![javascript style guide][standard-image]][standard-url] [![coverage][coverage-image]][coverage-url]
+# wto [![travis][travis-image]][travis-url] [![license][license-image]][license-url] [![javascript style guide][standard-image]][standard-url] [![version][version-image]][version-url] [![coverage][coverage-image]][coverage-url]
+<!-- [![npm][npm-image]][npm-url]  -->
 
 [travis-image]: https://img.shields.io/travis/standard/eslint-config-standard/master.svg
 [travis-url]: https://travis-ci.org/standard/eslint-config-standard
-[npm-image]: https://img.shields.io/badge/npm-v6.13.4-blue
-[npm-url]: https://npmjs.org/package/eslint-config-standard
+<!-- [npm-image]: https://img.shields.io/badge/npm-v6.13.4-blue
+[npm-url]: https://npmjs.org/package/eslint-config-standard -->
 [standard-image]: https://img.shields.io/badge/code_style-standard-brightgreen.svg
 [standard-url]: https://standardjs.com
-[coverage-image]: https://img.shields.io/badge/coverage-80%25-yellowgreen
-[coverage-url]: https://img.shields.io/badge/coverage-80%25-yellowgreen
-[license-image]: https://img.shields.io/cocoapods/l/Kingfisher.svg?style=flat
+[coverage-image]: https://img.shields.io/badge/coverage-87.47%25-yellowgreen.svg
+[coverage-url]: README.md
+[license-image]: https://img.shields.io/badge/license-MIT-blue.svg
 [license-url]: demo/miniprogram-demo/LICENSE
+[version-image]: https://img.shields.io/badge/version-v2.0.10-blue.svg
+[version-url]: README.md
 
 > **wto**: wechat mini-program to other mini-program
 
