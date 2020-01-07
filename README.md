@@ -1,4 +1,4 @@
-# wto [![travis][travis-image]][travis-url] [![npm][npm-image]][npm-url] [![javascript style guide][standard-image]][standard-url] [![coverage][coverage-image]][coverage-url]
+# wto [![travis][travis-image]][travis-url] [![npm][npm-image]][npm-url] [![license][license-image]][license-url] [![javascript style guide][standard-image]][standard-url] [![coverage][coverage-image]][coverage-url]
 
 [travis-image]: https://img.shields.io/travis/standard/eslint-config-standard/master.svg
 [travis-url]: https://travis-ci.org/standard/eslint-config-standard
@@ -8,6 +8,8 @@
 [standard-url]: https://standardjs.com
 [coverage-image]: https://img.shields.io/badge/coverage-80%25-yellowgreen
 [coverage-url]: https://img.shields.io/badge/coverage-80%25-yellowgreen
+[license-image]: https://img.shields.io/cocoapods/l/Kingfisher.svg?style=flat
+[license-url]: demo/miniprogram-demo/LICENSE
 
 > **wto**: wechat mini-program to other mini-program
 
