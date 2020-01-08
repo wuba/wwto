@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1578388230708" clover="3.2.0">
-  <project timestamp="1578388230708" name="All files">
-    <metrics statements="424" coveredstatements="372" conditionals="111" coveredconditionals="72" methods="147" coveredmethods="117" elements="682" coveredelements="561" complexity="0" loc="424" ncloc="424" packages="12" files="36" classes="36"/>
+<coverage generated="1578465330255" clover="3.2.0">
+  <project timestamp="1578465330255" name="All files">
+    <metrics statements="402" coveredstatements="363" conditionals="103" coveredconditionals="72" methods="138" coveredmethods="114" elements="643" coveredelements="549" complexity="0" loc="402" ncloc="402" packages="11" files="34" classes="34"/>
     <package name="src">
       <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
       <file name="config.js" path="/Users/a58/Documents/项目/wto/wto/src/config.js">
@@ -502,37 +502,6 @@
         <line num="33" count="4" type="stmt"/>
         <line num="40" count="7" type="stmt"/>
         <line num="43" count="4" type="stmt"/>
-      </file>
-    </package>
-    <package name="src.scope">
-      <metrics statements="22" coveredstatements="9" conditionals="8" coveredconditionals="0" methods="9" coveredmethods="3"/>
-      <file name="scope-id.js" path="/Users/a58/Documents/项目/wto/wto/src/scope/scope-id.js">
-        <metrics statements="16" coveredstatements="4" conditionals="8" coveredconditionals="0" methods="6" coveredmethods="1"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="4" count="1" type="stmt"/>
-        <line num="5" count="1" type="stmt"/>
-        <line num="6" count="0" type="stmt"/>
-        <line num="7" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="9" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="10" count="0" type="stmt"/>
-        <line num="12" count="0" type="stmt"/>
-        <line num="15" count="0" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="25" count="0" type="stmt"/>
-      </file>
-      <file name="scope-style.js" path="/Users/a58/Documents/项目/wto/wto/src/scope/scope-style.js">
-        <metrics statements="6" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
-        <line num="1" count="1" type="stmt"/>
-        <line num="2" count="1" type="stmt"/>
-        <line num="10" count="1" type="stmt"/>
-        <line num="13" count="1" type="stmt"/>
-        <line num="16" count="0" type="stmt"/>
-        <line num="18" count="1" type="stmt"/>
       </file>
     </package>
     <package name="src.utils">

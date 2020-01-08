@@ -1,2 +1,0 @@
-var wx = require('./../../../adaptor.js').default;
-function convert(e){return e.replace(/usingComponents([^}]+)/g,function(e,n){return e.replace(/"([\w]+)":/gi,(e,n)=>e.replace(n,n.replace(/[A-Z]/g,e=>["-",e.toLowerCase()].join(""))))})}module.exports=convert;

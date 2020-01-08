@@ -1,2 +1,0 @@
-var wx = require('./../../../adaptor.js').default;
-function convert(e){return e.replace(/\.wxss(["'])/g,(e,r)=>r).replace(/url\(['"]?\/\/[^)]+['"]?\)/gi,e=>e.replace(/\/\//g,e=>`https:${e}`))}module.exports=convert;

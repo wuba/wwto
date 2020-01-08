@@ -1,2 +1,0 @@
-import wx from './../../adaptor.js';
-function convert(e){return e.replace(/\.wxss(["'])/g,function(e,r){return r}).replace(/url\(['"](\/\/[^'"]+)['"]\)/gi,function(e,r){return e.replace(/\/\//g,e=>"https:"+e)}).replace(/url\((\/\/[^'"]+)\)/gi,function(e,r){return e.replace(/\/\//g,e=>"https:"+e)})}module.exports=convert;age[,\s{]/gi,function(e,r){return e.replace(/image/g,".fix-image-cls")})}module.exports=convert;

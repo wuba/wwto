@@ -1,2 +1,0 @@
-var wx = require('./../../../adaptor.js').default;
-function calcLine(t,n){const e=t.indexOf(n);return t.substring(0,e).split("\n").length}function unsupportedAttrOrEvents(t,n,e,r,c){const s=[];return e.forEach(e=>{e.attrs.forEach(u=>{const o=new RegExp(`<${e.tag}[^>]*${u}=`),a=t.match(o);if(a){const o=calcLine(t,a),i=`${r}小程序 ${e.tag} 组件不支持 ${u} ${c}`;s.push({path:n,line:o,source:a,rule:i})}})}),s}module.exports={calcLine:calcLine,unsupportedAttrOrEvents:unsupportedAttrOrEvents};

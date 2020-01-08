@@ -1,1 +1,9 @@
-language: javascript
+language: node_js
+node_js: node
+cache: yarn
+install:
+- yarn install
+- yarn global add node-coveralls
+
+script:
+- yarn jest --coverage --coverageReporters=text-lcov | coveralls

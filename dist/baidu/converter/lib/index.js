@@ -1,2 +1,0 @@
-import wx from './../../adaptor.js';
-const baidu=require("./baidu/index"),toutiao=require("./toutiao/index"),alibaba=require("./alibaba/index");module.exports={baidu:baidu,toutiao:toutiao,alibaba:alibaba};
