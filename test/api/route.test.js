@@ -3,7 +3,7 @@ const _ = require('../utils/utils');
 
 test('navigateBack', async () => {
   const res = await _.wa(wx.navigateBack);
-  console.log("res:", res);
+  // console.log("res:", res);
   expect(res).toEqual({ errMsg: 'navigateBack:ok' });
 });
 

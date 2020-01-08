@@ -1,9 +1,9 @@
 language: node_js
 node_js: node
-cache: yarn
+cache: npm
 install:
-- yarn install
-- yarn global add node-coveralls
+- npm install
+- npm global add node-coveralls
 
 script:
-- yarn jest --coverage --coverageReporters=text-lcov | coveralls
+- jest --coverage --coverageReporters=text-lcov | coveralls
