@@ -1,9 +1,21 @@
 language: node_js
-node_js: node
-cache: npm
+node_js: 
+  # - '12'
+  # - '10'
+  - '8'
+  # - '6'
+  # - '4'
+
 install:
-- npm install
-- npm global add node-coveralls
+  - npm install --save-dev jest
+  - npm install coveralls --save-dev
+
+cache:
+  directories: node_modules
 
 script:
-- jest --coverage --coverageReporters=text-lcov | coveralls
+- npm run coveralls
+
+after_script: cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -repotoken NHoDMlPkslTL4p83e7TcIREKcnpJZvZ1I
+
+os: osx
