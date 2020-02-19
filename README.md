@@ -146,3 +146,8 @@ gulp.task('lint', function(cb) {
 - 自定义组件不能响应事件（如：`bindTap`），需要添加一层容器来捕获事件
 - 唤起键盘不会上推position:fixed的元素
 - 文件名不能包含'@'字符
+
+## 贡献
+
+欢迎参与 wto 项目的开发建设和讨论。
+> 提交 pull request 之前请先提 [Issue 讨论](https://github.com/ant-move/antmove/issues).
