@@ -81,17 +81,17 @@
 ### 启动项目
 
 ```shell
-npm install
-# 安装依赖
+  npm install
+  # 安装依赖
 
-npm run build
-# 构建项目
+  npm run build
+  # 构建项目
 
-npm run dev
-# 运行项目
+  npm run dev
+  # 运行项目
 
-jest --coverage
-# 检测单元测试覆盖率
+  jest --coverage
+  # 检测单元测试覆盖率
 ```
 
 ### 打包工具
