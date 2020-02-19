@@ -150,4 +150,4 @@ gulp.task('lint', function(cb) {
 ## 贡献
 
 欢迎参与 wto 项目的开发建设和讨论。
-> 提交 pull request 之前请先提 [Issue 讨论](https://github.com/ant-move/antmove/issues).
+> 提交 pull request 之前请先提 [Issue 讨论].
