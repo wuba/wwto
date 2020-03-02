@@ -19,7 +19,7 @@ testWxml(
   <div data-Attr="">{{ a <.123 ? 'a' :'b' }}</div>
   <scroll-view scroll-y="true" style="height: 300rpx;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{{toView}}" scroll-top="{{scrollTop}}" scroll-left="{{scrollLeft}}"></scroll-view>
   <template is="head" data="{{title: 'tabBar'}}"/>
-  <image src="https://img.58cdn.com.cn/git/teg-app-fe/hash-ganghood/indexBg.png?a=111" bindtap="previewImage"></image>
+  <image src="demo/miniprogram-demo/image/preview.png" bindtap="previewImage"></image>
   <navigator url="navigate?title=navigate" hover-class="navigator-hover"></navigator>
   <video object-fit="ff"></video>
   <video page-gesture="test"></video>`),
@@ -33,7 +33,7 @@ testWxml(
   <div data-attr="">{{ a < .123 ? 'a' :'b' }}</div>
   <scroll-view scroll-y="true" style="height: 300rpx;" bindscrolltoupper="upper" bindscrolltolower="lower" bindscroll="scroll" scroll-into-view="{=toView=}" scroll-top="{=scrollTop=}" scroll-left="{=scrollLeft=}"></scroll-view>
   <template is="head" data="{{{title: 'tabBar'}}}"/>
-  <image class="fix-image-cls"  src="https://img.58cdn.com.cn/git/teg-app-fe/hash-ganghood/indexBg.png?a=111" bindtap="previewImage"></image>
+  <image class="fix-image-cls"  src="demo/miniprogram-demo/image/preview.png" bindtap="previewImage"></image>
   <navigator url="navigate?title=navigate" hover-class="navigator-hover"></navigator>
   <video objectFit="ff"></video>
   <video page-gesture="test"></video>`

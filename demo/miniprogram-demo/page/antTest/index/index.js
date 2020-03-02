@@ -161,7 +161,7 @@ Page({
   },
   clip() {
     wx.downloadFile({
-      url: 'http://is5.mzstatic.com/image/thumb/Purple128/v4/75/3b/90/753b907c-b7fb-5877-215a-759bd73691a4/source/50x50bb.jpg',
+      url: 'demo/miniprogram-demo/image/weixin.jpg',
       success(res) {
         ctx.save()
         ctx.beginPath()

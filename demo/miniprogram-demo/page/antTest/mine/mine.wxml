@@ -36,7 +36,7 @@
 <button bindtap="createMapContext">createMapContext</button>
 <button bindtap="getCenterLocation">getCenterLocation</button>
 <button bindtap="moveToLocation">moveToLocation</button>
-<image src="https://img.58cdn.com.cn/git/teg-app-fe/hash-ganghood/indexBg.png?a=111" bindtap="previewImage"></image>
+<image src="demo/miniprogram-demo/image/preview.png" bindtap="previewImage"></image>
 <button bindtap="getImageInfo">getImageInfo</button>
 <button bindtap="chooseImage">chooseImage</button>
 <button bindtap="getLocation">getLocation</button>

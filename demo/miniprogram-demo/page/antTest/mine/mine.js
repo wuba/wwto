@@ -98,7 +98,7 @@ Page({
   },
   downloadFile(){
     wx.downloadFile({
-      url: 'http://t8.baidu.com/it/u=3660968530,985748925&fm=191&app=48&wm=1,17,90,45,20,7&wmo=0,0&n=0&g=0n&f=JPEG?sec=1853310920&t=9b4f100f0eedfe853fad24a58a4e1ad7', // 仅为示例，并非真实的资源
+      url: 'demo/miniprogram-demo/image/download.png', // 仅为示例，并非真实的资源
       success(res) {
         console.log(res)
       }
@@ -172,12 +172,12 @@ Page({
   },
   previewImage(){
     wx.previewImage({
-      urls:["https://img.58cdn.com.cn/git/teg-app-fe/hash-ganghood/indexBg.png?a=111"]
+      urls:["demo/miniprogram-demo/image/preview.png"]
     })
   },
   getImageInfo(){
     wx.getImageInfo({
-      src:'https://img.58cdn.com.cn/git/teg-app-fe/hash-ganghood/indexBg.png?a=111',
+      src:'demo/miniprogram-demo/image/preview.png',
       success(res){
         console.log(res)
       }
