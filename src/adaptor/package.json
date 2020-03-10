@@ -1,7 +1,7 @@
 {
   "name": "mp-adaptor",
   "version": "1.0.8",
-  "description": "static cross-platform mini-program converter",
+  "description": "static cross-platform mini-program adaptor",
   "scripts": {
     "build": "gulp build",
     "prepare": "npm run build"

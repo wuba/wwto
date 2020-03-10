@@ -1,7 +1,7 @@
 {
   "name": "mp-linter",
   "version": "1.0.7",
-  "description": "static cross-platform mini-program converter",
+  "description": "static cross-platform mini-program linter",
   "main": "lib/index.js",
   "scripts": {
     "build": "gulp build",
@@ -14,7 +14,6 @@
     "gulp-sequence": "^1.0.0",
     "gulp-uglify-es": "^1.0.4",
     "gulp-watch": "^5.0.1",
-    "mp-linter": "^1.0.1",
     "pump": "^3.0.0"
   }
 }

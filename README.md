@@ -1,4 +1,4 @@
-# wto [![Build Status][travis-image]][travis-url] [![license][license-image]][license-url] [![javascript style guide][standard-image]][standard-url] [![version][version-image]][version-url]
+# wwto [![Build Status][travis-image]][travis-url] [![license][license-image]][license-url] [![javascript style guide][standard-image]][standard-url] [![version][version-image]][version-url]
 <!-- [![Coverage Status][coveralls-image]][coveralls-url] -->
 <!-- [![npm][npm-image]][npm-url]  -->
 
@@ -15,12 +15,12 @@
 [version-image]: https://img.shields.io/badge/version-v2.0.10-blue.svg
 [version-url]: README.md
 
-> **wto**: wechat mini-program to other mini-program
+> **wwto**: wuba wechat mini-program to other mini-program
 
 ## 简介
 
-**wto**是一款支持将原生微信小程序转换成其他小程序的工具集合。  
-使用**wto**，几乎不需要对已有的微信小程序做任何改动，可以接近零成本获得`百度小程序`、`阿里小程序`、`头条小程序`。
+**wwto**是一款支持将原生微信小程序转换成其他小程序的工具集合。  
+使用**wwto**，几乎不需要对已有的微信小程序做任何改动，可以接近零成本获得`百度小程序`、`阿里小程序`、`头条小程序`。
 
 ## 前提
 
@@ -30,11 +30,9 @@
 ## 安装
 
 ```shell
-  npm config set registry http://ires.58corp.com/repository/58npm
   npm i wto-cli -g
 
   #or
-  yarn config set registry http://ires.58corp.com/repository/58npm
   yarn global add wto-cli
 ```
 
@@ -46,36 +44,36 @@
 
 ```shell
   # 查看帮助
-  wto --help
+  wwto --help
   # 查看转换命令使用说明
-  wto build --help
+  wwto build --help
   # 查看源码兼容性检测使用说明
-  wto lint --help
+  wwto lint --help
   # 查看版本号
-  wto -v
+  wwto -v
 
   # 转换成百度小程序
-  wto build -p baidu -s src -t dist/baidu
+  wwto build -p baidu -s src -t dist/baidu
   # 检测源码对百度小程序的兼容性
-  wto lint -p baidu -s src
+  wwto lint -p baidu -s src
   
   # 转换成阿里小程序
-  wto build -p alibaba -s src -t dist/alibaba
+  wwto build -p alibaba -s src -t dist/alibaba
   # 检测源码对阿里小程序的兼容性
-  wto lint -p alibaba -s src
+  wwto lint -p alibaba -s src
   
   # 转换成头条小程序
-  wto build -p toutiao -s src -t dist/toutiao
+  wwto build -p toutiao -s src -t dist/toutiao
   # 检测源码对头条小程序的兼容性
-  wto lint -p toutiao -s src
+  wwto lint -p toutiao -s src
   
   # 转换成百度&&阿里&&头条小程序
-  wto build -s src -t dist
+  wwto build -s src -t dist
   # 检测源码对百度&&阿里&&头条小程序的兼容性
-  wto lint -s src
+  wwto lint -s src
   
   # 转换插件调用方式（提供给wbmp使用，原生微信小程序转换已集成到build命令）
-  wto plugin -s dist/baidu
+  wwto plugin -s dist/baidu
 ```
 
 ### 启动项目
@@ -98,11 +96,11 @@
 
 ```javascript
 const gulp = require('gulp');
-const wto = require('wto-cli');
+const wwto = require('wto-cli');
 
 // 转换成百度/阿里/头条小程序
 gulp.task('build', function(cb) {
-    wto.toAll({
+    wwto.toAll({
       source: './src',
       baiduTarget: './dist/baidu',
       alibabaTarget: './dist/alibaba',
@@ -112,7 +110,7 @@ gulp.task('build', function(cb) {
 
 // 检测源码对各平台的兼容性
 gulp.task('lint', function(cb) {
-    wto.lintAll({
+    wwto.lintAll({
       source: './src'
     });
 });
@@ -120,7 +118,7 @@ gulp.task('lint', function(cb) {
 
 ## 使用案例
 
-`wto`已经投入了我们的生产环境中使用，包括`58微聊`和`云账号`
+`wwto`已经投入了生产环境中使用，包括`微聊`和`云账号`
 
 ## 注意事项
 
@@ -165,5 +163,5 @@ gulp.task('lint', function(cb) {
 
 ## 贡献
 
-欢迎参与 wto 项目的开发建设和讨论。
+欢迎参与 wwto 项目的开发建设和讨论。
 > 提交 pull request 之前请先提 [Issue 讨论].

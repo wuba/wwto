@@ -1,1 +1,1 @@
-const baidu = require("./baidu/index"); const toutiao = require("./toutiao/index"); const alibaba = require("./alibaba/index"); module.exports = { baidu: baidu, toutiao: toutiao, alibaba: alibaba };
+const baidu=require("./baidu/index"),toutiao=require("./toutiao/index"),alibaba=require("./alibaba/index");module.exports={baidu:baidu,toutiao:toutiao,alibaba:alibaba};
