@@ -30,10 +30,10 @@
 ## 安装
 
 ```shell
-  npm i wto-cli -g
+  npm i wwto -g
 
   #or
-  yarn global add wto-cli
+  yarn global add wwto
 ```
 
 ## 使用
@@ -96,7 +96,7 @@
 
 ```javascript
 const gulp = require('gulp');
-const wwto = require('wto-cli');
+const wwto = require('wwto');
 
 // 转换成百度/阿里/头条小程序
 gulp.task('build', function(cb) {

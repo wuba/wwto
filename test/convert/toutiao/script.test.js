@@ -10,12 +10,12 @@ function testScript(testName, code1, code2) {
 testScript(
   'toutiao script convert test:',
   convert(`
-  "//github.com/fulme/wwto-cli.git/issues"
+  "//github.com/wwto.git/issues"
   commander.option()
   commander.transition()
   commander.timingFunction()`),
   `
-  "https://github.com/fulme/wwto-cli.git/issues"
+  "https://github.com/wwto.git/issues"
   commander.option()
   commander.transition()
   commander.timingFunction()`

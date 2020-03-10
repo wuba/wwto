@@ -7,7 +7,7 @@
     "build": "gulp build",
     "prepare": "npm run build"
   },
-  "author": "fulme@58.com",
+  "author": "",
   "license": "MIT",
   "dependencies": {
     "@babel/cli": "^7.2.3",
