@@ -10,12 +10,12 @@ function testScript(testName, code1, code2) {
 testScript(
   'baidu script convert test:',
   convert(`
-  "//github.com/fulme/wto-cli.git/issues"
+  "//github.com/fulme/wwto-cli.git/issues"
   commander.option()
   commander.transition()
   commander.timingFunction()`),
   `
-  "https://github.com/fulme/wto-cli.git/issues"
+  "https://github.com/fulme/wwto-cli.git/issues"
   commander.option()
   commander.transition()
   commander.timingFunction()`

@@ -33,7 +33,7 @@ testJson(
     "navigationBarTitleText": "小程序接口能力展示",
     "usingComponents": {
       "setTabBar": "./components/set-tab-bar/set-tab-bar",
-      "path": "/wto/ test/convert alibaba/json.test.js"
+      "path": "/ test/convert alibaba/json.test.js"
     }
   }`),
   `
@@ -60,7 +60,7 @@ testJson(
     "navigationBarTitleText": "小程序接口能力展示",
     "usingComponents": {
       "set-tab-bar": "./components/set-tab-bar/set-tab-bar",
-      "path": "/wto/ test/convert alibaba/json.test.js"
+      "path": "/ test/convert alibaba/json.test.js"
     }
   }`
 );
