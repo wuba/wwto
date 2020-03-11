@@ -1,15 +1,11 @@
-# wwto [![Build Status][travis-image]][travis-url] [![license][license-image]][license-url] [![javascript style guide][standard-image]][standard-url] [![version][version-image]][version-url]
-<!-- [![Coverage Status][coveralls-image]][coveralls-url] -->
-<!-- [![npm][npm-image]][npm-url]  -->
+# wwto [![Build Status][travis-image]][travis-url] [![license][license-image]][license-url] [![javascript style guide][standard-image]][standard-url] [![version][version-image]][version-url] [![Coverage Status][coveralls-image]][coveralls-url]
 
-[travis-image]: https://img.shields.io/travis/standard/eslint-config-standard/master.svg
-[travis-url]: https://travis-ci.org/standard/eslint-config-standard
-<!-- [npm-image]: https://img.shields.io/badge/npm-v6.13.4-blue
-[npm-url]: https://npmjs.org/package/eslint-config-standard -->
+[travis-url]: https://www.travis-ci.org/WangJuYan/wjyTest
+[travis-image]: https://www.travis-ci.org/WangJuYan/wjyTest.svg?branch=master
+[coveralls-url]: https://coveralls.io/github/WangJuYan/wjyTest?branch=master
+[coveralls-image]: https://coveralls.io/repos/github/WangJuYan/wjyTest/badge.svg?branch=master
 [standard-image]: https://img.shields.io/badge/code_style-standard-brightgreen.svg
 [standard-url]: https://standardjs.com
-<!-- [coveralls-image]: https://img.shields.io/badge/coverage-87.47%25-yellowgreen.svg
-[coveralls-url]: https://coveralls.io -->
 [license-image]: https://img.shields.io/badge/license-MIT-blue.svg
 [license-url]: demo/miniprogram-demo/LICENSE
 [version-image]: https://img.shields.io/badge/version-v2.0.10-blue.svg
