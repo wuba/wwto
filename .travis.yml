@@ -1,5 +1,5 @@
-language: node_js
-node_js: 
+language: node_js #指定运行环境
+node_js:
   # - '12'
   # - '10'
   - '8'
@@ -11,10 +11,13 @@ install:
   - npm install coveralls --save-dev
 
 cache:
-  directories: node_modules
+  directories: node_modules #缓存node_modules文件
 
 script:
-- npm run coveralls
+  - npm run coveralls
+  # - npm run test --coverage
+  # 没有全局安装 codecov，所以要通过 npm 来运行 codecov
+  # - npm run codecov
 
 after_script: cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js -repotoken NHoDMlPkslTL4p83e7TcIREKcnpJZvZ1I
 
