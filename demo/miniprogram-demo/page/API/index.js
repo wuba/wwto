@@ -234,9 +234,6 @@ Page({
   },
   onHide() {
     this.leaveSetTabBarPage()
-    var name = 'name';
-    var data = {};
-    this.triggerEvent(name, data);
   },
   kindToggle(e) {
     const id = e.currentTarget.id; const

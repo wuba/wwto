@@ -32,7 +32,6 @@ Component({
 
   methods: {
     navigateBack() {
-      this.triggerEvent('unmount')
     },
 
     setTabBarBadge() {
