@@ -54,7 +54,7 @@ function convert(opt = {}) {
     .pipe(through2.obj(function(file, enc, cb) {
       const path = file.history[0].replace(file.base, '');
       const spec = path.split(sysPath.sep);
-      const adaptor = new Array(spec.length).fill('..').concat('adaptor.js').join('/');
+      const adaptor = new Array(spec.length - 1).fill('..').concat('adaptor.js').join('/');
       const str = [
         `var wx = require('${adaptor.replace(/^\.\./, '.')}').default;`,
         ab2str(file.contents)

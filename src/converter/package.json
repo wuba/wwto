@@ -1,6 +1,6 @@
 {
   "name": "mp-converter",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "static cross-platform mini-program converter",
   "main": "lib/index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-uglify-es": "^1.0.4",
     "gulp-watch": "^5.0.1",
     "pump": "^3.0.0",

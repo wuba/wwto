@@ -7,18 +7,6 @@ const UGLIFY_OPTIONS = {
   compress: {}
 };
 
-gulp.task('debug', ['build'], () => watch('src/**/*.js', (file) => {
-  const path = file.history[0];
-  console.log('开始压缩：', path);
-
-  return gulp.src(path)
-    .pipe(uglifyES(UGLIFY_OPTIONS))
-    .pipe(gulp.dest('lib'))
-    .on('end', () => {
-      console.log('压缩完成：', path);
-    });
-}));
-
 gulp.task('build', (cb) => {
   console.log('开始压缩...');
   pump([
@@ -30,3 +18,15 @@ gulp.task('build', (cb) => {
     cb && cb();
   });
 });
+
+gulp.task('debug', gulp.series('build', () => watch('src/**/*.js', (file) => {
+  const path = file.history[0];
+  console.log('开始压缩：', path);
+
+  return gulp.src(path)
+    .pipe(uglifyES(UGLIFY_OPTIONS))
+    .pipe(gulp.dest('lib'))
+    .on('end', () => {
+      console.log('压缩完成：', path);
+    });
+})));
