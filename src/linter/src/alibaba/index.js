@@ -6,7 +6,7 @@ const unsupportedEvents = require('./unsupported-events');
 
 const wxmlLineRules = [
   (source) => {
-    const rule = '组件阿里小程序未实现';
+    const rule = '组件支付宝小程序未实现';
 
     for (let i = 0; i < unsupportedTags.length; i++) {
       const fn = unsupportedTags[i];
@@ -22,7 +22,7 @@ const wxmlLineRules = [
   },
   (source) => {
     const attrs = ['contact', 'getUserInfo', 'getPhoneNumber', 'openSetting', 'feedback'].join('|');
-    const rule = `阿里小程序 button 组件 不支持 ${attrs} 属性`;
+    const rule = `支付宝小程序 button 组件 不支持 ${attrs} 属性`;
     const reg = `<button[^>]*open-type=["'](contact|getUserInfo|getPhoneNumber|openSetting|feedback)["']`;
     const match = source.match(reg);
 
@@ -71,8 +71,8 @@ const wxmlLineRules = [
 ];
 
 const wxmlFileRules = [
-  (contents, path) => utils.unsupportedAttrOrEvents(contents, path, unsupportedAttrs, '阿里', '属性'),
-  (contents, path) => utils.unsupportedAttrOrEvents(contents, path, unsupportedEvents, '阿里', '事件')
+  (contents, path) => utils.unsupportedAttrOrEvents(contents, path, unsupportedAttrs, '支付宝', '属性'),
+  (contents, path) => utils.unsupportedAttrOrEvents(contents, path, unsupportedEvents, '支付宝', '事件')
 ];
 
 const wxssFileRules = [];
@@ -81,7 +81,7 @@ const wxssLineRules = [];
 
 const scriptLineRules = [
   (source) => {
-    const rule = '方法阿里小程序未实现';
+    const rule = '方法支付宝小程序未实现';
 
     for (let i = 0; i < unsupportedFns.length; i++) {
       const fn = unsupportedFns[i];

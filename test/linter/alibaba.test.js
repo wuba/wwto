@@ -11,7 +11,7 @@ function testCode(testName, code01, code02) {
 testCode(
   'linter alibaba-wxmlLineRules-0 testing:',
   Plug.wxmlLineRules[0](`<camera />`),
-  { rule: "camera组件阿里小程序未实现", source: "<camera />" }
+  { rule: "camera组件支付宝小程序未实现", source: "<camera />" }
 );
 
 testCode(
@@ -23,7 +23,7 @@ testCode(
 testCode(
   'linter alibaba-wxmlLineRules-1 testing:',
   Plug.wxmlLineRules[1](`<button open-type="openSetting" type="default">打开小程序设置</button>`),
-  { rule: "阿里小程序 button 组件 不支持 contact|getUserInfo|getPhoneNumber|openSetting|feedback 属性", source: "<button open-type=\"openSetting\" type=\"default\">打开小程序设置</button>" }
+  { rule: "支付宝小程序 button 组件 不支持 contact|getUserInfo|getPhoneNumber|openSetting|feedback 属性", source: "<button open-type=\"openSetting\" type=\"default\">打开小程序设置</button>" }
 );
 
 testCode(
@@ -60,7 +60,7 @@ testCode(
 testCode(
   'linter alibaba-scriptLineRules-0 testing:',
   Plug.scriptLineRules[0](`wx.setTabBarStyle()`),
-  { rule: "setTabBarStyle方法阿里小程序未实现", source: "wx.setTabBarStyle()" }
+  { rule: "setTabBarStyle方法支付宝小程序未实现", source: "wx.setTabBarStyle()" }
 );
 
 testCode(
@@ -98,11 +98,11 @@ testCode(
 testCode(
   'linter alibaba-wxmlFileRules-1 testing:',
   JSON.stringify(Plug.wxmlFileRules[1](`<button binderror="error">`, `../test`)),
-  JSON.stringify([{ path: "../test", line: 1, source: ["<button binderror="], rule: "阿里小程序 button 组件不支持 binderror 事件" }])
+  JSON.stringify([{ path: "../test", line: 1, source: ["<button binderror="], rule: "支付宝小程序 button 组件不支持 binderror 事件" }])
 );
 
 testCode(
   'linter alibaba-wxmlFileRules-0 testing:',
   JSON.stringify(Plug.wxmlFileRules[0](`<progress color="" active />`, '../test')),
-  JSON.stringify([{ path: '../test', line: 1, source: ["<progress color="], rule: "阿里小程序 progress 组件不支持 color 属性" }])
+  JSON.stringify([{ path: '../test', line: 1, source: ["<progress color="], rule: "支付宝小程序 progress 组件不支持 color 属性" }])
 );
