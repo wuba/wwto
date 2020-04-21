@@ -18,6 +18,8 @@ function ignoreFn(opt) {
 function getInstance() {
   var wx = tt;
 
+  if (wx.has_toutiao_hook_flag) return
+
   wx.has_toutiao_hook_flag = true;
 
   wx.hideKeyboard = wx.hideKeyboard || emptyFn;

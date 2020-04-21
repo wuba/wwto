@@ -4,6 +4,8 @@ function getInstance() {
   // eslint-disable-next-line no-undef
   const wx = swan;
 
+  if (wx.has_baidu_hook_flag) return
+
   wx.has_baidu_hook_flag = true;
 
   const {
