@@ -16,6 +16,7 @@ const logger = require('../../utils/logger');
 const converter = require('mp-converter').alibaba;
 const scopeStyle = require('../../scope/scope-style');
 const scopeTemplate = require('../../scope/scope-template');
+const diffTag = require('../diff/index').diffTag('alipay');
 
 function convert(opt = {}) {
   const src = opt.source || './src';
@@ -26,6 +27,7 @@ function convert(opt = {}) {
 
   // 处理样式文件
   gulp.src(`${src}/**/*.wxss`)
+    .pipe(replace(/[\s\S]*/g, diffTag))
     .pipe(replace(/[\s\S]*/g, (match) => converter.wxss(match)))
     .pipe(through2.obj(function(file, enc, cb) {
       const path = file.history[0].replace(file.base, '').replace('.wxss', '');
@@ -65,6 +67,7 @@ function convert(opt = {}) {
 
   // 处理模板文件
   gulp.src(`${src}/**/*.wxml`)
+    .pipe(replace(/[\s\S]*/g, diffTag))
     .pipe(replace(/[\s\S]*/g, (match) => converter.wxml(match)))
     .pipe(through2.obj(function(file, enc, cb) {
       const path = file.history[0].replace(file.base, '').replace('.wxml', '');
@@ -129,6 +132,7 @@ function convert(opt = {}) {
 
   // 处理脚本文件
   gulp.src(`${src}/**/*.js`)
+    .pipe(replace(/[\s\S]*/g, diffTag))
     .pipe(replace(/[\s\S]*/g, (match) => converter.script(match)))
     .pipe(through2.obj(function(file, enc, cb) {
       const path = file.history[0].replace(file.base, '');

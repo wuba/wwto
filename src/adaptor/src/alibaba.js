@@ -22,7 +22,7 @@ function getInstance() {
   // eslint-disable-next-line no-undef
   const wx = my;
 
-  if (wx.has_ali_hook_flag) return
+  if (wx.has_ali_hook_flag) return;
 
   wx.has_ali_hook_flag = true;
 

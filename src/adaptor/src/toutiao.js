@@ -18,7 +18,7 @@ function ignoreFn(opt) {
 function getInstance() {
   var wx = tt;
 
-  if (wx.has_toutiao_hook_flag) return
+  if (wx.has_toutiao_hook_flag) return;
 
   wx.has_toutiao_hook_flag = true;
 

@@ -9,6 +9,7 @@ const replace = require('gulp-replace');
 const config = require('../../config');
 const logger = require('../../utils/logger');
 const converter = require('mp-converter').baidu;
+const diffTag = require('../diff/index').diffTag('baidu');
 
 const plugin = require('mp-plugin');
 
@@ -21,6 +22,7 @@ function convert(opt = {}) {
 
   // 处理wxss
   gulp.src(`${src}/**/*.wxss`)
+    .pipe(replace(/[\s\S]*/g, diffTag))
     .pipe(replace(/[\s\S]*/g, (match) => converter.wxss(match)))
     .pipe(rename((path) => {
       path.extname = ".css";
@@ -29,6 +31,7 @@ function convert(opt = {}) {
 
   // 处理wxml
   gulp.src(`${src}/**/*.wxml`)
+    .pipe(replace(/[\s\S]*/g, diffTag))
     .pipe(replace(/[\s\S]*/g, (match) => converter.wxml(match)))
     .pipe(rename((path) => {
       path.extname = ".swan";
@@ -65,6 +68,7 @@ function convert(opt = {}) {
 
   // 处理js
   return gulp.src(`${src}/**/*.js`)
+    .pipe(replace(/[\s\S]*/g, diffTag))
     .pipe(replace(/[\s\S]*/g, (match) => converter.script(match)))
     .pipe(through2.obj(function(file, enc, cb) {
       const path = file.history[0].replace(file.base, '');

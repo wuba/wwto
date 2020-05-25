@@ -9,6 +9,7 @@ const replace = require('gulp-replace');
 const config = require('../../config');
 const logger = require('../../utils/logger');
 const converter = require('mp-converter').toutiao;
+const diffTag = require('../diff/index').diffTag('tt');
 
 function convert(opt = {}) {
   const src = opt.source || './src';
@@ -19,6 +20,7 @@ function convert(opt = {}) {
     .pipe(gulp.dest(dest));
 
   gulp.src(`${src}/**/*.wxss`)
+    .pipe(replace(/[\s\S]*/g, diffTag))
     .pipe(replace(/[\s\S]*/g, (match) => converter.wxss(match)))
     .pipe(rename((path) => {
       path.extname = ".ttss";
@@ -26,6 +28,7 @@ function convert(opt = {}) {
     .pipe(gulp.dest(dest));
 
   gulp.src(`${src}/**/*.wxml`)
+    .pipe(replace(/[\s\S]*/g, diffTag))
     .pipe(replace(/[\s\S]*/g, (match) => converter.wxml(match)))
     .pipe(rename((path) => {
       path.extname = ".ttml";
@@ -50,6 +53,7 @@ function convert(opt = {}) {
     });
 
   gulp.src(`${src}/**/*.js`)
+    .pipe(replace(/[\s\S]*/g, diffTag))
     .pipe(replace(/[\s\S]*/g, (match) => converter.script(match)))
     .pipe(through2.obj(function(file, enc, cb) {
       const path = file.history[0].replace(file.base, '');
