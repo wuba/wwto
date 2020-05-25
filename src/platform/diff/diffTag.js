@@ -1,4 +1,3 @@
-const replace = require('gulp-replace');
 //<wwto-wx></wwto-wx> <wwto-baidu></wwto-baidu> <wwto-alipay><wwto-alipay>
 const platformMap = {
   wx: {
