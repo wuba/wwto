@@ -4,8 +4,8 @@ const toutiaoLinter = require('./platform/toutiao/linter');
 const baiduConverter = require('./platform/baidu/converter');
 const alibabaConverter = require('./platform/alibaba/converter');
 const toutiaoConverter = require('./platform/toutiao/converter');
+const wxConverter = require('./platform/wx/converter');
 const pluginConverter = require('mp-plugin');
-
 module.exports = {
   lintBaidu: baiduLinter,
   lintAlibaba: alibabaLinter,
@@ -15,7 +15,9 @@ module.exports = {
     alibabaLinter(opt);
     toutiaoLinter(opt);
   },
-
+  toWx: (opt) => {
+    wxConverter(opt);
+  },
   toBaidu: (opt) => {
     baiduConverter(opt);
     baiduLinter(opt.source);
@@ -33,7 +35,7 @@ module.exports = {
     baiduConverter(Object.assign({}, opt, { target: opt.baiduTarget }));
     alibabaConverter(Object.assign({}, opt, { target: opt.alibabaTarget }));
     toutiaoConverter(Object.assign({}, opt, { target: opt.toutiaoTarget }));
-
+    wxConverter(Object.assign({}, opt, { target: opt.wxTarget }));
     baiduLinter(opt.source);
     alibabaLinter(opt.source);
     toutiaoLinter(opt.source);

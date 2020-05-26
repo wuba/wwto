@@ -16,12 +16,12 @@ const platformMap = {
 
 module.exports = function(platform) {
   const saveName = platformMap[platform].tagName;
-  const saveTagReg = new RegExp(`\\s*<${saveName}>([\\s\\S]*?)<\\/${saveName}>\\s*`, 'g');
+  const saveTagReg = new RegExp(`<${saveName}>([\\s\\S]*?)<\\/${saveName}>`, 'g');
   let deleteTag = [];
   Object.keys(platformMap).forEach(item => {
     if (item !== platform) {
       const delTagName = platformMap[item].tagName;
-      deleteTag.push(`(\\s*<${delTagName}>[\\s\\S]*?<\\/${delTagName}>\\s*)`);
+      deleteTag.push(`(<${delTagName}>[\\s\\S]*?<\\/${delTagName}>)`);
     }
   });
   deleteTag = new RegExp(deleteTag.join('|'), 'g');

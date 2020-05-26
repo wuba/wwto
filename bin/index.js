@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const logger = require('../lib/utils/logger');
 const wto = require('../lib/index.js');
+const watch = require('glob-watcher');
 
 function readFile(p) {
   let rst = '';
@@ -76,12 +77,59 @@ commander.command('build')
       wto.toAlibaba(cmd);
     } else if (cmd.platform === 'toutiao') {
       wto.toToutiao(cmd);
+    } else if (cmd.platform === 'wx') {
+      wto.toWx(cmd);
     } else {
       wto.toAll(Object.assign(true, cmd, {
+        wxTarget: [cmd.target, '/wx'].join('/'),
         baiduTarget: [cmd.target, '/baidu'].join('/'),
         alibabaTarget: [cmd.target, '/alibaba'].join('/'),
         toutiaoTarget: [cmd.target, '/toutiao'].join('/')
       }));
+    }
+  });
+
+let compileIndex = 0;
+function watchFile(opt, callback) {
+  const src = opt.source || './src';
+  const watcher = watch([src + '/**/**.**']);
+  logger.info('编译中.......，编译索引：' + ++compileIndex);
+  callback();
+  watcher.on('change', function(path, stat) {
+    logger.info('编译中.......，编译索引：' + ++compileIndex);
+    callback();
+  });
+}
+commander.command('watch')
+  .description('dev模式编译项目')
+  .option('-p, --platform <platform>', '目标平台')
+  .option('-s, --source <source>', '源码目录')
+  .option('-t, --target <target>', '生成代码目录')
+  .action(cmd => {
+    if (cmd.platform === 'baidu') {
+      watchFile(cmd, function() {
+        wto.toBaidu(cmd);
+      });
+    } else if (cmd.platform === 'alibaba') {
+      watchFile(cmd, function() {
+        wto.toAlibaba(cmd);
+      });
+    } else if (cmd.platform === 'toutiao') {
+      watchFile(cmd, function() {
+        wto.toToutiao(cmd);
+      });
+    } else if (cmd.platform === 'wx') {
+      watchFile(cmd, function() {
+        wto.toWx(cmd);
+      });
+    } else {
+      watchFile(cmd, function() {
+        wto.toAll(Object.assign(true, cmd, {
+          baiduTarget: [cmd.target, '/baidu'].join('/'),
+          alibabaTarget: [cmd.target, '/alibaba'].join('/'),
+          toutiaoTarget: [cmd.target, '/toutiao'].join('/')
+        }));
+      });
     }
   });
 

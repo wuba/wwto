@@ -42,53 +42,86 @@ const name = 'alipay';
 
 const wxDiffResult = `
 <button>
+
 <button bindtap="createCanvasContext">createCanvasContext</button>
 const name = 'wx';
+
 </button>
-
-<button></button>
-
-<button></button>
-
-<button></button>
-`;
-const baiduDiffResult = `
-<button></button>
 
 <button>
-<button bindtap="createCanvasContext">createCanvasContext</button>
-const name = 'baidu';
+
 </button>
 
-<button></button>
+<button>
 
-<button></button>
+</button>
+
+<button>
+
+</button>
+`;
+
+const baiduDiffResult = `
+<button>
+
+</button>
+
+<button>
+
+<button bindtap="createCanvasContext">createCanvasContext</button>
+const name = 'baidu';
+
+</button>
+
+<button>
+
+</button>
+
+<button>
+
+</button>
 `;
 
 const alipayDiffResult = `
-<button></button>
+<button>
 
-<button></button>
-
-<button></button>
+</button>
 
 <button>
+
+</button>
+
+<button>
+
+</button>
+
+<button>
+
 <button bindtap="createCanvasContext">createCanvasContext</button>
 const name = 'alipay';
+
 </button>
 `;
 
 const ttDiffResult = `
-<button></button>
-
-<button></button>
-
 <button>
-<button bindtap="createCanvasContext">createCanvasContext</button>
-const name = 'tt';
+
 </button>
 
-<button></button>
+<button>
+
+</button>
+
+<button>
+
+<button bindtap="createCanvasContext">createCanvasContext</button>
+const name = 'tt';
+
+</button>
+
+<button>
+
+</button>
 `;
 testCode(
   'wx diffTag test:',
