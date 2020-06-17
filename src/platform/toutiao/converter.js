@@ -46,7 +46,7 @@ function convert(opt = {}) {
   });
 
   // 注入适配器代码
-  gulp.src(sysPath.resolve(__dirname, '../../../node_modules/mp-adaptor/lib/toutiao.js'))
+  gulp.src(sysPath.resolve(__dirname, '../../adaptor/lib/toutiao.js'))
     .pipe(rename('adaptor.js'))
     .pipe(gulp.dest(dest)).on('end', () => {
       logger.info('复制 adaptor.js 完成！');

@@ -59,7 +59,7 @@ function convert(opt = {}) {
   });
 
   // 注入适配器代码
-  gulp.src(sysPath.resolve(__dirname, '../../../node_modules/mp-adaptor/lib/baidu.js'))
+  gulp.src(sysPath.resolve(__dirname, '../../adaptor/lib/baidu.js'))
     .pipe(rename('adaptor.js'))
     .pipe(gulp.dest(dest))
     .on('end', () => {
