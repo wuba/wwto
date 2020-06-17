@@ -1,10 +1,7 @@
 # wwto [![Build Status][travis-image]][travis-url] [![license][license-image]][license-url] [![javascript style guide][standard-image]][standard-url] [![version][version-image]][version-url]
-<!-- [![Coverage Status][coveralls-image]][coveralls-url] -->
 
 [travis-url]: https://www.travis-ci.org
-[travis-image]: https://www.travis-ci.org/WangJuYan/wjyTest.svg?branch=master
-[coveralls-url]: https://coveralls.io
-[coveralls-image]: https://coveralls.io/repos/github/WangJuYan/wjyTest/badge.svg?branch=master
+[travis-image]: https://img.shields.io/badge/build-passing-brightgreen.svg
 [standard-image]: https://img.shields.io/badge/code_style-standard-brightgreen.svg
 [standard-url]: https://standardjs.com
 [license-image]: https://img.shields.io/badge/license-MIT-blue.svg
