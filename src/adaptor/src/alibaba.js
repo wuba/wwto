@@ -46,7 +46,7 @@ function getInstance() {
 
       let result = storageBak[api](params);
       if (api === 'getStorageSync') {
-        result = result || '';
+        result = result ? (result.data || '') : '';
       }
 
       return result;
