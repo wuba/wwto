@@ -24,6 +24,7 @@ function convert(wxmlText, isWpy) {
     .replace(/\s+bind[\w]+=['"]/ig, (match) => match
       .replace(/bindscrolltolower/gi, 'bindScrollToLower')
       .replace(/bindscrolltoupper/gi, 'bindScrollToUpper')
+      .replace(/onLongpress/gi, 'onLongTap')
       .replace(/bind(\w)/g, (m, p1) => ['on', p1.toUpperCase()].join('')))
     // touch事件名称对齐
     .replace(/\s+onTouch(start|end|move|cancel)=/g, (match, p1) => match.replace(p1, p1.substring(0, 1).toUpperCase() + p1.substring(1)))
