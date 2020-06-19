@@ -13,7 +13,7 @@ const {
 } = require('xmldom');
 const config = require('../../config');
 const logger = require('../../utils/logger');
-const converter = require('../../converter/lib/alibaba').alibaba;
+const converter = require('../../converter/lib/alibaba');
 const scopeStyle = require('../../scope/scope-style');
 const scopeTemplate = require('../../scope/scope-template');
 const diffTag = require('../diff/index').diffTag('alipay');
