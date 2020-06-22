@@ -20,6 +20,7 @@ function convert(wxmlText, isWpy) {
     // 三目运算 "<" 后面不能直接跟非空白字符
     .replace(/{{[^}]+(<)[^=\s][^}]+}}/ig, (match, p1) => match.replace(p1, [p1, ' '].join('')))
     // 事件绑定名称对齐
+    // bind事件绑定
     .replace(/bind:\w+/g, (m) => m.replace(':', ''))
     .replace(/\s+bind[\w]+=['"]/ig, (match) => match
       .replace(/bindscrolltolower/gi, 'bindScrollToLower')
@@ -30,6 +31,7 @@ function convert(wxmlText, isWpy) {
     .replace(/\s+onTouch(start|end|move|cancel)=/g, (match, p1) => match.replace(p1, p1.substring(0, 1).toUpperCase() + p1.substring(1)))
     // 事件绑定名称对齐
     .replace(/\s+catch[\w]+=['"]/ig, (match) => match.replace(/catchsubmit/ig, 'onSubmit')
+      .replace(/catchlongpress/gi, 'catchLongTap')
       .replace(/catch(\w)/g, (m, p1) => ['catch', p1.toUpperCase()].join('')))
     // progress属性映射
     .replace(/<progress[^>]+(activeColor|backgroundColor)=/g, (match, p1) => match.replace(p1, p1.replace(/[A-Z]/, (m) => `-${m.toLowerCase()}`)))
