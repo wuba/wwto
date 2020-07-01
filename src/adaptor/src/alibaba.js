@@ -301,7 +301,7 @@ function getInstance() {
   wx.uploadFile = function(opt) {
     const paths = opt.filePath.split(/[/\\]/);
     const fileName = paths[paths.length - 1];
-    const isImg = /\.(png|jpg|jpeg|gif|webp)/i.test(fileName);
+    const isImg = /\.(png|jpg|jpeg|gif|webp|image)/i.test(fileName);
     const isVideo = /\.(mp4|mov|WMV|3GP|FLV|RMVB|WebM|AVI|ASF|MPEG|MPG|DAT|MKV)/i.test(fileName);
     const fileType = isImg ? 'image' : (isVideo ? 'video' : 'audio');
 
