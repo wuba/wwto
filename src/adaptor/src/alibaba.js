@@ -223,7 +223,8 @@ function getInstance() {
 
   ////////// 滚动
   const {
-    pageScrollTo
+    pageScrollTo,
+    request
   } = wx;
   wx.pageScrollTo = function(opt) {
     opt.success = opt.success || emptyFn;
@@ -269,7 +270,7 @@ function getInstance() {
       }));
     };
 
-    return wx.httpRequest(opt);
+    return request(opt);
   };
 
   //////////下载
