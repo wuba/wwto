@@ -1,11 +1,10 @@
-#!/usr/bin/env node
+#!/usr/bin/env node --inspect-brk
 const commander = require('commander');
 const fs = require('fs');
 const path = require('path');
 const logger = require('../lib/utils/logger');
-const wto = require('../lib/index.js');
+const wto = require('../src/index.js');
 const watch = require('glob-watcher');
-
 function readFile(p) {
   let rst = '';
   p = (typeof (p) === 'object') ? path.join(p.dir, p.base) : p;
@@ -28,6 +27,14 @@ function getVersion() {
   return version;
 }
 
+function isFile(filePath) {
+  if (fs.existsSync(filePath)) {
+    var fileStat = fs.statSync(filePath);
+    return fileStat.isFile();
+  } else {
+    return false;
+  }
+}
 function displayVersion() {
   const version = getVersion();
   const chars = [
@@ -71,6 +78,13 @@ commander.command('build')
   .option('-s, --source <source>', '源码目录')
   .option('-t, --target <target>', '生成代码目录')
   .action(cmd => {
+    let config = {};
+    const configFile = path.join(process.cwd(), "./wwto.config.js");
+
+    if (isFile(configFile)) {
+      config = require(configFile);
+    }
+    cmd.config = config;
     if (cmd.platform === 'baidu') {
       wto.toBaidu(cmd);
     } else if (cmd.platform === 'alibaba') {
