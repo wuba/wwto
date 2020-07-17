@@ -36,6 +36,14 @@ function convert(opt = {}) {
     });
   }
 
+  /**
+   *
+   * @param {*} src  源地址
+   * @param {*} dest 目标地址
+   * @param {*} plugins  处理的插件 key是插件名 value是插件目录
+   * @param {*} assets   资源
+   * @param {*} isPlugin  是否是插件
+   */
   function handleProject(src, dest, plugins, assets, isPlugin) {
     assets = assets || config.getAssets(src);
     gulp.src(assets).pipe(gulp.dest(dest));
@@ -62,47 +70,54 @@ function convert(opt = {}) {
       });
 
     // 处理json  json对插件处理的有问题
-    const jsonSrc = [`${src}/**/*.json`];
-    const jsonStream = gulp.src(jsonSrc).pipe(replace(/[\s\S]*/g, (match) => converter.json(match)));
-    if (plugins) {
-      jsonStream.pipe(through2.obj(function(file, enc, cb) {
-        const path = file.history[0].replace(file.base, '');
+    const jsonSrc = `${src}/**/*.json`;
+    //对于插件的处理
+    if (!isPlugin) {
+      gulp.src(jsonSrc)
+        .pipe(replace(/[\s\S]*/g, (match) => converter.json(match)))
+        .pipe(through2.obj(function(file, enc, cb) {
+          const path = file.history[0].replace(file.base, '');
 
-        const spec = path.split(sysPath.sep);
-        const seps = new Array(spec.length - 1).fill('..').join('/').replace(/^\.\./, '.');
-        let str = ab2str(file.contents);
-        console.log(file.history[0]);
-        if (~file.history[0].indexOf('chat.json')) {
-          debugger;
-        }
-        str = str.replace(/plugin:\/\/([\s\S]*?)\/([\s\S]*)/g, (match, p1, p2) => {
-          if (plugins[p1]){
-            return `${seps}/plugins/${p1}/${p2}`;
-          } else {
-            return match;
-          }
+          const spec = path.split(sysPath.sep);
+          const seps = new Array(spec.length - 1).fill('..').join('/').replace(/^\.\./, '.');
+          let str = ab2str(file.contents);
+
+          str = str.replace(/plugin:\/\/([\s\S]*?)\/([\s\S]*)/g, (match, p1, p2) => {
+            if (plugins[p1]){
+              return `${seps}/plugins/${p1}/${p2}`;
+            } else {
+              return match;
+            }
+          });
+
+          file.contents = str2ab(str);
+          this.push(file);
+          cb();
+        }))
+        .pipe(gulp.dest(dest)).on('end', () => {
+          logger.info('处理 json 完成！');
         });
-
-        file.contents = str2ab(str);
-        this.push(file);
-      }));
-    };
-    jsonStream.pipe(gulp.dest(dest)).on('end', () => {
-      logger.info('处理 json 完成！');
-    });
+    } else {
+      gulp.src(jsonSrc).pipe(replace(/[\s\S]*/g, (match) => converter.json(match))).pipe(gulp.dest(dest)).on('end', () => {
+        logger.info('处理 json 完成！');
+      });
+    }
 
     // 处理js
     gulp.src(`${src}/**/*.js`)
       .pipe(replace(/[\s\S]*/g, diffTag))
       .pipe(replace(/[\s\S]*/g, (match) => converter.script(match)))
       .pipe(through2.obj(function(file, enc, cb) {
+        // console.log(file.history[0])
         const path = file.history[0].replace(file.base, '');
         const spec = path.split(sysPath.sep);
         let adaptorspec = spec;
+        // 如果是插件中的adaptor需要再向上查找2级
         if (isPlugin) {
           adaptorspec = spec.concat([1, 1]);
         }
         const adaptor = new Array(adaptorspec.length - 1).fill('..').concat('adaptor.js').join('/');
+        // 相对与项目根目录
         const seps = new Array(spec.length - 1).fill('..').join('/').replace(/^\.\./, '.');
 
         let content = ab2str(file.contents);

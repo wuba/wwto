@@ -1,4 +1,4 @@
-#!/usr/bin/env node --inspect-brk
+#!/usr/bin/env node
 const commander = require('commander');
 const fs = require('fs');
 const path = require('path');
@@ -120,6 +120,13 @@ commander.command('watch')
   .option('-s, --source <source>', '源码目录')
   .option('-t, --target <target>', '生成代码目录')
   .action(cmd => {
+    let config = {};
+    const configFile = path.join(process.cwd(), "./wwto.config.js");
+
+    if (isFile(configFile)) {
+      config = require(configFile);
+    }
+    cmd.config = config;
     if (cmd.platform === 'baidu') {
       watchFile(cmd, function() {
         wto.toBaidu(cmd);
