@@ -21,10 +21,8 @@ function emptyFn() {}
 let wx;
 
 function getInstance() {
-  
-
   if (wx && wx.has_ali_hook_flag) return wx;
-  // eslint-disable-next-line no-undef  
+  // eslint-disable-next-line no-undef
   wx = { ...my };
 
   wx.has_ali_hook_flag = true;

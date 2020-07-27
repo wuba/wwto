@@ -27,7 +27,7 @@ function convert(opt = {}) {
   const plugins = opt.config && opt.config.plugins;
 
   // 注入适配器代码
-  gulp.src(sysPath.resolve(__dirname, '../../adaptor/lib/alibaba.js'))
+  gulp.src(sysPath.resolve(__dirname, '../../adaptor/src/alibaba.js'))
     .pipe(rename('adaptor.js'))
     .pipe(gulp.dest(dest)).on('end', () => {
       logger.info('复制 adaptor.js 完成！');
