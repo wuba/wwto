@@ -15,7 +15,7 @@ function convert(opt = {}) {
   const dest = opt.target || './toutiao';
 
   // 注入适配器代码
-  gulp.src(sysPath.resolve(__dirname, '../../adaptor/lib/toutiao.js'))
+  gulp.src(sysPath.resolve(__dirname, '../../adaptor/src/toutiao.js'))
     .pipe(rename('adaptor.js'))
     .pipe(gulp.dest(dest))
     .on('end', () => {

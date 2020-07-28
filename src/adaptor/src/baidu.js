@@ -1,10 +1,13 @@
 function emptyFn() {}
 
-function getInstance() {
-  // eslint-disable-next-line no-undef
-  const wx = swan;
+let wx;
 
-  if (wx.has_baidu_hook_flag) return;
+function getInstance() {
+  
+  if (wx && wx.has_baidu_hook_flag) return wx;
+
+  // eslint-disable-next-line no-undef
+  wx = { ...swan };
 
   wx.has_baidu_hook_flag = true;
 
