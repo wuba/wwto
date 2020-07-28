@@ -7,7 +7,8 @@ const rename = require('gulp-rename');
 const replace = require('gulp-replace');
 const config = require('../../config');
 const logger = require('../../utils/logger');
-const converter = require('mp-converter').baidu;
+//const converter = require('mp-converter').baidu;
+const converter = require('../../converter/src/baidu');
 const diffTag = require('../diff/index').diffTag('baidu');
 
 function convert(opt = {}) {

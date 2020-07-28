@@ -7,7 +7,8 @@ const rename = require('gulp-rename');
 const replace = require('gulp-replace');
 const config = require('../../config');
 const logger = require('../../utils/logger');
-const converter = require('mp-converter').toutiao;
+//const converter = require('mp-converter').toutiao;
+const converter = require('../../converter/src/toutiao');
 const diffTag = require('../diff/index').diffTag('tt');
 
 function convert(opt = {}) {
