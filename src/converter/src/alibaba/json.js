@@ -19,6 +19,7 @@ function convert(jsonText) {
     .replace(/usingComponents([^}]+)/g, (match) => {
       return match.replace(/":\s*"([\w])/ig, (m, p1) => {
         // 绝对路径必须加/
+        debugger;
         return m.replace(p1, ['/', p1].join(''));
       });
     });

@@ -17,7 +17,7 @@ const converter = require('../../converter/src/alibaba');
 const scopeStyle = require('../../scope/scope-style');
 const scopeTemplate = require('../../scope/scope-template');
 const diffTag = require('../diff/index').diffTag('alipay');
-
+const path = require('path');
 function convert(opt = {}) {
   const src = opt.source || './src';
   const dest = opt.target || './alibaba';
@@ -25,6 +25,15 @@ function convert(opt = {}) {
   // 插件拷贝到 src/plugins/插件名称内
   // 插件的拷贝位置是src下的plugins下的pluginName
   const plugins = opt.config && opt.config.plugins;
+  const pluginsJSON = {};
+  Object.keys(plugins).forEach(key => {
+    const relativePath = plugins[key];
+    // console.log('==========',relativePath)
+    const jsonPath = path.join(process.cwd(), relativePath, 'plugin.json');
+    console.log(jsonPath);
+
+    pluginsJSON[key] = require(jsonPath);
+  });
 
   // 注入适配器代码
   gulp.src(sysPath.resolve(__dirname, '../../adaptor/src/alibaba.js'))
@@ -150,12 +159,19 @@ function convert(opt = {}) {
           const path = file.history[0].replace(file.base, '');
 
           const spec = path.split(sysPath.sep);
-          const seps = new Array(spec.length - 1).fill('..').join('/').replace(/^\.\./, '.');
+          let seps = new Array(spec.length - 1).fill('..').join('/').replace(/^\.\./, '.');
           let str = ab2str(file.contents);
 
-          str = str.replace(/plugin:\/\/([\s\S]*?)\/([\s\S]*)/g, (match, p1, p2) => {
-            if (plugins[p1]){
-              return `${seps}/plugins/${p1}/${p2}`;
+          //前面的converter 会把plugin前加上/
+          str = str.replace(/\/?plugin:\/\/([\s\S]*?)\/([\s\S]*?)"/g, (match, pluginName, component) => {
+            if (plugins[pluginName]){
+              const pluginJSON = pluginsJSON[pluginName];
+              let componentPath = pluginJSON.publicComponents[component];
+              if (componentPath[0] === '/') { componentPath = componentPath.slice(1); }
+              if (seps[0] === '/') {
+                seps = seps.slice(1);
+              }
+              return `${seps}/plugins/${pluginName}/${componentPath}"`;
             } else {
               return match;
             }
