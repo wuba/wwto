@@ -26,7 +26,7 @@ function convert(opt = {}) {
 
   // 插件拷贝到 src/plugins/插件名称内
   // 插件的拷贝位置是src下的plugins下的pluginName
-  const plugins = opt.config && opt.config.plugins;
+  const plugins = (opt.config && opt.config.plugins) || {};
   const pluginsJSON = {};
   Object.keys(plugins).forEach(key => {
     const relativePath = plugins[key];
