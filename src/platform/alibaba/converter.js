@@ -161,7 +161,6 @@ function convert(opt = {}) {
           const spec = path.split(sysPath.sep);
           let seps = new Array(spec.length - 1).fill('..').join('/').replace(/^\.\./, '.');
           let str = ab2str(file.contents);
-
           //前面的converter 会把plugin前加上/
           str = str.replace(/\/?plugin:\/\/([\s\S]*?)\/([\s\S]*?)"/g, (match, pluginName, component) => {
             if (plugins[pluginName]){
@@ -177,6 +176,11 @@ function convert(opt = {}) {
             }
           });
 
+          if (path === '/app.json') {
+            const data = JSON.parse(str);
+            delete data.plugins;
+            str = JSON.stringify(data, '', 4);
+          }
           file.contents = str2ab(str);
           this.push(file);
           cb();
