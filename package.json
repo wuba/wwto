@@ -1,6 +1,6 @@
 {
   "name": "@tegfe/wwto",
-  "version": "2.1.8",
+  "version": "2.2.0",
   "description": "weChat mini-program to other mini-program",
   "main": "lib/index.js",
   "bin": {
