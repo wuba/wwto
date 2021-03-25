@@ -12,8 +12,7 @@
     "build": "gulp build",
     "prepare": "npm run build",
     "lint": "eslint --fix --ext .js src test",
-    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
-    "likd": "node src/platform/diff/test.js"
+    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls"
   },
   "pre-commit": [
     "lint"

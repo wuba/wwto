@@ -61,3 +61,15 @@ module.exports = function(platform) {
     return text;
   };
 };
+
+/*
+
+if (WWTO_WX) {
+
+} else if (WWTO_BAIDU) {
+
+} else if (WWTO_ALIPAY) {
+
+}
+
+*/
