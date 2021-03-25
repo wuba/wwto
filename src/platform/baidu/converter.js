@@ -11,6 +11,7 @@ const logger = require('../../utils/logger');
 //const converter = require('mp-converter').baidu;
 const converter = require('../../converter/src/baidu');
 const diffTag = require('../diff/index').diffTag('baidu');
+const diffDefine = require('../diff/index').diffDefine('baidu');
 
 function convert(opt = {}) {
   const src = opt.source || './src';
@@ -156,6 +157,7 @@ function convert(opt = {}) {
         this.push(file);
         cb();
       }))
+      .pipe(replace(/[\s\S]*/g, diffDefine))
       .pipe(gulp.dest(dest)).on('end', () => {
         logger.info('处理 js 完成！');
       });
