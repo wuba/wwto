@@ -9,6 +9,7 @@ function convert(opt = {}) {
   const dest = opt.target || './wx';
   const assets = opt.assets || config.getAssets(src);
   debugger;
+  console.log('likd-a', config.getAssets(src), src);
   gulp.src(assets)
     .pipe(gulp.dest(dest)).on('end', () => {
       logger.info('资源拷贝完成！');
@@ -27,7 +28,7 @@ function convert(opt = {}) {
     });
 
   // const destConfigFile = `${dest}/project.config.json`;
-  const jsonSrc = [`${src}/**/*.json`];
+  const jsonSrc = [`${src}/**/*.json`, `!${src}/**/package.json`];
   // fs.exists(destConfigFile, (exist) => {
   // fs.stat(destConfigFile, (exist) => {
   // if (exist) {

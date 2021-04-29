@@ -7,6 +7,7 @@ module.exports = {
   getAssets(srcPath) {
     return [
       `${srcPath}/**/*.*`,
+      `!${srcPath}/**/package.json`,
       `!${srcPath}/**/*.wxml`,
       `!${srcPath}/**/*.wxss`,
       `!${srcPath}/**/*.js`,

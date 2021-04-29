@@ -150,7 +150,7 @@ function convert(opt = {}) {
       .pipe(gulp.dest(dest));
 
     // 处理json  json对插件处理的有问题
-    const jsonSrc = `${src}/**/*.json`;
+    const jsonSrc = [`${src}/**/*.json`, `!${src}/**/package.json`];
     //对于插件的处理
     if (!isPlugin) {
       gulp.src(jsonSrc)
