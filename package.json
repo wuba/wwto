@@ -1,6 +1,6 @@
 {
   "name": "@tegfe/wwto",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "description": "weChat mini-program to other mini-program",
   "main": "lib/index.js",
   "bin": {
@@ -12,10 +12,11 @@
     "build": "gulp build",
     "prepare": "npm run build",
     "lint": "eslint --fix --ext .js src test",
-    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls"
+    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls",
+    "jest": "jest"
   },
   "pre-commit": [
-    "lint"
+    //"lint"
   ],
   "repository": {
     "type": "git",
