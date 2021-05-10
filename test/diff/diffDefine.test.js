@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const index = require("../../src/platform/diff/index");
 const baiduDiff = index.diffDefine("baidu");
 const wxDiff = index.diffDefine("wx");

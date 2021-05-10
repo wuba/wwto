@@ -16,7 +16,7 @@
     "jest": "jest"
   },
   "pre-commit": [
-    //"lint"
+    "lint"
   ],
   "repository": {
     "type": "git",
