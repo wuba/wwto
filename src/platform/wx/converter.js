@@ -2,6 +2,7 @@ const gulp = require('gulp');
 const replace = require('gulp-replace');
 const config = require('../../config');
 const diffTag = require('../diff/index').diffTag('wx');
+const diffDefine = require('../diff/index').diffDefine('wx');
 const logger = require('../../utils/logger');
 
 function convert(opt = {}) {
@@ -41,6 +42,7 @@ function convert(opt = {}) {
 
   gulp.src(`${src}/**/*.js`)
     .pipe(replace(/[\s\S]*/g, diffTag))
+    .pipe(replace(/[\s\S]*/g, diffDefine))
     .pipe(gulp.dest(dest)).on('end', () => {
       logger.info('微信：js文件编译完成！');
     });
