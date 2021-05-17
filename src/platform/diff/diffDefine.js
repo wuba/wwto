@@ -21,6 +21,7 @@ const platformMap = {
 };
 
 module.exports = function(platform) {
+  console.log('platform', platform);
   const saveName = platformMap[platform].tagName;
   const saveTagReg = [];
   saveTagReg.push(saveName);

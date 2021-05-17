@@ -17,6 +17,8 @@ const converter = require('../../converter/src/alibaba');
 const scopeStyle = require('../../scope/scope-style');
 const scopeTemplate = require('../../scope/scope-template');
 const diffTag = require('../diff/index').diffTag('alipay');
+const diffDefine = require('../diff/index').diffDefine('alipay');
+
 const path = require('path');
 function convert(opt = {}) {
   const src = opt.source || './src';
@@ -225,6 +227,7 @@ function convert(opt = {}) {
         this.push(file);
         cb();
       }))
+      .pipe(replace(/[\s\S]*/g, diffDefine))
       .pipe(gulp.dest(dest)).on('end', () => {
         logger.info('处理 js 完成！');
       });
