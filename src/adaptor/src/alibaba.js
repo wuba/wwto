@@ -18,11 +18,13 @@ function paramsMap(options, maps = {}) {
 
 function emptyFn() {}
 
-function getInstance() {
-  // eslint-disable-next-line no-undef
-  const wx = my;
+let wx;
 
-  if (wx.has_ali_hook_flag) return
+function getInstance() {
+  if (wx && wx.has_ali_hook_flag) return wx;
+
+  // eslint-disable-next-line no-undef
+  wx = { ...my };
 
   wx.has_ali_hook_flag = true;
 
@@ -46,7 +48,7 @@ function getInstance() {
 
       let result = storageBak[api](params);
       if (api === 'getStorageSync') {
-        result = result || '';
+        result = result ? (result.data || '') : '';
       }
 
       return result;
@@ -223,7 +225,8 @@ function getInstance() {
 
   ////////// 滚动
   const {
-    pageScrollTo
+    pageScrollTo,
+    request
   } = wx;
   wx.pageScrollTo = function(opt) {
     opt.success = opt.success || emptyFn;
@@ -269,7 +272,7 @@ function getInstance() {
       }));
     };
 
-    return wx.httpRequest(opt);
+    return request(opt);
   };
 
   //////////下载

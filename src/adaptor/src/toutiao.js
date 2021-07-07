@@ -15,10 +15,13 @@ function ignoreFn(opt) {
   }
 }
 
-function getInstance() {
-  var wx = tt;
+let wx;
 
-  if (wx.has_toutiao_hook_flag) return
+function getInstance() {
+  if (wx && wx.has_toutiao_hook_flag) return wx;
+
+  // eslint-disable-next-line no-undef
+  wx = { ...tt };
 
   wx.has_toutiao_hook_flag = true;
 

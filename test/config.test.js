@@ -10,5 +10,5 @@ function testCode(testName, code01, code02) {
 testCode(
   'config test:',
   Plug.getAssets('/index/baidu'),
-  ["/index/baidu/**/*.*", "!/index/baidu/**/*.wxml", "!/index/baidu/**/*.wxss", "!/index/baidu/**/*.js", "!/index/baidu/**/*.json"]
+  ["/index/baidu/**/*.*", "!/index/baidu/**/package.json", "!/index/baidu/**/*.wxml", "!/index/baidu/**/*.wxss", "!/index/baidu/**/*.js", "!/index/baidu/**/*.json"]
 );
