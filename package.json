@@ -47,7 +47,7 @@
     "mp-converter": "^1.0.9",
     "mp-linter": "^1.0.9",
     "mp-plugin": "^1.0.2",
-    "postcss": "5.2.16",
+    "postcss": "8.4.31",
     "postcss-selector-parser": "2.2.3",
     "pre-commit": "^1.2.2",
     "pump": "^3.0.0",
